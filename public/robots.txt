@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aurix1121gold.netlify.app/sitemap.xml
