@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aurix1121gold.netlify.app/sitemap.xml
+Sitemap: https://aurix1121gold.vercel.app/sitemap.xml
