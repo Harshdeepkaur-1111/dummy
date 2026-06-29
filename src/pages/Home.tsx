@@ -53,7 +53,7 @@ export function Home() {
                   "worstRating": "0"
                 },
                 "datePublished": "2026-06-17",
-                "author": {"@type": "Person", "name": ""}
+                "author": {"@type": "organization", "name": "aurix"}
               }
             }
           `}
