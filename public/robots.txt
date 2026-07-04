@@ -1,16 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
 
 Sitemap: https://aurix-gold.vercel.app/sitemap.xml
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-Crawl-delay: 1
-
-Sitemap: https://aurix1121gold.vercel.app/sitemap.xml
