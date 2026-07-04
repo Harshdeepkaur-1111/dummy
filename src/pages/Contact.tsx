@@ -42,22 +42,25 @@ export function Contact() {
   return (
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
-        <title>Contact Aurix - Get in Touch With Our Jewelry Experts</title>
-        <link rel="canonical" href="https://aurix1121gold.netlify.app/contact" />
+        <title>Contact Aurix - Get in Touch With Our Jewelry Team</title>
+        <link rel="canonical" href="https://yourdomain.com/contact" />
         <meta name="description" content="Contact Aurix for inquiries about gold jewelry, orders, support, and product information. We're here to help with all your jewelry needs." />
+        <meta name="keywords" content="contact Aurix, customer support, jewelry inquiries, gold jewelry help" />
+        <meta property="og:title" content="Contact Aurix - Get in Touch" />
+        <meta property="og:description" content="Contact Aurix for inquiries about gold jewelry, orders, and support." />
+        <meta property="og:type" content="website" />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "ContactPage",
               "name": "Contact Aurix",
-              "url": "https://aurix1121gold.netlify.app/contact",
+              "url": "https://yourdomain.com/contact",
               "description": "Contact Aurix for customer support, product inquiries, and assistance with your gold jewelry purchases.",
               "mainEntity": {
                 "@type": "Organization",
                 "name": "Aurix",
-                "telephone": "+91-9034196429",
-                "email": "tejinders791@gmail.com"
+                "email": "info@aurix.com"
               }
             }
           `}

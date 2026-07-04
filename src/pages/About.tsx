@@ -7,9 +7,13 @@ export function About() {
   return (
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen">
       <Helmet>
-        <title>About Aurix - Premium Gold Jewelry</title>
-        <link rel="canonical" href="https://aurix1121gold.netlify.app/about" />
-        <meta name="description" content="Learn about Aurix, a trusted brand offering premium gold jewelry and accessories. Discover our passion for quality, craftsmanship, and timeless elegance." />
+        <title>About Aurix - Premium Gold Jewelry Brand</title>
+        <link rel="canonical" href="https://yourdomain.com/about" />
+        <meta name="description" content="Learn about Aurix, a trusted brand offering premium gold jewelry and accessories. Discover our passion for quality, craftsmanship, and timeless elegance since 2023." />
+        <meta name="keywords" content="about Aurix, gold jewelry brand, jewelry craftsmanship, premium gold" />
+        <meta property="og:title" content="About Aurix - Premium Gold Jewelry Brand" />
+        <meta property="og:description" content="Learn about Aurix, a trusted brand offering premium gold jewelry and accessories crafted with quality and elegance." />
+        <meta property="og:type" content="website" />
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center border-b border-white/10">

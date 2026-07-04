@@ -11,9 +11,13 @@ export function Blog() {
   return (
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
-        <title>Aurix Blog - Gold Jewelry Trends</title>
-        <link rel="canonical" href="https://aurix1121gold.netlify.app/blog" />
-        <meta name="description" content="Explore the Aurix Blog for the latest gold jewelry trends, styling tips, care guides, and expert advice on luxury gold accessories." />
+        <title>Aurix Blog - Gold Jewelry Trends, Tips & Expert Advice</title>
+        <link rel="canonical" href="https://yourdomain.com/blog" />
+        <meta name="description" content="Explore the Aurix Blog for the latest gold jewelry trends, styling tips, care guides, and expert advice on luxury gold accessories and fine jewelry." />
+        <meta name="keywords" content="gold jewelry blog, jewelry trends, gold styling tips, jewelry care, luxury accessories" />
+        <meta property="og:title" content="Aurix Blog - Gold Jewelry Trends & Tips" />
+        <meta property="og:description" content="Explore the latest gold jewelry trends, styling tips, and expert advice on luxury gold accessories." />
+        <meta property="og:type" content="website" />
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center border-b border-white/10 mb-16">
