@@ -4,6 +4,11 @@
   "installCommand": "npm install",
   "routes": [
     {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1",
+      "status": 200
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html",
       "status": 200
