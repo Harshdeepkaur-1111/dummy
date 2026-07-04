@@ -17,7 +17,7 @@ export function Services() {
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
         <title>Aurix Gold Jewelry Services - Premium Collection</title>
-        <link rel="canonical" href="https://aurix.vercel.app/services" />
+        <link rel="canonical" href="/services" />
         <meta name="description" content="Discover Aurix's premium gold jewelry services featuring elegant necklaces, rings, earrings, bracelets, and handcrafted pendants. Shop timeless designs online." />
         <meta name="keywords" content="gold jewelry, necklaces, rings, earrings, bracelets, gold accessories, jewelry services" />
         <meta property="og:title" content="Aurix Gold Jewelry Services - Premium Collection" />

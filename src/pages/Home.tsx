@@ -20,7 +20,7 @@ export function Home() {
     <div className="w-full flex-grow flex flex-col">
       <Helmet>
         <title>Aurix - Premium Gold Jewelry & Accessories</title>
-        <link rel="canonical" href="https://yourdomain.com/" />
+        <link rel="canonical" href="/" />
         <meta name="description" content="Shop Aurix's exclusive gold jewelry collection online. Discover stylish necklaces, rings, earrings, bracelets, and premium gold accessories for every occasion." />
         <meta name="keywords" content="gold jewelry, necklaces, rings, earrings, bracelets, gold accessories, premium jewelry" />
         <meta property="og:title" content="Aurix - Premium Gold Jewelry & Accessories" />

@@ -12,7 +12,7 @@ export function Blog() {
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
         <title>Aurix Blog - Gold Jewelry Trends, Tips & Expert Advice</title>
-        <link rel="canonical" href="https://yourdomain.com/blog" />
+        <link rel="canonical" href="/blog" />
         <meta name="description" content="Explore the Aurix Blog for the latest gold jewelry trends, styling tips, care guides, and expert advice on luxury gold accessories and fine jewelry." />
         <meta name="keywords" content="gold jewelry blog, jewelry trends, gold styling tips, jewelry care, luxury accessories" />
         <meta property="og:title" content="Aurix Blog - Gold Jewelry Trends & Tips" />

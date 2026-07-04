@@ -43,7 +43,7 @@ export function Contact() {
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
         <title>Contact Aurix - Get in Touch With Our Jewelry Team</title>
-        <link rel="canonical" href="https://yourdomain.com/contact" />
+        <link rel="canonical" href="/contact" />
         <meta name="description" content="Contact Aurix for inquiries about gold jewelry, orders, support, and product information. We're here to help with all your jewelry needs." />
         <meta name="keywords" content="contact Aurix, customer support, jewelry inquiries, gold jewelry help" />
         <meta property="og:title" content="Contact Aurix - Get in Touch" />
@@ -55,7 +55,7 @@ export function Contact() {
               "@context": "https://schema.org",
               "@type": "ContactPage",
               "name": "Contact Aurix",
-              "url": "https://yourdomain.com/contact",
+              "url": "/contact",
               "description": "Contact Aurix for customer support, product inquiries, and assistance with your gold jewelry purchases.",
               "mainEntity": {
                 "@type": "Organization",
