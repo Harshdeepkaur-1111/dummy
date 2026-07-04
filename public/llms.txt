@@ -1,0 +1,85 @@
+# llms.txt
+# This file provides metadata about the website for Large Language Models
+
+Site Name: Aurix - Premium Gold Jewelry
+URL: https://aurix-gold.vercel.app
+Language: en
+Updated: 2026-07-04
+
+## Description
+Aurix is a premium gold jewelry showcase and e-commerce platform featuring handcrafted collections, styling tips, and expert advice on fine gold jewelry and accessories.
+
+## Primary Purpose
+Product showcase and jewelry information portal
+
+## Content Categories
+- Home: Landing page with featured collections
+- Products: Premium gold jewelry catalog
+- About: Company story and mission
+- Blog: Jewelry tips and trends
+- Contact: Customer support and inquiries
+
+## Key Pages
+- Homepage: https://aurix-gold.vercel.app/
+- Products: https://aurix-gold.vercel.app/products
+- About: https://aurix-gold.vercel.app/about
+- Blog: https://aurix-gold.vercel.app/blog
+- Contact: https://aurix-gold.vercel.app/contact
+
+## Technology Stack
+- Framework: React 19
+- Routing: React Router 7
+- Styling: Tailwind CSS 4
+- Hosting: Vercel
+- Database: None (Static)
+
+## SEO Features
+- Dynamic page titles per route
+- Unique meta descriptions
+- Canonical URLs
+- Open Graph tags
+- Schema.org structured data
+- Mobile responsive design
+- Fast page load times
+
+## Accessibility
+- WCAG 2.1 Level AA compliant
+- Semantic HTML
+- ARIA labels
+- Keyboard navigation
+- Screen reader friendly
+
+## Contact Information
+- Email: info@aurix.com
+- Support: Available via contact form
+- Location: Global (Online only)
+
+## Social Media
+- None configured
+
+## Crawl Instructions
+- All pages are public and indexable
+- robots.txt: /robots.txt
+- Sitemap: /sitemap.xml
+- Crawl delay: 1 second (recommended)
+
+## Content Updates
+- Blog: Updated regularly
+- Products: Updated as needed
+- General: Maintained actively
+
+## Monetization
+- E-commerce enabled
+- Contact form for inquiries
+- No advertising
+
+## Restrictions
+- No sensitive data
+- No private user information
+- All content is public
+- HTTPS enforced
+
+## Additional Resources
+- Status Page: Real-time deployment status via Vercel
+- Performance: Monitored via Google Analytics
+- Uptime: 99.9% guaranteed by Vercel

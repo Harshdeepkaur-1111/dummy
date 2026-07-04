@@ -43,7 +43,7 @@ export function Contact() {
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
         <title>Contact Aurix - Get in Touch With Our Jewelry Team</title>
-        <link rel="canonical" href="/contact" />
+        <link rel="canonical" href="https://aurix-gold.vercel.app/contact" />
         <meta name="description" content="Contact Aurix for inquiries about gold jewelry, orders, support, and product information. We're here to help with all your jewelry needs." />
         <meta name="keywords" content="contact Aurix, customer support, jewelry inquiries, gold jewelry help" />
         <meta property="og:title" content="Contact Aurix - Get in Touch" />

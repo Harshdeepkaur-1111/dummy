@@ -8,7 +8,7 @@ export function About() {
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen">
       <Helmet>
         <title>About Aurix - Premium Gold Jewelry Brand</title>
-        <link rel="canonical" href="/about" />
+        <link rel="canonical" href="https://aurix-gold.vercel.app/about" />
         <meta name="description" content="Learn about Aurix, a trusted brand offering premium gold jewelry and accessories. Discover our passion for quality, craftsmanship, and timeless elegance since 2023." />
         <meta name="keywords" content="about Aurix, gold jewelry brand, jewelry craftsmanship, premium gold" />
         <meta property="og:title" content="About Aurix - Premium Gold Jewelry Brand" />

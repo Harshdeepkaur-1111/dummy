@@ -17,7 +17,7 @@ export function Products() {
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
         <title>Gold Jewelry Collection - Necklaces-Ring-Aurix</title>
-        <link rel="canonical" href="https://aurix1121gold.netlify.app/products" />
+        <link rel="canonical" href="https://aurix-gold.vercel.app/products" />
         <meta name="description" content="Explore Aurix's premium gold jewelry collection featuring elegant necklaces, rings, earrings, bracelets, and pendants. Shop timeless designs online." />
       </Helmet>
       {/* Page Header */}
