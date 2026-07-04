@@ -11,7 +11,7 @@ export function Layout() {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
+    { name: "Products", path: "/products" },
     { name: "About", path: "/about" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
@@ -227,10 +227,10 @@ export function Layout() {
             <div className="col-span-1">
               <h2 className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] mb-6">Collections</h2>
               <ul className="space-y-4">
-                <li><Link to="/services" className="text-white/70 hover:text-white text-xs transition-colors">Bridal Collection</Link></li>
-                <li><Link to="/services" className="text-white/70 hover:text-white text-xs transition-colors">Everyday Essentials</Link></li>
-                <li><Link to="/services" className="text-white/70 hover:text-white text-xs transition-colors">Men's Gold Rings</Link></li>
-                <li><Link to="/services" className="text-white/70 hover:text-white text-xs transition-colors">Limited Editions</Link></li>
+                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Bridal Collection</Link></li>
+                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Everyday Essentials</Link></li>
+                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Men's Gold Rings</Link></li>
+                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Limited Editions</Link></li>
               </ul>
             </div>
 

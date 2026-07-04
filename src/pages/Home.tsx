@@ -192,7 +192,7 @@ export function Home() {
                 Explore our signature lines. Each piece is meticulously forged by master artisans using ethically sourced 22k gold, reflecting the pinnacle of modern luxury and heritage.
               </p>
             </div>
-            <Link to="/services" className="group flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] hover:text-white transition-colors">
+            <Link to="/products" className="group flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] hover:text-white transition-colors">
               <span>View All Collections</span>
               <div className="w-8 h-[1px] bg-[#D4AF37] group-hover:bg-white group-hover:w-12 transition-all"></div>
             </Link>
@@ -206,7 +206,7 @@ export function Home() {
                 
                 
                 
-                onClick={() => navigate("/services")}
+                onClick={() => navigate("/products")}
                 className={`group cursor-pointer ${
                   idx === 0 ? "md:col-span-12 lg:col-span-7" : 
                   idx === 1 ? "md:col-span-6 lg:col-span-5" : 
@@ -307,7 +307,7 @@ export function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link 
-              to="/services"
+              to="/products"
               className="group relative bg-[#D4AF37] text-black px-12 py-5 text-[10px] uppercase tracking-[0.2em] font-medium overflow-hidden text-center"
             >
               <span className="relative z-10 transition-colors group-hover:text-white">Shop the Collection</span>

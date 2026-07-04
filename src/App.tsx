@@ -15,7 +15,7 @@ const Home = lazy(() => import("./pages/Home").then(m => ({ default: m.Home })))
 const About = lazy(() => import("./pages/About").then(m => ({ default: m.About })));
 const Services = lazy(() => import("./pages/Services").then(m => ({ default: m.Services })));
 const Blog = lazy(() => import("./pages/Blog").then(m => ({ default: m.Blog })));
-const Contact = lazy(() => import("./pages/Contact").then(m => ({ default: m.Contact })));
+const Products = lazy(() => import("./pages/Products").then(m => ({ default: m.Products })));
 
 export default function App() {
   return (
@@ -27,7 +27,7 @@ export default function App() {
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="about" element={<About />} />
-                <Route path="services" element={<Services />} />
+                <Route path="products" element={<Products />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="contact" element={<Contact />} />
               </Route>
