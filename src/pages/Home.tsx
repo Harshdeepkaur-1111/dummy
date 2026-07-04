@@ -26,39 +26,57 @@ export function Home() {
         <meta property="og:title" content="Aurix - Premium Gold Jewelry & Accessories" />
         <meta property="og:description" content="Shop Aurix's exclusive gold jewelry collection online. Discover stylish necklaces, rings, earrings, bracelets, and premium gold accessories." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Aurix - Premium Gold Jewelry & Accessories" />
+        <meta name="twitter:description" content="Shop Aurix's exclusive gold jewelry collection online." />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org/",
-              "@type": "Product",
-              "name": "Aurix-Gold Collection",
-              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgvq90qggZGHhL8faO_ObbXO7joy1P0kuVSoXNAZxl7A&s=10",
-              "description": "Discover Aurix's premium gold jewelry collection featuring elegant necklaces, rings, earrings, bracelets, and pendants. Crafted with quality and timeless style, our gold accessories are perfect for every occasion.",
-              "brand": {
-                "@type": "Brand",
-                "name": "Aurix"
+              "@type": "Organization",
+              "name": "Aurix",
+              "url": "https://aurix-gold.vercel.app/",
+              "logo": "https://aurix-gold.vercel.app/assets/aurix-logo.png",
+              "description": "Premium gold jewelry and luxury accessories online",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Online",
+                "addressCountry": "IN"
               },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5",
-                "bestRating": "5",
-                "worstRating": "0",
-                "ratingCount": "1",
-                "reviewCount": "1"
-              },
-              "review": {
-                "@type": "Review",
-                "name": "Priya Sharma",
-                "reviewBody": "Beautiful gold jewelry with excellent quality. The necklace I ordered looks stunning and arrived on time.",
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": "5",
-                  "bestRating": "5",
-                  "worstRating": "0"
-                },
-                "datePublished": "2026-06-17",
-                "author": {"@type": "organization", "name": "aurix"}
+              "sameAs": ["https://www.instagram.com/aurixgold", "https://www.facebook.com/aurixgold"],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "info@aurix.com"
               }
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://aurix-gold.vercel.app/"
+                }
+              ]
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "CollectionPage",
+              "name": "Aurix - Premium Gold Jewelry",
+              "description": "Shop Aurix's exclusive gold jewelry collection online",
+              "url": "https://aurix-gold.vercel.app/"
             }
           `}
         </script>

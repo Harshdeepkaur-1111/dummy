@@ -49,18 +49,50 @@ export function Contact() {
         <meta property="og:title" content="Contact Aurix - Get in Touch" />
         <meta property="og:description" content="Contact Aurix for inquiries about gold jewelry, orders, and support." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/contact" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://aurix-gold.vercel.app/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Contact",
+                  "item": "https://aurix-gold.vercel.app/contact"
+                }
+              ]
+            }
+          `}
+        </script>
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "ContactPage",
               "name": "Contact Aurix",
-              "url": "/contact",
+              "url": "https://aurix-gold.vercel.app/contact",
               "description": "Contact Aurix for customer support, product inquiries, and assistance with your gold jewelry purchases.",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "@id": "https://aurix-gold.vercel.app/contact",
+                "contactType": "customer service",
+                "email": "info@aurix.com",
+                "availableLanguage": "en"
+              },
               "mainEntity": {
                 "@type": "Organization",
                 "name": "Aurix",
-                "email": "info@aurix.com"
+                "email": "info@aurix.com",
+                "url": "https://aurix-gold.vercel.app/",
+                "logo": "https://aurix-gold.vercel.app/assets/aurix-logo.png"
               }
             }
           `}

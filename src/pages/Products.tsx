@@ -19,6 +19,44 @@ export function Products() {
         <title>Gold Jewelry Collection - Necklaces-Ring-Aurix</title>
         <link rel="canonical" href="https://aurix-gold.vercel.app/products" />
         <meta name="description" content="Explore Aurix's premium gold jewelry collection featuring elegant necklaces, rings, earrings, bracelets, and pendants. Shop timeless designs online." />
+        <meta name="keywords" content="gold jewelry collection, necklaces, rings, earrings, bracelets, premium gold" />
+        <meta property="og:title" content="Gold Jewelry Collection - Premium Necklaces & Rings" />
+        <meta property="og:description" content="Explore Aurix's premium gold jewelry collection featuring elegant necklaces, rings, earrings, bracelets, and pendants." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/products" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://aurix-gold.vercel.app/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Products",
+                  "item": "https://aurix-gold.vercel.app/products"
+                }
+              ]
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "CollectionPage",
+              "name": "Gold Jewelry Collection",
+              "description": "Explore Aurix's premium gold jewelry collection",
+              "url": "https://aurix-gold.vercel.app/products"
+            }
+          `}
+        </script>
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center mb-16 border-b border-white/10">

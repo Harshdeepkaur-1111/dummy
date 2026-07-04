@@ -18,6 +18,40 @@ export function Blog() {
         <meta property="og:title" content="Aurix Blog - Gold Jewelry Trends & Tips" />
         <meta property="og:description" content="Explore the latest gold jewelry trends, styling tips, and expert advice on luxury gold accessories." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/blog" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://aurix-gold.vercel.app/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Blog",
+                  "item": "https://aurix-gold.vercel.app/blog"
+                }
+              ]
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "Blog",
+              "name": "Aurix Blog",
+              "description": "Gold jewelry trends, tips, and expert advice",
+              "url": "https://aurix-gold.vercel.app/blog"
+            }
+          `}
+        </script>
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center border-b border-white/10 mb-16">

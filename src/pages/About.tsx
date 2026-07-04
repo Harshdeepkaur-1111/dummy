@@ -14,6 +14,48 @@ export function About() {
         <meta property="og:title" content="About Aurix - Premium Gold Jewelry Brand" />
         <meta property="og:description" content="Learn about Aurix, a trusted brand offering premium gold jewelry and accessories crafted with quality and elegance." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/about" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://aurix-gold.vercel.app/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "About",
+                  "item": "https://aurix-gold.vercel.app/about"
+                }
+              ]
+            }
+          `}
+        </script>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org/",
+              "@type": "Organization",
+              "name": "Aurix",
+              "url": "https://aurix-gold.vercel.app/",
+              "description": "Premium gold jewelry brand offering handcrafted accessories",
+              "foundingDate": "2023",
+              "foundingLocation": {
+                "@type": "Place",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressCountry": "IN"
+                }
+              }
+            }
+          `}
+        </script>
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center border-b border-white/10">
