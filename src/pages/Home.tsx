@@ -6,7 +6,8 @@ import { Helmet } from "react-helmet-async";
 import { classicNecklace } from "../assets/images";
 import OptimizedImage from "../components/OptimizedImage";
 import { categories, features, reviews } from "../data";
-import { motion } from "motion/react";
+import React, { Suspense } from "react";
+const Motion = React.lazy(() => import('motion/react').then(m => ({ default: m.motion })));
 
 export function Home() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export function Home() {
   };
 
   return (
+    <Suspense fallback={<div className="min-h-screen bg-[#050505] text-white flex items-center justify-center">Loading animations...</div>}>
     <div className="w-full flex-grow flex flex-col">
       <Helmet>
         <title>Aurix - Premium Gold Jewelry & Accessories</title>
@@ -87,7 +89,7 @@ export function Home() {
         {/* Hero Text Side */}
         <section className="w-full md:w-1/2 p-8 sm:p-16 flex flex-col justify-center relative z-10 bg-[#050505]">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[100px] pointer-events-none"></div>
-          <motion.div 
+          <Motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -121,13 +123,13 @@ export function Home() {
                 <div className="absolute inset-0 bg-[#D4AF37]/5 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
               </Link>
             </div>
-          </motion.div>
+          </Motion.div>
         </section>
 
         {/* Hero Image/Feature Side */}
         <section className="w-full md:w-1/2 relative bg-[#0a0a0a] flex items-center justify-center p-8 lg:p-12 border-t md:border-t-0 md:border-l border-white/10 overflow-hidden">
           <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_#D4AF37_0%,_transparent_60%)] pointer-events-none"></div>
-          <motion.div 
+          <Motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
@@ -193,19 +195,19 @@ export function Home() {
                 </button>
               </div>
             </div>
-          </motion.div>
+          </Motion.div>
         </section>
       </main>
 
       {/* Luxury Marquee Bar */}
       <div className="w-full bg-[#D4AF37] py-3 overflow-hidden flex whitespace-nowrap items-center border-y border-[#c4a132]">
-        <motion.div 
+        <Motion.div 
           animate={{ x: ["0%", "-50%"] }}
           transition={{ ease: "linear", duration: 20, repeat: Infinity }}
           className="flex font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.3em] font-medium text-black gap-12"
         >
           {Array(8).fill("100% CERTIFIED 22K GOLD · FREE GLOBAL SHIPPING · LIFETIME WARRANTY · SECURE PACKAGING · ").join('')}
-        </motion.div>
+        </Motion.div>
       </div>
 
       {/* Featured Categories */}
@@ -352,5 +354,6 @@ export function Home() {
         </div>
       </section>
     </div>
+    </Suspense>
   );
 }

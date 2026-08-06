@@ -1,6 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import compression from 'vite-plugin-compression';
+import { visualizer } from 'rollup-plugin-visualizer';
 import path from 'path';
 import {defineConfig} from 'vite';
 
@@ -12,6 +13,7 @@ export default defineConfig(() => {
       // generate gz and brotli compressed assets for CDN / static hosting
       compression({ algorithm: 'gzip' }),
       compression({ algorithm: 'brotliCompress' }),
+      visualizer({ filename: 'dist/bundle-stats.html', gzipSize: true, brotliSize: true }),
     ],
     resolve: {
       alias: {

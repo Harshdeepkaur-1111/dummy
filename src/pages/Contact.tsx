@@ -1,7 +1,7 @@
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
-import { motion } from "motion/react";
+const Motion = React.lazy(() => import('motion/react').then(m => ({ default: m.motion })));
 
 export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -40,6 +40,7 @@ export function Contact() {
   };
 
   return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">Loading animations...</div>}>
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
         <title>Contact Aurix - Get in Touch With Our Jewelry Team</title>
@@ -100,17 +101,17 @@ export function Contact() {
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center border-b border-white/10 mb-16">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
+               <Motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                >
           <h1 className="font-serif text-4xl md:text-5xl text-white mb-6 italic">Contact Aurix | Get in Touch With Our Jewelry Experts</h1>
           <div className="w-16 h-px bg-[#D4AF37] mx-auto"></div>
           <p className="mt-8 text-white/70 font-light max-w-2xl mx-auto text-sm leading-relaxed">
             We would love to hear from you. Reach out to us for any inquiries about gold jewelry, orders, support, and product information. We're here to help with all your jewelry needs.
           </p>
-        </motion.div>
+        </Motion.div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -120,7 +121,7 @@ export function Contact() {
           <div className="flex flex-col justify-center">
             <h2 className="font-serif text-3xl text-white mb-12">Gold Jewelry Contact Details</h2>
             
-            <div className="space-y-10">
+              <div className="space-y-10">
               <div className="border-l border-[#D4AF37]/30 pl-6 relative">
                 <div className="absolute top-0 -left-[5px] w-2 h-2 bg-[#D4AF37] rounded-full"></div>
                 <h3 className="text-[#D4AF37] mb-2 uppercase tracking-widest text-[10px]">Address</h3>
@@ -131,7 +132,7 @@ export function Contact() {
               </div>
 
               <div className="border-l border-[#D4AF37]/30 pl-6 relative">
-                <div className="absolute top-0 -left-[5px] w-2 h-2 bg-[#D4AF37] rounded-full"></div>
+                <Motion.div className="absolute top-0 -left-[5px] w-2 h-2 bg-[#D4AF37] rounded-full" />
                 <h3 className="text-[#D4AF37] mb-2 uppercase tracking-widest text-[10px]">Phone</h3>
                 <p className="text-white/70 font-light text-sm tracking-widest">+91 9034196429<br /><span className="text-[11px] text-[#D4AF37]">(Contact: Harshdeep)</span></p>
               </div>
@@ -164,7 +165,7 @@ export function Contact() {
             <p className="text-white/70 text-[10px] uppercase tracking-widest mb-10">We will respond within 24 hours.</p>
 
             {isSubmitted ? (
-               <motion.div 
+               <Motion.div 
                  initial={{ opacity: 0, scale: 0.95 }}
                  animate={{ opacity: 1, scale: 1 }}
                  className="flex flex-col items-center justify-center py-16 text-center"
@@ -174,7 +175,7 @@ export function Contact() {
                  </div>
                  <h3 className="font-serif text-2xl text-white mb-2 italic">Message Sent</h3>
                  <p className="text-white/70 text-sm font-light">Thank you for reaching out. We will get back to you shortly.</p>
-               </motion.div>
+               </Motion.div>
             ) : (
               <form className="space-y-8" onSubmit={handleSubmit}>
                 <div>
@@ -252,5 +253,6 @@ export function Contact() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }

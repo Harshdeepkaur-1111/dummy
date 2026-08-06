@@ -2,7 +2,8 @@
 import { ArrowRight, X } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { motion } from "motion/react";
+import React, { Suspense } from "react";
+const Motion = React.lazy(() => import('motion/react').then(m => ({ default: m.motion })));
 import { articles } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
 import { getOptimizedImage } from "../lib/utils";
@@ -11,6 +12,7 @@ export function Blog() {
   const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
 
   return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">Loading animations...</div>}>
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
         <title>Aurix Blog - Gold Jewelry Trends, Tips & Expert Advice</title>
@@ -57,7 +59,7 @@ export function Blog() {
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center border-b border-white/10 mb-16">
-        <motion.div 
+        <Motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -67,13 +69,13 @@ export function Blog() {
           <p className="mt-8 text-white/70 font-light max-w-2xl mx-auto text-sm leading-relaxed">
             Read our gold jewelry styling guide for insights, learn how to clean 22k gold, and explore timeless gold jewelry trends from the world of fine gold jewelry.
           </p>
-        </motion.div>
+        </Motion.div>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-16">
           {articles.map((article, idx) => (
-            <motion.article 
+            <Motion.article 
               key={article.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -135,10 +137,11 @@ export function Blog() {
                   )}
                 </div>
               </div>
-            </motion.article>
+            </Motion.article>
           ))}
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }

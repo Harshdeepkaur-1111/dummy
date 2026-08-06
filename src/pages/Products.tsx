@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "motion/react";
+import React, { Suspense } from "react";
+const Motion = React.lazy(() => import('motion/react').then(m => ({ default: m.motion })));
 import { Helmet } from "react-helmet-async";
 import { products } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
@@ -16,6 +16,7 @@ export function Products() {
   };
 
   return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">Loading animations...</div>}>
     <div className="w-full bg-[#0a0a0a] text-white min-h-screen pb-24">
       <Helmet>
         <title>Gold Jewelry Collection - Necklaces-Ring-Aurix</title>
@@ -61,8 +62,8 @@ export function Products() {
         </script>
       </Helmet>
       {/* Page Header */}
-      <div className="bg-[#111] py-24 px-4 text-center mb-16 border-b border-white/10">
-        <motion.div 
+        <div className="bg-[#111] py-24 px-4 text-center mb-16 border-b border-white/10">
+        <Motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -72,13 +73,13 @@ export function Products() {
           <p className="mt-8 text-white/70 font-light max-w-2xl mx-auto text-sm leading-relaxed">
             Shop fine gold jewelry and explore our handcrafted pieces designed to elevate your everyday and special moments. Each design is a testament to Aurix's unparalleled craftsmanship. Look through 22k gold bangles and rings, and explore our handcrafted gold pendants.
           </p>
-        </motion.div>
+        </Motion.div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {products.map((product, idx) => (
-            <motion.div 
+            <Motion.div 
               key={product.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -146,10 +147,11 @@ export function Products() {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </Motion.div>
           ))}
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
