@@ -27,8 +27,13 @@ async function convertFile(srcPath, baseName) {
   const outAvif = path.join(publicImagesDir, baseName + '.avif');
   const outWebp = path.join(publicImagesDir, baseName + '.webp');
   try {
+    // Always attempt to write AVIF. For WEBP output, avoid writing to the same
+    // path as the input (sharp will error if input and output are identical).
+    const ext = path.extname(srcPath).toLowerCase();
     await sharp(srcPath).avif({ quality: 60 }).toFile(outAvif);
-    await sharp(srcPath).webp({ quality: 75 }).toFile(outWebp);
+    if (ext !== '.webp' || outWebp !== srcPath) {
+      await sharp(srcPath).webp({ quality: 75 }).toFile(outWebp);
+    }
     console.log('Converted:', baseName);
   } catch (err) {
     console.error('Error converting', srcPath, err.message);
@@ -37,7 +42,8 @@ async function convertFile(srcPath, baseName) {
 
 async function run() {
   console.log('Scanning public/images for conversions...');
-  const files = fs.readdirSync(publicImagesDir).filter(f => /\.(jpe?g|png|webp|tiff)$/i.test(f));
+  // Only convert common raster source formats here; avoid re-processing existing webp/avif files
+  const files = fs.readdirSync(publicImagesDir).filter(f => /\.(jpe?g|png|tiff)$/i.test(f));
   for (const f of files) {
     const src = path.join(publicImagesDir, f);
     const base = path.parse(f).name;
