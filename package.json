@@ -30,17 +30,19 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "autoprefixer": "^10.4.21",
     "esbuild": "^0.25.0",
+    "rollup-plugin-visualizer": "^5.9.2",
     "sharp": "^0.35.2",
     "svgo": "^4.0.1",
     "tailwindcss": "^4.1.14",
     "terser": "^5.48.0",
-    "vite-plugin-compression": "^0.3.1",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.3",
-    "rollup-plugin-visualizer": "^5.9.2",
+    "vite-plugin-compression": "^0.3.1",
     "vite-plugin-image-optimizer": "^2.0.3"
   }
 }
