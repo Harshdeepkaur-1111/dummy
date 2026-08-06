@@ -1,9 +1,9 @@
 
 import React, { Suspense } from "react";
-const Motion = React.lazy(() => import('motion/react').then(m => ({ default: m.motion })));
 import { Helmet } from "react-helmet-async";
 import { team } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
+import LazyMotion from "../components/LazyMotion";
 import { getOptimizedImage } from "../lib/utils";
 
 export function About() {
@@ -63,7 +63,7 @@ export function About() {
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center border-b border-white/10">
-        <Motion.div 
+        <LazyMotion 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -71,7 +71,7 @@ export function About() {
           <div className="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37] mb-6">Our Story</div>
           <h1 className="font-serif text-4xl md:text-5xl text-white mb-6 italic">About Aurix - Premium Gold Jewelry</h1>
           <div className="w-16 h-px bg-[#D4AF37] mx-auto"></div>
-        </Motion.div>
+        </LazyMotion>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">

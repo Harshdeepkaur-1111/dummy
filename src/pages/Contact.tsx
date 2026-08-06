@@ -1,7 +1,7 @@
 
 import React, { useState, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
-const Motion = React.lazy(() => import('motion/react').then(m => ({ default: m.motion })));
+import LazyMotion from "../components/LazyMotion";
 
 export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -101,7 +101,7 @@ export function Contact() {
       </Helmet>
       {/* Page Header */}
       <div className="bg-[#111] py-24 px-4 text-center border-b border-white/10 mb-16">
-               <Motion.div 
+               <LazyMotion 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
@@ -111,7 +111,7 @@ export function Contact() {
           <p className="mt-8 text-white/70 font-light max-w-2xl mx-auto text-sm leading-relaxed">
             We would love to hear from you. Reach out to us for any inquiries about gold jewelry, orders, support, and product information. We're here to help with all your jewelry needs.
           </p>
-        </Motion.div>
+        </LazyMotion>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,7 +132,7 @@ export function Contact() {
               </div>
 
               <div className="border-l border-[#D4AF37]/30 pl-6 relative">
-                <Motion.div className="absolute top-0 -left-[5px] w-2 h-2 bg-[#D4AF37] rounded-full" />
+                <LazyMotion tag="div" className="absolute top-0 -left-[5px] w-2 h-2 bg-[#D4AF37] rounded-full" />
                 <h3 className="text-[#D4AF37] mb-2 uppercase tracking-widest text-[10px]">Phone</h3>
                 <p className="text-white/70 font-light text-sm tracking-widest">+91 9034196429<br /><span className="text-[11px] text-[#D4AF37]">(Contact: Harshdeep)</span></p>
               </div>
@@ -165,7 +165,8 @@ export function Contact() {
             <p className="text-white/70 text-[10px] uppercase tracking-widest mb-10">We will respond within 24 hours.</p>
 
             {isSubmitted ? (
-               <Motion.div 
+               <LazyMotion 
+                 tag="div"
                  initial={{ opacity: 0, scale: 0.95 }}
                  animate={{ opacity: 1, scale: 1 }}
                  className="flex flex-col items-center justify-center py-16 text-center"
@@ -175,7 +176,7 @@ export function Contact() {
                  </div>
                  <h3 className="font-serif text-2xl text-white mb-2 italic">Message Sent</h3>
                  <p className="text-white/70 text-sm font-light">Thank you for reaching out. We will get back to you shortly.</p>
-               </Motion.div>
+               </LazyMotion>
             ) : (
               <form className="space-y-8" onSubmit={handleSubmit}>
                 <div>
