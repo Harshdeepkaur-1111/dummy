@@ -149,16 +149,16 @@ export function Home() {
             
             {/* Elegant Image Container */}
             <div className="group relative my-6">
-              <div className="w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden border border-white/10 p-2 bg-gradient-to-b from-white/5 to-transparent">
-                <div className="w-full h-full rounded-full overflow-hidden border border-[#D4AF37]/20 relative">
+              <div className="w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden border border-white/10 p-2 bg-[#0f0f0f]">
+                <div className="w-full h-full rounded-full overflow-hidden border border-[#D4AF37]/20 relative bg-black">
                   <OptimizedImage
                     src={classicNecklace}
-                    alt="minimalist 22k gold necklaces"
+                    alt="minimalist 22k gold necklace"
                     width={800}
                     height={800}
                     priority
                     sizes="100vw"
-                    className="w-full h-full object-cover mix-blend-screen opacity-90 group-hover:scale-110 transition-transform duration-1000 ease-out"
+                    className="w-full h-full object-contain transition-transform duration-1000 ease-out group-hover:scale-105"
                   />
                   <div className="absolute inset-0 rounded-full shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] pointer-events-none"></div>
                 </div>
