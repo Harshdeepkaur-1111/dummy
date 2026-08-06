@@ -322,7 +322,7 @@ export function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-32 bg-cover bg-center bg-fixed relative text-center px-4" style={{ backgroundImage: `url(${classicNecklace})` }}>
+      <section className="py-32 bg-cover bg-center bg-fixed relative text-center px-4" style={{ backgroundImage: `https://simhajewellers.com/wp-content/uploads/2026/01/ChatGPT-Image-Jan-1-2026-07_03_44-PM.jpg` }}>
         <div className="absolute inset-0 bg-[#050505]/95"></div>
         <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
           <div className="w-12 h-12 border border-[#D4AF37]/30 rotate-45 flex items-center justify-center mb-12">
