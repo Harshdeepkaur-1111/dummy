@@ -1,13 +1,17 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import compression from 'vite-plugin-compression';
 import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
     plugins: [
-      react(), 
+      react(),
       tailwindcss(),
+      // generate gz and brotli compressed assets for CDN / static hosting
+      compression({ algorithm: 'gzip' }),
+      compression({ algorithm: 'brotliCompress' }),
     ],
     resolve: {
       alias: {

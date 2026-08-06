@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
 import { products } from "../data";
+import OptimizedImage from "../components/OptimizedImage";
+import { getOptimizedImage } from "../lib/utils";
 import { useCart } from "../contexts/CartContext";
 
 export function Services() {
@@ -53,13 +55,13 @@ export function Services() {
               className="group flex flex-col bg-[#050505] border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-700 hover:shadow-[0_0_30px_rgba(212,175,55,0.05)]"
             >
               <div className="relative aspect-[3/4] overflow-hidden border-b border-white/5 bg-[#0a0a0a]">
-                <img 
-                  src={product.image} 
+                <OptimizedImage
+                  src={getOptimizedImage(product.image)}
                   alt={product.name}
-                  width="600"
-                  height="800"
-                  loading={idx < 4 ? "eager" : "lazy"}
-                  fetchPriority={idx < 4 ? "high" : "auto"}
+                  width={600}
+                  height={800}
+                  priority={idx < 4}
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                   className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 opacity-70 group-hover:opacity-100 mix-blend-screen"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>

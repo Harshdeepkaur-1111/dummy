@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "motion/react";
 import { articles } from "../data";
+import OptimizedImage from "../components/OptimizedImage";
+import { getOptimizedImage } from "../lib/utils";
 
 export function Blog() {
   const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
@@ -82,13 +84,13 @@ export function Blog() {
               <div className="md:grid md:grid-cols-5 md:gap-12 items-center">
                 <div className="md:col-span-2 mb-8 md:mb-0">
                   <div className="aspect-[4/3] overflow-hidden border border-white/10 bg-black">
-                    <img 
-                      src={article.image} 
+                    <OptimizedImage
+                      src={getOptimizedImage(article.image)}
                       alt={article.title}
-                      width="800"
-                      height="600"
-                      loading={idx === 0 ? "eager" : "lazy"}
-                      fetchPriority={idx === 0 ? "high" : "auto"}
+                      width={800}
+                      height={600}
+                      priority={idx === 0}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 opacity-60 hover:opacity-100 grayscale hover:grayscale-0"
                     />
                   </div>

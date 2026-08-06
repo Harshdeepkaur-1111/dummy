@@ -4,6 +4,7 @@ import { Star, ShieldCheck, Diamond, Truck, ShoppingBag } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { Helmet } from "react-helmet-async";
 import { classicNecklace } from "../assets/images";
+import OptimizedImage from "../components/OptimizedImage";
 import { categories, features, reviews } from "../data";
 import { motion } from "motion/react";
 
@@ -147,7 +148,15 @@ export function Home() {
             <div className="group relative my-6">
               <div className="w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden border border-white/10 p-2 bg-gradient-to-b from-white/5 to-transparent">
                 <div className="w-full h-full rounded-full overflow-hidden border border-[#D4AF37]/20 relative">
-                  <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgvq90qggZGHhL8faO_ObbXO7joy1P0kuVSoXNAZxl7A&s=10https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgvq90qggZGHhL8faO_ObbXO7joy1P0kuVSoXNAZxl7A&s=10"} alt="minimalist 22k gold necklaces" width="800" height="800" fetchPriority="high" className="w-full h-full object-cover mix-blend-screen opacity-90 group-hover:scale-110 transition-transform duration-1000 ease-out" />
+                  <OptimizedImage
+                    src={classicNecklace}
+                    alt="minimalist 22k gold necklaces"
+                    width={800}
+                    height={800}
+                    priority
+                    sizes="100vw"
+                    className="w-full h-full object-cover mix-blend-screen opacity-90 group-hover:scale-110 transition-transform duration-1000 ease-out"
+                  />
                   <div className="absolute inset-0 rounded-full shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] pointer-events-none"></div>
                 </div>
               </div>
@@ -233,12 +242,12 @@ export function Home() {
                 }`}
               >
                 <div className="relative overflow-hidden mb-6 bg-[#0a0a0a] border border-white/5 h-[400px] sm:h-[500px]">
-                  <img 
-                    src={category.image} 
+                  <OptimizedImage
+                    src={getOptimizedImage(category.image)}
                     alt={category.title}
-                    width="600"
-                    height="800"
-                    loading="lazy"
+                    width={600}
+                    height={800}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 opacity-70 group-hover:opacity-100 mix-blend-screen"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>

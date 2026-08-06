@@ -2,6 +2,8 @@
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
 import { team } from "../data";
+import OptimizedImage from "../components/OptimizedImage";
+import { getOptimizedImage } from "../lib/utils";
 
 export function About() {
   return (
@@ -123,12 +125,12 @@ export function About() {
               {team.map((member, idx) => (
                 <div key={idx} className="text-center flex flex-col items-center">
                   <div className="w-32 h-32 bg-[#111] rounded-full mb-6 overflow-hidden border border-[#D4AF37]/20 p-2">
-                    <img 
-                      src={member.image}
+                    <OptimizedImage
+                      src={getOptimizedImage(member.image)}
                       alt={member.name}
-                      width="128"
-                      height="128"
-                      loading="lazy"
+                      width={128}
+                      height={128}
+                      sizes="64px"
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>

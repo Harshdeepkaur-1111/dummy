@@ -30,8 +30,6 @@ export default function App() {
                 <Route path="products" element={<Products />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="contact" element={<Contact />} />
-                <Route path="blog" element={<Blog />} />
-                <Route path="contact" element={<Contact />} />
               </Route>
             </Routes>
           </Suspense>
