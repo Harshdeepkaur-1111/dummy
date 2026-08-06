@@ -64,7 +64,7 @@ export const articles = [
     title: "Tips for Maintaining Gold Accessories",
     excerpt: "Store jewelry separately. Avoid exposure to chemicals. Clean regularly using a soft cloth. Remove jewelry before swimming.",
     date: "May 5, 2026",
-    image: "/images/a312eedff6062cb35225cc1b12e68c4d.webp",
+    image: "https://simhajewellers.com/wp-content/uploads/2026/01/ChatGPT-Image-Jan-1-2026-07_03_44-PM.jpg",
   },
   {
     id: 4,
