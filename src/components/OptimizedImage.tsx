@@ -9,15 +9,26 @@ type Props = React.ImgHTMLAttributes<HTMLImageElement> & {
 };
 
 export function OptimizedImage({ src, alt, width, height, priority, sizes, className, ...rest }: Props) {
-  const avif = src.replace(/\.(jpe?g|png|webp)$/i, '.avif');
-  const webp = src.replace(/\.(jpe?g|png|avif)$/i, '.webp');
+  const match = src.match(/^\/images\/.+\.(jpe?g|png|webp|avif)$/i);
+  const isLocalImage = Boolean(match);
+  const extension = match?.[1].toLowerCase();
+  const isAvif = extension === 'avif';
+  const isWebp = extension === 'webp';
+
+  const avif = isLocalImage && !isWebp
+    ? src.replace(/\.(jpe?g|png|webp|avif)$/i, '.avif')
+    : undefined;
+  const webp = isLocalImage
+    ? src.replace(/\.(jpe?g|png|avif)$/i, '.webp')
+    : undefined;
+  const fallbackSrc = isLocalImage ? (webp || src) : src;
 
   return (
     <picture>
-      <source srcSet={avif} type="image/avif" />
-      <source srcSet={webp} type="image/webp" />
+      {isLocalImage && !isWebp && <source srcSet={avif} type="image/avif" />}
+      {isLocalImage && webp && <source srcSet={webp} type="image/webp" />}
       <img
-        src={webp}
+        src={fallbackSrc}
         alt={alt}
         width={width}
         height={height}

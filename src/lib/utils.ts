@@ -5,16 +5,21 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Return a local optimized image path (prefer .avif then .webp) based on original URL or path
+// Return a local optimized image path based on original URL or path.
+// Only rewrite local /images paths and preserve external URLs.
 export function getOptimizedImage(src: string) {
   if (!src) return src;
-  try {
-    const u = new URL(src, 'http://localhost');
-    const name = u.pathname.split('/').pop() || '';
-    const base = name.split('?')[0].split('.').slice(0, -1).join('.');
-    // Prefer avif then webp
-    return `/images/${base}.avif`;
-  } catch (e) {
+  const localImageMatch = src.match(/^\/images\/(.+)\.(jpe?g|png|webp|avif)$/i);
+  if (!localImageMatch) {
     return src;
   }
+
+  const [, base, extension] = localImageMatch;
+  const ext = extension.toLowerCase();
+
+  if (ext === 'avif' || ext === 'webp') {
+    return src;
+  }
+
+  return `/images/${base}.avif`;
 }

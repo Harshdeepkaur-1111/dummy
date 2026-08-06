@@ -39,8 +39,8 @@ export const reviews = [
 
 export const team = [
   { name: "Sophia Bennett", role: "Founder & CEO", image: "/images/brunette-business-woman-with-wavy-long-hair-blue-eyes-stands-holding-notebook-hands_197531-343.avif" },
-  { name: "Daniel Carter", role: "Creative Director", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzlxiblggoNTQjU2LK_TNcy2sbh9hOuxHBVnRAHx83VRE4RHQ45zJALJ8&s=10" },
-  { name: "Emma Wilson", role: "Head of Product Design", image: "/images/business-concept-portrait-confident-young-businesswoman-keeping-arms-crossed-looking-camera-w_1258-104422.avif" },
+  { name: "Daniel Carter", role: "Creative Director", image: "/images/business-concept-portrait-confident-young-businesswoman-keeping-arms-crossed-looking-camera-w_1258-104422.avif" },
+  { name: "Emma Wilson", role: "Head of Product Design", image: "/images/brunette-business-woman-with-wavy-long-hair-blue-eyes-stands-holding-notebook-hands_197531-343.avif" },
   { name: "Michael Brooks", role: "Customer Exp Manager", image: "/images/a312eedff6062cb35225cc1b12e68c4d.avif" }
 ];
 
@@ -64,7 +64,7 @@ export const articles = [
     title: "Tips for Maintaining Gold Accessories",
     excerpt: "Store jewelry separately. Avoid exposure to chemicals. Clean regularly using a soft cloth. Remove jewelry before swimming.",
     date: "May 5, 2026",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg27ETVZF5hKEAFHHSsTbCprAOBpJu-ZnHAXrF5mTxRSH05pBNEgUxAaX_&s=10",
+    image: "/images/il_570xN.6784115192_tg5l.avif",
   },
   {
     id: 4,
