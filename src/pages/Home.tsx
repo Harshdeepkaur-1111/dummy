@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { classicNecklace } from "../assets/images";
 import OptimizedImage from "../components/OptimizedImage";
 import { categories, features, reviews } from "../data";
+import { getOptimizedImage } from "../lib/utils";
 import React, { Suspense } from "react";
 const Motion = React.lazy(() => import('motion/react').then(m => ({ default: m.motion })));
 
