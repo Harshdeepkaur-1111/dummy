@@ -1,5 +1,5 @@
-import React, { Suspense } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { Suspense, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Star, Diamond, ShoppingBag } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
@@ -14,8 +14,20 @@ import { getOptimizedImage } from "../lib/utils";
    HERO PRODUCT IMAGE
 ========================================================= */
 
-const necklaceImage =
-  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80";
+const heroImages = [
+  {
+    src: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80",
+    alt: "Gold necklace with a luminous finish",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80",
+    alt: "Elegant gold ring displayed on a silk cloth",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80",
+    alt: "Luxury gold bracelet showcased on a dark background",
+  },
+];
 
 /* =========================================================
    CTA IMAGE
@@ -26,7 +38,7 @@ const ctaImage =
 
 
 export function Home() {
-  const navigate = useNavigate();
+  const [heroIndex, setHeroIndex] = useState(0);
 
   const { addToCart, setIsCartOpen } = useCart();
 
@@ -50,6 +62,13 @@ export function Home() {
     setIsCartOpen(true);
   };
 
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setHeroIndex((current) => (current + 1) % heroImages.length);
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, []);
 
   return (
     <Suspense
@@ -116,7 +135,7 @@ export function Home() {
 
           <meta
             property="og:image"
-            content={necklaceImage}
+            content={heroImages[0].src}
           />
 
           {/* Twitter */}
@@ -138,7 +157,7 @@ export function Home() {
 
           <meta
             name="twitter:image"
-            content={necklaceImage}
+            content={heroImages[0].src}
           />
 
 
@@ -183,9 +202,9 @@ export function Home() {
               "@context": "https://schema.org",
               "@type": "Product",
               name: "Aurix Classic Gold Necklace",
-              image: [necklaceImage],
+              image: [heroImages[0].src],
               description:
-                "Classic 22K gold necklace from Aurix.",
+                "Classic 22K gold jewellery from Aurix.",
               brand: {
                 "@type": "Brand",
                 name: "Aurix",
@@ -392,20 +411,22 @@ export function Home() {
 
                 <div className="w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border border-white/10 p-2 bg-[#111111]">
 
-                  <div className="w-full h-full rounded-full overflow-hidden border border-[#D4AF37]/20 bg-black">
+<div className="w-full h-full rounded-full overflow-hidden border border-[#D4AF37]/20 bg-black relative">
 
-                    <img
-                      src={necklaceImage}
-                      alt="Aurix Classic 22K gold necklace"
-                      width={900}
-                      height={900}
-                      loading="eager"
-                      fetchPriority="high"
-                      decoding="async"
-                      className="w-full h-full object-cover"
-                    />
+                      {heroImages.map((image, index) => (
+                        <img
+                          key={image.src}
+                          src={image.src}
+                          alt={image.alt}
+                          width={900}
+                          height={900}
+                          loading={index === heroIndex ? "eager" : "lazy"}
+                          decoding="async"
+                          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${index === heroIndex ? "opacity-100" : "opacity-0"}`}
+                        />
+                      ))}
 
-                  </div>
+                    </div>
 
                 </div>
 
