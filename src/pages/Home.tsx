@@ -16,16 +16,16 @@ import { getOptimizedImage } from "../lib/utils";
 
 const heroImages = [
   {
-    src: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80",
-    alt: "Gold necklace with a luminous finish",
+    src: "/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp",
+    alt: "Classic gold necklace from Aurix",
   },
   {
-    src: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80",
-    alt: "Elegant gold ring displayed on a silk cloth",
+    src: "/images/diamond_gold_ring_1781762677970-C24oRI-9.webp",
+    alt: "Diamond gold ring showcased in luxury lighting",
   },
   {
-    src: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80",
-    alt: "Luxury gold bracelet showcased on a dark background",
+    src: "/images/modern_gold_bracelet_1781762704753-DMbwxbLT.webp",
+    alt: "Modern gold bracelet with polished finish",
   },
 ];
 
@@ -34,7 +34,7 @@ const heroImages = [
 ========================================================= */
 
 const ctaImage =
-  "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1600&q=75";
+  "/images/signature_gold_pendant_1781762720597-Bwiy23va.webp";
 
 
 export function Home() {
@@ -135,7 +135,7 @@ export function Home() {
 
           <meta
             property="og:image"
-            content={heroImages[0].src}
+            content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
           />
 
           {/* Twitter */}
@@ -157,7 +157,7 @@ export function Home() {
 
           <meta
             name="twitter:image"
-            content={heroImages[0].src}
+            content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
           />
 
 
