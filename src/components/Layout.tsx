@@ -45,6 +45,7 @@ export function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#0a0a0a] text-white selection:bg-[#D4AF37] selection:text-black">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Navigation */}
       <header className="sticky top-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
@@ -56,11 +57,12 @@ export function Layout() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-10">
+            <nav aria-label="Primary navigation" className="hidden md:flex space-x-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
+                  aria-current={location.pathname === link.path ? "page" : undefined}
                   className={cn(
                     "relative text-[11px] uppercase tracking-[0.2em] font-medium transition-colors group",
                     location.pathname === link.path ? "text-[#D4AF37]" : "text-white/70 hover:text-white"
@@ -76,29 +78,38 @@ export function Layout() {
             </nav>
 
             <div className="hidden md:flex items-center gap-6">
-              <div 
+              <button
+                type="button"
                 className="flex items-center gap-2 cursor-pointer group"
                 onClick={() => setIsCartOpen(true)}
+                aria-label="Open cart"
+                aria-expanded={isCartOpen}
+                aria-controls="cart-drawer"
               >
                 <ShoppingBag className="w-4 h-4 text-[#D4AF37] group-hover:text-white transition-colors" />
                 <span className="text-[11px] uppercase tracking-widest text-[#D4AF37] group-hover:text-white transition-colors">Cart ({cartCount})</span>
-              </div>
+              </button>
             </div>
 
             {/* Mobile Menu & Cart Buttons */}
             <div className="md:hidden flex items-center gap-4">
               <button 
+                type="button"
                 className="flex items-center gap-2 cursor-pointer group"
                 onClick={() => setIsCartOpen(true)}
                 aria-label="Open cart"
+                aria-expanded={isCartOpen}
+                aria-controls="cart-drawer"
               >
                 <ShoppingBag className="w-4 h-4 text-[#D4AF37] group-hover:text-white transition-colors" />
                 <span className="text-[11px] text-[#D4AF37] group-hover:text-white transition-colors">({cartCount})</span>
               </button>
               <button
+                type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-xs hover:bg-white/5 focus:outline-none"
                 aria-label="Toggle mobile menu"
+                aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? <X size={20} className="text-white" /> : <Menu size={20} className="text-white" />}
               </button>
@@ -135,11 +146,13 @@ export function Layout() {
           <div 
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity"
             onClick={() => setIsCartOpen(false)}
+            aria-hidden="true"
           ></div>
-          <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-[#111] border-l border-white/10 shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
+          <div id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" className="fixed inset-y-0 right-0 w-full max-w-sm bg-[#111] border-l border-white/10 shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
             <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <h2 className="font-serif text-2xl text-white italic">Your Cart</h2>
+              <h2 id="cart-title" className="font-serif text-2xl text-white italic">Your Cart</h2>
               <button 
+                type="button"
                 onClick={() => setIsCartOpen(false)}
                 className="p-2 hover:bg-white/5 rounded-full transition-colors"
                 aria-label="Close cart"
@@ -205,7 +218,7 @@ export function Layout() {
       )}
 
       {/* Main Content */}
-      <main className="flex-grow flex flex-col">
+      <main id="main-content" className="flex-grow flex flex-col">
         <Outlet />
       </main>
 
@@ -240,7 +253,7 @@ export function Layout() {
                 <li><Link to="/contact" className="text-white/70 hover:text-white text-xs transition-colors">Contact Us</Link></li>
                 <li><Link to="/about" className="text-white/70 hover:text-white text-xs transition-colors">Our Story</Link></li>
                 <li><Link to="/blog" className="text-white/70 hover:text-white text-xs transition-colors">Jewelry Care Guide</Link></li>
-                <li><a href="#" className="text-white/70 hover:text-white text-xs transition-colors">Shipping & Returns</a></li>
+                <li><Link to="/shipping-returns" className="text-white/70 hover:text-white text-xs transition-colors">Shipping & Returns</Link></li>
               </ul>
             </div>
 
@@ -249,13 +262,16 @@ export function Layout() {
               <p className="text-white/70 text-xs font-light leading-relaxed mb-4">
                 Subscribe to receive updates on new collections and exclusive access to limited pieces.
               </p>
-              <form className="flex border-b border-white/20 pb-2 group focus-within:border-[#D4AF37] transition-colors">
+              <form className="flex flex-col gap-3 border-b border-white/20 pb-2 group focus-within:border-[#D4AF37] transition-colors" aria-label="Newsletter subscription form">
+                <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                 <input 
+                  id="newsletter-email"
+                  name="newsletter-email"
                   type="email" 
                   placeholder="Enter your email address" 
-                  className="bg-transparent w-full text-sm text-white placeholder-white/70 focus:outline-none"
+                  className="bg-transparent w-full text-sm text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] rounded"
                 />
-                <button type="submit" className="text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white transition-colors" aria-label="Submit Newsletter Subscription">Submit</button>
+                <button type="submit" className="text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">Submit</button>
               </form>
             </div>
           </div>
@@ -263,10 +279,10 @@ export function Layout() {
           <div className="flex flex-col md:flex-row items-center justify-between text-[9px] uppercase tracking-[0.2em] text-white/70 gap-6">
             <div>© 2026 Aurix Jewelry. All Rights Reserved.</div>
             <div className="flex flex-wrap justify-center gap-8">
-              <a href="#" className="hover:text-white transition-colors" aria-label="Visit our Instagram page">Instagram</a>
-              <a href="#" className="hover:text-white transition-colors" aria-label="Visit our Facebook page">Facebook</a>
-              <a href="#" className="hover:text-white transition-colors" aria-label="Visit our Twitter page">Twitter</a>
-              <a href="#" className="hover:text-white transition-colors" aria-label="Visit our Pinterest page">Pinterest</a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Visit our Instagram page">Instagram</a>
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Visit our Facebook page">Facebook</a>
+              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Visit our Twitter page">Twitter</a>
+              <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Visit our Pinterest page">Pinterest</a>
             </div>
             <div className="flex gap-4">
               <span className="hover:text-white transition-colors cursor-pointer">Privacy</span>
