@@ -501,8 +501,7 @@ export function Contact() {
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        autoComplete="off"
-                        className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 text-white focus:outline-none focus:ring-0 focus:border-[#D4AF37] transition-colors rounded-none placeholder-white/20 text-sm"
+className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 text-white focus:outline-none focus:ring-0 focus:border-[#D4AF37] transition-colors rounded-none placeholder-white/20 text-sm"
                         placeholder="Inquiry reason"
                       />
 

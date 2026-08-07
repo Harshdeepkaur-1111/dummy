@@ -1,13 +1,14 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { Menu, X, Diamond, ShoppingBag, Trash2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCart } from "../contexts/CartContext";
 
 export function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { cart, cartCount, removeFromCart, clearCart, isCartOpen, setIsCartOpen } = useCart();
+  const cartDrawerRef = useRef<HTMLDivElement | null>(null);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -27,6 +28,12 @@ export function Layout() {
       window.scrollTo(0, 0);
     });
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (isCartOpen) {
+      cartDrawerRef.current?.focus();
+    }
+  }, [isCartOpen]);
 
   // Calculate cart total
   const cartTotal = cart.reduce((total, item) => {
@@ -119,7 +126,7 @@ export function Layout() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-[#111] border-b border-white/10 z-40 absolute w-full">
+          <div id="mobile-menu" className="md:hidden bg-[#111] border-b border-white/10 z-40 absolute w-full" aria-hidden={!isMobileMenuOpen}>
             <div className="px-4 pt-2 pb-4 space-y-1 shadow-lg">
               {navLinks.map((link) => (
                 <Link
@@ -148,7 +155,7 @@ export function Layout() {
             onClick={() => setIsCartOpen(false)}
             aria-hidden="true"
           ></div>
-          <div id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" className="fixed inset-y-0 right-0 w-full max-w-sm bg-[#111] border-l border-white/10 shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
+          <div id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabIndex={-1} ref={cartDrawerRef} onKeyDown={(event) => event.key === 'Escape' && setIsCartOpen(false)} className="fixed inset-y-0 right-0 w-full max-w-sm bg-[#111] border-l border-white/10 shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <h2 id="cart-title" className="font-serif text-2xl text-white italic">Your Cart</h2>
               <button 
@@ -285,9 +292,9 @@ export function Layout() {
               <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Visit our Pinterest page">Pinterest</a>
             </div>
             <div className="flex gap-4">
-              <span className="hover:text-white transition-colors cursor-pointer">Privacy</span>
+              <Link to="/privacy" className="text-white/70 hover:text-white transition-colors">Privacy</Link>
               <span>|</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Terms</span>
+              <Link to="/terms" className="text-white/70 hover:text-white transition-colors">Terms</Link>
             </div>
           </div>
         </div>

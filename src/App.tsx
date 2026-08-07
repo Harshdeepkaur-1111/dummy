@@ -16,6 +16,9 @@ const About = lazy(() => import("./pages/About").then(m => ({ default: m.About }
 const Products = lazy(() => import("./pages/Products").then(m => ({ default: m.Products })));
 const Blog = lazy(() => import("./pages/Blog").then(m => ({ default: m.Blog })));
 const Contact = lazy(() => import("./pages/Contact").then(m => ({ default: m.Contact })));
+const Privacy = lazy(() => import("./pages/Privacy").then(m => ({ default: m.Privacy })));
+const Terms = lazy(() => import("./pages/Terms").then(m => ({ default: m.Terms })));
+const ShippingReturns = lazy(() => import("./pages/ShippingReturns").then(m => ({ default: m.ShippingReturns })));
 
 export default function App() {
   return (
@@ -30,6 +33,9 @@ export default function App() {
                 <Route path="products" element={<Products />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="privacy" element={<Privacy />} />
+                <Route path="terms" element={<Terms />} />
+                <Route path="shipping-returns" element={<ShippingReturns />} />
               </Route>
             </Routes>
           </Suspense>
