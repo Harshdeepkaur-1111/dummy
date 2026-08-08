@@ -397,7 +397,7 @@ export function Home() {
 
                     <Link
                       to="/products"
-                      className="group bg-[#D4AF37] text-black px-8 py-4 flex items-center justify-center gap-4 text-[9px] uppercase tracking-[0.25em] font-medium hover:bg-white transition-colors"
+                      className="group bg-[#947100] text-black px-8 py-4 flex items-center justify-center gap-4 text-[9px] uppercase tracking-[0.25em] font-medium hover:bg-white transition-colors"
                     >
                       Explore Collection
 
@@ -495,15 +495,13 @@ export function Home() {
                     <div className="relative w-[78%] h-[430px] sm:h-[500px] flex items-center justify-center">
 
                       {heroProducts.map((image, index) => (
-                        <img
+                        <OptimizedImage
                           key={image.src}
                           src={image.src}
                           alt={image.alt}
-                          width="900"
-                          height="900"
-                          loading={index === 0 ? "eager" : "lazy"}
-                          decoding="async"
-                          fetchPriority={index === 0 ? "high" : "low"}
+                          width={900}
+                          height={900}
+                          priority={index === 0}
                           className={`absolute inset-0 w-full h-full object-contain transition-all duration-1000 ${
                             index === heroIndex
                               ? "opacity-100 scale-100"
@@ -664,13 +662,12 @@ export function Home() {
 
                     <div className="relative aspect-[4/5] overflow-hidden bg-[#0b0b0b] border border-white/[0.07]">
 
-                      <img
+                      <OptimizedImage
                         src={item.src}
                         alt={item.alt}
-                        width="900"
-                        height="1100"
-                        loading="lazy"
-                        decoding="async"
+                        width={900}
+                        height={1100}
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-1000"
                       />
 
@@ -839,13 +836,12 @@ export function Home() {
 
                   <div className="aspect-[4/5] bg-[#0b0b0b] overflow-hidden">
 
-                    <img
+                    <OptimizedImage
                       src={ctaImage}
                       alt="Aurix gold jewellery craftsmanship"
-                      width="1200"
-                      height="1500"
-                      loading="lazy"
-                      decoding="async"
+                      width={1200}
+                      height={1500}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1.2s]"
                     />
 
@@ -1082,13 +1078,12 @@ export function Home() {
                     className="aspect-square overflow-hidden bg-[#050505]"
                   >
 
-                    <img
+                    <OptimizedImage
                       src={image}
                       alt={`Aurix gold jewellery ${index + 1}`}
-                      width="700"
-                      height="700"
-                      loading="lazy"
-                      decoding="async"
+                      width={700}
+                      height={700}
+                      sizes="(max-width: 768px) 50vw, 25vw"
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                     />
 
@@ -1107,13 +1102,12 @@ export function Home() {
 
           <section className="relative py-32 sm:py-40 overflow-hidden">
 
-            <img
+            <OptimizedImage
               src={ctaImage}
               alt=""
-              width="1600"
-              height="900"
-              loading="lazy"
-              decoding="async"
+              width={1600}
+              height={900}
+              sizes="100vw"
               className="absolute inset-0 w-full h-full object-cover"
               aria-hidden="true"
             />
@@ -1158,7 +1152,7 @@ export function Home() {
 
                 <Link
                   to="/products"
-                  className="bg-[#D4AF37] text-black px-10 py-5 text-[9px] uppercase tracking-[0.25em] font-medium hover:bg-white transition-colors"
+                  className="bg-[#947100] text-black px-10 py-5 text-[9px] uppercase tracking-[0.25em] font-medium hover:bg-white transition-colors"
                 >
                   Shop Gold Collection
                 </Link>

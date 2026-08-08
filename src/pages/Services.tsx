@@ -306,7 +306,7 @@ export function Services() {
                   <button
                     type="button"
                     onClick={(e) => handleAddToCart(product, e)}
-                    className="w-full bg-[#D4AF37] text-black py-4 font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-colors duration-300"
+                    className="w-full bg-[#947100] text-black py-4 font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-colors duration-300"
                     aria-label={`Add ${product.name} to cart`}
                   >
                     Add to Cart

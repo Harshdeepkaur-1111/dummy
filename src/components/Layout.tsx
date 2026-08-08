@@ -212,7 +212,7 @@ export function Layout() {
                   </span>
                 </div>
                 <button 
-                  className="w-full bg-[#D4AF37] text-black py-5 font-medium uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-colors duration-300"
+                  className="w-full bg-[#947100] text-black py-5 font-medium uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-colors duration-300"
                   onClick={handleCheckout}
                   aria-label="Proceed to Checkout"
                 >

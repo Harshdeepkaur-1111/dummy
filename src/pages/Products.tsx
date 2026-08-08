@@ -369,7 +369,7 @@ export function Products() {
 
                         <div className="absolute top-4 right-4">
 
-                          <span className="bg-[#D4AF37] text-black px-3 py-2 text-[8px] uppercase tracking-widest font-bold">
+                          <span className="bg-[#947100] text-black px-3 py-2 text-[8px] uppercase tracking-widest font-bold">
                             22K GOLD
                           </span>
 
@@ -449,7 +449,7 @@ export function Products() {
                             onClick={(e) =>
                               handleBuyNow(product, e)
                             }
-                            className="w-full min-h-12 bg-[#D4AF37] text-black px-5 py-3.5 font-bold uppercase tracking-[0.18em] text-[9px] hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2"
+                              className="w-full min-h-12 bg-[#947100] text-black px-5 py-3.5 font-bold uppercase tracking-[0.18em] text-[9px] hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2"
                             aria-label={`Buy ${product.name} now`}
                           >
                             Buy Now
