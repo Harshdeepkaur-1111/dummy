@@ -24,7 +24,7 @@ export const signaturePendant =
   "/images/il_300x300.6811366752_yuu4.webp";
 
 export const heritageBangle =
-  "/images/9619e7cde469090473c070feb2005eca.webp";
+  "/images/71FN+9fe2yL._SY395_.webp";;
 
 export const imperialDiamondChoker =
   "/images/336052524_594628079068489_8991184652865232177_n.webp";
