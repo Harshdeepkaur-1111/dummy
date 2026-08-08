@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from "react";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, BookOpen, X } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 import LazyMotion from "../components/LazyMotion";
@@ -7,59 +7,67 @@ import { articles } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
 import { getOptimizedImage } from "../lib/utils";
 
+const SITE_URL = "https://aurix-gold.vercel.app";
+
 export function Blog() {
-  const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
+  const [expandedArticle, setExpandedArticle] =
+    useState<number | null>(null);
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Aurix Journal",
+    description:
+      "Gold jewellery trends, styling guides, care tips and jewellery advice from Aurix.",
+    url: `${SITE_URL}/blog`,
+    publisher: {
+      "@type": "Organization",
+      name: "Aurix",
+      url: SITE_URL,
+    },
+  };
 
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center">
+        <div className="min-h-screen bg-[#050505] text-white grid place-items-center">
           Loading...
         </div>
       }
     >
-      <div className="w-full flex-grow bg-[#050505] text-white">
+      <div className="min-h-screen bg-[#050505] text-white">
 
-        {/* =====================================================
-            SEO
-        ===================================================== */}
+        {/* ================= SEO ================= */}
 
         <Helmet>
 
           <title>
-            Aurix Blog | Gold Jewellery Trends, Tips & Expert Advice
+            Aurix Journal | Gold Jewellery Trends, Tips & Guides
           </title>
 
           <meta
             name="description"
-            content="Explore the Aurix jewellery blog for gold jewellery trends, 22k gold care tips, styling ideas, buying guides and expert advice."
-          />
-
-          <link
-            rel="canonical"
-            href="https://aurix-gold.vercel.app/blog"
+            content="Read the Aurix Journal for gold jewellery trends, 22K gold care tips, styling ideas, buying guides and expert jewellery advice."
           />
 
           <meta
             name="robots"
-            content="index, follow"
+            content="index, follow, max-image-preview:large"
           />
 
-          {/* Open Graph */}
+          <link
+            rel="canonical"
+            href={`${SITE_URL}/blog`}
+          />
 
           <meta
             property="og:title"
-            content="Aurix Blog | Gold Jewellery Trends & Tips"
+            content="Aurix Journal | Gold Jewellery Trends & Tips"
           />
 
           <meta
             property="og:description"
-            content="Discover gold jewellery trends, styling tips, 22k gold care guides and expert jewellery advice from Aurix."
-          />
-
-          <meta
-            property="og:url"
-            content="https://aurix-gold.vercel.app/blog"
+            content="Discover gold jewellery trends, styling tips and jewellery care guides from Aurix."
           />
 
           <meta
@@ -68,11 +76,14 @@ export function Blog() {
           />
 
           <meta
+            property="og:url"
+            content={`${SITE_URL}/blog`}
+          />
+
+          <meta
             property="og:site_name"
             content="Aurix"
           />
-
-          {/* Twitter */}
 
           <meta
             name="twitter:card"
@@ -81,274 +92,244 @@ export function Blog() {
 
           <meta
             name="twitter:title"
-            content="Aurix Blog | Gold Jewellery Trends & Tips"
+            content="Aurix Journal | Gold Jewellery Trends & Tips"
           />
 
           <meta
             name="twitter:description"
-            content="Read Aurix guides about gold jewellery styling, 22k gold care and timeless jewellery trends."
+            content="Gold jewellery trends, styling ideas and care guides from Aurix."
           />
 
-          {/* =====================================================
-              BREADCRUMB SCHEMA
-          ===================================================== */}
-
           <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Home",
-                  item: "https://aurix-gold.vercel.app/",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Blog",
-                  item: "https://aurix-gold.vercel.app/blog",
-                },
-              ],
-            })}
-          </script>
-
-          {/* =====================================================
-              BLOG SCHEMA
-          ===================================================== */}
-
-          <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Blog",
-              name: "Aurix Blog",
-              description:
-                "Gold jewellery trends, tips, styling guides and expert advice.",
-              url: "https://aurix-gold.vercel.app/blog",
-              publisher: {
-                "@type": "Organization",
-                name: "Aurix",
-                url: "https://aurix-gold.vercel.app/",
-              },
-            })}
+            {JSON.stringify(blogSchema)}
           </script>
 
         </Helmet>
 
+        {/* ================= HERO ================= */}
 
-        {/* =====================================================
-            PAGE HEADER
-        ===================================================== */}
+        <header className="relative overflow-hidden border-b border-white/10 bg-[#0b0b0b]">
 
-        <section className="border-b border-white/10">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 opacity-60 [background:radial-gradient(circle_at_50%_0%,rgba(212,175,55,.14),transparent_48%)]"
+          />
 
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+          <div className="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 lg:py-28">
 
             <LazyMotion
-              tag="div"
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                ease: "easeOut",
-              }}
-              className="text-center"
+              transition={{ duration: 0.55 }}
             >
 
-              <div className="flex items-center justify-center gap-4 mb-7">
+              <div className="mb-6 flex items-center justify-center gap-4">
 
-                <div className="h-px w-10 bg-[#D4AF37]" />
+                <span className="h-px w-10 bg-[#D4AF37]" />
 
                 <span className="text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
                   Aurix Journal
                 </span>
 
-                <div className="h-px w-10 bg-[#D4AF37]" />
+                <span className="h-px w-10 bg-[#D4AF37]" />
 
               </div>
 
-
-              <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl italic font-light text-white mb-7">
+              <h1 className="font-serif text-5xl font-light italic sm:text-6xl lg:text-7xl">
                 Gold Jewellery Journal
               </h1>
 
-
-              <p className="text-white/60 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                Discover gold jewellery trends, styling guides,
-                22k gold care tips and expert advice to help you
-                choose and care for timeless jewellery.
+              <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/55 sm:text-base">
+                Discover jewellery trends, styling inspiration,
+                gold care tips and helpful guides for choosing
+                pieces you will love for years.
               </p>
 
             </LazyMotion>
 
           </div>
 
-        </section>
-
-
-        {/* =====================================================
-            BLOG ARTICLES
-        ===================================================== */}
+        </header>
 
         <main>
 
-          <section className="py-24 lg:py-32">
+          {/* ================= ARTICLES ================= */}
 
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <section
+            aria-labelledby="journal-heading"
+            className="px-4 py-16 sm:px-6 lg:py-24"
+          >
 
-              <div className="space-y-16">
+            <div className="mx-auto max-w-6xl">
 
-                {articles.map((article, idx) => (
+              <div className="mb-12 flex items-end justify-between">
 
-                  <LazyMotion
-                    tag="article"
-                    key={article.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{
-                      once: true,
-                      margin: "-50px",
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      ease: "easeOut",
-                    }}
-                    className="border-b border-white/10 pb-16 last:border-0 last:pb-0"
+                <div>
+
+                  <p className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">
+                    Latest Stories
+                  </p>
+
+                  <h2
+                    id="journal-heading"
+                    className="mt-3 font-serif text-3xl italic sm:text-4xl"
                   >
+                    From The Journal
+                  </h2>
 
-                    <div className="md:grid md:grid-cols-5 md:gap-12 items-center">
+                </div>
 
+                <BookOpen
+                  aria-hidden="true"
+                  className="hidden h-6 w-6 text-[#D4AF37] sm:block"
+                />
 
-                      {/* =================================================
-                          ARTICLE IMAGE
-                      ================================================= */}
+              </div>
 
-                      <div className="md:col-span-2 mb-8 md:mb-0">
+              <div className="space-y-8">
 
-                        <div className="aspect-[4/3] overflow-hidden border border-white/10 bg-black">
+                {articles.map((article: any, idx: number) => {
+
+                  const isOpen =
+                    expandedArticle === article.id;
+
+                  return (
+
+                    <LazyMotion
+                      tag="article"
+                      key={article.id}
+                      initial={{
+                        opacity: 0,
+                        y: 20,
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      viewport={{
+                        once: true,
+                        margin: "-50px",
+                      }}
+                      transition={{
+                        duration: 0.5,
+                      }}
+                      className="group overflow-hidden border border-white/10 bg-[#090909] transition hover:border-[#D4AF37]/25"
+                    >
+
+                      <div className="grid md:grid-cols-[.85fr_1.15fr]">
+
+                        {/* IMAGE */}
+
+                        <div className="relative aspect-[4/3] overflow-hidden bg-[#111] md:aspect-auto">
 
                           <OptimizedImage
                             src={getOptimizedImage(article.image)}
                             alt={`${article.title} - Aurix Gold Jewellery`}
-                            width={800}
-                            height={600}
+                            width={900}
+                            height={675}
                             priority={idx === 0}
                             loading={idx === 0 ? "eager" : "lazy"}
                             sizes="(max-width: 768px) 100vw, 40vw"
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 opacity-70 hover:opacity-100 grayscale hover:grayscale-0"
+                            className="h-full min-h-[260px] w-full object-cover transition duration-700 motion-safe:group-hover:scale-[1.03]"
                           />
+
+                          <div
+                            aria-hidden="true"
+                            className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"
+                          />
+
+                          <span className="absolute left-5 top-5 border border-white/10 bg-black/60 px-3 py-2 text-[8px] uppercase tracking-[0.2em] text-[#D4AF37] backdrop-blur">
+                            Journal {String(idx + 1).padStart(2, "0")}
+                          </span>
+
+                        </div>
+
+                        {/* CONTENT */}
+
+                        <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
+
+                          <span className="text-[9px] uppercase tracking-[0.25em] text-[#D4AF37]">
+                            {article.date}
+                          </span>
+
+                          <h2 className="mt-4 font-serif text-2xl leading-tight sm:text-3xl lg:text-4xl">
+                            {article.title}
+                          </h2>
+
+                          <p className="mt-5 text-sm leading-7 text-white/55">
+                            {article.excerpt}
+                          </p>
+
+                          {isOpen && (
+
+                            <div
+                              id={`article-${article.id}`}
+                              className="relative mt-7 border border-white/10 bg-white/[0.025] p-6"
+                            >
+
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setExpandedArticle(null)
+                                }
+                                className="absolute right-4 top-4 rounded-full p-2 text-white/50 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+                                aria-label={`Close ${article.title}`}
+                              >
+                                <X className="h-4 w-4" />
+                              </button>
+
+                              <div className="space-y-4 pr-5 text-sm leading-7 text-white/65">
+
+                                <p>
+                                  {article.excerpt}
+                                </p>
+
+                                <p>
+                                  Gold jewellery becomes more meaningful
+                                  when design, wearability and care are
+                                  considered together.
+                                </p>
+
+                                <p>
+                                  Explore the Aurix collection for elegant
+                                  jewellery designed around modern luxury
+                                  and timeless appeal.
+                                </p>
+
+                              </div>
+
+                            </div>
+
+                          )}
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setExpandedArticle(
+                                isOpen ? null : article.id
+                              )
+                            }
+                            className="mt-7 inline-flex w-fit items-center border-b border-[#D4AF37]/40 pb-2 text-[9px] font-medium uppercase tracking-[0.2em] text-white/75 transition hover:border-[#D4AF37] hover:text-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+                            aria-expanded={isOpen}
+                            aria-controls={`article-${article.id}`}
+                          >
+
+                            {isOpen
+                              ? "Close Article"
+                              : "Read Full Article"}
+
+                            <ArrowRight className="ml-2 h-3 w-3" />
+
+                          </button>
 
                         </div>
 
                       </div>
 
+                    </LazyMotion>
 
-                      {/* =================================================
-                          ARTICLE CONTENT
-                      ================================================= */}
-
-                      <div className="md:col-span-3">
-
-                        <span className="text-[#D4AF37] text-[10px] font-medium tracking-[0.2em] uppercase mb-4 block">
-                          {article.date}
-                        </span>
-
-
-                        <h2
-                          className="font-serif text-2xl md:text-3xl text-white mb-4 hover:text-[#D4AF37] transition-colors cursor-pointer italic"
-                          onClick={() =>
-                            setExpandedArticle(
-                              expandedArticle === article.id
-                                ? null
-                                : article.id
-                            )
-                          }
-                        >
-                          {article.title}
-                        </h2>
-
-
-                        <p className="text-white/70 font-light leading-relaxed mb-8 text-sm">
-                          {article.excerpt}
-                        </p>
-
-
-                        {/* =================================================
-                            EXPANDED ARTICLE
-                        ================================================= */}
-
-                        {expandedArticle === article.id ? (
-
-                          <div className="bg-[#111] border border-white/10 p-6 mb-8 relative">
-
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setExpandedArticle(null)
-                              }
-                              className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
-                              aria-label={`Close ${article.title}`}
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-
-
-                            <h3 className="text-[#D4AF37] font-serif italic mb-3 pr-6">
-                              {article.title}
-                            </h3>
-
-
-                            <div className="space-y-4 text-white/70 text-sm font-light leading-relaxed">
-
-                              <p>
-                                {article.excerpt}
-                              </p>
-
-                              <p>
-                                Discover more gold jewellery insights,
-                                styling ideas and care tips from the
-                                Aurix Journal.
-                              </p>
-
-                              <p>
-                                Explore the Aurix collection to find
-                                elegant and timeless jewellery pieces
-                                designed for modern style.
-                              </p>
-
-                            </div>
-
-                          </div>
-
-                        ) : (
-
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setExpandedArticle(article.id)
-                            }
-                            className="flex items-center text-white/80 hover:text-[#D4AF37] transition-colors text-[10px] uppercase tracking-widest border-b border-[#D4AF37]/30 pb-1 hover:border-[#D4AF37]"
-                            aria-label={`Read full article: ${article.title}`}
-                          >
-
-                            Read Full Article
-
-                            <ArrowRight
-                              className="ml-2 w-3 h-3"
-                            />
-
-                          </button>
-
-                        )}
-
-                      </div>
-
-                    </div>
-
-                  </LazyMotion>
-
-                ))}
+                  );
+                })}
 
               </div>
 
@@ -356,43 +337,30 @@ export function Blog() {
 
           </section>
 
+          {/* ================= CTA ================= */}
 
-          {/* =====================================================
-              BLOG CTA
-          ===================================================== */}
+          <section className="border-y border-white/10 bg-[#0a0a0a]">
 
-          <section className="border-t border-white/10 bg-[#0a0a0a]">
+            <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:py-24">
 
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-
-              <div className="w-10 h-10 border border-[#D4AF37]/40 rotate-45 mx-auto mb-10 flex items-center justify-center">
-
-                <div className="w-6 h-6 border border-[#D4AF37]/30" />
-
-              </div>
-
-
-              <p className="text-[9px] uppercase tracking-[0.45em] text-[#D4AF37] mb-5">
-                Discover Aurix
+              <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
+                Explore Aurix
               </p>
 
-
-              <h2 className="font-serif text-4xl md:text-5xl text-white italic font-light mb-6">
-                Find Your Perfect Gold Piece
+              <h2 className="mt-4 font-serif text-4xl italic sm:text-5xl">
+                Read. Choose. Wear.
               </h2>
 
-
-              <p className="text-white/55 text-sm max-w-xl mx-auto leading-relaxed mb-9">
-                Explore our collection of elegant gold jewellery
-                inspired by timeless design and modern luxury.
+              <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-white/55">
+                Turn inspiration into your next gold jewellery piece.
               </p>
-
 
               <a
                 href="/products"
-                className="inline-block bg-[#D4AF37] text-black px-9 py-4 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-white transition-colors"
+                className="mt-8 inline-flex items-center gap-3 bg-[#D4AF37] px-7 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
               >
                 Explore Collection
+                <ArrowRight className="h-3.5 w-3.5" />
               </a>
 
             </div>

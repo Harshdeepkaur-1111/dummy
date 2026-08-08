@@ -1,6 +1,17 @@
 import React, { Suspense, useState } from "react";
+import {
+  CheckCircle2,
+  Clock3,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+} from "lucide-react";
 import { Helmet } from "react-helmet-async";
+
 import LazyMotion from "../components/LazyMotion";
+
+const SITE_URL = "https://aurix-gold.vercel.app";
 
 export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -13,34 +24,38 @@ export function Contact() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.message) {
-      alert("Please fill in Name, Email and Message.");
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    ) {
       return;
     }
 
-    // Demo submission
-    setTimeout(() => {
-      setIsSubmitted(true);
+    setIsSubmitted(true);
 
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    });
 
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    }, 500);
+    window.setTimeout(() => {
+      setIsSubmitted(false);
+    }, 5000);
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >
   ) => {
     const { id, value } = e.target;
 
@@ -50,42 +65,61 @@ export function Contact() {
     }));
   };
 
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact Aurix",
+    url: `${SITE_URL}/contact`,
+    description:
+      "Contact Aurix for gold jewellery enquiries, product information, orders and customer support.",
+    mainEntity: {
+      "@type": "Organization",
+      name: "Aurix",
+      url: SITE_URL,
+      email: "tejinders791@gmail.com",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        telephone: "+91-9034196429",
+        email: "tejinders791@gmail.com",
+        availableLanguage: ["English", "Hindi"],
+      },
+    },
+  };
+
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
+        <div className="min-h-screen bg-[#050505] text-white grid place-items-center">
           Loading...
         </div>
       }
     >
-      <div className="w-full min-h-screen bg-[#0a0a0a] text-white pb-24">
 
-        {/* =====================================================
-            SEO
-        ===================================================== */}
+      <div className="min-h-screen bg-[#050505] text-white pb-20">
+
+        {/* ================= SEO ================= */}
 
         <Helmet>
 
           <title>
-            Contact Aurix | Gold Jewellery Support & Enquiries
+            Contact Aurix | Gold Jewellery Enquiries & Support
           </title>
 
           <meta
             name="description"
-            content="Contact Aurix for gold jewellery enquiries, product information, order support and customer assistance. Our team is here to help."
+            content="Contact Aurix for gold jewellery enquiries, product information, order support and customer assistance."
           />
 
           <meta
             name="robots"
-            content="index, follow"
+            content="index, follow, max-image-preview:large"
           />
 
           <link
             rel="canonical"
-            href="https://aurix-gold.vercel.app/contact"
+            href={`${SITE_URL}/contact`}
           />
-
-          {/* Open Graph */}
 
           <meta
             property="og:title"
@@ -94,7 +128,7 @@ export function Contact() {
 
           <meta
             property="og:description"
-            content="Get in touch with Aurix for gold jewellery enquiries, product information and customer support."
+            content="Get in touch with Aurix for jewellery enquiries and customer support."
           />
 
           <meta
@@ -104,7 +138,7 @@ export function Contact() {
 
           <meta
             property="og:url"
-            content="https://aurix-gold.vercel.app/contact"
+            content={`${SITE_URL}/contact`}
           />
 
           <meta
@@ -112,11 +146,9 @@ export function Contact() {
             content="Aurix"
           />
 
-          {/* Twitter */}
-
           <meta
             name="twitter:card"
-            content="summary"
+            content="summary_large_image"
           />
 
           <meta
@@ -126,282 +158,237 @@ export function Contact() {
 
           <meta
             name="twitter:description"
-            content="Contact Aurix for gold jewellery enquiries and customer support."
+            content="Contact Aurix for jewellery enquiries and support."
           />
 
-          {/* =====================================================
-              BREADCRUMB SCHEMA
-          ===================================================== */}
-
           <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Home",
-                  item: "https://aurix-gold.vercel.app/",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Contact",
-                  item: "https://aurix-gold.vercel.app/contact",
-                },
-              ],
-            })}
-          </script>
-
-          {/* =====================================================
-              CONTACT PAGE SCHEMA
-          ===================================================== */}
-
-          <script type="application/ld+json">
-            {JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ContactPage",
-              name: "Contact Aurix",
-              url: "https://aurix-gold.vercel.app/contact",
-              description:
-                "Contact Aurix for gold jewellery enquiries, product information, order support and customer assistance.",
-              mainEntity: {
-                "@type": "Organization",
-                name: "Aurix",
-                url: "https://aurix-gold.vercel.app/",
-                email: "tejinders791@gmail.com",
-                contactPoint: {
-                  "@type": "ContactPoint",
-                  contactType: "customer service",
-                  email: "tejinders791@gmail.com",
-                  telephone: "+91-9034196429",
-                  availableLanguage: ["English", "Hindi"],
-                },
-              },
-            })}
+            {JSON.stringify(contactSchema)}
           </script>
 
         </Helmet>
 
+        {/* ================= HERO ================= */}
 
-        {/* =====================================================
-            PAGE HEADER
-        ===================================================== */}
+        <header className="relative isolate overflow-hidden border-b border-white/10 bg-[#0b0b0b]">
 
-        <section className="bg-[#111] py-24 px-4 text-center border-b border-white/10">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 opacity-50 [background:radial-gradient(circle_at_50%_0%,rgba(212,175,55,.14),transparent_45%)]"
+          />
 
-          <LazyMotion
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              ease: "easeOut",
-            }}
-          >
+          <div className="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 lg:py-28">
 
-            <div className="flex items-center justify-center gap-4 mb-7">
+            <LazyMotion
+              initial={{
+                opacity: 0,
+                y: 16,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.55,
+              }}
+            >
 
-              <div className="w-10 h-px bg-[#D4AF37]" />
+              <div className="mb-6 flex items-center justify-center gap-3">
 
-              <span className="text-[9px] uppercase tracking-[0.4em] text-[#D4AF37]">
-                Aurix Support
-              </span>
+                <span className="h-px w-10 bg-[#D4AF37]" />
 
-              <div className="w-10 h-px bg-[#D4AF37]" />
+                <span className="text-[10px] uppercase tracking-[0.42em] text-[#D4AF37]">
+                  Aurix Support
+                </span>
 
-            </div>
+                <span className="h-px w-10 bg-[#D4AF37]" />
 
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6 italic">
-              Contact Aurix
-            </h1>
+              </div>
 
-            <div className="w-16 h-px bg-[#D4AF37] mx-auto" />
+              <h1 className="font-serif text-5xl font-light italic sm:text-6xl lg:text-7xl">
+                Let’s Talk Jewellery.
+              </h1>
 
-            <p className="mt-8 text-white/70 font-light max-w-2xl mx-auto text-sm leading-relaxed">
-              Have a question about our gold jewellery, products or orders?
-              Get in touch with the Aurix team and we will be happy to help.
-            </p>
+              <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-white/60 sm:text-base">
+                Have a question about a piece, an order or Aurix?
+                Send us a message and our team will get back to you.
+              </p>
 
-          </LazyMotion>
+            </LazyMotion>
 
-        </section>
+          </div>
 
+        </header>
 
-        {/* =====================================================
-            MAIN CONTENT
-        ===================================================== */}
+        <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+          <section className="grid gap-8 py-14 lg:grid-cols-[.8fr_1.2fr] lg:py-20">
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+            {/* ================= CONTACT INFO ================= */}
 
+            <div className="space-y-4">
 
-            {/* =================================================
-                CONTACT INFORMATION
-            ================================================= */}
+              <div className="border border-white/10 bg-[#0a0a0a] p-6">
 
-            <section className="flex flex-col justify-center">
+                <p className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">
+                  Contact Details
+                </p>
 
-              <h2 className="font-serif text-3xl md:text-4xl text-white mb-12">
-                Gold Jewellery Contact Details
-              </h2>
+                <h2 className="mt-3 font-serif text-3xl italic">
+                  We’re here to help.
+                </h2>
 
+                <p className="mt-4 text-sm leading-6 text-white/50">
+                  For jewellery questions, product details and order
+                  support, reach out using the details below.
+                </p>
 
-              <div className="space-y-10">
+              </div>
 
+              <a
+                href="tel:+919034196429"
+                className="flex items-start gap-4 border border-white/10 bg-[#0a0a0a] p-6 transition hover:border-[#D4AF37]/40 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+              >
 
-                {/* ADDRESS */}
+                <Phone
+                  aria-hidden="true"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]"
+                />
 
-                <div className="border-l border-[#D4AF37]/30 pl-6 relative">
+                <span>
 
-                  <div className="absolute top-0 -left-[5px] w-2 h-2 bg-[#D4AF37] rounded-full" />
+                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/35">
+                    Phone
+                  </span>
 
-                  <h3 className="text-[#D4AF37] mb-2 uppercase tracking-widest text-[10px]">
-                    Address
-                  </h3>
+                  <span className="mt-2 block text-sm text-white/80">
+                    +91 9034196429
+                  </span>
 
-                  <address className="not-italic text-white/70 font-light leading-relaxed text-sm">
+                </span>
+
+              </a>
+
+              <a
+                href="mailto:tejinders791@gmail.com"
+                className="flex items-start gap-4 border border-white/10 bg-[#0a0a0a] p-6 transition hover:border-[#D4AF37]/40 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+              >
+
+                <Mail
+                  aria-hidden="true"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]"
+                />
+
+                <span>
+
+                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/35">
+                    Email
+                  </span>
+
+                  <span className="mt-2 block break-all text-sm text-white/80">
+                    tejinders791@gmail.com
+                  </span>
+
+                </span>
+
+              </a>
+
+              <div className="flex items-start gap-4 border border-white/10 bg-[#0a0a0a] p-6">
+
+                <MapPin
+                  aria-hidden="true"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]"
+                />
+
+                <span>
+
+                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/35">
+                    Location
+                  </span>
+
+                  <address className="mt-2 not-italic text-sm leading-6 text-white/80">
                     Yamunanagar,
                     <br />
                     Haryana, India - 135001
                   </address>
 
-                </div>
-
-
-                {/* PHONE */}
-
-                <div className="border-l border-[#D4AF37]/30 pl-6 relative">
-
-                  <div className="absolute top-0 -left-[5px] w-2 h-2 bg-[#D4AF37] rounded-full" />
-
-                  <h3 className="text-[#D4AF37] mb-2 uppercase tracking-widest text-[10px]">
-                    Phone
-                  </h3>
-
-                  <a
-                    href="tel:+919034196429"
-                    className="text-white/70 font-light text-sm tracking-widest hover:text-[#D4AF37] transition-colors"
-                  >
-                    +91 9034196429
-                  </a>
-
-                </div>
-
-
-                {/* EMAIL */}
-
-                <div className="border-l border-[#D4AF37]/30 pl-6 relative">
-
-                  <div className="absolute top-0 -left-[5px] w-2 h-2 bg-[#D4AF37] rounded-full" />
-
-                  <h3 className="text-[#D4AF37] mb-2 uppercase tracking-widest text-[10px]">
-                    Email
-                  </h3>
-
-                  <a
-                    href="mailto:tejinders791@gmail.com"
-                    className="text-white/70 font-light text-sm tracking-widest hover:text-[#D4AF37] transition-colors break-all"
-                  >
-                    tejinders791@gmail.com
-                  </a>
-
-                </div>
+                </span>
 
               </div>
 
+              <div className="flex items-start gap-4 border border-[#D4AF37]/20 bg-[#D4AF37]/[0.035] p-6">
 
-              {/* =================================================
-                  WORKING HOURS
-              ================================================= */}
+                <Clock3
+                  aria-hidden="true"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]"
+                />
 
-              <div className="mt-16 pt-12 border-t border-white/10">
+                <span>
 
-                <h3 className="text-white mb-6 font-serif italic text-xl">
-                  Working Hours
-                </h3>
+                  <span className="block text-[9px] uppercase tracking-[0.2em] text-[#D4AF37]">
+                    Working Hours
+                  </span>
 
-                <ul className="text-white/70 font-light space-y-4 text-sm">
+                  <span className="mt-2 block text-sm text-white/70">
+                    Monday – Saturday · 10:00 AM – 7:00 PM
+                  </span>
 
-                  <li className="flex justify-between max-w-[320px] border-b border-white/5 pb-2">
-                    <span>Monday - Saturday</span>
+                  <span className="mt-1 block text-sm text-white/40">
+                    Sunday · Closed
+                  </span>
 
-                    <span className="font-mono text-xs text-white/80">
-                      10:00 AM – 7:00 PM
-                    </span>
-                  </li>
-
-                  <li className="flex justify-between max-w-[320px]">
-                    <span>Sunday</span>
-
-                    <span className="font-mono text-xs text-[#D4AF37]">
-                      CLOSED
-                    </span>
-                  </li>
-
-                </ul>
+                </span>
 
               </div>
 
-            </section>
+            </div>
 
+            {/* ================= FORM ================= */}
 
-            {/* =================================================
-                CONTACT FORM
-            ================================================= */}
-
-            <section className="bg-[#111] p-8 md:p-12 border border-white/10 relative overflow-hidden">
+            <section className="border border-white/10 bg-[#0a0a0a] p-6 sm:p-9 lg:p-10">
 
               {isSubmitted ? (
 
-                <LazyMotion
-                  tag="div"
-                  initial={{
-                    opacity: 0,
-                    scale: 0.95,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                  }}
-                  className="flex flex-col items-center justify-center py-16 text-center min-h-[500px]"
+                <div
+                  className="flex min-h-[520px] flex-col items-center justify-center text-center"
+                  role="status"
+                  aria-live="polite"
                 >
 
-                  <div className="w-16 h-16 rounded-full border border-[#D4AF37]/50 flex items-center justify-center mb-6">
+                  <CheckCircle2
+                    aria-hidden="true"
+                    className="h-14 w-14 text-[#D4AF37]"
+                  />
 
-                    <div className="w-2 h-2 rounded-full bg-[#D4AF37]" />
-
-                  </div>
-
-                  <h2 className="font-serif text-2xl text-white mb-3 italic">
+                  <h2 className="mt-6 font-serif text-3xl italic">
                     Message Sent
                   </h2>
 
-                  <p className="text-white/70 text-sm font-light max-w-sm">
-                    Thank you for contacting Aurix. We will get back to you
-                    shortly.
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/55">
+                    Thank you for contacting Aurix.
+                    We’ll get back to you shortly.
                   </p>
 
-                </LazyMotion>
+                </div>
 
               ) : (
 
                 <>
 
-                  <h2 className="font-serif text-2xl md:text-3xl text-white mb-2 italic">
-                    Send a Message
-                  </h2>
-
-                  <p className="text-white/70 text-[10px] uppercase tracking-widest mb-10">
-                    We will respond within 24 hours.
+                  <p className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">
+                    Send an Enquiry
                   </p>
 
+                  <h2 className="mt-3 font-serif text-3xl italic">
+                    Tell us what you need.
+                  </h2>
+
+                  <p className="mt-3 text-sm text-white/50">
+                    Fields marked with * are required.
+                  </p>
 
                   <form
-                    className="space-y-8"
+                    className="mt-9 space-y-7"
                     onSubmit={handleSubmit}
-                    noValidate
                   >
 
                     {/* NAME */}
@@ -410,79 +397,76 @@ export function Contact() {
 
                       <label
                         htmlFor="name"
-                        className="block text-[10px] uppercase tracking-widest text-[#D4AF37] mb-3"
+                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
                       >
                         Full Name *
                       </label>
 
                       <input
-                        type="text"
                         id="name"
                         name="name"
+                        type="text"
                         value={formData.name}
                         onChange={handleChange}
-                        required
                         autoComplete="name"
-                        className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 text-white focus:outline-none focus:ring-0 focus:border-[#D4AF37] transition-colors rounded-none placeholder-white/20 text-sm"
-                        placeholder="Enter your name"
+                        required
+                        className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition focus:border-[#D4AF37]"
+                        placeholder="Your name"
                       />
 
                     </div>
 
-
                     {/* EMAIL + PHONE */}
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div className="grid gap-7 sm:grid-cols-2">
 
                       <div>
 
                         <label
                           htmlFor="email"
-                          className="block text-[10px] uppercase tracking-widest text-[#D4AF37] mb-3"
+                          className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
                         >
-                          Email Address *
+                          Email *
                         </label>
 
                         <input
-                          type="email"
                           id="email"
                           name="email"
+                          type="email"
                           value={formData.email}
                           onChange={handleChange}
-                          required
                           autoComplete="email"
-                          className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 text-white focus:outline-none focus:ring-0 focus:border-[#D4AF37] transition-colors rounded-none placeholder-white/20 text-sm"
-                          placeholder="Enter your email"
+                          required
+                          className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition focus:border-[#D4AF37]"
+                          placeholder="you@example.com"
                         />
 
                       </div>
-
 
                       <div>
 
                         <label
                           htmlFor="phone"
-                          className="block text-[10px] uppercase tracking-widest text-[#D4AF37] mb-3"
+                          className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
                         >
-                          Phone Number
+                          Phone
                         </label>
 
                         <input
-                          type="tel"
                           id="phone"
                           name="phone"
+                          type="tel"
                           value={formData.phone}
                           onChange={handleChange}
                           autoComplete="tel"
                           inputMode="tel"
-                          className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 text-white focus:outline-none focus:ring-0 focus:border-[#D4AF37] transition-colors rounded-none placeholder-white/20 text-sm"
-                          placeholder="Enter your number"
+                          className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition focus:border-[#D4AF37]"
+                          placeholder="+91"
                         />
 
                       </div>
 
                     </div>
-
 
                     {/* SUBJECT */}
 
@@ -490,23 +474,22 @@ export function Contact() {
 
                       <label
                         htmlFor="subject"
-                        className="block text-[10px] uppercase tracking-widest text-[#D4AF37] mb-3"
+                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
                       >
                         Subject
                       </label>
 
                       <input
-                        type="text"
                         id="subject"
                         name="subject"
+                        type="text"
                         value={formData.subject}
                         onChange={handleChange}
-className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 text-white focus:outline-none focus:ring-0 focus:border-[#D4AF37] transition-colors rounded-none placeholder-white/20 text-sm"
-                        placeholder="Inquiry reason"
+                        className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition focus:border-[#D4AF37]"
+                        placeholder="How can we help?"
                       />
 
                     </div>
-
 
                     {/* MESSAGE */}
 
@@ -514,7 +497,7 @@ className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 tex
 
                       <label
                         htmlFor="message"
-                        className="block text-[10px] uppercase tracking-widest text-[#D4AF37] mb-3"
+                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
                       >
                         Message *
                       </label>
@@ -526,21 +509,23 @@ className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 tex
                         value={formData.message}
                         onChange={handleChange}
                         required
-                        className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 text-white focus:outline-none focus:ring-0 focus:border-[#D4AF37] transition-colors resize-none rounded-none placeholder-white/20 text-sm"
-                        placeholder="Write your message here..."
+                        className="w-full resize-none border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition focus:border-[#D4AF37]"
+                        placeholder="Write your message..."
                       />
 
                     </div>
-
 
                     {/* SUBMIT */}
 
                     <button
                       type="submit"
-                      className="w-full py-5 bg-[#D4AF37] text-black font-bold uppercase tracking-widest text-[11px] hover:bg-[#c4a132] transition-colors mt-6"
-                      aria-label="Send message to Aurix"
+                      className="inline-flex w-full items-center justify-center gap-3 bg-[#D4AF37] px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
                     >
                       Send Message
+                      <Send
+                        aria-hidden="true"
+                        className="h-3.5 w-3.5"
+                      />
                     </button>
 
                   </form>
@@ -551,11 +536,12 @@ className="w-full px-0 py-3 bg-transparent border-0 border-b border-white/20 tex
 
             </section>
 
-          </div>
+          </section>
 
         </main>
 
       </div>
+
     </Suspense>
   );
 }
