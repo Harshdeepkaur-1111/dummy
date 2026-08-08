@@ -11,7 +11,7 @@ import { HelmetProvider } from "react-helmet-async";
 
 
 
-const Home = lazy(() => import("./pages/Home").then(m => ({ default: m.Home })));
+const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About").then(m => ({ default: m.About })));
 const Products = lazy(() => import("./pages/Products").then(m => ({ default: m.Products })));
 const Blog = lazy(() => import("./pages/Blog").then(m => ({ default: m.Blog })));

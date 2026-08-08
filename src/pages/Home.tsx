@@ -21,6 +21,10 @@ import {
   pearlEarrings,
   modernBracelet,
   signaturePendant,
+  heritageBangle,
+  imperialDiamondChoker,
+  sovereignSignetRing,
+  pearlDropEarrings,
 } from "../assets/images";
 
 const products = [
@@ -44,6 +48,15 @@ const products = [
   },
   {
     id: 3,
+    image: pearlDropEarrings,
+    name: "Pearl Drop Gold Earrings",
+    category: "Earrings",
+    purity: "22K Gold",
+    weight: "5.20g",
+    price: "₹1,29,999",
+  },
+  {
+    id: 4,
     image: modernBracelet,
     name: "Modern Gold Bracelet",
     category: "Bracelets",
@@ -57,12 +70,12 @@ const categories = [
   {
     title: "Necklaces",
     subtitle: "Statement pieces",
-    image: classicNecklace,
+    image: imperialDiamondChoker,
   },
   {
     title: "Rings",
     subtitle: "Made to be remembered",
-    image: diamondRing,
+    image: sovereignSignetRing,
   },
   {
     title: "Earrings",
@@ -72,12 +85,12 @@ const categories = [
   {
     title: "Bracelets",
     subtitle: "Modern gold signatures",
-    image: modernBracelet,
+    image: heritageBangle,
   },
 ];
 
 const fallbackImage =
-  "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85";
+  "/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp";
 
 function SafeImage({
   src,
@@ -858,8 +871,8 @@ export default function Home() {
           <section className="relative py-36 overflow-hidden">
 
             <SafeImage
-              src={signaturePendant}
-              alt=""
+              src={imperialDiamondChoker}
+              alt="Aurix luxury gold necklace background"
               width={1600}
               height={900}
               loading="lazy"
