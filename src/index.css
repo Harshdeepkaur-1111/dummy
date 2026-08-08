@@ -2,31 +2,35 @@
 
 /* =========================================================
    AURIX — PREMIUM GOLD JEWELLERY DESIGN SYSTEM
+   Tailwind CSS v4
    Performance + Accessibility + Responsive + Luxury UI
-   ========================================================= */
+========================================================= */
 
-@theme {
-  /* GOLD PALETTE */
+:root {
+  /* ---------------- GOLD PALETTE ---------------- */
+
   --color-gold-50: #fbf8f1;
   --color-gold-100: #f5eedc;
   --color-gold-200: #ead8b1;
   --color-gold-300: #dec185;
   --color-gold-400: #d3aa5c;
-  --color-gold-500: #d4af37;
-  --color-gold-600: #b8942e;
-  --color-gold-700: #947522;
-  --color-gold-800: #6d541c;
-  --color-gold-900: #493811;
-  --color-gold-950: #281e0b;
+  --color-gold-500: #c1923c;
+  --color-gold-600: #a57430;
+  --color-gold-700: #845728;
+  --color-gold-800: #6d4726;
+  --color-gold-900: #593b22;
+  --color-gold-950: #321e10;
 
-  /* DARK LUXURY */
-  --color-luxury-black: #050505;
-  --color-luxury-dark: #0a0a0a;
-  --color-luxury-card: #111111;
-  --color-luxury-soft: #171717;
+  /* ---------------- FONTS ---------------- */
 
-  /* TYPOGRAPHY */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 
   --font-serif:
     "Playfair Display",
@@ -40,30 +44,40 @@
 
 /* =========================================================
    ROOT
-   ========================================================= */
+========================================================= */
 
 :root {
   color-scheme: dark;
 
-  --aurix-gold: #d4af37;
-  --aurix-gold-light: #f1d77a;
   --aurix-black: #050505;
   --aurix-dark: #0a0a0a;
-  --aurix-card: #111111;
+  --aurix-card: #101010;
+  --aurix-card-light: #151515;
+
+  --aurix-gold: #d4af37;
+  --aurix-gold-light: #ead58a;
+  --aurix-gold-dark: #a88624;
+
+  --aurix-white: #ffffff;
+  --aurix-text: rgba(255, 255, 255, 0.88);
+  --aurix-muted: rgba(255, 255, 255, 0.62);
+  --aurix-subtle: rgba(255, 255, 255, 0.42);
+
+  --aurix-border: rgba(255, 255, 255, 0.09);
+  --aurix-gold-border: rgba(212, 175, 55, 0.25);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* =========================================================
-   GLOBAL
-   ========================================================= */
+   HTML / BODY
+========================================================= */
 
 html {
   scroll-behavior: smooth;
-  background: #050505;
+  background: var(--aurix-black);
+  min-height: 100%;
 }
 
 body {
@@ -73,37 +87,58 @@ body {
 
   background:
     radial-gradient(
-      circle at 50% -20%,
-      rgba(212, 175, 55, 0.06),
-      transparent 38%
+      circle at 50% -10%,
+      rgba(212, 175, 55, 0.045),
+      transparent 35%
     ),
-    #050505;
+    var(--aurix-black);
 
-  color: #ffffff;
+  color: var(--aurix-text);
 
   font-family: var(--font-sans);
-
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 1.6;
 
   overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Better box sizing */
+/* =========================================================
+   ROOT APP
+========================================================= */
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+#root {
+  min-height: 100vh;
+  width: 100%;
 }
 
-/* Images */
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
 
-img {
-  display: block;
-  max-width: 100%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  text-wrap: balance;
 }
 
-/* Buttons */
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 button,
 input,
@@ -112,59 +147,24 @@ select {
   font: inherit;
 }
 
-/* Remove default button appearance */
-
 button {
   cursor: pointer;
 }
 
-/* Links */
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 /* =========================================================
-   TEXT SELECTION
-   ========================================================= */
+   SELECTION
+========================================================= */
 
 ::selection {
-  background: #d4af37;
+  background: var(--aurix-gold);
   color: #050505;
 }
 
 /* =========================================================
-   SCROLLBAR — PREMIUM GOLD
-   ========================================================= */
+   ACCESSIBILITY
+========================================================= */
 
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #050505;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.45);
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
-}
-
-/* Firefox */
-
-html {
-  scrollbar-color: rgba(212, 175, 55, 0.45) #050505;
-  scrollbar-width: thin;
-}
-
-/* =========================================================
-   ACCESSIBILITY — SKIP LINK
-   ========================================================= */
+/* Skip to content */
 
 .skip-link {
   position: fixed;
@@ -175,16 +175,15 @@ html {
 
   padding: 12px 18px;
 
-  background: #d4af37;
+  background: var(--aurix-gold);
   color: #050505;
 
   font-size: 12px;
   font-weight: 700;
-
   letter-spacing: 0.08em;
   text-transform: uppercase;
 
-  border-radius: 4px;
+  border-radius: 2px;
 
   transition:
     top 0.2s ease,
@@ -197,65 +196,70 @@ html {
   outline: none;
 
   box-shadow:
-    0 0 0 3px #050505,
-    0 0 0 5px #d4af37;
+    0 0 0 3px rgba(212, 175, 55, 0.25),
+    0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* =========================================================
-   KEYBOARD ACCESSIBILITY
-   ========================================================= */
+/* Keyboard focus */
 
 :focus-visible {
-  outline: 2px solid #d4af37;
-  outline-offset: 4px;
+  outline: 2px solid var(--aurix-gold);
+  outline-offset: 3px;
 }
 
-/* Don't show ugly focus ring on mouse clicks */
+/* Don't show focus outline for mouse clicks */
 
 :focus:not(:focus-visible) {
   outline: none;
 }
 
 /* =========================================================
-   HEADINGS
-   ========================================================= */
+   SCROLLBAR
+========================================================= */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-  text-wrap: balance;
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--aurix-gold-dark) var(--aurix-black);
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-serif);
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--aurix-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    var(--aurix-gold-light),
+    var(--aurix-gold-dark)
+  );
+
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--aurix-gold);
 }
 
 /* =========================================================
-   LUXURY TYPOGRAPHY HELPERS
-   ========================================================= */
-
-.aurix-serif {
-  font-family: var(--font-serif);
-}
+   LUXURY GOLD UTILITIES
+========================================================= */
 
 .aurix-gold-text {
-  color: #d4af37;
+  color: var(--aurix-gold);
 }
 
-.aurix-gradient-text {
+.aurix-gold-gradient {
   background: linear-gradient(
     110deg,
-    #a57430 0%,
-    #d4af37 35%,
-    #f4dc8a 50%,
-    #d4af37 65%,
-    #a57430 100%
+    #9c7720 0%,
+    #d4af37 30%,
+    #f3df8a 50%,
+    #d4af37 70%,
+    #9c7720 100%
   );
 
   -webkit-background-clip: text;
@@ -263,85 +267,75 @@ h3 {
   color: transparent;
 }
 
-.aurix-eyebrow {
-  color: #d4af37;
-
-  font-size: 10px;
-  font-weight: 500;
-
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-}
-
-/* =========================================================
-   GOLD DIVIDER
-   ========================================================= */
-
-.aurix-divider {
-  width: 48px;
+.aurix-gold-line {
   height: 1px;
-
-  margin-inline: auto;
+  width: 48px;
 
   background: linear-gradient(
     90deg,
     transparent,
-    #d4af37,
+    var(--aurix-gold),
     transparent
   );
 }
 
 /* =========================================================
    LUXURY CARD
-   ========================================================= */
+========================================================= */
 
 .aurix-card {
+  position: relative;
+
   background:
     linear-gradient(
       145deg,
       rgba(255, 255, 255, 0.035),
       rgba(255, 255, 255, 0.01)
     ),
-    #111111;
+    var(--aurix-card);
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--aurix-border);
 
   transition:
-    border-color 0.35s ease,
     transform 0.35s ease,
+    border-color 0.35s ease,
     box-shadow 0.35s ease;
 }
 
 .aurix-card:hover {
-  border-color: rgba(212, 175, 55, 0.35);
+  transform: translateY(-4px);
+
+  border-color: var(--aurix-gold-border);
 
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.35),
-    0 0 30px rgba(212, 175, 55, 0.04);
+    0 0 40px rgba(212, 175, 55, 0.035);
 }
 
 /* =========================================================
-   PRODUCT IMAGE EFFECT
-   ========================================================= */
+   IMAGE EFFECTS
+========================================================= */
 
-.aurix-product-image {
-  overflow: hidden;
-  background: #0a0a0a;
-}
+.aurix-image {
+  display: block;
 
-.aurix-product-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
   transition:
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.5s ease;
 }
 
-.aurix-product-image:hover img {
+.aurix-image-hover:hover .aurix-image {
   transform: scale(1.045);
 }
 
 /* =========================================================
    GOLD SHIMMER
-   ========================================================= */
+========================================================= */
 
 .aurix-shimmer {
   position: relative;
@@ -354,16 +348,14 @@ h3 {
   position: absolute;
   inset: 0;
 
-  width: 35%;
+  transform: translateX(-120%);
 
   background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.12),
-    transparent
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 70%
   );
-
-  transform: translateX(-150%) skewX(-20deg);
 
   pointer-events: none;
 
@@ -371,14 +363,14 @@ h3 {
 }
 
 .aurix-shimmer:hover::after {
-  transform: translateX(450%) skewX(-20deg);
+  transform: translateX(120%);
 }
 
 /* =========================================================
-   PREMIUM GOLD BUTTON
-   ========================================================= */
+   GOLD BUTTON
+========================================================= */
 
-.aurix-gold-button {
+.aurix-button {
   position: relative;
 
   display: inline-flex;
@@ -387,62 +379,62 @@ h3 {
 
   min-height: 48px;
 
-  padding: 0 28px;
+  padding: 13px 24px;
 
-  background: #d4af37;
+  background: var(--aurix-gold);
   color: #050505;
 
-  border: 1px solid #d4af37;
+  border: 1px solid var(--aurix-gold);
 
   font-size: 10px;
   font-weight: 700;
-
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 
   overflow: hidden;
 
   transition:
-    color 0.3s ease,
     background-color 0.3s ease,
-    border-color 0.3s ease,
-    transform 0.3s ease;
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.aurix-gold-button:hover {
+.aurix-button:hover {
   background: #ffffff;
   border-color: #ffffff;
 
   transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 30px rgba(212, 175, 55, 0.15);
 }
 
-.aurix-gold-button:active {
+.aurix-button:active {
   transform: translateY(0);
 }
 
 /* =========================================================
    SECONDARY BUTTON
-   ========================================================= */
+========================================================= */
 
-.aurix-outline-button {
+.aurix-button-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   min-height: 48px;
 
-  padding: 0 28px;
+  padding: 13px 24px;
 
   background: transparent;
+  color: rgba(255, 255, 255, 0.85);
 
   border: 1px solid rgba(255, 255, 255, 0.2);
 
-  color: rgba(255, 255, 255, 0.8);
-
   font-size: 10px;
   font-weight: 500;
-
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 
   transition:
@@ -452,32 +444,101 @@ h3 {
     transform 0.3s ease;
 }
 
-.aurix-outline-button:hover {
+.aurix-button-outline:hover {
   color: #ffffff;
 
-  border-color: #d4af37;
+  border-color: var(--aurix-gold);
 
-  background: rgba(212, 175, 55, 0.05);
+  background: rgba(212, 175, 55, 0.04);
 
   transform: translateY(-2px);
 }
 
 /* =========================================================
-   HEADER / NAVIGATION SUPPORT
-   ========================================================= */
+   INPUTS
+========================================================= */
 
-.aurix-glass {
-  background: rgba(5, 5, 5, 0.82);
+.aurix-input {
+  width: 100%;
 
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: transparent;
+
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+
+  color: #ffffff;
+
+  padding: 12px 0;
+
+  border-radius: 0;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.aurix-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.aurix-input:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.35);
+}
+
+.aurix-input:focus {
+  outline: none;
+
+  border-bottom-color: var(--aurix-gold);
+
+  box-shadow: 0 1px 0 var(--aurix-gold);
+}
+
+/* =========================================================
+   PAGE CONTAINER
+========================================================= */
+
+.aurix-container {
+  width: 100%;
+  max-width: 1280px;
+
+  margin-inline: auto;
+
+  padding-inline: 16px;
+}
+
+@media (min-width: 640px) {
+  .aurix-container {
+    padding-inline: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .aurix-container {
+    padding-inline: 32px;
+  }
+}
+
+/* =========================================================
+   LUXURY SECTION
+========================================================= */
+
+.aurix-section {
+  position: relative;
+
+  padding-block: 80px;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
+@media (min-width: 1024px) {
+  .aurix-section {
+    padding-block: 120px;
+  }
+}
+
 /* =========================================================
    DECORATIVE GOLD GLOW
-   ========================================================= */
+========================================================= */
 
 .aurix-glow {
   position: relative;
@@ -488,19 +549,19 @@ h3 {
 
   position: absolute;
 
-  width: 280px;
-  height: 280px;
+  width: 300px;
+  height: 300px;
 
+  top: -150px;
   left: 50%;
-  top: 50%;
 
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
 
-  background: rgba(212, 175, 55, 0.07);
+  background: rgba(212, 175, 55, 0.055);
 
   filter: blur(80px);
 
-  border-radius: 50%;
+  border-radius: 999px;
 
   pointer-events: none;
 
@@ -508,38 +569,8 @@ h3 {
 }
 
 /* =========================================================
-   FORM INPUTS
-   ========================================================= */
-
-input,
-textarea,
-select {
-  color-scheme: dark;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.28);
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-}
-
-/* =========================================================
-   FORM VALIDATION
-   ========================================================= */
-
-input:invalid:not(:placeholder-shown),
-textarea:invalid:not(:placeholder-shown) {
-  border-color: rgba(212, 175, 55, 0.5);
-}
-
-/* =========================================================
-   REDUCED MOTION — ACCESSIBILITY
-   ========================================================= */
+   REDUCED MOTION — ACCESSIBILITY + PERFORMANCE
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -558,47 +589,109 @@ textarea:invalid:not(:placeholder-shown) {
 
 /* =========================================================
    MOBILE OPTIMIZATION
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 640px) {
   body {
     font-size: 14px;
   }
 
-  .aurix-eyebrow {
-    letter-spacing: 0.28em;
+  .aurix-section {
+    padding-block: 64px;
   }
 
-  .aurix-gold-button,
-  .aurix-outline-button {
-    width: 100%;
-    min-height: 50px;
+  .aurix-card:hover {
+    transform: none;
   }
-}
 
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  body {
-    font-size: 15px;
+  .aurix-button:hover,
+  .aurix-button-outline:hover {
+    transform: none;
   }
 }
 
 /* =========================================================
-   LARGE DESKTOP
-   ========================================================= */
+   TOUCH DEVICES
+========================================================= */
 
-@media (min-width: 1280px) {
-  body {
-    font-size: 16px;
+@media (hover: none) {
+  .aurix-card:hover {
+    transform: none;
   }
+
+  .aurix-shimmer::after {
+    display: none;
+  }
+}
+
+/* =========================================================
+   CONTENT VISIBILITY — PERFORMANCE
+========================================================= */
+
+.aurix-content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
+}
+
+/* =========================================================
+   IMAGE PERFORMANCE
+========================================================= */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Prevent layout shift for media */
+
+img,
+video {
+  vertical-align: middle;
+}
+
+/* =========================================================
+   FORM ACCESSIBILITY
+========================================================= */
+
+label {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  color-scheme: dark;
+}
+
+/* =========================================================
+   SCREEN READER ONLY
+========================================================= */
+
+.sr-only {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+
+  border: 0;
 }
 
 /* =========================================================
    PRINT
-   ========================================================= */
+========================================================= */
 
 @media print {
   body {
