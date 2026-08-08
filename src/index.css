@@ -1,27 +1,17 @@
 @import "tailwindcss";
 
-/* ===============================
-   AURIX GLOBAL STYLES
-   =============================== */
+/* =========================================================
+   AURIX — LUXURY GLOBAL DESIGN SYSTEM
+   ========================================================= */
 
 :root {
-  --gold-50: #fbf8f1;
-  --gold-100: #f5eedc;
-  --gold-200: #ead8b1;
-  --gold-300: #dec185;
-  --gold-400: #d3aa5c;
-  --gold-500: #c1923c;
-  --gold-600: #a57430;
-  --gold-700: #845728;
-  --gold-800: #6d4726;
-  --gold-900: #593b22;
-  --gold-950: #321e10;
-
-  --aurix-gold: #d4af37;
   --aurix-black: #050505;
+  --aurix-dark: #090909;
+  --aurix-panel: #0d0d0d;
+  --aurix-gold: #d4af37;
+  --aurix-gold-light: #e8d28a;
+  --aurix-muted: rgba(255, 255, 255, 0.55);
 }
-
-/* Reset */
 
 * {
   box-sizing: border-box;
@@ -29,14 +19,18 @@
 
 html {
   scroll-behavior: smooth;
-  background: #050505;
+  background: var(--aurix-black);
+  scrollbar-width: thin;
+  scrollbar-color: #a57430 #050505;
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  background: #050505;
-  color: #ffffff;
+  overflow-x: hidden;
+
+  background: var(--aurix-black);
+  color: white;
 
   font-family:
     Inter,
@@ -49,11 +43,24 @@ body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  overflow-x: hidden;
 }
 
-/* Typography */
+html::-webkit-scrollbar {
+  width: 7px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #a57430;
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
 
 h1,
 h2,
@@ -61,13 +68,12 @@ h3,
 h4,
 h5,
 h6 {
+  margin: 0;
   font-family:
     "Playfair Display",
     Georgia,
-    Cambria,
     "Times New Roman",
     serif;
-
   font-weight: 400;
 }
 
@@ -87,8 +93,6 @@ select {
   font: inherit;
 }
 
-/* Images */
-
 img,
 picture,
 video,
@@ -102,7 +106,14 @@ img {
   height: auto;
 }
 
-/* Accessibility */
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--aurix-gold);
+  color: #050505;
+}
 
 :focus {
   outline: none;
@@ -113,65 +124,252 @@ img {
   outline-offset: 3px;
 }
 
-/* Skip link */
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
 
 .skip-link {
   position: fixed;
-  top: -100px;
   left: 16px;
-
+  top: -100px;
   z-index: 9999;
+
+  padding: 12px 18px;
 
   background: var(--aurix-gold);
   color: #050505;
 
-  padding: 12px 18px;
-
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-
-  transition: top 0.2s ease;
+  letter-spacing: 0.1em;
 }
 
 .skip-link:focus {
   top: 16px;
 }
 
-/* Selection */
+/* =========================================================
+   LUXURY UTILITIES
+   ========================================================= */
 
-::selection {
+.luxury-grid {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 64px 64px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: var(--aurix-gold);
+
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+}
+
+.display-title {
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(2.8rem, 6vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+
+  font-style: italic;
+  font-weight: 300;
+}
+
+.display-title span {
+  color: var(--aurix-gold);
+}
+
+.section-luxury {
+  padding-top: clamp(6rem, 10vw, 9rem);
+  padding-bottom: clamp(6rem, 10vw, 9rem);
+}
+
+.luxury-button {
+  min-height: 52px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 15px 30px;
+
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.luxury-button:hover {
+  transform: translateY(-2px);
+}
+
+.luxury-card {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  transition:
+    border-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+.luxury-card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-3px);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+
+  transition: color 0.25s ease;
+}
+
+.text-link:hover {
+  color: var(--aurix-gold);
+}
+
+.text-link svg {
+  transition: transform 0.25s ease;
+}
+
+.text-link:hover svg {
+  transform: translateX(5px);
+}
+
+/* =========================================================
+   GOLD MARQUEE
+   ========================================================= */
+
+.gold-strip {
+  overflow: hidden;
+  white-space: nowrap;
+
+  padding: 13px 0;
+
   background: var(--aurix-gold);
   color: #050505;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+
+  animation: marquee 28s linear infinite;
 }
 
-/* Scrollbar */
-
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #a57430 #050505;
+.gold-strip-track {
+  display: inline-block;
+  min-width: max-content;
 }
 
-html::-webkit-scrollbar {
-  width: 8px;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-25%);
+  }
 }
 
-html::-webkit-scrollbar-track {
-  background: #050505;
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-html::-webkit-scrollbar-thumb {
-  background: #a57430;
-  border-radius: 999px;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-html::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
+.animate-fade-up {
+  animation: fade-up 0.75s ease-out both;
 }
 
-/* Reduced motion */
+.animate-fade-in {
+  animation: fade-in 0.9s ease-out both;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .gold-strip {
+    animation-duration: 22s;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.32em;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+
+  .luxury-button {
+    width: 100%;
+  }
+
+  .luxury-grid {
+    background-size: 45px 45px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -185,13 +383,5 @@ html::-webkit-scrollbar-thumb:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-/* Mobile */
-
-@media (max-width: 640px) {
-  body {
-    font-size: 15px;
   }
 }

@@ -1,19 +1,24 @@
-import React from 'react';
-import type { HTMLMotionProps } from 'motion/react';
+import type { ReactNode, CSSProperties } from "react";
 
-type MotionElementProps = HTMLMotionProps<'div'> & {
-  tag?: React.ElementType;
+type LazyMotionProps = {
+  children?: ReactNode;
+  className?: string;
+  id?: string;
+  role?: string;
+  title?: string;
+  style?: CSSProperties;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
 };
 
-const MotionLoader = React.lazy(() =>
-  import('motion/react').then((m) => ({
-    default: ({ tag = 'div', ...props }: MotionElementProps) => {
-      const MotionTag = (m.motion as any)[tag as string] || m.motion.div;
-      return React.createElement(MotionTag, props as any);
-    },
-  }))
-);
-
-export default function LazyMotion(props: MotionElementProps) {
-  return <MotionLoader {...props} />;
+export default function LazyMotion({
+  children,
+  className,
+  ...props
+}: LazyMotionProps) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
 }
