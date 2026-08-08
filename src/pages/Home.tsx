@@ -17,8 +17,11 @@ import { categories, features, reviews } from "../data";
 import { getOptimizedImage } from "../lib/utils";
 
 /* =========================================================
-   HERO PRODUCTS
+   SITE CONSTANTS
 ========================================================= */
+
+const SITE_URL = "https://aurix-gold.vercel.app";
+const SITE_NAME = "Aurix";
 
 const heroProducts = [
   {
@@ -41,7 +44,7 @@ const heroProducts = [
   },
   {
     src: "/images/modern_gold_bracelet_1781762704753-DMbwxbLT.webp",
-    alt: "Modern gold bracelet from Aurix",
+    alt: "Modern 22K gold bracelet from Aurix",
     name: "Modern Gold Bracelet",
     ref: "098-BR-22K",
     purity: "22 Karat",
@@ -118,14 +121,18 @@ export function Home() {
           />
 
           <meta
-            name="robots"
-            content="index, follow"
+            name="keywords"
+            content="22K gold jewellery, gold jewellery India, premium gold jewellery, gold necklace, gold ring, gold bracelet, Aurix jewellery"
           />
 
-          <link
-            rel="canonical"
-            href="https://aurix-gold.vercel.app/"
+          <meta
+            name="robots"
+            content="index, follow, max-image-preview:large"
           />
+
+          <link rel="canonical" href={`${SITE_URL}/`} />
+
+          {/* Open Graph */}
 
           <meta
             property="og:title"
@@ -144,18 +151,25 @@ export function Home() {
 
           <meta
             property="og:url"
-            content="https://aurix-gold.vercel.app/"
+            content={`${SITE_URL}/`}
           />
 
           <meta
             property="og:site_name"
-            content="Aurix"
+            content={SITE_NAME}
           />
 
           <meta
             property="og:image"
-            content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
+            content={`${SITE_URL}${heroProducts[0].src}`}
           />
+
+          <meta
+            property="og:image:alt"
+            content="Aurix Classic 22K Gold Necklace"
+          />
+
+          {/* Twitter */}
 
           <meta
             name="twitter:card"
@@ -174,58 +188,63 @@ export function Home() {
 
           <meta
             name="twitter:image"
-            content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
+            content={`${SITE_URL}${heroProducts[0].src}`}
           />
 
-          {/* Organization Schema */}
+          {/* =================================================
+              ORGANIZATION SCHEMA
+          ================================================= */}
 
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Aurix",
-              url: "https://aurix-gold.vercel.app/",
-              logo: "https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp",
+              name: SITE_NAME,
+              url: `${SITE_URL}/`,
+              logo: `${SITE_URL}${heroProducts[0].src}`,
               description:
-                "Premium 22K gold jewellery brand crafted in India.",
+                "Aurix is a premium 22K gold jewellery brand crafted in India.",
             })}
           </script>
 
-          {/* Website Schema */}
+          {/* =================================================
+              WEBSITE SCHEMA
+          ================================================= */}
 
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "Aurix",
-              url: "https://aurix-gold.vercel.app/",
+              name: SITE_NAME,
+              url: `${SITE_URL}/`,
               description:
                 "Premium 22K gold jewellery and luxury accessories from Aurix.",
             })}
           </script>
 
-          {/* Product Schema */}
+          {/* =================================================
+              PRODUCT SCHEMA
+          ================================================= */}
 
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
               name: currentProduct.name,
-              image: [
-                `https://aurix-gold.vercel.app${currentProduct.src}`,
-              ],
+              image: [`${SITE_URL}${currentProduct.src}`],
               description: `Premium ${currentProduct.purity} gold jewellery from Aurix.`,
               brand: {
                 "@type": "Brand",
-                name: "Aurix",
+                name: SITE_NAME,
               },
+              sku: currentProduct.ref,
+              material: "Gold",
               offers: {
                 "@type": "Offer",
-                url: "https://aurix-gold.vercel.app/products",
+                url: `${SITE_URL}/products`,
                 priceCurrency: "INR",
                 price: currentProduct.price.replace(/[₹,]/g, ""),
-                availability:
-                  "https://schema.org/InStock",
+                availability: "https://schema.org/InStock",
               },
             })}
           </script>
@@ -236,7 +255,6 @@ export function Home() {
         ===================================================== */}
 
         <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-white/[0.08]">
-
           <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 h-[76px] flex items-center justify-between">
 
             {/* Logo */}
@@ -257,8 +275,10 @@ export function Home() {
 
             {/* Navigation */}
 
-            <nav className="hidden md:flex items-center gap-9">
-
+            <nav
+              className="hidden md:flex items-center gap-9"
+              aria-label="Main navigation"
+            >
               {[
                 ["Home", "/"],
                 ["Products", "/products"],
@@ -274,7 +294,6 @@ export function Home() {
                   {label}
                 </Link>
               ))}
-
             </nav>
 
             {/* Cart */}
@@ -291,7 +310,6 @@ export function Home() {
                 Cart
               </span>
             </button>
-
           </div>
         </header>
 
@@ -301,7 +319,10 @@ export function Home() {
 
         <main className="pt-[76px]">
 
-          <section className="relative min-h-[calc(100vh-76px)] flex items-center overflow-hidden">
+          <section
+            className="relative min-h-[calc(100vh-76px)] flex items-center overflow-hidden"
+            aria-labelledby="hero-heading"
+          >
 
             {/* Background glow */}
 
@@ -343,8 +364,10 @@ export function Home() {
 
                   </div>
 
-                  <h1 className="font-serif text-[58px] sm:text-[76px] lg:text-[92px] leading-[0.9] tracking-[-0.04em] font-light">
-
+                  <h1
+                    id="hero-heading"
+                    className="font-serif text-[58px] sm:text-[76px] lg:text-[92px] leading-[0.9] tracking-[-0.04em] font-light"
+                  >
                     <span className="italic">
                       The Art
                     </span>
@@ -360,7 +383,6 @@ export function Home() {
                     <span className="text-[#D4AF37] italic">
                       Gold.
                     </span>
-
                   </h1>
 
                   <div className="w-28 h-px bg-[#D4AF37] mt-9 mb-7" />
@@ -388,10 +410,9 @@ export function Home() {
                     >
                       Discover Aurix
                     </Link>
-
                   </div>
 
-                  {/* Small stats */}
+                  {/* Stats */}
 
                   <div className="flex gap-10 mt-14 pt-7 border-t border-white/[0.08] max-w-lg">
 
@@ -445,19 +466,18 @@ export function Home() {
                   className="relative"
                 >
 
-                  {/* Product background */}
-
-                  <div className="absolute inset-5 border border-[#D4AF37]/10 pointer-events-none" />
+                  <div
+                    className="absolute inset-5 border border-[#D4AF37]/10 pointer-events-none"
+                    aria-hidden="true"
+                  />
 
                   <div className="relative min-h-[580px] sm:min-h-[650px] flex items-center justify-center bg-[#090909] border border-white/[0.08] overflow-hidden">
 
-                    {/* Editorial number */}
+                    {/* Product number */}
 
                     <div className="absolute top-7 left-7 text-[9px] font-mono tracking-[0.3em] text-white/25">
-                      01 / 03
+                      {String(heroIndex + 1).padStart(2, "0")} / 03
                     </div>
-
-                    {/* Featured label */}
 
                     <div className="absolute top-7 right-7 text-[8px] uppercase tracking-[0.35em] text-[#D4AF37]">
                       Featured Piece
@@ -470,7 +490,7 @@ export function Home() {
                       aria-hidden="true"
                     />
 
-                    {/* Image */}
+                    {/* Product images */}
 
                     <div className="relative w-[78%] h-[430px] sm:h-[500px] flex items-center justify-center">
 
@@ -483,6 +503,7 @@ export function Home() {
                           height="900"
                           loading={index === 0 ? "eager" : "lazy"}
                           decoding="async"
+                          fetchPriority={index === 0 ? "high" : "low"}
                           className={`absolute inset-0 w-full h-full object-contain transition-all duration-1000 ${
                             index === heroIndex
                               ? "opacity-100 scale-100"
@@ -493,7 +514,7 @@ export function Home() {
 
                     </div>
 
-                    {/* Product bottom info */}
+                    {/* Product info */}
 
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent pt-24 px-7 pb-7">
 
@@ -537,6 +558,8 @@ export function Home() {
 
                       </div>
 
+                      {/* Slider controls */}
+
                       <div className="flex gap-2 mt-6">
 
                         {heroProducts.map((_, index) => (
@@ -545,6 +568,9 @@ export function Home() {
                             type="button"
                             onClick={() => setHeroIndex(index)}
                             aria-label={`Show product ${index + 1}`}
+                            aria-current={
+                              index === heroIndex ? "true" : undefined
+                            }
                             className={`h-px transition-all duration-500 ${
                               index === heroIndex
                                 ? "w-12 bg-[#D4AF37]"
@@ -571,28 +597,25 @@ export function Home() {
           =================================================== */}
 
           <div className="border-y border-[#D4AF37]/20 bg-[#D4AF37] text-black overflow-hidden">
-
             <div className="py-3 flex whitespace-nowrap">
-
               <div className="flex shrink-0 animate-[marquee_25s_linear_infinite]">
-
                 {Array(5)
                   .fill(
                     "22K GOLD · PREMIUM CRAFTSMANSHIP · SECURE DELIVERY · TIMELESS DESIGN · CRAFTED IN INDIA · "
                   )
                   .join("")}
-
               </div>
-
             </div>
-
           </div>
 
           {/* ===================================================
               THE AURIX EDIT
           =================================================== */}
 
-          <section className="py-24 sm:py-28 lg:py-36 bg-[#050505]">
+          <section
+            className="py-24 sm:py-28 lg:py-36 bg-[#050505]"
+            aria-labelledby="collection-heading"
+          >
 
             <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
@@ -601,16 +624,17 @@ export function Home() {
                 <div>
 
                   <div className="flex items-center gap-3 mb-5">
-
                     <span className="w-8 h-px bg-[#D4AF37]" />
 
                     <span className="text-[8px] uppercase tracking-[0.45em] text-[#D4AF37]">
                       The Collection
                     </span>
-
                   </div>
 
-                  <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-light italic">
+                  <h2
+                    id="collection-heading"
+                    className="font-serif text-5xl sm:text-6xl lg:text-7xl font-light italic"
+                  >
                     The Aurix Edit
                   </h2>
 
@@ -635,6 +659,7 @@ export function Home() {
                     to="/products"
                     key={item.src}
                     className="group"
+                    aria-label={`View ${item.name}`}
                   >
 
                     <div className="relative aspect-[4/5] overflow-hidden bg-[#0b0b0b] border border-white/[0.07]">
@@ -649,7 +674,10 @@ export function Home() {
                         className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-1000"
                       />
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-70" />
+                      <div
+                        className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-70"
+                        aria-hidden="true"
+                      />
 
                       <div className="absolute top-5 left-5 text-[8px] uppercase tracking-[0.3em] text-[#D4AF37]">
                         0{index + 1}
@@ -724,6 +752,7 @@ export function Home() {
                     className={`group ${
                       index === 0 ? "md:col-span-2" : ""
                     }`}
+                    aria-label={`Explore ${category.title} collection`}
                   >
 
                     <div
@@ -744,7 +773,10 @@ export function Home() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.2s]"
                       />
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                      <div
+                        className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"
+                        aria-hidden="true"
+                      />
 
                       <div className="absolute top-6 left-6">
 
@@ -766,6 +798,7 @@ export function Home() {
 
                         <div className="mt-6 flex items-center gap-3 text-[8px] uppercase tracking-[0.3em] text-[#D4AF37]">
                           Explore Collection
+
                           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-2 transition-transform" />
                         </div>
 
@@ -794,9 +827,15 @@ export function Home() {
 
                 <div className="relative">
 
-                  <div className="absolute -top-5 -left-5 w-24 h-24 border-l border-t border-[#D4AF37]/40" />
+                  <div
+                    className="absolute -top-5 -left-5 w-24 h-24 border-l border-t border-[#D4AF37]/40"
+                    aria-hidden="true"
+                  />
 
-                  <div className="absolute -bottom-5 -right-5 w-24 h-24 border-r border-b border-[#D4AF37]/40" />
+                  <div
+                    className="absolute -bottom-5 -right-5 w-24 h-24 border-r border-b border-[#D4AF37]/40"
+                    aria-hidden="true"
+                  />
 
                   <div className="aspect-[4/5] bg-[#0b0b0b] overflow-hidden">
 
@@ -852,6 +891,7 @@ export function Home() {
                     className="group inline-flex items-center gap-4 mt-9 text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]"
                   >
                     Read Our Story
+
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
                   </Link>
 
@@ -959,7 +999,10 @@ export function Home() {
                     className="relative p-8 sm:p-10 bg-[#090909] border border-white/[0.07] hover:border-[#D4AF37]/25 transition-colors"
                   >
 
-                    <div className="absolute top-6 right-7 font-serif text-5xl text-[#D4AF37]/10">
+                    <div
+                      className="absolute top-6 right-7 font-serif text-5xl text-[#D4AF37]/10"
+                      aria-hidden="true"
+                    >
                       “
                     </div>
 
@@ -1010,7 +1053,10 @@ export function Home() {
 
               <div className="text-center mb-12">
 
-                <Instagram className="w-5 h-5 text-[#D4AF37] mx-auto mb-5" />
+                <Instagram
+                  className="w-5 h-5 text-[#D4AF37] mx-auto mb-5"
+                  aria-hidden="true"
+                />
 
                 <div className="text-[8px] uppercase tracking-[0.45em] text-white/40">
                   Follow the Aurix World
@@ -1093,11 +1139,14 @@ export function Home() {
               </div>
 
               <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl italic font-light">
+
                 Find the piece
                 <br />
+
                 <span className="text-[#D4AF37]">
                   that becomes yours.
                 </span>
+
               </h2>
 
               <p className="max-w-xl mx-auto text-white/50 text-sm leading-[1.9] mt-7">
@@ -1124,7 +1173,6 @@ export function Home() {
               </div>
 
             </div>
-
           </section>
 
         </main>
@@ -1146,6 +1194,7 @@ export function Home() {
                 <Link
                   to="/"
                   className="inline-flex items-center gap-3"
+                  aria-label="Aurix Home"
                 >
 
                   <span className="w-8 h-8 border border-[#D4AF37] rotate-45 flex items-center justify-center">
