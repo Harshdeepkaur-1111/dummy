@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Diamond,
-  Instagram,
-  ShoppingBag,
   Star,
   ShieldCheck,
   Gem,
@@ -21,11 +19,14 @@ import {
   pearlEarrings,
   modernBracelet,
   signaturePendant,
-  heritageBangle,
   imperialDiamondChoker,
   sovereignSignetRing,
   pearlDropEarrings,
 } from "../assets/images";
+
+/* =========================================================
+   FEATURED PRODUCTS
+========================================================= */
 
 const products = [
   {
@@ -66,6 +67,10 @@ const products = [
   },
 ];
 
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
 const categories = [
   {
     title: "Necklaces",
@@ -85,12 +90,20 @@ const categories = [
   {
     title: "Bracelets",
     subtitle: "Modern gold signatures",
-    image: heritageBangle,
+    image: modernBracelet,
   },
 ];
 
+/* =========================================================
+   FALLBACK IMAGE
+========================================================= */
+
 const fallbackImage =
   "/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp";
+
+/* =========================================================
+   SAFE IMAGE
+========================================================= */
 
 function SafeImage({
   src,
@@ -103,8 +116,8 @@ function SafeImage({
       src={src}
       alt={alt}
       className={className}
-      onError={(e) => {
-        const img = e.currentTarget;
+      onError={(event) => {
+        const img = event.currentTarget;
 
         if (!img.dataset.fallback) {
           img.dataset.fallback = "true";
@@ -116,20 +129,34 @@ function SafeImage({
   );
 }
 
+/* =========================================================
+   HOME PAGE
+========================================================= */
+
 export default function Home() {
   const [activeProduct, setActiveProduct] = useState(0);
 
   const { setIsCartOpen, addToCart } = useCart();
 
+  /* =======================================================
+     AUTO PRODUCT SLIDER
+  ======================================================= */
+
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveProduct((prev) => (prev + 1) % products.length);
+      setActiveProduct((previous) => {
+        return (previous + 1) % products.length;
+      });
     }, 5000);
 
     return () => clearInterval(timer);
   }, []);
 
   const product = products[activeProduct];
+
+  /* =======================================================
+     ADD FEATURED PRODUCT TO CART
+  ======================================================= */
 
   const handleAddToCart = () => {
     addToCart({
@@ -143,6 +170,10 @@ export default function Home() {
 
   return (
     <>
+      {/* =====================================================
+          SEO
+      ===================================================== */}
+
       <Helmet>
         <title>
           Aurix | Premium 22K Gold Jewellery Crafted in India
@@ -153,12 +184,17 @@ export default function Home() {
           content="Discover Aurix premium 22K gold jewellery crafted in India. Shop timeless necklaces, rings, earrings and bracelets designed for modern luxury."
         />
 
-        <meta name="robots" content="index, follow" />
+        <meta
+          name="robots"
+          content="index, follow"
+        />
 
         <link
           rel="canonical"
           href="https://aurix-gold.vercel.app/"
         />
+
+        {/* Open Graph */}
 
         <meta
           property="og:title"
@@ -185,10 +221,40 @@ export default function Home() {
           content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
         />
 
+        <meta
+          property="og:image:alt"
+          content="Aurix premium 22K gold necklace"
+        />
+
+        {/* Twitter */}
+
+        <meta
+          name="twitter:card"
+          content="summary_large_image"
+        />
+
+        <meta
+          name="twitter:title"
+          content="Aurix | Premium 22K Gold Jewellery"
+        />
+
+        <meta
+          name="twitter:description"
+          content="Discover timeless 22K gold jewellery crafted in India by Aurix."
+        />
+
+        <meta
+          name="twitter:image"
+          content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
+        />
+
+        {/* Organization Schema */}
+
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
+            "@id": "https://aurix-gold.vercel.app/#organization",
             name: "Aurix",
             url: "https://aurix-gold.vercel.app/",
             description:
@@ -196,97 +262,73 @@ export default function Home() {
           })}
         </script>
 
+        {/* Website Schema */}
+
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
+            "@id": "https://aurix-gold.vercel.app/#website",
             name: "Aurix",
             url: "https://aurix-gold.vercel.app/",
+            publisher: {
+              "@id":
+                "https://aurix-gold.vercel.app/#organization",
+            },
+          })}
+        </script>
+
+        {/* Featured Products Schema */}
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Aurix Featured Gold Jewellery",
+            itemListElement: products.map((item, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: item.name,
+              url: "https://aurix-gold.vercel.app/products",
+            })),
           })}
         </script>
       </Helmet>
 
+      {/* =====================================================
+          PAGE WRAPPER
+
+          Navbar and Footer are handled by Layout.tsx.
+      ===================================================== */}
+
       <div className="min-h-screen bg-[#050505] text-white overflow-hidden">
 
-        {/* =====================================================
-            NAVBAR
-        ===================================================== */}
-
-        <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-5 lg:px-10 h-20 flex items-center justify-between">
-
-            <Link
-              to="/"
-              className="flex items-center gap-3"
-              aria-label="Aurix Home"
-            >
-              <span className="w-9 h-9 border border-[#D4AF37] rotate-45 flex items-center justify-center">
-                <span className="w-3 h-3 border border-[#D4AF37]" />
-              </span>
-
-              <span className="font-serif text-2xl tracking-[0.3em] text-[#D4AF37]">
-                AURIX
-              </span>
-            </Link>
-
-            <nav className="hidden md:flex items-center gap-10">
-              <Link to="/" className="luxury-nav">
-                Home
-              </Link>
-
-              <Link to="/products" className="luxury-nav">
-                Products
-              </Link>
-
-              <Link to="/about" className="luxury-nav">
-                About
-              </Link>
-
-              <Link to="/blog" className="luxury-nav">
-                Journal
-              </Link>
-
-              <Link to="/contact" className="luxury-nav">
-                Contact
-              </Link>
-            </nav>
-
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="flex items-center gap-2 text-[#D4AF37] hover:text-white transition"
-              aria-label="Open cart"
-            >
-              <ShoppingBag size={18} />
-
-              <span className="hidden sm:block text-[10px] uppercase tracking-[0.25em]">
-                Cart
-              </span>
-            </button>
-          </div>
-        </header>
-
-        {/* =====================================================
+        {/* ===================================================
             HERO
-        ===================================================== */}
+        =================================================== */}
 
-        <main className="pt-20">
+        <div className="pt-0">
 
-          <section className="relative min-h-[calc(100vh-80px)] flex items-center">
+          <section className="relative min-h-[calc(100vh-96px)] flex items-center">
 
-            {/* Background */}
-            <div className="absolute inset-0 pointer-events-none">
+            {/* Background Glow */}
 
+            <div
+              className="absolute inset-0 pointer-events-none"
+              aria-hidden="true"
+            >
               <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#D4AF37]/10 rounded-full blur-[160px]" />
 
               <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[130px]" />
-
             </div>
 
             <div className="max-w-7xl mx-auto w-full px-5 lg:px-10 py-16 lg:py-20">
 
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-                {/* LEFT */}
+                {/* =================================================
+                    HERO LEFT
+                ================================================= */}
 
                 <div className="relative z-10">
 
@@ -386,27 +428,38 @@ export default function Home() {
 
                 </div>
 
-                {/* RIGHT PRODUCT */}
+                {/* =================================================
+                    HERO RIGHT / FEATURED PRODUCT
+                ================================================= */}
 
                 <div className="relative">
 
-                  <div className="absolute inset-5 border border-[#D4AF37]/20" />
+                  <div
+                    className="absolute inset-5 border border-[#D4AF37]/20"
+                    aria-hidden="true"
+                  />
 
                   <div className="relative bg-[#0b0b0b] border border-white/10 min-h-[580px] flex items-center justify-center overflow-hidden">
 
+                    {/* Product Counter */}
+
                     <div className="absolute top-6 left-6 text-[9px] tracking-[0.3em] text-white/30">
-                      0{activeProduct + 1} / 03
+                      {String(activeProduct + 1).padStart(2, "0")} /{" "}
+                      {String(products.length).padStart(2, "0")}
                     </div>
 
                     <div className="absolute top-6 right-6 text-[8px] uppercase tracking-[0.3em] text-[#D4AF37]">
                       Featured Piece
                     </div>
 
-                    {/* GOLD GLOW */}
+                    {/* Gold Glow */}
 
-                    <div className="absolute w-[400px] h-[400px] rounded-full bg-[#D4AF37]/10 blur-[90px]" />
+                    <div
+                      className="absolute w-[400px] h-[400px] rounded-full bg-[#D4AF37]/10 blur-[90px]"
+                      aria-hidden="true"
+                    />
 
-                    {/* IMAGE */}
+                    {/* Product Image */}
 
                     <div className="relative w-[85%] h-[450px] flex items-center justify-center">
 
@@ -427,7 +480,7 @@ export default function Home() {
 
                     </div>
 
-                    {/* PRODUCT INFO */}
+                    {/* Product Information */}
 
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent p-7 pt-24">
 
@@ -444,8 +497,13 @@ export default function Home() {
                           </h2>
 
                           <div className="flex gap-5 mt-3 text-[8px] uppercase tracking-[0.2em] text-white/40">
-                            <span>{product.purity}</span>
-                            <span>{product.weight}</span>
+                            <span>
+                              {product.purity}
+                            </span>
+
+                            <span>
+                              {product.weight}
+                            </span>
                           </div>
 
                         </div>
@@ -464,13 +522,21 @@ export default function Home() {
 
                       </div>
 
+                      {/* Slider Controls */}
+
                       <div className="flex gap-2 mt-5">
 
-                        {products.map((_, index) => (
+                        {products.map((item, index) => (
                           <button
-                            key={index}
-                            onClick={() => setActiveProduct(index)}
-                            aria-label={`Show product ${index + 1}`}
+                            key={item.id}
+                            type="button"
+                            onClick={() =>
+                              setActiveProduct(index)
+                            }
+                            aria-label={`Show ${item.name}`}
+                            aria-pressed={
+                              index === activeProduct
+                            }
                             className={`h-1 transition-all ${
                               index === activeProduct
                                 ? "w-12 bg-[#D4AF37]"
@@ -481,6 +547,16 @@ export default function Home() {
 
                       </div>
 
+                      {/* Add To Cart */}
+
+                      <button
+                        type="button"
+                        onClick={handleAddToCart}
+                        className="mt-5 w-full border border-[#D4AF37]/40 text-[#D4AF37] py-3 text-[9px] uppercase tracking-[0.25em] hover:bg-[#D4AF37] hover:text-black transition"
+                      >
+                        Add to Cart
+                      </button>
+
                     </div>
 
                   </div>
@@ -490,11 +566,12 @@ export default function Home() {
               </div>
 
             </div>
+
           </section>
 
-          {/* =====================================================
+          {/* ===================================================
               GOLD STRIP
-          ===================================================== */}
+          =================================================== */}
 
           <section className="bg-[#D4AF37] text-black py-4 overflow-hidden">
 
@@ -514,9 +591,9 @@ export default function Home() {
 
           </section>
 
-          {/* =====================================================
+          {/* ===================================================
               COLLECTION
-          ===================================================== */}
+          =================================================== */}
 
           <section className="py-28 bg-[#050505]">
 
@@ -560,14 +637,14 @@ export default function Home() {
 
                       <SafeImage
                         src={item.image}
-                        alt={item.name}
+                        alt={`${item.name} - Aurix 22K gold jewellery`}
                         width={900}
                         height={1100}
                         loading="lazy"
                         className="w-full h-full object-contain p-10 group-hover:scale-105 transition-transform duration-700"
                       />
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
 
                       <div className="absolute bottom-6 left-6 right-6">
 
@@ -605,9 +682,9 @@ export default function Home() {
 
           </section>
 
-          {/* =====================================================
+          {/* ===================================================
               WHY AURIX
-          ===================================================== */}
+          =================================================== */}
 
           <section className="py-28 bg-[#0a0a0a] border-y border-white/10">
 
@@ -661,6 +738,7 @@ export default function Home() {
                       <Icon
                         size={25}
                         className="text-[#D4AF37] mb-8"
+                        aria-hidden="true"
                       />
 
                       <h3 className="font-serif text-2xl italic mb-4">
@@ -681,9 +759,9 @@ export default function Home() {
 
           </section>
 
-          {/* =====================================================
+          {/* ===================================================
               STORY
-          ===================================================== */}
+          =================================================== */}
 
           <section className="py-28 bg-[#050505]">
 
@@ -693,7 +771,10 @@ export default function Home() {
 
                 <div className="relative">
 
-                  <div className="absolute -top-5 -left-5 w-20 h-20 border-l border-t border-[#D4AF37]/40" />
+                  <div
+                    className="absolute -top-5 -left-5 w-20 h-20 border-l border-t border-[#D4AF37]/40"
+                    aria-hidden="true"
+                  />
 
                   <div className="aspect-[4/5] bg-[#0b0b0b] overflow-hidden">
 
@@ -756,9 +837,9 @@ export default function Home() {
 
           </section>
 
-          {/* =====================================================
+          {/* ===================================================
               CATEGORIES
-          ===================================================== */}
+          =================================================== */}
 
           <section className="py-28 bg-[#090909] border-y border-white/10">
 
@@ -794,10 +875,10 @@ export default function Home() {
                         width={1000}
                         height={700}
                         loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
                       />
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent pointer-events-none" />
 
                       <div className="absolute bottom-7 left-7">
 
@@ -827,9 +908,9 @@ export default function Home() {
 
           </section>
 
-          {/* =====================================================
-              TESTIMONIAL
-          ===================================================== */}
+          {/* ===================================================
+              CLIENT STORIES
+          =================================================== */}
 
           <section className="py-28 bg-[#050505]">
 
@@ -839,13 +920,17 @@ export default function Home() {
                 Client Stories
               </p>
 
-              <div className="flex justify-center mb-7">
+              <div
+                className="flex justify-center mb-7"
+                aria-label="Aurix client experience"
+              >
 
                 {[1, 2, 3, 4, 5].map((item) => (
                   <Star
                     key={item}
                     size={14}
                     className="text-[#D4AF37] fill-current mx-1"
+                    aria-hidden="true"
                   />
                 ))}
 
@@ -864,15 +949,15 @@ export default function Home() {
 
           </section>
 
-          {/* =====================================================
+          {/* ===================================================
               FINAL CTA
-          ===================================================== */}
+          =================================================== */}
 
           <section className="relative py-36 overflow-hidden">
 
             <SafeImage
               src={imperialDiamondChoker}
-              alt="Aurix luxury gold necklace background"
+              alt=""
               width={1600}
               height={900}
               loading="lazy"
@@ -880,7 +965,10 @@ export default function Home() {
               aria-hidden="true"
             />
 
-            <div className="absolute inset-0 bg-black/85" />
+            <div
+              className="absolute inset-0 bg-black/85"
+              aria-hidden="true"
+            />
 
             <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
 
@@ -889,6 +977,7 @@ export default function Home() {
                 <Diamond
                   size={22}
                   className="text-[#D4AF37] -rotate-45"
+                  aria-hidden="true"
                 />
 
               </div>
@@ -935,98 +1024,7 @@ export default function Home() {
 
           </section>
 
-        </main>
-
-        {/* =====================================================
-            FOOTER
-        ===================================================== */}
-
-        <footer className="bg-[#030303] border-t border-white/10">
-
-          <div className="max-w-7xl mx-auto px-5 lg:px-10 py-16">
-
-            <div className="grid md:grid-cols-4 gap-12">
-
-              <div className="md:col-span-2">
-
-                <div className="flex items-center gap-3">
-
-                  <span className="w-8 h-8 border border-[#D4AF37] rotate-45 flex items-center justify-center">
-                    <span className="w-3 h-3 border border-[#D4AF37]" />
-                  </span>
-
-                  <span className="font-serif text-2xl tracking-[0.3em] text-[#D4AF37]">
-                    AURIX
-                  </span>
-
-                </div>
-
-                <p className="max-w-sm text-white/35 text-xs leading-7 mt-6">
-                  Premium 22K gold jewellery crafted in India
-                  for timeless elegance.
-                </p>
-
-                <a
-                  href="#"
-                  aria-label="Aurix Instagram"
-                  className="inline-flex mt-6 w-9 h-9 border border-white/10 items-center justify-center hover:border-[#D4AF37] hover:text-[#D4AF37]"
-                >
-                  <Instagram size={15} />
-                </a>
-
-              </div>
-
-              <div>
-
-                <h3 className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37] mb-6">
-                  Shop
-                </h3>
-
-                <div className="flex flex-col gap-4 text-xs text-white/40">
-
-                  <Link to="/products">Necklaces</Link>
-                  <Link to="/products">Rings</Link>
-                  <Link to="/products">Earrings</Link>
-                  <Link to="/products">Bracelets</Link>
-
-                </div>
-
-              </div>
-
-              <div>
-
-                <h3 className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37] mb-6">
-                  Company
-                </h3>
-
-                <div className="flex flex-col gap-4 text-xs text-white/40">
-
-                  <Link to="/about">Our Story</Link>
-                  <Link to="/blog">Journal</Link>
-                  <Link to="/contact">Contact</Link>
-                  <Link to="/contact">Custom Design</Link>
-
-                </div>
-
-              </div>
-
-            </div>
-
-            <div className="border-t border-white/10 mt-14 pt-7 flex flex-col sm:flex-row justify-between gap-4">
-
-              <p className="text-[8px] uppercase tracking-[0.25em] text-white/25">
-                © {new Date().getFullYear()} Aurix. All rights reserved.
-              </p>
-
-              <p className="text-[8px] uppercase tracking-[0.25em] text-white/25">
-                Crafted in India
-              </p>
-
-            </div>
-
-          </div>
-
-        </footer>
+        </div>
 
       </div>
     </>

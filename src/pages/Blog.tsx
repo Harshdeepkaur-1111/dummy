@@ -10,8 +10,7 @@ import { getOptimizedImage } from "../lib/utils";
 const SITE_URL = "https://aurix-gold.vercel.app";
 
 export function Blog() {
-  const [expandedArticle, setExpandedArticle] =
-    useState<number | null>(null);
+  const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
 
   const blogSchema = {
     "@context": "https://schema.org",
@@ -27,23 +26,38 @@ export function Blog() {
     },
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${SITE_URL}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Aurix Journal",
+        item: `${SITE_URL}/blog`,
+      },
+    ],
+  };
+
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#050505] text-white grid place-items-center">
+        <div className="grid min-h-screen place-items-center bg-[#050505] text-white">
           Loading...
         </div>
       }
     >
       <div className="min-h-screen bg-[#050505] text-white">
-
         {/* ================= SEO ================= */}
 
         <Helmet>
-
-          <title>
-            Aurix Journal | Gold Jewellery Trends, Tips & Guides
-          </title>
+          <title>Aurix Journal | Gold Jewellery Trends, Tips & Guides</title>
 
           <meta
             name="description"
@@ -55,10 +69,7 @@ export function Blog() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link
-            rel="canonical"
-            href={`${SITE_URL}/blog`}
-          />
+          <link rel="canonical" href={`${SITE_URL}/blog`} />
 
           <meta
             property="og:title"
@@ -70,25 +81,13 @@ export function Blog() {
             content="Discover gold jewellery trends, styling tips and jewellery care guides from Aurix."
           />
 
-          <meta
-            property="og:type"
-            content="website"
-          />
+          <meta property="og:type" content="website" />
 
-          <meta
-            property="og:url"
-            content={`${SITE_URL}/blog`}
-          />
+          <meta property="og:url" content={`${SITE_URL}/blog`} />
 
-          <meta
-            property="og:site_name"
-            content="Aurix"
-          />
+          <meta property="og:site_name" content="Aurix" />
 
-          <meta
-            name="twitter:card"
-            content="summary_large_image"
-          />
+          <meta name="twitter:card" content="summary_large_image" />
 
           <meta
             name="twitter:title"
@@ -104,27 +103,26 @@ export function Blog() {
             {JSON.stringify(blogSchema)}
           </script>
 
+          <script type="application/ld+json">
+            {JSON.stringify(breadcrumbSchema)}
+          </script>
         </Helmet>
 
         {/* ================= HERO ================= */}
 
         <header className="relative overflow-hidden border-b border-white/10 bg-[#0b0b0b]">
-
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-60 [background:radial-gradient(circle_at_50%_0%,rgba(212,175,55,.14),transparent_48%)]"
           />
 
           <div className="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 lg:py-28">
-
             <LazyMotion
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
             >
-
               <div className="mb-6 flex items-center justify-center gap-4">
-
                 <span className="h-px w-10 bg-[#D4AF37]" />
 
                 <span className="text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
@@ -132,7 +130,6 @@ export function Blog() {
                 </span>
 
                 <span className="h-px w-10 bg-[#D4AF37]" />
-
               </div>
 
               <h1 className="font-serif text-5xl font-light italic sm:text-6xl lg:text-7xl">
@@ -140,32 +137,23 @@ export function Blog() {
               </h1>
 
               <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/55 sm:text-base">
-                Discover jewellery trends, styling inspiration,
-                gold care tips and helpful guides for choosing
-                pieces you will love for years.
+                Discover jewellery trends, styling inspiration, gold care tips
+                and helpful guides for choosing pieces you will love for years.
               </p>
-
             </LazyMotion>
-
           </div>
-
         </header>
 
         <main>
-
           {/* ================= ARTICLES ================= */}
 
           <section
             aria-labelledby="journal-heading"
             className="px-4 py-16 sm:px-6 lg:py-24"
           >
-
             <div className="mx-auto max-w-6xl">
-
               <div className="mb-12 flex items-end justify-between">
-
                 <div>
-
                   <p className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">
                     Latest Stories
                   </p>
@@ -176,25 +164,20 @@ export function Blog() {
                   >
                     From The Journal
                   </h2>
-
                 </div>
 
                 <BookOpen
                   aria-hidden="true"
                   className="hidden h-6 w-6 text-[#D4AF37] sm:block"
                 />
-
               </div>
 
               <div className="space-y-8">
-
                 {articles.map((article: any, idx: number) => {
-
-                  const isOpen =
-                    expandedArticle === article.id;
+                  const isOpen = expandedArticle === article.id;
+                  const articleContentId = `article-${article.id}`;
 
                   return (
-
                     <LazyMotion
                       tag="article"
                       key={article.id}
@@ -215,13 +198,10 @@ export function Blog() {
                       }}
                       className="group overflow-hidden border border-white/10 bg-[#090909] transition hover:border-[#D4AF37]/25"
                     >
-
                       <div className="grid md:grid-cols-[.85fr_1.15fr]">
-
                         {/* IMAGE */}
 
                         <div className="relative aspect-[4/3] overflow-hidden bg-[#111] md:aspect-auto">
-
                           <OptimizedImage
                             src={getOptimizedImage(article.image)}
                             alt={`${article.title} - Aurix Gold Jewellery`}
@@ -241,13 +221,11 @@ export function Blog() {
                           <span className="absolute left-5 top-5 border border-white/10 bg-black/60 px-3 py-2 text-[8px] uppercase tracking-[0.2em] text-[#D4AF37] backdrop-blur">
                             Journal {String(idx + 1).padStart(2, "0")}
                           </span>
-
                         </div>
 
                         {/* CONTENT */}
 
                         <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
-
                           <span className="text-[9px] uppercase tracking-[0.25em] text-[#D4AF37]">
                             {article.date}
                           </span>
@@ -261,17 +239,13 @@ export function Blog() {
                           </p>
 
                           {isOpen && (
-
                             <div
-                              id={`article-${article.id}`}
+                              id={articleContentId}
                               className="relative mt-7 border border-white/10 bg-white/[0.025] p-6"
                             >
-
                               <button
                                 type="button"
-                                onClick={() =>
-                                  setExpandedArticle(null)
-                                }
+                                onClick={() => setExpandedArticle(null)}
                                 className="absolute right-4 top-4 rounded-full p-2 text-white/50 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
                                 aria-label={`Close ${article.title}`}
                               >
@@ -279,27 +253,21 @@ export function Blog() {
                               </button>
 
                               <div className="space-y-4 pr-5 text-sm leading-7 text-white/65">
+                                <p>{article.excerpt}</p>
 
                                 <p>
-                                  {article.excerpt}
-                                </p>
-
-                                <p>
-                                  Gold jewellery becomes more meaningful
-                                  when design, wearability and care are
-                                  considered together.
+                                  Gold jewellery becomes more meaningful when
+                                  design, wearability and care are considered
+                                  together.
                                 </p>
 
                                 <p>
                                   Explore the Aurix collection for elegant
-                                  jewellery designed around modern luxury
-                                  and timeless appeal.
+                                  jewellery designed around modern luxury and
+                                  timeless appeal.
                                 </p>
-
                               </div>
-
                             </div>
-
                           )}
 
                           <button
@@ -311,38 +279,25 @@ export function Blog() {
                             }
                             className="mt-7 inline-flex w-fit items-center border-b border-[#D4AF37]/40 pb-2 text-[9px] font-medium uppercase tracking-[0.2em] text-white/75 transition hover:border-[#D4AF37] hover:text-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
                             aria-expanded={isOpen}
-                            aria-controls={`article-${article.id}`}
+                            aria-controls={articleContentId}
                           >
-
-                            {isOpen
-                              ? "Close Article"
-                              : "Read Full Article"}
+                            {isOpen ? "Close Article" : "Read Full Article"}
 
                             <ArrowRight className="ml-2 h-3 w-3" />
-
                           </button>
-
                         </div>
-
                       </div>
-
                     </LazyMotion>
-
                   );
                 })}
-
               </div>
-
             </div>
-
           </section>
 
           {/* ================= CTA ================= */}
 
           <section className="border-y border-white/10 bg-[#0a0a0a]">
-
             <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:py-24">
-
               <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
                 Explore Aurix
               </p>
@@ -362,13 +317,9 @@ export function Blog() {
                 Explore Collection
                 <ArrowRight className="h-3.5 w-3.5" />
               </a>
-
             </div>
-
           </section>
-
         </main>
-
       </div>
     </Suspense>
   );
