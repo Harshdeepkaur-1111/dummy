@@ -18,10 +18,6 @@ const SITE_URL = "https://aurix-gold.vercel.app";
 export function Products() {
   const { addToCart, setIsCartOpen } = useCart();
 
-  /* =========================================================
-     BUY NOW
-  ========================================================= */
-
   const handleBuyNow = (
     product: any,
     e: React.MouseEvent<HTMLButtonElement>
@@ -37,10 +33,6 @@ export function Products() {
     setIsCartOpen(true);
   };
 
-  /* =========================================================
-     ADD TO CART
-  ========================================================= */
-
   const handleAddToCart = (
     product: any,
     e: React.MouseEvent<HTMLButtonElement>
@@ -53,10 +45,6 @@ export function Products() {
       price: product.price,
     });
   };
-
-  /* =========================================================
-     SCHEMA
-  ========================================================= */
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -95,16 +83,16 @@ export function Products() {
     <Suspense
       fallback={
         <div className="grid min-h-screen place-items-center bg-[#050505] text-white">
-          <div className="text-xs uppercase tracking-[0.3em] text-[#D4AF37]">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-[#D4AF37]">
             Loading Collection...
           </div>
         </div>
       }
     >
-      <div className="min-h-screen overflow-x-hidden bg-[#050505] text-white">
+      <div className="min-h-screen bg-[#050505] text-white">
         {/* =====================================================
             SEO
-        ===================================================== */}
+        ====================================================== */}
 
         <Helmet>
           <title>
@@ -143,7 +131,10 @@ export function Products() {
             content={`${SITE_URL}/products`}
           />
 
-          <meta property="og:site_name" content="Aurix" />
+          <meta
+            property="og:site_name"
+            content="Aurix"
+          />
 
           <meta
             name="twitter:card"
@@ -171,19 +162,19 @@ export function Products() {
 
         {/* =====================================================
             HERO
-        ===================================================== */}
+        ====================================================== */}
 
         <header className="relative overflow-hidden border-b border-white/10 bg-[#050505]">
-          {/* GOLD GLOW */}
-
+          {/* Background glow */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-[-250px] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.055] blur-3xl"
+            className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#D4AF37]/5 blur-3xl"
           />
 
-          {/* SAME CONTAINER AS ABOUT */}
-
-          <div className="relative mx-auto flex min-h-[470px] max-w-6xl items-center justify-center px-4 py-20 text-center sm:px-6 md:py-24 lg:px-8">
+          {/* IMPORTANT:
+              Same container width + padding used throughout page
+          */}
+          <div className="relative mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
             <LazyMotion
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -191,40 +182,30 @@ export function Products() {
                 duration: 0.7,
                 ease: "easeOut",
               }}
-              className="w-full"
+              className="mx-auto max-w-4xl text-center"
             >
-              {/* EYEBROW */}
-
-              <div className="mb-8 flex items-center justify-center gap-4">
+              <div className="mb-7 flex items-center justify-center gap-4">
                 <span className="h-px w-10 bg-gradient-to-r from-transparent to-[#D4AF37]" />
 
-                <span className="flex items-center gap-2 text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
-                  <Sparkles className="h-3 w-3" />
-
+                <span className="flex items-center gap-2 whitespace-nowrap text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
+                  <Sparkles className="h-3 w-3 shrink-0" />
                   Aurix Collection
                 </span>
 
                 <span className="h-px w-10 bg-gradient-to-l from-transparent to-[#D4AF37]" />
               </div>
 
-              {/* TITLE */}
-
-              <h1 className="font-serif text-5xl font-light italic leading-[0.9] text-white sm:text-6xl md:text-7xl lg:text-8xl">
+              <h1 className="font-serif text-5xl font-light italic leading-[0.95] text-white sm:text-6xl md:text-7xl lg:text-8xl">
                 Fine Gold
-
                 <span className="block text-[#D4AF37]">
                   Jewellery
                 </span>
               </h1>
 
-              {/* DIVIDER */}
-
-              <div className="mx-auto my-8 h-px w-14 bg-[#D4AF37]/60" />
-
-              {/* DESCRIPTION */}
+              <div className="mx-auto my-8 h-px w-12 bg-[#D4AF37]" />
 
               <p className="mx-auto max-w-2xl text-sm font-light leading-7 text-white/60 md:text-base">
-                Discover Aurix&apos;s curated collection of premium 22K gold
+                Discover Aurix's curated collection of premium 22K gold
                 jewellery — thoughtfully designed for timeless elegance,
                 everyday luxury and unforgettable occasions.
               </p>
@@ -234,13 +215,13 @@ export function Products() {
 
         {/* =====================================================
             TRUST BAR
-        ===================================================== */}
+        ====================================================== */}
 
         <section
           aria-label="Aurix jewellery benefits"
           className="border-b border-white/10 bg-[#080808]"
         >
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4">
               {[
                 "22K Gold",
@@ -250,7 +231,7 @@ export function Products() {
               ].map((item, index) => (
                 <div
                   key={item}
-                  className={`flex min-h-[64px] items-center justify-center px-4 py-5 text-center ${
+                  className={`px-4 py-5 text-center ${
                     index !== 0
                       ? "border-l border-white/10"
                       : ""
@@ -267,33 +248,32 @@ export function Products() {
 
         {/* =====================================================
             PRODUCTS
-        ===================================================== */}
+        ====================================================== */}
 
         <main id="main-content">
-          <section className="bg-[#050505]">
-            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24 lg:px-8">
-              {/* SECTION HEADING */}
+          <section className="bg-[#050505] py-16 sm:py-20 md:py-24">
+            <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
 
-              <div className="mb-12 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+              {/* Section heading */}
+              <div className="mb-10 grid gap-6 md:mb-12 md:grid-cols-[1fr_auto] md:items-end">
                 <div>
                   <p className="mb-4 text-[9px] uppercase tracking-[0.4em] text-[#D4AF37]">
                     The Collection
                   </p>
 
-                  <h2 className="font-serif text-3xl font-light italic sm:text-4xl lg:text-5xl">
+                  <h2 className="max-w-3xl font-serif text-3xl font-light italic leading-tight md:text-5xl">
                     Discover Your Signature Piece
                   </h2>
                 </div>
 
-                <p className="max-w-md text-sm leading-7 text-white/45 md:text-right">
-                  Explore our selection of timeless gold jewellery, created to
-                  complement your personal style.
+                <p className="max-w-md text-sm leading-7 text-white/45 md:pb-1">
+                  Explore our selection of timeless gold jewellery,
+                  created to complement your personal style.
                 </p>
               </div>
 
-              {/* PRODUCT GRID */}
-
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+              {/* Product grid */}
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
                 {products.map((product, idx) => (
                   <LazyMotion
                     key={product.id}
@@ -316,11 +296,9 @@ export function Products() {
                     }}
                     className="h-full"
                   >
-                    <article className="group flex h-full flex-col overflow-hidden border border-white/10 bg-[#0b0b0b] transition-all duration-500 hover:-translate-y-1 hover:border-[#D4AF37]/35">
-                      {/* =================================================
-                          IMAGE
-                      ================================================= */}
+                    <article className="group flex h-full flex-col overflow-hidden border border-white/10 bg-[#0b0b0b] transition-all duration-500 hover:border-[#D4AF37]/35">
 
+                      {/* Image */}
                       <div className="relative aspect-[4/5] overflow-hidden bg-[#080808]">
                         <OptimizedImage
                           src={getOptimizedImage(product.image)}
@@ -328,29 +306,21 @@ export function Products() {
                           width={600}
                           height={750}
                           priority={idx < 2}
-                          loading={
-                            idx < 2 ? "eager" : "lazy"
-                          }
+                          loading={idx < 2 ? "eager" : "lazy"}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                         />
-
-                        {/* IMAGE OVERLAY */}
 
                         <div
                           aria-hidden="true"
                           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/75 via-transparent to-transparent"
                         />
 
-                        {/* NUMBER */}
-
                         <div className="absolute left-4 top-4">
                           <span className="inline-flex h-8 min-w-9 items-center justify-center border border-white/10 bg-black/60 px-2 font-mono text-[9px] tracking-widest text-[#D4AF37] backdrop-blur-sm">
                             {String(idx + 1).padStart(2, "0")}
                           </span>
                         </div>
-
-                        {/* GOLD BADGE */}
 
                         <div className="absolute right-4 top-4">
                           <span className="bg-[#947100] px-3 py-2 text-[8px] font-bold uppercase tracking-widest text-black">
@@ -359,38 +329,29 @@ export function Products() {
                         </div>
                       </div>
 
-                      {/* =================================================
-                          CONTENT
-                      ================================================= */}
-
+                      {/* Content */}
                       <div className="flex flex-1 flex-col p-6 md:p-7">
-                        {/* META */}
 
                         <div className="mb-4 flex items-center gap-2 text-[8px] uppercase tracking-[0.2em] text-[#D4AF37]">
                           <span>{product.material}</span>
 
                           <span
                             aria-hidden="true"
-                            className="h-1 w-1 rounded-full bg-[#D4AF37]/50"
+                            className="h-1 w-1 shrink-0 rounded-full bg-[#D4AF37]/50"
                           />
 
                           <span>{product.weight}</span>
                         </div>
 
-                        {/* TITLE */}
-
-                        <h2 className="mb-3 font-serif text-xl font-light italic text-white transition-colors duration-300 group-hover:text-[#D4AF37] md:text-2xl">
+                        <h2 className="mb-3 font-serif text-xl italic leading-tight text-white transition-colors duration-300 group-hover:text-[#D4AF37] md:text-2xl">
                           {product.name}
                         </h2>
-
-                        {/* DESCRIPTION */}
 
                         <p className="mb-6 line-clamp-3 text-xs leading-7 text-white/50">
                           {product.desc}
                         </p>
 
-                        {/* PRICE */}
-
+                        {/* Price */}
                         <div className="mb-6 flex items-center justify-between">
                           <div>
                             <span className="mb-1 block text-[8px] uppercase tracking-[0.2em] text-white/35">
@@ -404,14 +365,13 @@ export function Products() {
 
                           <div
                             aria-hidden="true"
-                            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D4AF37]/30"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#D4AF37]/30"
                           >
                             <Sparkles className="h-3 w-3 text-[#D4AF37]" />
                           </div>
                         </div>
 
-                        {/* BUTTONS */}
-
+                        {/* Buttons */}
                         <div className="mt-auto space-y-2.5">
                           <button
                             type="button"
@@ -422,7 +382,6 @@ export function Products() {
                             aria-label={`Buy ${product.name} now`}
                           >
                             Buy Now
-
                             <ArrowRight className="h-3.5 w-3.5" />
                           </button>
 
@@ -435,7 +394,6 @@ export function Products() {
                             aria-label={`Add ${product.name} to cart`}
                           >
                             <ShoppingBag className="h-3.5 w-3.5" />
-
                             Add to Cart
                           </button>
                         </div>
@@ -449,7 +407,7 @@ export function Products() {
 
           {/* =====================================================
               CTA
-          ===================================================== */}
+          ====================================================== */}
 
           <section className="relative overflow-hidden border-t border-white/10 bg-[#080808]">
             <div
@@ -457,9 +415,7 @@ export function Products() {
               className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/5 blur-3xl"
             />
 
-            <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 md:py-32 lg:px-8">
-              {/* DIAMOND */}
-
+            <div className="relative mx-auto w-full max-w-4xl px-4 py-20 text-center sm:px-6 md:py-28 lg:px-8">
               <div className="mx-auto mb-8 flex h-12 w-12 rotate-45 items-center justify-center border border-[#D4AF37]/40">
                 <div className="h-7 w-7 border border-[#D4AF37]/30" />
               </div>
@@ -468,17 +424,16 @@ export function Products() {
                 Aurix Fine Jewellery
               </p>
 
-              <h2 className="mb-6 font-serif text-4xl font-light italic text-white md:text-6xl">
+              <h2 className="mb-6 font-serif text-4xl font-light italic leading-tight text-white md:text-6xl">
                 Jewellery That
-
                 <span className="block text-[#D4AF37]">
                   Tells Your Story
                 </span>
               </h2>
 
               <p className="mx-auto max-w-xl text-sm leading-7 text-white/50">
-                From everyday elegance to unforgettable celebrations, discover
-                jewellery designed to become part of your story.
+                From everyday elegance to unforgettable celebrations,
+                discover jewellery designed to become part of your story.
               </p>
             </div>
           </section>
