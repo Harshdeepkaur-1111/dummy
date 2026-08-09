@@ -181,7 +181,7 @@ export function Contact() {
             className="absolute inset-0 opacity-50 [background:radial-gradient(circle_at_50%_0%,rgba(212,175,55,.14),transparent_45%)]"
           />
 
-          <div className="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 lg:py-28">
+          <div className="aurix-page-hero-inner">
 
             <LazyMotion
               initial={{

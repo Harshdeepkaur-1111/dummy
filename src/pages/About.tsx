@@ -146,7 +146,7 @@ export function About() {
             className="absolute inset-0 opacity-60 [background:radial-gradient(circle_at_50%_0%,rgba(212,175,55,.15),transparent_48%)]"
           />
 
-          <div className="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 lg:py-28">
+          <div className="aurix-page-hero-inner">
             <LazyMotion
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -178,8 +178,9 @@ export function About() {
         <main>
           {/* ================= INTRO ================= */}
 
-          <section className="px-4 py-16 sm:px-6 lg:py-24">
-            <div className="mx-auto max-w-4xl">
+          <section className="aurix-page-section">
+
+  <div className="aurix-page-section-inner">
               <div className="border border-[#D4AF37]/20 bg-[#D4AF37]/[0.035] p-8 text-center sm:p-12">
                 <p className="font-serif text-2xl italic leading-relaxed text-white sm:text-3xl">
                   “Timeless gold. Modern expression. Jewellery made to stay
@@ -195,7 +196,7 @@ export function About() {
             aria-labelledby="story-heading"
             className="border-y border-white/10 bg-[#080808]"
           >
-            <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:py-24">
+            <div className="aurix-page-section-inner grid gap-12 lg:grid-cols-2 lg:gap-20">
               <div>
                 <p className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">
                   Since 2023
@@ -341,10 +342,10 @@ export function About() {
 
           {team?.length > 0 && (
             <section
-              aria-labelledby="team-heading"
-              className="px-4 py-16 sm:px-6 lg:py-24"
-            >
-              <div className="mx-auto max-w-6xl">
+  aria-labelledby="team-heading"
+  className="aurix-page-section"
+>
+  <div className="aurix-page-section-inner">
                 <div className="text-center">
                   <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
                     Behind Aurix

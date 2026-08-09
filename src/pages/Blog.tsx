@@ -116,7 +116,7 @@ export function Blog() {
             className="absolute inset-0 opacity-60 [background:radial-gradient(circle_at_50%_0%,rgba(212,175,55,.14),transparent_48%)]"
           />
 
-          <div className="relative mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 lg:py-28">
+          <div className="aurix-page-hero-inner">
             <LazyMotion
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -147,12 +147,10 @@ export function Blog() {
         <main>
           {/* ================= ARTICLES ================= */}
 
-          <section
-            aria-labelledby="journal-heading"
-            className="px-4 py-16 sm:px-6 lg:py-24"
-          >
-            <div className="mx-auto max-w-6xl">
-              <div className="mb-12 flex items-end justify-between">
+          <section className="aurix-page-section">
+  <div className="aurix-page-section-inner">
+
+    <div className="space-y-16">
                 <div>
                   <p className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">
                     Latest Stories

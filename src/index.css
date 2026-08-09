@@ -684,3 +684,120 @@ button:disabled {
     display: none !important;
   }
 }
+/* =========================================================
+   AURIX — UNIVERSAL PAGE ALIGNMENT
+   ========================================================= */
+
+.aurix-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.aurix-page-hero {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.aurix-page-hero-inner {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 420px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 80px 20px;
+
+  text-align: center;
+}
+
+.aurix-page-section {
+  width: 100%;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.aurix-page-section-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Consistent headings */
+
+.aurix-section-heading {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
+}
+
+/* Consistent content width */
+
+.aurix-content {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .aurix-container,
+  .aurix-page-hero-inner,
+  .aurix-page-section-inner,
+  .aurix-content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .aurix-page-hero-inner {
+    min-height: 360px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .aurix-page-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .aurix-container,
+  .aurix-page-hero-inner,
+  .aurix-page-section-inner,
+  .aurix-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .aurix-page-hero-inner {
+    min-height: 320px;
+    padding-top: 55px;
+    padding-bottom: 55px;
+  }
+
+  .aurix-page-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
