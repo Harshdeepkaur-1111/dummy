@@ -2,7 +2,7 @@
 
 /* =========================================================
    AURIX — GLOBAL DESIGN SYSTEM
-========================================================= */
+   ========================================================= */
 
 :root {
   --aurix-black: #050505;
@@ -13,11 +13,14 @@
   --aurix-gold-light: #e8d28a;
 
   --aurix-muted: rgba(255, 255, 255, 0.55);
+
+  --aurix-border: rgba(255, 255, 255, 0.07);
+  --aurix-border-gold: rgba(212, 175, 55, 0.3);
 }
 
 /* =========================================================
    RESET
-========================================================= */
+   ========================================================= */
 
 *,
 *::before,
@@ -28,6 +31,8 @@
 html {
   margin: 0;
   padding: 0;
+
+  min-width: 320px;
 
   background: var(--aurix-black);
   color-scheme: dark;
@@ -63,17 +68,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* React root must also have no default spacing */
+/* React root */
 
 #root {
+  width: 100%;
   min-height: 100vh;
+
   margin: 0;
   padding: 0;
 }
 
+/* Prevent accidental horizontal overflow */
+
+html,
+body,
+#root {
+  max-width: 100%;
+}
+
 /* =========================================================
    SCROLLBAR
-========================================================= */
+   ========================================================= */
 
 html::-webkit-scrollbar {
   width: 7px;
@@ -94,7 +109,7 @@ html::-webkit-scrollbar-thumb:hover {
 
 /* =========================================================
    TYPOGRAPHY
-========================================================= */
+   ========================================================= */
 
 h1,
 h2,
@@ -129,22 +144,36 @@ select {
   font: inherit;
 }
 
+button {
+  border: 0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
 img,
 picture,
 video,
 canvas,
 svg {
   display: block;
-  max-width: 100%;
 }
 
-img {
-  height: auto;
-}
+/*
+  Do NOT force img height here.
+  Tailwind classes such as h-full / object-cover
+  should be allowed to control image dimensions.
+*/
 
 /* =========================================================
    FORM
-========================================================= */
+   ========================================================= */
 
 button {
   cursor: pointer;
@@ -156,7 +185,7 @@ button:disabled {
 
 /* =========================================================
    SELECTION
-========================================================= */
+   ========================================================= */
 
 ::selection {
   background: var(--aurix-gold);
@@ -165,7 +194,7 @@ button:disabled {
 
 /* =========================================================
    FOCUS
-========================================================= */
+   ========================================================= */
 
 :focus {
   outline: none;
@@ -178,23 +207,24 @@ button:disabled {
 
 /* =========================================================
    PAGE LOADER
-========================================================= */
+   ========================================================= */
 
 .page-loader {
-  min-height: 100vh;
   width: 100%;
+  min-height: 100vh;
 
   display: grid;
   place-items: center;
 
-  background: #050505;
-  color: #d4af37;
+  background: var(--aurix-black);
+  color: var(--aurix-gold);
 }
 
 .page-loader-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   gap: 14px;
 }
 
@@ -205,19 +235,22 @@ button:disabled {
     serif;
 
   font-size: 28px;
+
   letter-spacing: 0.35em;
+
+  text-transform: uppercase;
 }
 
 .page-loader-line {
   width: 50px;
   height: 1px;
 
-  background: #d4af37;
+  background: var(--aurix-gold);
 }
 
 /* =========================================================
    SKIP LINK
-========================================================= */
+   ========================================================= */
 
 .skip-link {
   position: fixed;
@@ -237,6 +270,8 @@ button:disabled {
 
   text-transform: uppercase;
   letter-spacing: 0.1em;
+
+  transition: top 0.2s ease;
 }
 
 .skip-link:focus {
@@ -245,7 +280,7 @@ button:disabled {
 
 /* =========================================================
    LUXURY GRID
-========================================================= */
+   ========================================================= */
 
 .luxury-grid {
   background-image:
@@ -264,11 +299,12 @@ button:disabled {
 
 /* =========================================================
    EYEBROW
-========================================================= */
+   ========================================================= */
 
 .eyebrow {
   display: flex;
   align-items: center;
+
   gap: 12px;
 
   color: var(--aurix-gold);
@@ -277,12 +313,13 @@ button:disabled {
   line-height: 1;
 
   letter-spacing: 0.45em;
+
   text-transform: uppercase;
 }
 
 /* =========================================================
    DISPLAY TITLE
-========================================================= */
+   ========================================================= */
 
 .display-title {
   font-family:
@@ -306,16 +343,16 @@ button:disabled {
 
 /* =========================================================
    SECTION
-========================================================= */
+   ========================================================= */
 
 .section-luxury {
-  padding-top: clamp(6rem, 10vw, 9rem);
-  padding-bottom: clamp(6rem, 10vw, 9rem);
+  padding-top: clamp(5rem, 10vw, 9rem);
+  padding-bottom: clamp(5rem, 10vw, 9rem);
 }
 
 /* =========================================================
    BUTTON
-========================================================= */
+   ========================================================= */
 
 .luxury-button {
   min-height: 52px;
@@ -323,55 +360,73 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   gap: 12px;
 
   padding: 15px 30px;
+
+  border: 1px solid transparent;
 
   font-size: 8px;
   line-height: 1;
 
   letter-spacing: 0.28em;
+
   text-transform: uppercase;
+
+  white-space: nowrap;
 
   transition:
     transform 0.25s ease,
     background-color 0.25s ease,
     color 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .luxury-button:hover {
   transform: translateY(-2px);
 }
 
+.luxury-button:active {
+  transform: translateY(0);
+}
+
+.luxury-button:focus-visible {
+  outline: 2px solid var(--aurix-gold);
+  outline-offset: 3px;
+}
+
 /* =========================================================
    CARD
-========================================================= */
+   ========================================================= */
 
 .luxury-card {
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--aurix-border);
 
   transition:
     border-color 0.35s ease,
-    transform 0.35s ease;
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .luxury-card:hover {
-  border-color: rgba(212, 175, 55, 0.3);
+  border-color: var(--aurix-border-gold);
 
   transform: translateY(-3px);
 }
 
 /* =========================================================
    TEXT LINK
-========================================================= */
+   ========================================================= */
 
 .text-link {
   display: inline-flex;
   align-items: center;
+
   gap: 12px;
 
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--aurix-muted);
 
   font-size: 8px;
 
@@ -395,12 +450,13 @@ button:disabled {
 
 /* =========================================================
    GOLD STRIP
-========================================================= */
+   ========================================================= */
 
 .gold-strip {
   width: 100%;
 
   overflow: hidden;
+
   white-space: nowrap;
 
   padding: 13px 0;
@@ -412,14 +468,18 @@ button:disabled {
   font-weight: 700;
 
   letter-spacing: 0.35em;
-  text-transform: uppercase;
 
-  animation: marquee 28s linear infinite;
+  text-transform: uppercase;
 }
 
 .gold-strip-track {
   display: inline-block;
+
   min-width: max-content;
+
+  will-change: transform;
+
+  animation: marquee 28s linear infinite;
 }
 
 @keyframes marquee {
@@ -434,7 +494,7 @@ button:disabled {
 
 /* =========================================================
    ANIMATIONS
-========================================================= */
+   ========================================================= */
 
 @keyframes fade-up {
   from {
@@ -467,36 +527,130 @@ button:disabled {
 }
 
 /* =========================================================
+   SAFE CONTAINERS
+   ========================================================= */
+
+.container-safe {
+  width: 100%;
+  max-width: 1280px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .display-title {
+    font-size: clamp(2.7rem, 7vw, 5rem);
+  }
+
+  .section-luxury {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* =========================================================
    MOBILE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 768px) {
-  .gold-strip {
+  .gold-strip-track {
     animation-duration: 22s;
   }
 
   .eyebrow {
     letter-spacing: 0.32em;
   }
+
+  .display-title {
+    font-size: clamp(2.6rem, 11vw, 4.5rem);
+
+    line-height: 0.98;
+  }
+
+  .section-luxury {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
 }
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
 
 @media (max-width: 640px) {
   body {
     font-size: 15px;
   }
 
-  .luxury-button {
-    width: 100%;
-  }
-
   .luxury-grid {
     background-size: 45px 45px;
+  }
+
+  .luxury-button {
+    width: auto;
+
+    min-width: 150px;
+
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .display-title {
+    font-size: clamp(2.35rem, 12vw, 3.7rem);
+
+    letter-spacing: -0.035em;
+  }
+
+  .eyebrow {
+    font-size: 7px;
+
+    letter-spacing: 0.25em;
+
+    gap: 8px;
+  }
+
+  .text-link {
+    font-size: 7px;
+
+    letter-spacing: 0.22em;
+  }
+
+  .section-luxury {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .luxury-button {
+    min-width: 135px;
+
+    padding-left: 18px;
+    padding-right: 18px;
+
+    letter-spacing: 0.2em;
+  }
+
+  .display-title {
+    font-size: 2.2rem;
   }
 }
 
 /* =========================================================
    REDUCED MOTION
-========================================================= */
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -508,7 +662,25 @@ button:disabled {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+
     transition-duration: 0.01ms !important;
+
     scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .skip-link,
+  .gold-strip {
+    display: none !important;
   }
 }
