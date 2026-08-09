@@ -305,7 +305,7 @@ export function Blog() {
               </h2>
 
               <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-white/55">
-                Turn inspiration into your next gold jewellery piece.
+                       Turn inspiration into your next gold jewellery piece.
               </p>
 
               <a

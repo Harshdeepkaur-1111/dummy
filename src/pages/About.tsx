@@ -187,7 +187,7 @@ export function About() {
             <div className="aurix-page-section-inner">
               <div className="border border-[#D4AF37]/20 bg-[#D4AF37]/[0.035] p-7 text-center sm:p-10 md:p-12">
                 <p className="mx-auto max-w-4xl font-serif text-2xl italic leading-relaxed text-white sm:text-3xl md:text-4xl">
-                  “Timeless gold. Modern expression. Jewellery made to stay
+                      “Timeless gold. Modern expression. Jewellery made to stay
                   with you.”
                 </p>
               </div>

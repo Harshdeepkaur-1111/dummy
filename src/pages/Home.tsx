@@ -998,7 +998,7 @@ export default function Home() {
               </h2>
 
               <p className="max-w-xl mx-auto text-white/50 text-sm leading-7 mt-7">
-                Explore our collection of timeless 22K gold
+                      Explore our collection of timeless 22K gold
                 jewellery crafted for moments that matter.
               </p>
 
