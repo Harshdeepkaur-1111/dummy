@@ -801,53 +801,61 @@ button:disabled {
     padding-bottom: 50px;
   }
 }
+
 /* =========================================================
-   AURIX — UNIFIED ALIGNMENT FIX
-   (forces every container variant to same width/padding)
+   AURIX — FORCE CENTER ALIGNMENT FIX (SITE-WIDE)
+   Fixes hero/section content that renders shifted to the
+   left instead of centered, across all pages.
    ========================================================= */
 
-:root {
-  --aurix-content-max: 1200px;
-  --aurix-content-pad: 20px;
+.aurix-page-hero,
+.aurix-page-hero-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
 }
 
-.container-safe,
-.aurix-container,
-.aurix-page-hero-inner,
-.aurix-page-section-inner,
-.aurix-content,
-.aurix-section-heading {
-  max-width: var(--aurix-content-max) !important;
+.aurix-page-hero-inner > *,
+.aurix-page-section-inner > *,
+.aurix-content > * {
   margin-left: auto !important;
   margin-right: auto !important;
-  padding-left: var(--aurix-content-pad) !important;
-  padding-right: var(--aurix-content-pad) !important;
-  box-sizing: border-box !important;
 }
 
-/* aurix-section-heading ek text block hai — max-width thoda kam rakhna behtar */
-.aurix-section-heading {
-  max-width: 900px !important;
+/* Text blocks — force center text + auto margins so they don't hug left */
+.aurix-page-hero-inner h1,
+.aurix-page-hero-inner h2,
+.aurix-page-hero-inner p,
+.aurix-page-hero-inner .eyebrow,
+.aurix-page-hero-inner .display-title,
+.aurix-section-heading,
+.aurix-section-heading * {
+  text-align: center !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-@media (max-width: 768px) {
-  .container-safe,
-  .aurix-container,
-  .aurix-page-hero-inner,
-  .aurix-page-section-inner,
-  .aurix-content {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
+/* Eyebrow ("YOUR SIGNATURE AWAITS") usually flex with gap — recenter it */
+.aurix-page-hero-inner .eyebrow {
+  display: flex !important;
+  justify-content: center !important;
 }
 
-@media (max-width: 480px) {
-  .container-safe,
-  .aurix-container,
-  .aurix-page-hero-inner,
-  .aurix-page-section-inner,
-  .aurix-content {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
+/* Button group — center the CTA buttons row */
+.aurix-page-hero-inner .luxury-button,
+.aurix-page-hero-inner .luxury-button + .luxury-button {
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+}
+
+.aurix-page-hero-inner > div:has(.luxury-button) {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
 }
