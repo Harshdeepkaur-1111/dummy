@@ -41,6 +41,11 @@ html {
 
   scrollbar-width: thin;
   scrollbar-color: #a57430 #050505;
+
+  /* Reserve scrollbar space always, so pages with vs without
+     scroll don't shift centered content left/right */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 body {
