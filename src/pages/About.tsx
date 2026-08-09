@@ -87,14 +87,10 @@ export function About() {
     >
       <div className="min-h-screen bg-[#050505] text-white">
 
-        {/* =====================================================
-            SEO
-        ====================================================== */}
+        {/* ================= SEO ================= */}
 
         <Helmet>
-          <title>
-            About Aurix | Premium Gold Jewellery Brand
-          </title>
+          <title>About Aurix | Premium Gold Jewellery Brand</title>
 
           <meta
             name="description"
@@ -128,10 +124,7 @@ export function About() {
             content={`${SITE_URL}/about`}
           />
 
-          <meta
-            property="og:site_name"
-            content="Aurix"
-          />
+          <meta property="og:site_name" content="Aurix" />
 
           <meta
             name="twitter:card"
@@ -157,20 +150,15 @@ export function About() {
           </script>
         </Helmet>
 
-        {/* =====================================================
-            HERO
-        ====================================================== */}
+        {/* ================= HERO ================= */}
 
         <header className="relative overflow-hidden border-b border-white/10 bg-[#0b0b0b]">
-
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(circle_at_50%_0%,rgba(212,175,55,.15),transparent_48%)]"
           />
 
-          {/* SAME CONTAINER SYSTEM */}
           <div className="relative mx-auto w-full max-w-6xl px-4 py-20 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-
             <LazyMotion
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -202,35 +190,27 @@ export function About() {
 
         <main>
 
-          {/* =====================================================
-              INTRO
-          ====================================================== */}
+          {/* ================= INTRO ================= */}
 
-          <section className="bg-[#050505] px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-            <div className="mx-auto w-full max-w-6xl">
-
+          <section className="bg-[#050505]">
+            <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
               <div className="border border-[#D4AF37]/20 bg-[#D4AF37]/[0.035] p-7 text-center sm:p-10 md:p-12">
                 <p className="mx-auto max-w-4xl font-serif text-2xl italic leading-relaxed text-white sm:text-3xl md:text-4xl">
                   “Timeless gold. Modern expression. Jewellery made to stay
                   with you.”
                 </p>
               </div>
-
             </div>
           </section>
 
-          {/* =====================================================
-              STORY
-          ====================================================== */}
+          {/* ================= STORY ================= */}
 
           <section
             aria-labelledby="story-heading"
             className="border-y border-white/10 bg-[#080808]"
           >
             <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-
               <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-
                 <div>
                   <p className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">
                     Since 2023
@@ -265,17 +245,14 @@ export function About() {
                     design, quality and trust come together.
                   </p>
                 </div>
-
               </div>
             </div>
           </section>
 
-          {/* =====================================================
-              MISSION & VISION
-          ====================================================== */}
+          {/* ================= MISSION ================= */}
 
-          <section className="bg-[#050505] px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-            <div className="mx-auto w-full max-w-6xl">
+          <section className="bg-[#050505]">
+            <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
 
               <div className="mb-10 text-center md:mb-12">
                 <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
@@ -325,9 +302,7 @@ export function About() {
             </div>
           </section>
 
-          {/* =====================================================
-              VALUES
-          ====================================================== */}
+          {/* ================= VALUES ================= */}
 
           <section
             aria-labelledby="values-heading"
@@ -349,7 +324,6 @@ export function About() {
               </div>
 
               <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
-
                 {values.map((value, index) => {
                   const Icon = value.icon;
 
@@ -379,21 +353,19 @@ export function About() {
                     </article>
                   );
                 })}
-
               </div>
+
             </div>
           </section>
 
-          {/* =====================================================
-              TEAM
-          ====================================================== */}
+          {/* ================= TEAM ================= */}
 
           {team?.length > 0 && (
             <section
               aria-labelledby="team-heading"
-              className="bg-[#050505] px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24"
+              className="bg-[#050505]"
             >
-              <div className="mx-auto w-full max-w-6xl">
+              <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
 
                 <div className="text-center">
                   <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
@@ -414,7 +386,6 @@ export function About() {
                 </div>
 
                 <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-8 lg:mt-12 lg:grid-cols-4">
-
                   {team.map((member: any) => (
                     <article
                       key={member.name}
@@ -441,18 +412,16 @@ export function About() {
                       </p>
                     </article>
                   ))}
-
                 </div>
+
               </div>
             </section>
           )}
 
-          {/* =====================================================
-              CTA
-          ====================================================== */}
+          {/* ================= CTA ================= */}
 
           <section className="border-t border-white/10 bg-[#0a0a0a]">
-            <div className="mx-auto w-full max-w-4xl px-4 py-20 text-center sm:px-6 md:py-24 lg:px-8">
+            <div className="mx-auto w-full max-w-6xl px-4 py-20 text-center sm:px-6 md:py-24 lg:px-8">
 
               <Sparkles
                 aria-hidden="true"
