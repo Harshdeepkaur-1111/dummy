@@ -801,3 +801,53 @@ button:disabled {
     padding-bottom: 50px;
   }
 }
+/* =========================================================
+   AURIX — UNIFIED ALIGNMENT FIX
+   (forces every container variant to same width/padding)
+   ========================================================= */
+
+:root {
+  --aurix-content-max: 1200px;
+  --aurix-content-pad: 20px;
+}
+
+.container-safe,
+.aurix-container,
+.aurix-page-hero-inner,
+.aurix-page-section-inner,
+.aurix-content,
+.aurix-section-heading {
+  max-width: var(--aurix-content-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: var(--aurix-content-pad) !important;
+  padding-right: var(--aurix-content-pad) !important;
+  box-sizing: border-box !important;
+}
+
+/* aurix-section-heading ek text block hai — max-width thoda kam rakhna behtar */
+.aurix-section-heading {
+  max-width: 900px !important;
+}
+
+@media (max-width: 768px) {
+  .container-safe,
+  .aurix-container,
+  .aurix-page-hero-inner,
+  .aurix-page-section-inner,
+  .aurix-content {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-safe,
+  .aurix-container,
+  .aurix-page-hero-inner,
+  .aurix-page-section-inner,
+  .aurix-content {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
