@@ -108,10 +108,7 @@ export function Products() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link
-            rel="canonical"
-            href={`${SITE_URL}/products`}
-          />
+          <link rel="canonical" href={`${SITE_URL}/products`} />
 
           <meta
             property="og:title"
@@ -125,17 +122,11 @@ export function Products() {
 
           <meta property="og:type" content="website" />
 
-          <meta
-            property="og:url"
-            content={`${SITE_URL}/products`}
-          />
+          <meta property="og:url" content={`${SITE_URL}/products`} />
 
           <meta property="og:site_name" content="Aurix" />
 
-          <meta
-            name="twitter:card"
-            content="summary_large_image"
-          />
+          <meta name="twitter:card" content="summary_large_image" />
 
           <meta
             name="twitter:title"
@@ -158,15 +149,13 @@ export function Products() {
 
         {/* ================= HERO ================= */}
 
-        <header className="relative overflow-hidden border-b border-white/10 bg-[#050505]">
-
+        <header className="aurix-page-hero bg-[#050505]">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#D4AF37]/5 blur-3xl"
           />
 
-          <div className="relative mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-
+          <div className="aurix-page-hero-inner relative">
             <LazyMotion
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -174,9 +163,8 @@ export function Products() {
                 duration: 0.7,
                 ease: "easeOut",
               }}
-              className="mx-auto max-w-4xl text-center"
+              className="w-full max-w-4xl text-center"
             >
-
               <div className="mb-7 flex items-center justify-center gap-4">
                 <span className="h-px w-10 bg-gradient-to-r from-transparent to-[#D4AF37]" />
 
@@ -202,7 +190,6 @@ export function Products() {
                 jewellery — thoughtfully designed for timeless elegance,
                 everyday luxury and unforgettable occasions.
               </p>
-
             </LazyMotion>
           </div>
         </header>
@@ -213,10 +200,8 @@ export function Products() {
           aria-label="Aurix jewellery benefits"
           className="border-b border-white/10 bg-[#080808]"
         >
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-
+          <div className="aurix-container">
             <div className="grid grid-cols-2 md:grid-cols-4">
-
               {[
                 "22K Gold",
                 "Crafted With Care",
@@ -236,44 +221,34 @@ export function Products() {
                   </p>
                 </div>
               ))}
-
             </div>
           </div>
         </section>
 
+        {/* ================= PRODUCTS ================= */}
+
         <main id="main-content">
+          <section className="aurix-page-section bg-[#050505]">
+            <div className="aurix-page-section-inner">
 
-          {/* ================= PRODUCT COLLECTION ================= */}
-
-          <section className="bg-[#050505]">
-
-            <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-
-              {/* Heading */}
-
-              <div className="mb-10 grid gap-6 md:mb-12 md:grid-cols-[1fr_320px] md:items-end">
-
+              <div className="mb-10 grid gap-6 md:mb-12 md:grid-cols-[1fr_auto] md:items-end">
                 <div>
                   <p className="mb-4 text-[9px] uppercase tracking-[0.4em] text-[#D4AF37]">
                     The Collection
                   </p>
 
-                  <h2 className="font-serif text-3xl font-light italic leading-tight md:text-5xl">
+                  <h2 className="max-w-3xl font-serif text-3xl font-light italic leading-tight md:text-5xl">
                     Discover Your Signature Piece
                   </h2>
                 </div>
 
                 <p className="max-w-md text-sm leading-7 text-white/45 md:pb-1">
-                  Explore our selection of timeless gold jewellery,
-                  created to complement your personal style.
+                  Explore our selection of timeless gold jewellery, created to
+                  complement your personal style.
                 </p>
-
               </div>
 
-              {/* Product Grid */}
-
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
                 {products.map((product, idx) => (
                   <LazyMotion
                     key={product.id}
@@ -301,7 +276,6 @@ export function Products() {
                       {/* IMAGE */}
 
                       <div className="relative aspect-[4/5] overflow-hidden bg-[#080808]">
-
                         <OptimizedImage
                           src={getOptimizedImage(product.image)}
                           alt={`${product.name} - Aurix 22K Gold Jewellery`}
@@ -329,13 +303,11 @@ export function Products() {
                             22K GOLD
                           </span>
                         </div>
-
                       </div>
 
                       {/* CONTENT */}
 
                       <div className="flex flex-1 flex-col p-6 md:p-7">
-
                         <div className="mb-4 flex items-center gap-2 text-[8px] uppercase tracking-[0.2em] text-[#D4AF37]">
                           <span>{product.material}</span>
 
@@ -354,8 +326,6 @@ export function Products() {
                         <p className="mb-6 line-clamp-3 text-xs leading-7 text-white/50">
                           {product.desc}
                         </p>
-
-                        {/* PRICE */}
 
                         <div className="mb-6 flex items-center justify-between">
                           <div>
@@ -376,10 +346,7 @@ export function Products() {
                           </div>
                         </div>
 
-                        {/* BUTTONS */}
-
                         <div className="mt-auto space-y-2.5">
-
                           <button
                             type="button"
                             onClick={(e) =>
@@ -403,14 +370,11 @@ export function Products() {
                             <ShoppingBag className="h-3.5 w-3.5" />
                             Add to Cart
                           </button>
-
                         </div>
-
                       </div>
                     </article>
                   </LazyMotion>
                 ))}
-
               </div>
             </div>
           </section>
@@ -418,37 +382,35 @@ export function Products() {
           {/* ================= CTA ================= */}
 
           <section className="relative overflow-hidden border-t border-white/10 bg-[#080808]">
-
             <div
               aria-hidden="true"
               className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/5 blur-3xl"
             />
 
-            <div className="relative mx-auto w-full max-w-6xl px-4 py-20 text-center sm:px-6 md:py-28 lg:px-8">
+            <div className="aurix-page-section-inner relative py-20 text-center md:py-28">
+              <div className="aurix-section-heading">
+                <div className="mx-auto mb-8 flex h-12 w-12 rotate-45 items-center justify-center border border-[#D4AF37]/40">
+                  <div className="h-7 w-7 border border-[#D4AF37]/30" />
+                </div>
 
-              <div className="mx-auto mb-8 flex h-12 w-12 rotate-45 items-center justify-center border border-[#D4AF37]/40">
-                <div className="h-7 w-7 border border-[#D4AF37]/30" />
+                <p className="mb-5 text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
+                  Aurix Fine Jewellery
+                </p>
+
+                <h2 className="mb-6 font-serif text-4xl font-light italic leading-tight text-white md:text-6xl">
+                  Jewellery That
+                  <span className="block text-[#D4AF37]">
+                    Tells Your Story
+                  </span>
+                </h2>
+
+                <p className="mx-auto max-w-xl text-sm leading-7 text-white/50">
+                  From everyday elegance to unforgettable celebrations,
+                  discover jewellery designed to become part of your story.
+                </p>
               </div>
-
-              <p className="mb-5 text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
-                Aurix Fine Jewellery
-              </p>
-
-              <h2 className="mb-6 font-serif text-4xl font-light italic leading-tight text-white md:text-6xl">
-                Jewellery That
-                <span className="block text-[#D4AF37]">
-                  Tells Your Story
-                </span>
-              </h2>
-
-              <p className="mx-auto max-w-xl text-sm leading-7 text-white/50">
-                From everyday elegance to unforgettable celebrations,
-                discover jewellery designed to become part of your story.
-              </p>
-
             </div>
           </section>
-
         </main>
       </div>
     </Suspense>

@@ -86,9 +86,7 @@ export function About() {
       }
     >
       <div className="min-h-screen bg-[#050505] text-white">
-        {/* =====================================================
-            SEO
-        ====================================================== */}
+        {/* ================= SEO ================= */}
 
         <Helmet>
           <title>About Aurix | Premium Gold Jewellery Brand</title>
@@ -146,18 +144,18 @@ export function About() {
             HERO
         ====================================================== */}
 
-        <header className="relative overflow-hidden border-b border-white/10 bg-[#0b0b0b]">
+        <header className="aurix-page-hero bg-[#0b0b0b]">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(circle_at_50%_0%,rgba(212,175,55,.15),transparent_48%)]"
           />
 
-          <div className="relative mx-auto w-full max-w-6xl px-5 py-20 text-center sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+          <div className="aurix-page-hero-inner relative">
             <LazyMotion
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
-              className="mx-auto max-w-3xl"
+              className="w-full max-w-3xl"
             >
               <div className="mb-6 flex items-center justify-center gap-4">
                 <span className="h-px w-10 bg-[#D4AF37]" />
@@ -183,13 +181,11 @@ export function About() {
         </header>
 
         <main>
-          {/* =====================================================
-              INTRO
-          ====================================================== */}
+          {/* ================= INTRO ================= */}
 
-          <section className="bg-[#050505]">
-            <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-              <div className="w-full border border-[#D4AF37]/20 bg-[#D4AF37]/[0.035] p-7 text-center sm:p-10 md:p-12">
+          <section className="aurix-page-section bg-[#050505]">
+            <div className="aurix-page-section-inner">
+              <div className="border border-[#D4AF37]/20 bg-[#D4AF37]/[0.035] p-7 text-center sm:p-10 md:p-12">
                 <p className="mx-auto max-w-4xl font-serif text-2xl italic leading-relaxed text-white sm:text-3xl md:text-4xl">
                   “Timeless gold. Modern expression. Jewellery made to stay
                   with you.”
@@ -198,16 +194,14 @@ export function About() {
             </div>
           </section>
 
-          {/* =====================================================
-              STORY
-          ====================================================== */}
+          {/* ================= STORY ================= */}
 
           <section
             aria-labelledby="story-heading"
             className="border-y border-white/10 bg-[#080808]"
           >
-            <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-              <div className="grid w-full gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+            <div className="aurix-page-section-inner py-16 md:py-20 lg:py-24">
+              <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
                 <div>
                   <p className="text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]">
                     Since 2023
@@ -246,13 +240,11 @@ export function About() {
             </div>
           </section>
 
-          {/* =====================================================
-              MISSION & VISION
-          ====================================================== */}
+          {/* ================= MISSION & VISION ================= */}
 
-          <section className="bg-[#050505]">
-            <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-              <div className="mb-10 text-center md:mb-12">
+          <section className="aurix-page-section bg-[#050505]">
+            <div className="aurix-page-section-inner">
+              <div className="aurix-section-heading">
                 <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
                   What Drives Us
                 </p>
@@ -262,7 +254,7 @@ export function About() {
                 </h2>
               </div>
 
-              <div className="grid w-full gap-6 md:grid-cols-2">
+              <div className="mt-10 grid gap-6 md:grid-cols-2 md:mt-12">
                 <article className="flex h-full flex-col border border-white/10 bg-[#0a0a0a] p-7 sm:p-9 md:p-10">
                   <span className="text-[9px] uppercase tracking-[0.25em] text-[#D4AF37]">
                     Our Mission
@@ -298,16 +290,14 @@ export function About() {
             </div>
           </section>
 
-          {/* =====================================================
-              VALUES
-          ====================================================== */}
+          {/* ================= VALUES ================= */}
 
           <section
             aria-labelledby="values-heading"
             className="border-y border-white/10 bg-[#080808]"
           >
-            <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-              <div className="text-center">
+            <div className="aurix-page-section-inner py-16 md:py-20 lg:py-24">
+              <div className="aurix-section-heading">
                 <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
                   The Aurix Standard
                 </p>
@@ -320,14 +310,14 @@ export function About() {
                 </h2>
               </div>
 
-              <div className="mt-10 grid w-full gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
+              <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
                 {values.map((value, index) => {
                   const Icon = value.icon;
 
                   return (
                     <article
                       key={value.title}
-                      className="group flex h-full min-h-[220px] flex-col border border-white/10 bg-[#0a0a0a] p-7 transition duration-500 hover:border-[#D4AF37]/35"
+                      className="group flex min-h-[220px] flex-col border border-white/10 bg-[#0a0a0a] p-7 transition duration-500 hover:border-[#D4AF37]/35"
                     >
                       <div className="flex items-center justify-between">
                         <Icon
@@ -354,25 +344,17 @@ export function About() {
             </div>
           </section>
 
-          {/* =====================================================
-              TEAM
-          ====================================================== */}
+          {/* ================= TEAM ================= */}
 
           {team?.length > 0 && (
-            <section
-              aria-labelledby="team-heading"
-              className="bg-[#050505]"
-            >
-              <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-24">
-                <div className="text-center">
+            <section className="aurix-page-section bg-[#050505]">
+              <div className="aurix-page-section-inner">
+                <div className="aurix-section-heading">
                   <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
                     Behind Aurix
                   </p>
 
-                  <h2
-                    id="team-heading"
-                    className="mt-4 font-serif text-4xl italic leading-tight sm:text-5xl"
-                  >
+                  <h2 className="mt-4 font-serif text-4xl italic leading-tight sm:text-5xl">
                     Meet Our Team
                   </h2>
 
@@ -382,13 +364,13 @@ export function About() {
                   </p>
                 </div>
 
-                <div className="mt-10 grid w-full grid-cols-2 gap-x-6 gap-y-10 sm:gap-8 lg:mt-12 lg:grid-cols-4">
+                <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-8 lg:mt-12 lg:grid-cols-4">
                   {team.map((member: any) => (
                     <article
                       key={member.name}
                       className="flex flex-col items-center text-center"
                     >
-                      <div className="mx-auto aspect-square w-full max-w-[170px] overflow-hidden rounded-full border border-[#D4AF37]/20 bg-[#111] p-2">
+                      <div className="aspect-square w-full max-w-[170px] overflow-hidden rounded-full border border-[#D4AF37]/20 bg-[#111] p-2">
                         <OptimizedImage
                           src={getOptimizedImage(member.image)}
                           alt={`${member.name} - Aurix jewellery team`}
@@ -414,13 +396,11 @@ export function About() {
             </section>
           )}
 
-          {/* =====================================================
-              CTA
-          ====================================================== */}
+          {/* ================= CTA ================= */}
 
           <section className="border-t border-white/10 bg-[#0a0a0a]">
-            <div className="mx-auto w-full max-w-6xl px-5 py-20 text-center sm:px-6 md:py-24 lg:px-8">
-              <div className="mx-auto max-w-4xl">
+            <div className="aurix-page-section-inner py-20 text-center md:py-24">
+              <div className="aurix-section-heading">
                 <Sparkles
                   aria-hidden="true"
                   className="mx-auto h-7 w-7 text-[#D4AF37]"
