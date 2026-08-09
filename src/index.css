@@ -2,25 +2,32 @@
 
 /* =========================================================
    AURIX — GLOBAL DESIGN SYSTEM
-   ========================================================= */
+========================================================= */
 
 :root {
   --aurix-black: #050505;
-  --aurix-dark: #090909;
-  --aurix-panel: #0d0d0d;
+  --aurix-dark: #080808;
+  --aurix-panel: #0b0b0b;
+  --aurix-panel-2: #0e0e0e;
 
   --aurix-gold: #d4af37;
+  --aurix-gold-dark: #947100;
   --aurix-gold-light: #e8d28a;
 
+  --aurix-white: #ffffff;
   --aurix-muted: rgba(255, 255, 255, 0.55);
+  --aurix-muted-2: rgba(255, 255, 255, 0.4);
 
-  --aurix-border: rgba(255, 255, 255, 0.07);
-  --aurix-border-gold: rgba(212, 175, 55, 0.3);
+  --aurix-border: rgba(255, 255, 255, 0.1);
+  --aurix-gold-border: rgba(212, 175, 55, 0.22);
+
+  --aurix-container: 1180px;
+  --aurix-page-container: 1120px;
 }
 
 /* =========================================================
    RESET
-   ========================================================= */
+========================================================= */
 
 *,
 *::before,
@@ -31,8 +38,6 @@
 html {
   margin: 0;
   padding: 0;
-
-  min-width: 320px;
 
   background: var(--aurix-black);
   color-scheme: dark;
@@ -53,7 +58,7 @@ body {
   overflow-x: hidden;
 
   background: var(--aurix-black);
-  color: #ffffff;
+  color: var(--aurix-white);
 
   font-family:
     Inter,
@@ -68,48 +73,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* React root */
-
 #root {
-  width: 100%;
   min-height: 100vh;
-
   margin: 0;
   padding: 0;
 }
 
-/* Prevent accidental horizontal overflow */
+/* =========================================================
+   MEDIA
+========================================================= */
 
-html,
-body,
-#root {
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
   max-width: 100%;
 }
 
-/* =========================================================
-   SCROLLBAR
-   ========================================================= */
-
-html::-webkit-scrollbar {
-  width: 7px;
-}
-
-html::-webkit-scrollbar-track {
-  background: #050505;
-}
-
-html::-webkit-scrollbar-thumb {
-  background: #a57430;
-  border-radius: 999px;
-}
-
-html::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
+img {
+  height: auto;
 }
 
 /* =========================================================
    TYPOGRAPHY
-   ========================================================= */
+========================================================= */
 
 h1,
 h2,
@@ -145,37 +134,6 @@ select {
 }
 
 button {
-  border: 0;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* =========================================================
-   MEDIA
-   ========================================================= */
-
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-}
-
-/*
-  Do NOT force img height here.
-  Tailwind classes such as h-full / object-cover
-  should be allowed to control image dimensions.
-*/
-
-/* =========================================================
-   FORM
-   ========================================================= */
-
-button {
   cursor: pointer;
 }
 
@@ -184,8 +142,29 @@ button:disabled {
 }
 
 /* =========================================================
+   SCROLLBAR
+========================================================= */
+
+html::-webkit-scrollbar {
+  width: 7px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #a57430;
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* =========================================================
    SELECTION
-   ========================================================= */
+========================================================= */
 
 ::selection {
   background: var(--aurix-gold);
@@ -194,7 +173,7 @@ button:disabled {
 
 /* =========================================================
    FOCUS
-   ========================================================= */
+========================================================= */
 
 :focus {
   outline: none;
@@ -206,81 +185,669 @@ button:disabled {
 }
 
 /* =========================================================
-   PAGE LOADER
-   ========================================================= */
+   AURIX SHARED CONTAINER
+   IMPORTANT — ALL PAGES USE THIS
+========================================================= */
 
-.page-loader {
-  width: 100%;
-  min-height: 100vh;
+.aurix-container {
+  width: min(
+    calc(100% - 32px),
+    var(--aurix-container)
+  );
 
-  display: grid;
-  place-items: center;
-
-  background: var(--aurix-black);
-  color: var(--aurix-gold);
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.page-loader-inner {
+.aurix-page-container {
+  width: min(
+    calc(100% - 32px),
+    var(--aurix-page-container)
+  );
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+   PAGE HERO
+========================================================= */
+
+.aurix-page-hero {
+  position: relative;
+
+  overflow: hidden;
+
+  border-bottom: 1px solid var(--aurix-border);
+
+  background: #080808;
+}
+
+.aurix-page-hero-inner {
+  position: relative;
+
+  width: min(
+    calc(100% - 32px),
+    var(--aurix-page-container)
+  );
+
+  min-height: 390px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-top: 92px;
+  padding-bottom: 86px;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
 
-  gap: 14px;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
 }
 
-.page-loader-logo {
-  font-family:
-    "Playfair Display",
-    Georgia,
-    serif;
+/* radial gold glow */
 
-  font-size: 28px;
+.aurix-page-hero::before {
+  content: "";
 
-  letter-spacing: 0.35em;
+  position: absolute;
+
+  top: -240px;
+  left: 50%;
+
+  width: 620px;
+  height: 620px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(212, 175, 55, 0.12),
+      transparent 65%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   HERO LABEL
+========================================================= */
+
+.aurix-eyebrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin-bottom: 22px;
+
+  color: var(--aurix-gold);
+
+  font-size: 9px;
+  line-height: 1;
+
+  letter-spacing: 0.42em;
 
   text-transform: uppercase;
 }
 
-.page-loader-line {
-  width: 50px;
+.aurix-eyebrow::before,
+.aurix-eyebrow::after {
+  content: "";
+
+  width: 38px;
   height: 1px;
 
   background: var(--aurix-gold);
 }
 
 /* =========================================================
-   SKIP LINK
-   ========================================================= */
+   HERO TITLE
+========================================================= */
 
-.skip-link {
-  position: fixed;
+.aurix-page-title {
+  max-width: 900px;
 
-  left: 16px;
-  top: -100px;
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
 
-  z-index: 9999;
+  font-size: clamp(
+    3rem,
+    6vw,
+    5.8rem
+  );
 
-  padding: 12px 18px;
+  line-height: 0.95;
 
-  background: var(--aurix-gold);
-  color: #050505;
+  font-weight: 300;
 
-  font-size: 11px;
-  font-weight: 700;
+  font-style: italic;
 
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.045em;
 
-  transition: top 0.2s ease;
+  color: white;
 }
 
-.skip-link:focus {
-  top: 16px;
+.aurix-page-subtitle {
+  width: min(100%, 700px);
+
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   GOLD TEXT
+========================================================= */
+
+.aurix-gold-text {
+  color: var(--aurix-gold);
+}
+
+/* =========================================================
+   GOLD DIVIDER
+========================================================= */
+
+.aurix-divider {
+  width: 48px;
+  height: 1px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  background: var(--aurix-gold);
+}
+
+/* =========================================================
+   PAGE SECTION
+   IMPORTANT — CONSISTENT VERTICAL SPACING
+========================================================= */
+
+.aurix-page-section {
+  width: 100%;
+
+  padding-top: 82px;
+  padding-bottom: 82px;
+}
+
+.aurix-page-section-inner {
+  width: min(
+    calc(100% - 32px),
+    var(--aurix-page-container)
+  );
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.aurix-section-heading {
+  text-align: center;
+}
+
+.aurix-section-label {
+  margin-bottom: 16px;
+
+  color: var(--aurix-gold);
+
+  font-size: 9px;
+  line-height: 1;
+
+  letter-spacing: 0.38em;
+
+  text-transform: uppercase;
+}
+
+.aurix-section-title {
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(
+    2.4rem,
+    4vw,
+    4rem
+  );
+
+  line-height: 1;
+
+  font-weight: 300;
+
+  font-style: italic;
+
+  letter-spacing: -0.035em;
+}
+
+.aurix-section-description {
+  width: min(100%, 650px);
+
+  margin-top: 18px;
+  margin-left: auto;
+  margin-right: auto;
+
+  color: rgba(255, 255, 255, 0.48);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   INTRO / QUOTE CARD
+========================================================= */
+
+.aurix-intro-card {
+  border: 1px solid var(--aurix-gold-border);
+
+  background: rgba(212, 175, 55, 0.035);
+
+  padding: 42px 48px;
+
+  text-align: center;
+}
+
+.aurix-intro-card p {
+  max-width: 800px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(
+    1.7rem,
+    3vw,
+    2.4rem
+  );
+
+  line-height: 1.45;
+
+  font-style: italic;
+}
+
+/* =========================================================
+   STORY SECTION
+========================================================= */
+
+.aurix-story-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.85fr)
+    minmax(0, 1.15fr);
+
+  gap: 80px;
+
+  align-items: start;
+}
+
+.aurix-story-copy {
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 14px;
+
+  line-height: 1.9;
+}
+
+.aurix-story-copy p + p {
+  margin-top: 20px;
+}
+
+/* =========================================================
+   STANDARD GRID
+========================================================= */
+
+.aurix-grid-2 {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+.aurix-grid-4 {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+/* =========================================================
+   VALUE / MISSION CARD
+========================================================= */
+
+.aurix-card {
+  height: 100%;
+
+  border: 1px solid var(--aurix-border);
+
+  background: #0a0a0a;
+
+  padding: 34px;
+
+  transition:
+    border-color 0.35s ease,
+    transform 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.aurix-card:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+
+  background: #0d0d0d;
+
+  transform: translateY(-3px);
+}
+
+/* =========================================================
+   TEAM
+========================================================= */
+
+.aurix-team-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 36px;
+
+  margin-top: 52px;
+}
+
+.aurix-team-card {
+  text-align: center;
+}
+
+.aurix-team-image {
+  width: 170px;
+  height: 170px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 7px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(212, 175, 55, 0.22);
+
+  border-radius: 50%;
+
+  background: #111;
+}
+
+.aurix-team-image img {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+.aurix-team-name {
+  margin-top: 18px;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 19px;
+
+  color: white;
+}
+
+.aurix-team-role {
+  margin-top: 7px;
+
+  color: var(--aurix-gold);
+
+  font-size: 9px;
+
+  letter-spacing: 0.2em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   PRODUCTS PAGE
+========================================================= */
+
+.aurix-products-hero-inner {
+  width: min(
+    calc(100% - 32px),
+    var(--aurix-page-container)
+  );
+
+  min-height: 510px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-top: 95px;
+  padding-bottom: 90px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+.aurix-products-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 28px;
+}
+
+.aurix-product-card {
+  display: flex;
+
+  height: 100%;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border: 1px solid var(--aurix-border);
+
+  background: #0b0b0b;
+
+  transition:
+    border-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+.aurix-product-card:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+
+  transform: translateY(-4px);
+}
+
+.aurix-product-image {
+  position: relative;
+
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+
+  background: #080808;
+}
+
+.aurix-product-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.7s ease;
+}
+
+.aurix-product-card:hover
+.aurix-product-image img {
+  transform: scale(1.04);
+}
+
+.aurix-product-content {
+  display: flex;
+
+  flex: 1;
+
+  flex-direction: column;
+
+  padding: 26px;
+}
+
+.aurix-product-actions {
+  margin-top: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.aurix-button {
+  min-height: 48px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 14px 24px;
+
+  border: 1px solid transparent;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.aurix-button:hover {
+  transform: translateY(-2px);
+}
+
+.aurix-button-primary {
+  background: var(--aurix-gold-dark);
+
+  color: #050505;
+}
+
+.aurix-button-primary:hover {
+  background: white;
+}
+
+.aurix-button-secondary {
+  border-color: rgba(255, 255, 255, 0.15);
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.aurix-button-secondary:hover {
+  border-color: var(--aurix-gold);
+
+  color: var(--aurix-gold);
+}
+
+/* =========================================================
+   GOLD STRIP
+========================================================= */
+
+.gold-strip {
+  width: 100%;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  padding: 13px 0;
+
+  background: var(--aurix-gold);
+
+  color: #050505;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.35em;
+
+  text-transform: uppercase;
+}
+
+.gold-strip-track {
+  display: inline-block;
+
+  min-width: max-content;
+
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-25%);
+  }
 }
 
 /* =========================================================
    LUXURY GRID
-   ========================================================= */
+========================================================= */
 
 .luxury-grid {
   background-image:
@@ -298,212 +865,19 @@ button:disabled {
 }
 
 /* =========================================================
-   EYEBROW
-   ========================================================= */
-
-.eyebrow {
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  color: var(--aurix-gold);
-
-  font-size: 8px;
-  line-height: 1;
-
-  letter-spacing: 0.45em;
-
-  text-transform: uppercase;
-}
-
-/* =========================================================
-   DISPLAY TITLE
-   ========================================================= */
-
-.display-title {
-  font-family:
-    "Playfair Display",
-    Georgia,
-    serif;
-
-  font-size: clamp(2.8rem, 6vw, 5.8rem);
-
-  line-height: 0.95;
-
-  letter-spacing: -0.045em;
-
-  font-style: italic;
-  font-weight: 300;
-}
-
-.display-title span {
-  color: var(--aurix-gold);
-}
-
-/* =========================================================
-   SECTION
-   ========================================================= */
-
-.section-luxury {
-  padding-top: clamp(5rem, 10vw, 9rem);
-  padding-bottom: clamp(5rem, 10vw, 9rem);
-}
-
-/* =========================================================
-   BUTTON
-   ========================================================= */
-
-.luxury-button {
-  min-height: 52px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 12px;
-
-  padding: 15px 30px;
-
-  border: 1px solid transparent;
-
-  font-size: 8px;
-  line-height: 1;
-
-  letter-spacing: 0.28em;
-
-  text-transform: uppercase;
-
-  white-space: nowrap;
-
-  transition:
-    transform 0.25s ease,
-    background-color 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.luxury-button:hover {
-  transform: translateY(-2px);
-}
-
-.luxury-button:active {
-  transform: translateY(0);
-}
-
-.luxury-button:focus-visible {
-  outline: 2px solid var(--aurix-gold);
-  outline-offset: 3px;
-}
-
-/* =========================================================
-   CARD
-   ========================================================= */
-
-.luxury-card {
-  border: 1px solid var(--aurix-border);
-
-  transition:
-    border-color 0.35s ease,
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
-.luxury-card:hover {
-  border-color: var(--aurix-border-gold);
-
-  transform: translateY(-3px);
-}
-
-/* =========================================================
-   TEXT LINK
-   ========================================================= */
-
-.text-link {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 12px;
-
-  color: var(--aurix-muted);
-
-  font-size: 8px;
-
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-
-  transition: color 0.25s ease;
-}
-
-.text-link:hover {
-  color: var(--aurix-gold);
-}
-
-.text-link svg {
-  transition: transform 0.25s ease;
-}
-
-.text-link:hover svg {
-  transform: translateX(5px);
-}
-
-/* =========================================================
-   GOLD STRIP
-   ========================================================= */
-
-.gold-strip {
-  width: 100%;
-
-  overflow: hidden;
-
-  white-space: nowrap;
-
-  padding: 13px 0;
-
-  background: var(--aurix-gold);
-  color: #050505;
-
-  font-size: 8px;
-  font-weight: 700;
-
-  letter-spacing: 0.35em;
-
-  text-transform: uppercase;
-}
-
-.gold-strip-track {
-  display: inline-block;
-
-  min-width: max-content;
-
-  will-change: transform;
-
-  animation: marquee 28s linear infinite;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-25%);
-  }
-}
-
-/* =========================================================
    ANIMATIONS
-   ========================================================= */
+========================================================= */
 
 @keyframes fade-up {
   from {
     opacity: 0;
+
     transform: translateY(22px);
   }
 
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
 }
@@ -519,138 +893,251 @@ button:disabled {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.75s ease-out both;
+  animation:
+    fade-up 0.75s ease-out both;
 }
 
 .animate-fade-in {
-  animation: fade-in 0.9s ease-out both;
+  animation:
+    fade-in 0.9s ease-out both;
 }
 
 /* =========================================================
-   SAFE CONTAINERS
-   ========================================================= */
+   PAGE LOADER
+========================================================= */
 
-.container-safe {
+.page-loader {
   width: 100%;
-  max-width: 1280px;
+  min-height: 100vh;
 
-  margin-left: auto;
-  margin-right: auto;
+  display: grid;
 
-  padding-left: 16px;
-  padding-right: 16px;
+  place-items: center;
+
+  background: #050505;
+
+  color: var(--aurix-gold);
+}
+
+.page-loader-inner {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.page-loader-logo {
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 28px;
+
+  letter-spacing: 0.35em;
+}
+
+.page-loader-line {
+  width: 50px;
+  height: 1px;
+
+  background: var(--aurix-gold);
 }
 
 /* =========================================================
-   MOBILE / TABLET
-   ========================================================= */
+   SKIP LINK
+========================================================= */
 
-@media (max-width: 1024px) {
-  .display-title {
-    font-size: clamp(2.7rem, 7vw, 5rem);
-  }
+.skip-link {
+  position: fixed;
 
-  .section-luxury {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
+  left: 16px;
+  top: -100px;
+
+  z-index: 9999;
+
+  padding: 12px 18px;
+
+  background: var(--aurix-gold);
+
+  color: #050505;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.1em;
+}
+
+.skip-link:focus {
+  top: 16px;
 }
 
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
+
+@media (max-width: 1024px) {
+  .aurix-team-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .aurix-grid-4 {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .aurix-products-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .aurix-story-grid {
+    gap: 50px;
+  }
+}
 
 @media (max-width: 768px) {
-  .gold-strip-track {
-    animation-duration: 22s;
+  .aurix-page-hero-inner {
+    min-height: 350px;
+
+    padding-top: 75px;
+    padding-bottom: 70px;
   }
 
-  .eyebrow {
-    letter-spacing: 0.32em;
+  .aurix-products-hero-inner {
+    min-height: 430px;
+
+    padding-top: 70px;
+    padding-bottom: 65px;
   }
 
-  .display-title {
-    font-size: clamp(2.6rem, 11vw, 4.5rem);
-
-    line-height: 0.98;
+  .aurix-page-section {
+    padding-top: 65px;
+    padding-bottom: 65px;
   }
 
-  .section-luxury {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+  .aurix-story-grid {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+
+  .aurix-intro-card {
+    padding: 32px 24px;
+  }
+
+  .aurix-team-grid {
+    gap: 30px 18px;
+  }
+
+  .aurix-team-image {
+    width: 145px;
+    height: 145px;
+  }
+
+  .aurix-products-grid {
+    gap: 18px;
   }
 }
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
 
 @media (max-width: 640px) {
-  body {
-    font-size: 15px;
+  .aurix-container,
+  .aurix-page-container,
+  .aurix-page-hero-inner,
+  .aurix-page-section-inner,
+  .aurix-products-hero-inner {
+    width: min(
+      calc(100% - 24px),
+      var(--aurix-page-container)
+    );
   }
 
-  .luxury-grid {
-    background-size: 45px 45px;
+  .aurix-page-hero-inner {
+    min-height: 330px;
+
+    padding-top: 65px;
+    padding-bottom: 58px;
   }
 
-  .luxury-button {
-    width: auto;
-
-    min-width: 150px;
-
-    padding-left: 22px;
-    padding-right: 22px;
+  .aurix-products-hero-inner {
+    min-height: 390px;
   }
 
-  .display-title {
-    font-size: clamp(2.35rem, 12vw, 3.7rem);
-
-    letter-spacing: -0.035em;
+  .aurix-page-title {
+    font-size: clamp(
+      2.8rem,
+      13vw,
+      4rem
+    );
   }
 
-  .eyebrow {
+  .aurix-page-subtitle {
+    font-size: 13px;
+
+    line-height: 1.7;
+  }
+
+  .aurix-eyebrow {
+    gap: 9px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.3em;
+  }
+
+  .aurix-eyebrow::before,
+  .aurix-eyebrow::after {
+    width: 25px;
+  }
+
+  .aurix-page-section {
+    padding-top: 52px;
+    padding-bottom: 52px;
+  }
+
+  .aurix-grid-2,
+  .aurix-grid-4,
+  .aurix-products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aurix-team-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 28px 12px;
+  }
+
+  .aurix-team-image {
+    width: 125px;
+    height: 125px;
+  }
+
+  .aurix-team-name {
+    font-size: 17px;
+  }
+
+  .aurix-team-role {
     font-size: 7px;
 
-    letter-spacing: 0.25em;
-
-    gap: 8px;
+    letter-spacing: 0.15em;
   }
 
-  .text-link {
-    font-size: 7px;
-
-    letter-spacing: 0.22em;
-  }
-
-  .section-luxury {
-    padding-top: 4.5rem;
-    padding-bottom: 4.5rem;
-  }
-}
-
-/* =========================================================
-   VERY SMALL DEVICES
-   ========================================================= */
-
-@media (max-width: 380px) {
-  .luxury-button {
-    min-width: 135px;
-
-    padding-left: 18px;
-    padding-right: 18px;
-
-    letter-spacing: 0.2em;
-  }
-
-  .display-title {
-    font-size: 2.2rem;
+  .aurix-product-content {
+    padding: 20px;
   }
 }
 
 /* =========================================================
    REDUCED MOTION
-   ========================================================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -661,143 +1148,11 @@ button:disabled {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+
     animation-iteration-count: 1 !important;
 
     transition-duration: 0.01ms !important;
 
     scroll-behavior: auto !important;
-  }
-}
-
-/* =========================================================
-   PRINT
-   ========================================================= */
-
-@media print {
-  body {
-    background: #ffffff;
-    color: #000000;
-  }
-
-  .skip-link,
-  .gold-strip {
-    display: none !important;
-  }
-}
-/* =========================================================
-   AURIX — UNIVERSAL PAGE ALIGNMENT
-   ========================================================= */
-
-.aurix-container {
-  width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.aurix-page-hero {
-  width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.aurix-page-hero-inner {
-  width: 100%;
-  max-width: 1200px;
-  min-height: 420px;
-  margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  padding: 80px 20px;
-
-  text-align: center;
-}
-
-.aurix-page-section {
-  width: 100%;
-  padding-top: 80px;
-  padding-bottom: 80px;
-}
-
-.aurix-page-section-inner {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-/* Consistent headings */
-
-.aurix-section-heading {
-  width: 100%;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-
-  text-align: center;
-}
-
-/* Consistent content width */
-
-.aurix-content {
-  width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 768px) {
-  .aurix-container,
-  .aurix-page-hero-inner,
-  .aurix-page-section-inner,
-  .aurix-content {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .aurix-page-hero-inner {
-    min-height: 360px;
-    padding-top: 70px;
-    padding-bottom: 70px;
-  }
-
-  .aurix-page-section {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-}
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 480px) {
-  .aurix-container,
-  .aurix-page-hero-inner,
-  .aurix-page-section-inner,
-  .aurix-content {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .aurix-page-hero-inner {
-    min-height: 320px;
-    padding-top: 55px;
-    padding-bottom: 55px;
-  }
-
-  .aurix-page-section {
-    padding-top: 50px;
-    padding-bottom: 50px;
   }
 }

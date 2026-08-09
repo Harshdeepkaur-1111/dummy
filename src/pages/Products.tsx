@@ -1,6 +1,10 @@
 import React, { Suspense } from "react";
 import { Helmet } from "react-helmet-async";
-import { ShoppingBag, Sparkles, ArrowRight } from "lucide-react";
+import {
+  ShoppingBag,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
 
 import LazyMotion from "../components/LazyMotion";
 import OptimizedImage from "../components/OptimizedImage";
@@ -13,6 +17,10 @@ const SITE_URL = "https://aurix-gold.vercel.app";
 
 export function Products() {
   const { addToCart, setIsCartOpen } = useCart();
+
+  /* =========================================================
+     BUY NOW
+  ========================================================= */
 
   const handleBuyNow = (
     product: any,
@@ -29,6 +37,10 @@ export function Products() {
     setIsCartOpen(true);
   };
 
+  /* =========================================================
+     ADD TO CART
+  ========================================================= */
+
   const handleAddToCart = (
     product: any,
     e: React.MouseEvent<HTMLButtonElement>
@@ -41,6 +53,10 @@ export function Products() {
       price: product.price,
     });
   };
+
+  /* =========================================================
+     SCHEMA
+  ========================================================= */
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -78,15 +94,17 @@ export function Products() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center">
-          <div className="text-[#D4AF37] text-xs uppercase tracking-[0.3em]">
+        <div className="grid min-h-screen place-items-center bg-[#050505] text-white">
+          <div className="text-xs uppercase tracking-[0.3em] text-[#D4AF37]">
             Loading Collection...
           </div>
         </div>
       }
     >
-      <div className="min-h-screen bg-[#050505] text-white">
-        {/* ================= SEO ================= */}
+      <div className="min-h-screen overflow-x-hidden bg-[#050505] text-white">
+        {/* =====================================================
+            SEO
+        ===================================================== */}
 
         <Helmet>
           <title>
@@ -103,7 +121,10 @@ export function Products() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link rel="canonical" href={`${SITE_URL}/products`} />
+          <link
+            rel="canonical"
+            href={`${SITE_URL}/products`}
+          />
 
           <meta
             property="og:title"
@@ -117,11 +138,17 @@ export function Products() {
 
           <meta property="og:type" content="website" />
 
-          <meta property="og:url" content={`${SITE_URL}/products`} />
+          <meta
+            property="og:url"
+            content={`${SITE_URL}/products`}
+          />
 
           <meta property="og:site_name" content="Aurix" />
 
-          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:card"
+            content="summary_large_image"
+          />
 
           <meta
             name="twitter:title"
@@ -142,15 +169,21 @@ export function Products() {
           </script>
         </Helmet>
 
-        {/* ================= HERO ================= */}
+        {/* =====================================================
+            HERO
+        ===================================================== */}
 
-        <header className="relative overflow-hidden border-b border-white/10">
+        <header className="relative overflow-hidden border-b border-white/10 bg-[#050505]">
+          {/* GOLD GLOW */}
+
           <div
             aria-hidden="true"
-            className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full bg-[#D4AF37]/5 blur-3xl pointer-events-none"
+            className="pointer-events-none absolute left-1/2 top-[-250px] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#D4AF37]/[0.055] blur-3xl"
           />
 
-          <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32 lg:px-8">
+          {/* SAME CONTAINER AS ABOUT */}
+
+          <div className="relative mx-auto flex min-h-[470px] max-w-6xl items-center justify-center px-4 py-20 text-center sm:px-6 md:py-24 lg:px-8">
             <LazyMotion
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -158,28 +191,40 @@ export function Products() {
                 duration: 0.7,
                 ease: "easeOut",
               }}
-              className="text-center"
+              className="w-full"
             >
+              {/* EYEBROW */}
+
               <div className="mb-8 flex items-center justify-center gap-4">
                 <span className="h-px w-10 bg-gradient-to-r from-transparent to-[#D4AF37]" />
 
                 <span className="flex items-center gap-2 text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
                   <Sparkles className="h-3 w-3" />
+
                   Aurix Collection
                 </span>
 
                 <span className="h-px w-10 bg-gradient-to-l from-transparent to-[#D4AF37]" />
               </div>
 
-              <h1 className="font-serif text-5xl font-light italic leading-[0.95] text-white sm:text-6xl md:text-7xl lg:text-8xl">
+              {/* TITLE */}
+
+              <h1 className="font-serif text-5xl font-light italic leading-[0.9] text-white sm:text-6xl md:text-7xl lg:text-8xl">
                 Fine Gold
-                <span className="block aurix-gold-text">Jewellery</span>
+
+                <span className="block text-[#D4AF37]">
+                  Jewellery
+                </span>
               </h1>
 
-              <div className="aurix-divider mb-8 mt-8" />
+              {/* DIVIDER */}
 
-              <p className="mx-auto max-w-2xl text-sm font-light leading-relaxed text-white/60 md:text-base">
-                Discover Aurix's curated collection of premium 22K gold
+              <div className="mx-auto my-8 h-px w-14 bg-[#D4AF37]/60" />
+
+              {/* DESCRIPTION */}
+
+              <p className="mx-auto max-w-2xl text-sm font-light leading-7 text-white/60 md:text-base">
+                Discover Aurix&apos;s curated collection of premium 22K gold
                 jewellery — thoughtfully designed for timeless elegance,
                 everyday luxury and unforgettable occasions.
               </p>
@@ -187,7 +232,9 @@ export function Products() {
           </div>
         </header>
 
-        {/* ================= TRUST BAR ================= */}
+        {/* =====================================================
+            TRUST BAR
+        ===================================================== */}
 
         <section
           aria-label="Aurix jewellery benefits"
@@ -203,8 +250,10 @@ export function Products() {
               ].map((item, index) => (
                 <div
                   key={item}
-                  className={`px-4 py-5 text-center ${
-                    index !== 0 ? "border-l border-white/10" : ""
+                  className={`flex min-h-[64px] items-center justify-center px-4 py-5 text-center ${
+                    index !== 0
+                      ? "border-l border-white/10"
+                      : ""
                   }`}
                 >
                   <p className="text-[9px] uppercase tracking-[0.25em] text-white/60">
@@ -216,29 +265,35 @@ export function Products() {
           </div>
         </section>
 
-        {/* ================= PRODUCTS ================= */}
+        {/* =====================================================
+            PRODUCTS
+        ===================================================== */}
 
         <main id="main-content">
-          <section className="py-20 md:py-28">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <section className="bg-[#050505]">
+            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24 lg:px-8">
+              {/* SECTION HEADING */}
+
+              <div className="mb-12 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
                 <div>
                   <p className="mb-4 text-[9px] uppercase tracking-[0.4em] text-[#D4AF37]">
                     The Collection
                   </p>
 
-                  <h2 className="font-serif text-3xl font-light italic md:text-5xl">
+                  <h2 className="font-serif text-3xl font-light italic sm:text-4xl lg:text-5xl">
                     Discover Your Signature Piece
                   </h2>
                 </div>
 
-                <p className="max-w-md text-sm leading-relaxed text-white/45">
+                <p className="max-w-md text-sm leading-7 text-white/45 md:text-right">
                   Explore our selection of timeless gold jewellery, created to
                   complement your personal style.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
+              {/* PRODUCT GRID */}
+
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
                 {products.map((product, idx) => (
                   <LazyMotion
                     key={product.id}
@@ -259,10 +314,12 @@ export function Products() {
                       delay: (idx % 3) * 0.08,
                       ease: "easeOut",
                     }}
-                    className="group"
+                    className="h-full"
                   >
-                    <article className="flex h-full flex-col border border-white/10 bg-[#0b0b0b] transition-all duration-500 hover:border-[#D4AF37]/35">
-                      {/* IMAGE */}
+                    <article className="group flex h-full flex-col overflow-hidden border border-white/10 bg-[#0b0b0b] transition-all duration-500 hover:-translate-y-1 hover:border-[#D4AF37]/35">
+                      {/* =================================================
+                          IMAGE
+                      ================================================= */}
 
                       <div className="relative aspect-[4/5] overflow-hidden bg-[#080808]">
                         <OptimizedImage
@@ -271,21 +328,29 @@ export function Products() {
                           width={600}
                           height={750}
                           priority={idx < 2}
-                          loading={idx < 2 ? "eager" : "lazy"}
+                          loading={
+                            idx < 2 ? "eager" : "lazy"
+                          }
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                         />
+
+                        {/* IMAGE OVERLAY */}
 
                         <div
                           aria-hidden="true"
                           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/75 via-transparent to-transparent"
                         />
 
+                        {/* NUMBER */}
+
                         <div className="absolute left-4 top-4">
                           <span className="inline-flex h-8 min-w-9 items-center justify-center border border-white/10 bg-black/60 px-2 font-mono text-[9px] tracking-widest text-[#D4AF37] backdrop-blur-sm">
                             {String(idx + 1).padStart(2, "0")}
                           </span>
                         </div>
+
+                        {/* GOLD BADGE */}
 
                         <div className="absolute right-4 top-4">
                           <span className="bg-[#947100] px-3 py-2 text-[8px] font-bold uppercase tracking-widest text-black">
@@ -294,9 +359,13 @@ export function Products() {
                         </div>
                       </div>
 
-                      {/* CONTENT */}
+                      {/* =================================================
+                          CONTENT
+                      ================================================= */}
 
-                      <div className="flex flex-grow flex-col p-6 md:p-7">
+                      <div className="flex flex-1 flex-col p-6 md:p-7">
+                        {/* META */}
+
                         <div className="mb-4 flex items-center gap-2 text-[8px] uppercase tracking-[0.2em] text-[#D4AF37]">
                           <span>{product.material}</span>
 
@@ -308,13 +377,19 @@ export function Products() {
                           <span>{product.weight}</span>
                         </div>
 
-                        <h2 className="mb-3 font-serif text-xl italic text-white transition-colors duration-300 group-hover:text-[#D4AF37] md:text-2xl">
+                        {/* TITLE */}
+
+                        <h2 className="mb-3 font-serif text-xl font-light italic text-white transition-colors duration-300 group-hover:text-[#D4AF37] md:text-2xl">
                           {product.name}
                         </h2>
 
-                        <p className="mb-6 line-clamp-3 text-xs leading-[1.8] text-white/50">
+                        {/* DESCRIPTION */}
+
+                        <p className="mb-6 line-clamp-3 text-xs leading-7 text-white/50">
                           {product.desc}
                         </p>
+
+                        {/* PRICE */}
 
                         <div className="mb-6 flex items-center justify-between">
                           <div>
@@ -335,24 +410,32 @@ export function Products() {
                           </div>
                         </div>
 
+                        {/* BUTTONS */}
+
                         <div className="mt-auto space-y-2.5">
                           <button
                             type="button"
-                            onClick={(e) => handleBuyNow(product, e)}
+                            onClick={(e) =>
+                              handleBuyNow(product, e)
+                            }
                             className="flex min-h-12 w-full items-center justify-center gap-2 bg-[#947100] px-5 py-3.5 text-[9px] font-bold uppercase tracking-[0.18em] text-black transition-colors duration-300 hover:bg-white"
                             aria-label={`Buy ${product.name} now`}
                           >
                             Buy Now
+
                             <ArrowRight className="h-3.5 w-3.5" />
                           </button>
 
                           <button
                             type="button"
-                            onClick={(e) => handleAddToCart(product, e)}
+                            onClick={(e) =>
+                              handleAddToCart(product, e)
+                            }
                             className="flex min-h-12 w-full items-center justify-center gap-2 border border-white/15 px-5 py-3.5 text-[9px] font-medium uppercase tracking-[0.18em] text-white/70 transition-colors duration-300 hover:border-[#D4AF37] hover:text-[#D4AF37]"
                             aria-label={`Add ${product.name} to cart`}
                           >
                             <ShoppingBag className="h-3.5 w-3.5" />
+
                             Add to Cart
                           </button>
                         </div>
@@ -364,7 +447,9 @@ export function Products() {
             </div>
           </section>
 
-          {/* ================= CTA ================= */}
+          {/* =====================================================
+              CTA
+          ===================================================== */}
 
           <section className="relative overflow-hidden border-t border-white/10 bg-[#080808]">
             <div
@@ -373,6 +458,8 @@ export function Products() {
             />
 
             <div className="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6 md:py-32 lg:px-8">
+              {/* DIAMOND */}
+
               <div className="mx-auto mb-8 flex h-12 w-12 rotate-45 items-center justify-center border border-[#D4AF37]/40">
                 <div className="h-7 w-7 border border-[#D4AF37]/30" />
               </div>
@@ -383,12 +470,13 @@ export function Products() {
 
               <h2 className="mb-6 font-serif text-4xl font-light italic text-white md:text-6xl">
                 Jewellery That
-                <span className="block aurix-gold-text">
+
+                <span className="block text-[#D4AF37]">
                   Tells Your Story
                 </span>
               </h2>
 
-              <p className="mx-auto max-w-xl text-sm leading-relaxed text-white/50">
+              <p className="mx-auto max-w-xl text-sm leading-7 text-white/50">
                 From everyday elegance to unforgettable celebrations, discover
                 jewellery designed to become part of your story.
               </p>
