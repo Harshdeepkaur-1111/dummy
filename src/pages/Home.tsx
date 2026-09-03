@@ -154,6 +154,27 @@ export default function Home() {
 
   const product = products[activeProduct];
 
+  const faqs = [
+    {
+      q: "Do you ship internationally?",
+      a: "Yes — we ship across India and to select international destinations. Delivery times and charges may vary based on location.",
+    },
+    {
+      q: "What is your return policy?",
+      a: "We accept returns within 14 days for unworn, undamaged pieces. Custom-made items are final sale. Contact support for return instructions.",
+    },
+    {
+      q: "Are your pieces hallmarked?",
+      a: "All our gold pieces are hallmarked and come with a certificate of authenticity where applicable.",
+    },
+  ];
+
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  function toggleFaq(index: number) {
+    setOpenFaq((prev) => (prev === index ? null : index));
+  }
+
   /* =======================================================
      ADD FEATURED PRODUCT TO CART
   ======================================================= */
@@ -562,6 +583,75 @@ export default function Home() {
                   </div>
 
                 </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+          {/* ===================================================
+              FAQ
+          =================================================== */}
+
+          <section className="py-20 bg-[#080808] border-t border-white/5">
+
+            <div className="max-w-5xl mx-auto px-5 lg:px-10">
+
+              <div className="text-center mb-10">
+
+                <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-3">
+                  FAQ
+                </p>
+
+                <h2 className="font-serif text-4xl italic">
+                  Frequently Asked Questions
+                </h2>
+
+              </div>
+
+              <div className="space-y-4">
+
+                {faqs.map((item, idx) => (
+
+                  <div
+                    key={idx}
+                    className="border border-white/6 p-5"
+                  >
+
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(idx)}
+                      className="w-full flex justify-between items-center text-left"
+                      aria-expanded={openFaq === idx}
+                    >
+
+                      <span className="font-semibold text-white">
+                        {item.q}
+                      </span>
+
+                      <span className="ml-4">
+                        <ArrowRight
+                          size={16}
+                          className={`text-[#D4AF37] transition-transform ${
+                            openFaq === idx ? "rotate-90" : ""
+                          }`}
+                        />
+                      </span>
+
+                    </button>
+
+                    <div
+                      className={`mt-3 text-white/60 text-sm ${
+                        openFaq === idx ? "block" : "hidden"
+                      }`}
+                    >
+                      {item.a}
+                    </div>
+
+                  </div>
+
+                ))}
 
               </div>
 
