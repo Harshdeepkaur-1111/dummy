@@ -314,6 +314,73 @@ export default function Home() {
             })),
           })}
         </script>
+
+        {/* FAQ Schema */}
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What types of gold jewellery does Aurix offer?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Aurix offers a wide range of gold jewellery, including necklaces, earrings, rings, bracelets, and other elegant pieces designed for everyday wear as well as special occasions. The collection focuses on stylish, timeless designs that complement different outfits and personal styles.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is Aurix jewellery suitable for gifting?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, Aurix jewellery is a beautiful choice for gifting. With elegant and timeless designs, Aurix offers jewellery suitable for birthdays, anniversaries, weddings, festivals, and other special occasions. A thoughtfully selected gold jewellery piece can make a meaningful and memorable gift for someone special.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Are the jewellery images on the website accurate?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, the jewellery images displayed on the Aurix website are intended to accurately represent the products. However, slight differences in colour, shine, or appearance may occur due to lighting, photography, and individual screen settings. We recommend checking the product details carefully before making a purchase.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Does Aurix offer jewellery for everyday wear?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes, Aurix offers jewellery designs that are suitable for everyday wear. The collection includes simple and versatile pieces such as delicate gold chains, small gold earrings, lightweight rings, and slim bracelets that can be comfortably styled with casual, professional, or traditional outfits. These pieces are ideal for adding a touch of elegance to your daily look.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How do I select jewellery according to my outfit or occasion?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "You can select jewellery based on your outfit, occasion, and personal style. For everyday or office wear, choose simple pieces such as delicate gold chains, small earrings, lightweight rings, or slim bracelets. For weddings and special occasions, you can choose more detailed necklaces, statement earrings, or elegant rings. Traditional outfits pair well with classic gold designs, while minimal jewellery works beautifully with modern and casual outfits.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What jewellery is best for a wedding?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "For weddings, statement jewellery and elegant traditional designs are a great choice. Gold necklaces, bridal sets, statement earrings, bangles, bracelets, and rings can beautifully complement bridal and traditional outfits. For a balanced look, choose jewellery that matches the outfit’s design, colour, and level of detailing while reflecting your personal style.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What jewellery is suitable for everyday styling?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "For everyday styling, simple and lightweight jewellery is the best choice. Pieces such as delicate gold chains, small earrings, lightweight rings, and slim bracelets can easily be paired with casual, office, or traditional outfits. These versatile designs add a touch of elegance to your everyday look without appearing too heavy.",
+                },
+              },
+            ],
+          })}
+        </script>
       </Helmet>
 
       {/* =====================================================
