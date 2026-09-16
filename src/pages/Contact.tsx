@@ -244,7 +244,7 @@ export function Contact() {
                   We’re here to help.
                 </h2>
 
-                <p className="mt-4 text-sm leading-6 text-white/50">
+                <p className="mt-4 text-sm leading-6 text-white/70">
                   For jewellery questions, product details and order
                   support, reach out using the details below.
                 </p>
@@ -262,7 +262,7 @@ export function Contact() {
                 />
 
                 <span>
-                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/35">
+                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/60">
                     Phone
                   </span>
 
@@ -284,7 +284,7 @@ export function Contact() {
                 />
 
                 <span>
-                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/35">
+                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/60">
                     Email
                   </span>
 
@@ -304,7 +304,7 @@ export function Contact() {
                 />
 
                 <span>
-                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/35">
+                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/60">
                     Location
                   </span>
 
@@ -334,7 +334,7 @@ export function Contact() {
                     Monday – Saturday · 10:00 AM – 7:00 PM
                   </span>
 
-                  <span className="mt-1 block text-sm text-white/40">
+                  <span className="mt-1 block text-sm text-white/60">
                     Sunday · Closed
                   </span>
                 </span>
@@ -360,7 +360,7 @@ export function Contact() {
                     Message Sent
                   </h2>
 
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/55">
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/70">
                     Thank you for contacting Aurix.
                     We’ll get back to you shortly.
                   </p>
@@ -375,7 +375,7 @@ export function Contact() {
                     Tell us what you need.
                   </h2>
 
-                  <p className="mt-3 text-sm text-white/50">
+                  <p className="mt-3 text-sm text-white/70">
                     Fields marked with * are required.
                   </p>
 
@@ -389,7 +389,7 @@ export function Contact() {
                     <div>
                       <label
                         htmlFor="name"
-                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
+                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/70"
                       >
                         Full Name *
                       </label>
@@ -403,7 +403,7 @@ export function Contact() {
                         autoComplete="name"
                         required
                         minLength={2}
-                        className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-[#D4AF37]"
+                        className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/60 focus:border-[#D4AF37]"
                         placeholder="Your name"
                       />
                     </div>
@@ -415,7 +415,7 @@ export function Contact() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
+                          className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/70"
                         >
                           Email *
                         </label>
@@ -428,7 +428,7 @@ export function Contact() {
                           onChange={handleChange}
                           autoComplete="email"
                           required
-                          className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-[#D4AF37]"
+                          className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/60 focus:border-[#D4AF37]"
                           placeholder="you@example.com"
                         />
                       </div>
@@ -436,7 +436,7 @@ export function Contact() {
                       <div>
                         <label
                           htmlFor="phone"
-                          className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
+                          className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/70"
                         >
                           Phone
                         </label>
@@ -449,7 +449,7 @@ export function Contact() {
                           onChange={handleChange}
                           autoComplete="tel"
                           inputMode="tel"
-                          className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-[#D4AF37]"
+                          className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/60 focus:border-[#D4AF37]"
                           placeholder="+91"
                         />
                       </div>
@@ -461,7 +461,7 @@ export function Contact() {
                     <div>
                       <label
                         htmlFor="subject"
-                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
+                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/70"
                       >
                         Subject
                       </label>
@@ -472,7 +472,7 @@ export function Contact() {
                         type="text"
                         value={formData.subject}
                         onChange={handleChange}
-                        className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-[#D4AF37]"
+                        className="w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/60 focus:border-[#D4AF37]"
                         placeholder="How can we help?"
                       />
                     </div>
@@ -482,7 +482,7 @@ export function Contact() {
                     <div>
                       <label
                         htmlFor="message"
-                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/50"
+                        className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/70"
                       >
                         Message *
                       </label>
@@ -495,7 +495,7 @@ export function Contact() {
                         onChange={handleChange}
                         required
                         minLength={10}
-                        className="w-full resize-none border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/25 focus:border-[#D4AF37]"
+                        className="w-full resize-none border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none transition placeholder:text-white/60 focus:border-[#D4AF37]"
                         placeholder="Write your message..."
                       />
                     </div>

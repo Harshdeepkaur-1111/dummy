@@ -192,7 +192,7 @@ export function Layout() {
                       </div>
                       <button 
                         onClick={() => removeFromCart(item.id)}
-                        className="text-white/20 hover:text-red-400 transition-colors bg-white/5 p-2 rounded-full opacity-0 group-hover:opacity-100"
+                        className="text-white/60 hover:text-red-400 transition-colors bg-white/5 p-2 rounded-full opacity-0 group-hover:opacity-100"
                         aria-label="Remove item"
                       >
                         <Trash2 size={14} />

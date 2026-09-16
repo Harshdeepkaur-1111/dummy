@@ -171,7 +171,7 @@ export function About() {
                 About Aurix
               </h1>
 
-              <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/55 sm:text-base">
+              <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/70 sm:text-base">
                 Jewellery is more than an accessory. It is a reflection of
                 identity, memories and moments. Aurix brings timeless gold
                 design into a modern world.
@@ -217,7 +217,7 @@ export function About() {
                   <div className="mt-5 h-px w-12 bg-[#D4AF37]" />
                 </div>
 
-                <div className="space-y-6 text-sm leading-7 text-white/55">
+                <div className="space-y-6 text-sm leading-7 text-white/70">
                   <p>
                     Founded in 2023, Aurix was created with a simple idea:
                     premium gold jewellery should feel elegant, meaningful and
@@ -264,7 +264,7 @@ export function About() {
                     Crafted With Purpose
                   </h3>
 
-                  <p className="mt-5 text-sm leading-7 text-white/50">
+                  <p className="mt-5 text-sm leading-7 text-white/70">
                     To create beautifully designed gold jewellery that
                     inspires confidence, individuality and elegance while
                     providing a trusted customer experience.
@@ -280,7 +280,7 @@ export function About() {
                     Timeless Modern Luxury
                   </h3>
 
-                  <p className="mt-5 text-sm leading-7 text-white/50">
+                  <p className="mt-5 text-sm leading-7 text-white/70">
                     To build Aurix into a recognised jewellery brand known for
                     quality, innovation, elegant designs and customer
                     satisfaction.
@@ -325,7 +325,7 @@ export function About() {
                           className="h-6 w-6 text-[#D4AF37]"
                         />
 
-                        <span className="font-mono text-[9px] text-white/25">
+                        <span className="font-mono text-[9px] text-white/60">
                           0{index + 1}
                         </span>
                       </div>
@@ -334,7 +334,7 @@ export function About() {
                         {value.title}
                       </h3>
 
-                      <p className="mt-4 text-xs leading-6 text-white/45">
+                      <p className="mt-4 text-xs leading-6 text-white/60">
                         {value.text}
                       </p>
                     </article>
@@ -358,7 +358,7 @@ export function About() {
                     Meet Our Team
                   </h2>
 
-                  <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-white/45">
+                  <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-white/60">
                     The people bringing creativity, craftsmanship and
                     attention to detail to Aurix.
                   </p>
@@ -414,7 +414,7 @@ export function About() {
                   Find Your Gold Piece
                 </h2>
 
-                <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-white/50">
+                <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-white/70">
                   Explore elegant jewellery designed for timeless style.
                 </p>
 

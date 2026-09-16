@@ -231,18 +231,18 @@ export function Products() {
           <section className="aurix-page-section bg-[#050505]">
             <div className="aurix-page-section-inner">
 
-              <div className="mb-10 grid gap-6 md:mb-12 md:grid-cols-[1fr_auto] md:items-end">
+              <div className="mb-10 flex flex-col items-center text-center gap-6 md:mb-12">
                 <div>
                   <p className="mb-4 text-[9px] uppercase tracking-[0.4em] text-[#D4AF37]">
                     The Collection
                   </p>
 
-                  <h2 className="max-w-3xl font-serif text-3xl font-light italic leading-tight md:text-5xl">
+                  <h2 className="max-w-3xl mx-auto font-serif text-3xl font-light italic leading-tight md:text-5xl text-center">
                     Discover Your Signature Piece
                   </h2>
                 </div>
 
-                <p className="max-w-md text-sm leading-7 text-white/45 md:pb-1">
+                <p className="max-w-md mx-auto text-sm leading-7 text-white/60 md:pb-1 text-center">
                   Explore our selection of timeless gold jewellery, created to
                   complement your personal style.
                 </p>
@@ -323,13 +323,13 @@ export function Products() {
                           {product.name}
                         </h2>
 
-                        <p className="mb-6 line-clamp-3 text-xs leading-7 text-white/50">
+                        <p className="mb-6 line-clamp-3 text-xs leading-7 text-white/70">
                           {product.desc}
                         </p>
 
                         <div className="mb-6 flex items-center justify-between">
                           <div>
-                            <span className="mb-1 block text-[8px] uppercase tracking-[0.2em] text-white/35">
+                            <span className="mb-1 block text-[8px] uppercase tracking-[0.2em] text-white/60">
                               Price
                             </span>
 
@@ -404,7 +404,7 @@ export function Products() {
                   </span>
                 </h2>
 
-                <p className="mx-auto max-w-xl text-sm leading-7 text-white/50">
+                <p className="mx-auto max-w-xl text-sm leading-7 text-white/70">
                   From everyday elegance to unforgettable celebrations,
                   discover jewellery designed to become part of your story.
                 </p>

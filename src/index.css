@@ -823,10 +823,8 @@ button:disabled {
   width: 100% !important;
 }
 
-.aurix-page-hero-inner > *,
-.aurix-page-section-inner > *,
-.aurix-content > * {
-  margin-left: auto !important;
+.aurix-page-hero-inner > * {
+  margin-left: auto !important; 
   margin-right: auto !important;
 }
 
@@ -840,7 +838,7 @@ button:disabled {
 .aurix-section-heading * {
   text-align: center !important;
   width: 100% !important;
-  margin-left: auto !important;
+  margin-left: auto !important; 
   margin-right: auto !important;
 }
 

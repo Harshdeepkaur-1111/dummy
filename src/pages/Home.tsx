@@ -156,6 +156,26 @@ export default function Home() {
 
   const faqs = [
     {
+      q: "What types of gold jewellery does Aurix offer?",
+      a: "Aurix offers a wide range of gold jewellery, including necklaces, earrings, rings, bracelets, and other elegant pieces designed for everyday wear as well as special occasions. The collection focuses on stylish, timeless designs that complement different outfits and personal styles.",
+    },
+    {
+      q: "Is Aurix jewellery suitable for gifting?",
+      a: "Yes, Aurix jewellery is a beautiful choice for gifting. With elegant and timeless designs, Aurix offers jewellery suitable for birthdays, anniversaries, weddings, festivals, and other special occasions.",
+    },
+    {
+      q: "Are the jewellery images on the website accurate?",
+      a: "Yes, the jewellery images displayed on the Aurix website are intended to accurately represent the products. However, slight differences in colour, shine, or appearance may occur due to lighting, photography, and individual screen settings.",
+    },
+    {
+      q: "Does Aurix offer jewellery for everyday wear?",
+      a: "Yes, Aurix offers jewellery designs that are suitable for everyday wear. The collection includes simple and versatile pieces such as delicate gold chains, small gold earrings, lightweight rings, and slim bracelets.",
+    },
+    {
+      q: "What jewellery is best for a wedding?",
+      a: "For weddings, statement jewellery and elegant traditional designs are a great choice. Gold necklaces, bridal sets, statement earrings, bangles, bracelets, and rings can beautifully complement bridal and traditional outfits.",
+    },
+    {
       q: "Do you ship internationally?",
       a: "Yes — we ship across India and to select international destinations. Delivery times and charges may vary based on location.",
     },
@@ -418,15 +438,17 @@ export default function Home() {
                     HERO LEFT
                 ================================================= */}
 
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col items-center text-center">
 
-                  <div className="flex items-center gap-4 mb-7">
+                  <div className="flex items-center justify-center gap-4 mb-7 w-full">
 
                     <span className="w-12 h-px bg-[#D4AF37]" />
 
                     <span className="text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
                       Est. 2023 · Crafted in India
                     </span>
+
+                    <span className="w-12 h-px bg-[#D4AF37]" />
 
                   </div>
 
@@ -450,15 +472,15 @@ export default function Home() {
 
                   </h1>
 
-                  <div className="w-24 h-px bg-[#D4AF37] my-8" />
+                  <div className="w-24 h-px bg-[#D4AF37] my-8 mx-auto" />
 
-                  <p className="max-w-xl text-white/55 text-sm sm:text-base leading-8">
+                  <p className="max-w-xl mx-auto text-white/70 text-sm sm:text-base leading-8">
                     Discover timeless 22K gold jewellery where
                     traditional Indian craftsmanship meets
                     contemporary luxury.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4 mt-9">
+                  <div className="flex flex-col sm:flex-row justify-center gap-4 mt-9 w-full">
 
                     <Link
                       to="/products"
@@ -476,14 +498,14 @@ export default function Home() {
 
                   </div>
 
-                  <div className="flex gap-10 mt-12 pt-7 border-t border-white/10 max-w-xl">
+                  <div className="flex justify-center gap-10 mt-12 pt-7 border-t border-white/10 max-w-xl mx-auto w-full">
 
                     <div>
                       <strong className="font-serif text-2xl">
                         22K
                       </strong>
 
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/40 mt-1">
+                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1">
                         Gold Purity
                       </p>
                     </div>
@@ -495,7 +517,7 @@ export default function Home() {
                         2023
                       </strong>
 
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/40 mt-1">
+                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1">
                         Established
                       </p>
                     </div>
@@ -507,7 +529,7 @@ export default function Home() {
                         India
                       </strong>
 
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/40 mt-1">
+                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1">
                         Crafted
                       </p>
                     </div>
@@ -531,7 +553,7 @@ export default function Home() {
 
                     {/* Product Counter */}
 
-                    <div className="absolute top-6 left-6 text-[9px] tracking-[0.3em] text-white/30">
+                    <div className="absolute top-6 left-6 text-[9px] tracking-[0.3em] text-white/60">
                       {String(activeProduct + 1).padStart(2, "0")} /{" "}
                       {String(products.length).padStart(2, "0")}
                     </div>
@@ -558,6 +580,9 @@ export default function Home() {
                           alt={item.name}
                           width={900}
                           height={900}
+                          loading={index === 0 ? "eager" : "lazy"}
+                          fetchPriority={index === 0 ? "high" : "auto"}
+                          decoding={index === 0 ? "sync" : "async"}
                           className={`absolute w-full h-full object-contain transition-all duration-1000 ${
                             index === activeProduct
                               ? "opacity-100 scale-100"
@@ -584,7 +609,7 @@ export default function Home() {
                             {product.name}
                           </h2>
 
-                          <div className="flex gap-5 mt-3 text-[8px] uppercase tracking-[0.2em] text-white/40">
+                          <div className="flex gap-5 mt-3 text-[8px] uppercase tracking-[0.2em] text-white/60">
                             <span>
                               {product.purity}
                             </span>
@@ -598,7 +623,7 @@ export default function Home() {
 
                         <div className="text-right">
 
-                          <p className="text-[8px] uppercase tracking-[0.2em] text-white/40">
+                          <p className="text-[8px] uppercase tracking-[0.2em] text-white/60">
                             Price
                           </p>
 
@@ -772,7 +797,7 @@ export default function Home() {
 
                 <Link
                   to="/products"
-                  className="hidden sm:flex items-center gap-3 text-[9px] uppercase tracking-[0.25em] text-white/50 hover:text-[#D4AF37]"
+                  className="hidden sm:flex items-center gap-3 text-[9px] uppercase tracking-[0.25em] text-white/70 hover:text-[#D4AF37]"
                 >
                   View All
                   <ArrowRight size={15} />
@@ -902,7 +927,7 @@ export default function Home() {
                         {item.title}
                       </h3>
 
-                      <p className="text-white/45 text-xs leading-7">
+                      <p className="text-white/60 text-xs leading-7">
                         {item.text}
                       </p>
 
@@ -967,13 +992,13 @@ export default function Home() {
 
                   <div className="w-16 h-px bg-[#D4AF37] my-8" />
 
-                  <p className="text-white/50 text-sm leading-8 max-w-lg">
+                  <p className="text-white/70 text-sm leading-8 max-w-lg">
                     Aurix brings together the richness of Indian
                     craftsmanship and the simplicity of modern
                     luxury.
                   </p>
 
-                  <p className="text-white/50 text-sm leading-8 max-w-lg mt-5">
+                  <p className="text-white/70 text-sm leading-8 max-w-lg mt-5">
                     Every piece is designed with an appreciation
                     for detail, proportion and timeless beauty.
                   </p>
@@ -1047,7 +1072,7 @@ export default function Home() {
                           {category.title}
                         </h3>
 
-                        <p className="text-white/50 text-xs mt-2">
+                        <p className="text-white/70 text-xs mt-2">
                           {category.subtitle}
                         </p>
 
@@ -1154,12 +1179,12 @@ export default function Home() {
 
               </h2>
 
-              <p className="max-w-xl mx-auto text-white/50 text-sm leading-7 mt-7">
+              <p className="max-w-xl mx-auto text-white/70 text-sm leading-7 mt-7 text-center">
                       Explore our collection of timeless 22K gold
                 jewellery crafted for moments that matter.
               </p>
 
-              <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10 w-full text-center">
 
                 <Link
                   to="/products"

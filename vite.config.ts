@@ -22,11 +22,20 @@ export default defineConfig({
   build: {
     sourcemap: false,
     minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
     cssCodeSplit: true,
   },
   server: {
     hmr: process.env.DISABLE_HMR !== 'true',
     watch: process.env.DISABLE_HMR === 'true' ? null : {},
+    host: '0.0.0.0',
+    port: 3000,
+    allowedHosts: true,
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],

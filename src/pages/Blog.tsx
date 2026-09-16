@@ -136,7 +136,7 @@ export function Blog() {
                 Gold Jewellery Journal
               </h1>
 
-              <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/55 sm:text-base">
+              <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-white/70 sm:text-base">
                 Discover jewellery trends, styling inspiration, gold care tips
                 and helpful guides for choosing pieces you will love for years.
               </p>
@@ -232,7 +232,7 @@ export function Blog() {
                             {article.title}
                           </h2>
 
-                          <p className="mt-5 text-sm leading-7 text-white/55">
+                          <p className="mt-5 text-sm leading-7 text-white/70">
                             {article.excerpt}
                           </p>
 
@@ -244,7 +244,7 @@ export function Blog() {
                               <button
                                 type="button"
                                 onClick={() => setExpandedArticle(null)}
-                                className="absolute right-4 top-4 rounded-full p-2 text-white/50 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+                                className="absolute right-4 top-4 rounded-full p-2 text-white/70 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
                                 aria-label={`Close ${article.title}`}
                               >
                                 <X className="h-4 w-4" />
@@ -295,7 +295,7 @@ export function Blog() {
           {/* ================= CTA ================= */}
 
           <section className="border-y border-white/10 bg-[#0a0a0a]">
-            <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:py-24">
+            <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:py-24 flex flex-col items-center">
               <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37]">
                 Explore Aurix
               </p>
@@ -304,7 +304,7 @@ export function Blog() {
                 Read. Choose. Wear.
               </h2>
 
-              <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-white/55">
+              <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-white/70">
                        Turn inspiration into your next gold jewellery piece.
               </p>
 
