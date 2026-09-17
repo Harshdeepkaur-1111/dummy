@@ -6,6 +6,7 @@ import { useCart } from "../contexts/CartContext";
 
 export function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
   const location = useLocation();
   const { cart, cartCount, removeFromCart, clearCart, isCartOpen, setIsCartOpen } = useCart();
   const cartDrawerRef = useRef<HTMLDivElement | null>(null);
@@ -50,6 +51,12 @@ export function Layout() {
     }, 3000);
   };
 
+  const handleNewsletterSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setNewsletterSubmitted(true);
+    event.currentTarget.reset();
+  };
+
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#0a0a0a] text-white selection:bg-[#D4AF37] selection:text-black">
       <a href="#main-content" className="skip-link">Skip to main content</a>
@@ -88,7 +95,10 @@ export function Layout() {
               <button
                 type="button"
                 className="flex items-center gap-2 cursor-pointer group"
-                onClick={() => setIsCartOpen(true)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsCartOpen(true);
+                }}
                 aria-label="Open cart"
                 aria-expanded={isCartOpen}
                 aria-controls="cart-drawer"
@@ -103,7 +113,10 @@ export function Layout() {
               <button 
                 type="button"
                 className="flex items-center gap-2 cursor-pointer group"
-                onClick={() => setIsCartOpen(true)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsCartOpen(true);
+                }}
                 aria-label="Open cart"
                 aria-expanded={isCartOpen}
                 aria-controls="cart-drawer"
@@ -113,7 +126,10 @@ export function Layout() {
               </button>
               <button
                 type="button"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => {
+                  setIsCartOpen(false);
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                }}
                 className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-xs hover:bg-white/5 focus:outline-none"
                 aria-label="Toggle mobile menu"
                 aria-expanded={isMobileMenuOpen}
@@ -192,7 +208,7 @@ export function Layout() {
                       </div>
                       <button 
                         onClick={() => removeFromCart(item.id)}
-                        className="text-white/60 hover:text-red-400 transition-colors bg-white/5 p-2 rounded-full opacity-0 group-hover:opacity-100"
+                        className="text-white/20 hover:text-red-400 transition-colors bg-white/5 p-2 rounded-full opacity-0 group-hover:opacity-100"
                         aria-label="Remove item"
                       >
                         <Trash2 size={14} />
@@ -269,16 +285,17 @@ export function Layout() {
               <p className="text-white/70 text-xs font-light leading-relaxed mb-4">
                 Subscribe to receive updates on new collections and exclusive access to limited pieces.
               </p>
-              <form className="flex flex-col gap-3 border-b border-white/20 pb-2 group focus-within:border-[#D4AF37] transition-colors" aria-label="Newsletter subscription form">
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-3 border-b border-white/20 pb-2 group focus-within:border-[#D4AF37] transition-colors" aria-label="Newsletter subscription form">
                 <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                 <input 
                   id="newsletter-email"
                   name="newsletter-email"
                   type="email" 
                   placeholder="Enter your email address" 
+                  required
                   className="bg-transparent w-full text-sm text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] rounded"
                 />
-                <button type="submit" className="text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">Submit</button>
+                <button type="submit" className="text-[10px] uppercase tracking-widest text-[#D4AF37] hover:text-white transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">{newsletterSubmitted ? "Subscribed" : "Submit"}</button>
               </form>
             </div>
           </div>

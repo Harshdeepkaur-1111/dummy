@@ -1,6 +1,49 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N8JKLMC5');</script>
+<!-- End Google Tag Manager -->
+    <!-- Analytics loader (deferred to idle/after load to avoid blocking LCP) -->
+    <script>
+      (function(){
+        // Minimal non-blocking loader for GTM and Meta Pixel
+        function loadScript(src, attrs){
+          var s = document.createElement('script');
+          s.src = src;
+          s.async = true;
+          if (attrs) Object.keys(attrs).forEach(k => s.setAttribute(k, attrs[k]));
+          document.head.appendChild(s);
+          return s;
+        }
+
+        function initGTM(){
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+          loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-N8JKLMC5');
+        }
+
+        function initFB(){
+          window.fbq = window.fbq || function(){ (window.fbq.q = window.fbq.q || []).push(arguments); };
+          loadScript('https://connect.facebook.net/en_US/fbevents.js').onload = function(){
+            try{ window.fbq('init','4094152494218113'); window.fbq('track','PageView'); }catch(e){}
+          };
+        }
+
+        var runner = function(){
+          if ('requestIdleCallback' in window) requestIdleCallback(function(){ initGTM(); initFB(); }, {timeout:2000});
+          else window.addEventListener('load', function(){ setTimeout(function(){ initGTM(); initFB(); }, 1000); });
+        };
+
+        // Run after DOM ready
+        if (document.readyState === 'complete' || document.readyState === 'interactive') runner(); else document.addEventListener('DOMContentLoaded', runner);
+      })();
+    </script>
+    <!-- End analytics loader -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#050505" />
