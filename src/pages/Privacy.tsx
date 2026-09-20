@@ -2,15 +2,52 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 export function Privacy() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://aurix-gold.vercel.app/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Privacy Policy",
+        item: "https://aurix-gold.vercel.app/privacy",
+      },
+    ],
+  };
+
   return (
     <div className="w-full min-h-screen bg-[#0a0a0a] text-white pb-24 px-4 sm:px-6 lg:px-8">
       <Helmet>
-        <title>Privacy Policy | Aurix</title>
+        <title>Privacy Policy | Aurix - 22K Gold Jewellery India</title>
         <meta
           name="description"
-          content="Read Aurix's privacy policy for information about data collection and user privacy."
+          content="Read Aurix's privacy policy to learn how we protect your personal information, handle secure transactions, and safeguard user data."
         />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://aurix-gold.vercel.app/privacy" />
+        <meta property="og:title" content="Privacy Policy | Aurix" />
+        <meta
+          property="og:description"
+          content="Aurix is committed to protecting your privacy and personal data. Read our complete privacy policy."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/privacy" />
+        <meta property="og:site_name" content="Aurix" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Privacy Policy | Aurix" />
+        <meta
+          name="twitter:description"
+          content="Learn how Aurix protects your privacy and personal information."
+        />
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
       </Helmet>
 
       <main className="max-w-5xl mx-auto py-24">

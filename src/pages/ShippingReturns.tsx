@@ -2,15 +2,52 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 export function ShippingReturns() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://aurix-gold.vercel.app/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Shipping & Returns",
+        item: "https://aurix-gold.vercel.app/shipping-returns",
+      },
+    ],
+  };
+
   return (
     <div className="w-full min-h-screen bg-[#0a0a0a] text-white pb-24 px-4 sm:px-6 lg:px-8">
       <Helmet>
-        <title>Shipping & Returns | Aurix</title>
+        <title>Shipping & Returns Policy | Aurix - 22K Gold Jewellery India</title>
         <meta
           name="description"
-          content="Learn Aurix shipping and returns policies for premium gold jewelry purchases."
+          content="Learn about Aurix's 100% insured courier delivery across India, 14-day hassle-free returns, and lifetime 22K gold buyback policy."
         />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://aurix-gold.vercel.app/shipping-returns" />
+        <meta property="og:title" content="Shipping & Returns Policy | Aurix" />
+        <meta
+          property="og:description"
+          content="Discover Aurix's insured express shipping, doorstep delivery with OTP verification, and clear return policies."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/shipping-returns" />
+        <meta property="og:site_name" content="Aurix" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Shipping & Returns Policy | Aurix" />
+        <meta
+          name="twitter:description"
+          content="Read our shipping, returns, and transit insurance guidelines."
+        />
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
       </Helmet>
 
       <main className="max-w-5xl mx-auto py-24">

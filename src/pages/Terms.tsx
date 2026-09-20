@@ -2,15 +2,52 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 export function Terms() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://aurix-gold.vercel.app/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Terms of Service",
+        item: "https://aurix-gold.vercel.app/terms",
+      },
+    ],
+  };
+
   return (
     <div className="w-full min-h-screen bg-[#0a0a0a] text-white pb-24 px-4 sm:px-6 lg:px-8">
       <Helmet>
-        <title>Terms of Service | Aurix</title>
+        <title>Terms of Service | Aurix - 22K Gold Jewellery India</title>
         <meta
           name="description"
-          content="Learn Aurix's terms of service for purchasing gold jewelry and using our website."
+          content="Review Aurix's terms of service for purchasing certified 22K gold jewellery, order processing, warranty, and platform usage."
         />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://aurix-gold.vercel.app/terms" />
+        <meta property="og:title" content="Terms of Service | Aurix" />
+        <meta
+          property="og:description"
+          content="Learn the terms and conditions governing purchases and usage of the Aurix gold jewellery platform."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/terms" />
+        <meta property="og:site_name" content="Aurix" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Terms of Service | Aurix" />
+        <meta
+          name="twitter:description"
+          content="Review the terms and conditions of purchasing 22K gold jewellery from Aurix."
+        />
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
       </Helmet>
 
       <main className="max-w-5xl mx-auto py-24">

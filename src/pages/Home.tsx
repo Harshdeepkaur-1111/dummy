@@ -651,12 +651,16 @@ export default function Home() {
                             aria-pressed={
                               index === activeProduct
                             }
-                            className={`h-1 transition-all ${
-                              index === activeProduct
-                                ? "w-12 bg-[#D4AF37]"
-                                : "w-5 bg-white/20"
-                            }`}
-                          />
+                            className="py-3 px-1 inline-flex items-center cursor-pointer"
+                          >
+                            <span
+                              className={`h-1 block transition-all ${
+                                index === activeProduct
+                                  ? "w-12 bg-[#D4AF37]"
+                                  : "w-5 bg-white/20"
+                              }`}
+                            />
+                          </button>
                         ))}
 
                       </div>
@@ -828,6 +832,8 @@ export default function Home() {
                 <form className="max-w-md mx-auto w-full flex flex-col sm:flex-row gap-3 justify-center" onSubmit={(e) => e.preventDefault()}>
                   <input
                     type="email"
+                    id="newsletter-email-home"
+                    aria-label="Email Address for newsletter"
                     placeholder="Email Address"
                     className="flex-1 bg-transparent border border-white/20 text-white text-sm px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition text-center sm:text-left"
                     required
@@ -1224,12 +1230,11 @@ export default function Home() {
 
             <SafeImage
               src={imperialDiamondChoker}
-              alt=""
+              alt="Aurix handcrafted 22K luxury gold bridal choker jewellery collection"
               width={1600}
               height={900}
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
-              aria-hidden="true"
             />
 
             <div
