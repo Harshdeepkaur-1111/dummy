@@ -10,8 +10,7 @@ import {
 import { Helmet } from "react-helmet-async";
 
 import LazyMotion from "../components/LazyMotion";
-
-const SITE_URL = "https://aurix-gold.vercel.app";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 interface FormData {
   name: string;
@@ -63,17 +62,20 @@ export function Contact() {
     }));
   };
 
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/contact");
+
   const contactSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     name: "Contact Aurix",
-    url: `${SITE_URL}/contact`,
+    url: canonicalUrl,
     description:
       "Contact Aurix for gold jewellery enquiries, product information, orders and customer support.",
     mainEntity: {
       "@type": "Organization",
       name: "Aurix",
-      url: SITE_URL,
+      url: siteUrl,
       email: "tejinders791@gmail.com",
       contactPoint: {
         "@type": "ContactPoint",
@@ -118,7 +120,7 @@ export function Contact() {
 
           <link
             rel="canonical"
-            href={`${SITE_URL}/contact`}
+            href={canonicalUrl}
           />
 
           {/* Open Graph */}
@@ -140,7 +142,7 @@ export function Contact() {
 
           <meta
             property="og:url"
-            content={`${SITE_URL}/contact`}
+            content={canonicalUrl}
           />
 
           <meta

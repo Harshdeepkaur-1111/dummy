@@ -12,8 +12,7 @@ import { team } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
 import LazyMotion from "../components/LazyMotion";
 import { getOptimizedImage } from "../lib/utils";
-
-const SITE_URL = "https://aurix-gold.vercel.app";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 const values = [
   {
@@ -39,11 +38,14 @@ const values = [
 ];
 
 export function About() {
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/about");
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Aurix",
-    url: SITE_URL,
+    url: siteUrl,
     description:
       "Aurix is a premium gold jewellery brand focused on timeless design, craftsmanship and modern elegance.",
     foundingDate: "2023",
@@ -64,13 +66,13 @@ export function About() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: `${SITE_URL}/`,
+        item: `${siteUrl}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "About Aurix",
-        item: `${SITE_URL}/about`,
+        item: canonicalUrl,
       },
     ],
   };
@@ -101,7 +103,7 @@ export function About() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link rel="canonical" href={`${SITE_URL}/about`} />
+          <link rel="canonical" href={canonicalUrl} />
 
           <meta
             property="og:title"
@@ -115,7 +117,7 @@ export function About() {
 
           <meta property="og:type" content="website" />
 
-          <meta property="og:url" content={`${SITE_URL}/about`} />
+          <meta property="og:url" content={canonicalUrl} />
 
           <meta property="og:site_name" content="Aurix" />
 

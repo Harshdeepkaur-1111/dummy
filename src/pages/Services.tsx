@@ -5,9 +5,12 @@ import { products } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
 import { getOptimizedImage } from "../lib/utils";
 import { useCart } from "../contexts/CartContext";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 export function Services() {
   const { addToCart, setIsCartOpen } = useCart();
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/services");
 
   const handleAddToCart = (
     product: any,
@@ -47,7 +50,7 @@ export function Services() {
 
           <link
             rel="canonical"
-            href="https://aurix-gold.vercel.app/services"
+            href={canonicalUrl}
           />
 
           <meta
@@ -73,7 +76,7 @@ export function Services() {
 
           <meta
             property="og:url"
-            content="https://aurix-gold.vercel.app/services"
+            content={canonicalUrl}
           />
 
           {/* Twitter */}
@@ -102,13 +105,13 @@ export function Services() {
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://aurix-gold.vercel.app/",
+                  item: `${siteUrl}/`,
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Services",
-                  item: "https://aurix-gold.vercel.app/services",
+                  item: canonicalUrl,
                 },
               ],
             })}
@@ -120,13 +123,13 @@ export function Services() {
               "@context": "https://schema.org",
               "@type": "WebPage",
               name: "Aurix Gold Jewelry Services",
-              url: "https://aurix-gold.vercel.app/services",
+              url: canonicalUrl,
               description:
                 "Premium gold jewelry services and handcrafted 22k gold jewelry collections from Aurix.",
               publisher: {
                 "@type": "Organization",
                 name: "Aurix",
-                url: "https://aurix-gold.vercel.app/",
+                url: siteUrl,
               },
             })}
           </script>

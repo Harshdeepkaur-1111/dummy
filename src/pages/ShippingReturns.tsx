@@ -1,7 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 export function ShippingReturns() {
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/shipping-returns");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -10,13 +14,13 @@ export function ShippingReturns() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://aurix-gold.vercel.app/",
+        item: `${siteUrl}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Shipping & Returns",
-        item: "https://aurix-gold.vercel.app/shipping-returns",
+        item: canonicalUrl,
       },
     ],
   };
@@ -30,14 +34,14 @@ export function ShippingReturns() {
           content="Learn about Aurix's 100% insured courier delivery across India, 14-day hassle-free returns, and lifetime 22K gold buyback policy."
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://aurix-gold.vercel.app/shipping-returns" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Shipping & Returns Policy | Aurix" />
         <meta
           property="og:description"
           content="Discover Aurix's insured express shipping, doorstep delivery with OTP verification, and clear return policies."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://aurix-gold.vercel.app/shipping-returns" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Aurix" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Shipping & Returns Policy | Aurix" />

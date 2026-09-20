@@ -64,14 +64,20 @@
     <!-- SEO -->
     <meta name="description" content="Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI.">
     <meta name="keywords" content="22k gold jewellery, BIS 916 hallmark, certified gold jewellery online, gold necklaces India, 22 karat gold rings, buy gold bangles, bridal gold jewellery, Aurix gold">
-    <link rel="canonical" data-rh="true" href="https://aurix-gold.vercel.app/">
+    <link rel="canonical" data-rh="true" href="https://dummy-1c741ii02-harshdeep-1111.vercel.app/">
     <script>
       (function() {
         try {
+          var origin = (window.location && window.location.origin) ? window.location.origin : "https://dummy-1c741ii02-harshdeep-1111.vercel.app";
+          var p = (window.location && window.location.pathname) ? window.location.pathname.replace(/\/+$/, '') || '/' : '/';
+          var fullUrl = origin + (p === '/' ? '/' : p);
           var c = document.querySelector('link[rel="canonical"]');
-          if (c && window.location && window.location.pathname) {
-            var p = window.location.pathname.replace(/\/+$/, '') || '/';
-            c.setAttribute('href', 'https://aurix-gold.vercel.app' + (p === '/' ? '/' : p));
+          if (c) {
+            c.setAttribute('href', fullUrl);
+          }
+          var ogUrl = document.querySelector('meta[property="og:url"]');
+          if (ogUrl) {
+            ogUrl.setAttribute('content', fullUrl);
           }
         } catch(e) {}
       })();
@@ -79,7 +85,7 @@
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aurix-gold.vercel.app/">
+    <meta property="og:url" content="https://dummy-1c741ii02-harshdeep-1111.vercel.app/">
     <meta property="og:title" content="Aurix - BIS 916 Hallmarked 22K Gold Jewellery Online India">
     <meta property="og:description" content="Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI.">
     <meta property="og:locale" content="en_IN">
@@ -95,8 +101,8 @@
       "@context": "https://schema.org",
       "@type": "JewelryStore",
       "name": "Aurix",
-      "url": "https://aurix-gold.vercel.app/",
-      "logo": "https://aurix-gold.vercel.app/images/336052524_594628079068489_8991184652865232177_n.webp",
+      "url": "https://dummy-1c741ii02-harshdeep-1111.vercel.app/",
+      "logo": "https://dummy-1c741ii02-harshdeep-1111.vercel.app/images/336052524_594628079068489_8991184652865232177_n.webp",
       "description": "Certified 22K BIS 916 hallmarked luxury gold jewellery handcrafted in India. Timeless necklaces, rings, bangles, and bridal collections.",
       "telephone": "+91 9034196429",
       "priceRange": "₹₹₹",

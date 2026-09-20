@@ -1,7 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 export function Privacy() {
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/privacy");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -10,13 +14,13 @@ export function Privacy() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://aurix-gold.vercel.app/",
+        item: `${siteUrl}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Privacy Policy",
-        item: "https://aurix-gold.vercel.app/privacy",
+        item: canonicalUrl,
       },
     ],
   };
@@ -30,14 +34,14 @@ export function Privacy() {
           content="Read Aurix's privacy policy to learn how we protect your personal information, handle secure transactions, and safeguard user data."
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://aurix-gold.vercel.app/privacy" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Privacy Policy | Aurix" />
         <meta
           property="og:description"
           content="Aurix is committed to protecting your privacy and personal data. Read our complete privacy policy."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://aurix-gold.vercel.app/privacy" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Aurix" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Privacy Policy | Aurix" />

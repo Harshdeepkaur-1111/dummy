@@ -2,7 +2,7 @@
 # This file provides metadata about the website for Large Language Models
 
 Site Name: Aurix - Premium Gold Jewelry
-URL: https://aurix-gold.vercel.app
+URL: https://dummy-1c741ii02-harshdeep-1111.vercel.app
 Language: en
 Updated: 2026-07-04
 
@@ -20,11 +20,11 @@ Product showcase and jewelry information portal
 - Contact: Customer support and inquiries
 
 ## Key Pages
-- Homepage: https://aurix-gold.vercel.app/
-- Products: https://aurix-gold.vercel.app/products
-- About: https://aurix-gold.vercel.app/about
-- Blog: https://aurix-gold.vercel.app/blog
-- Contact: https://aurix-gold.vercel.app/contact
+- Homepage: https://dummy-1c741ii02-harshdeep-1111.vercel.app/
+- Products: https://dummy-1c741ii02-harshdeep-1111.vercel.app/products
+- About: https://dummy-1c741ii02-harshdeep-1111.vercel.app/about
+- Blog: https://dummy-1c741ii02-harshdeep-1111.vercel.app/blog
+- Contact: https://dummy-1c741ii02-harshdeep-1111.vercel.app/contact
 
 ## Technology Stack
 - Framework: React 19

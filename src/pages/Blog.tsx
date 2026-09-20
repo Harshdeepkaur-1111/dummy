@@ -6,11 +6,12 @@ import LazyMotion from "../components/LazyMotion";
 import { articles } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
 import { getOptimizedImage } from "../lib/utils";
-
-const SITE_URL = "https://aurix-gold.vercel.app";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 export function Blog() {
   const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/blog");
 
   const blogSchema = {
     "@context": "https://schema.org",
@@ -18,11 +19,11 @@ export function Blog() {
     name: "Aurix Journal",
     description:
       "Gold jewellery trends, styling guides, care tips and jewellery advice from Aurix.",
-    url: `${SITE_URL}/blog`,
+    url: canonicalUrl,
     publisher: {
       "@type": "Organization",
       name: "Aurix",
-      url: SITE_URL,
+      url: siteUrl,
     },
   };
 
@@ -34,13 +35,13 @@ export function Blog() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: `${SITE_URL}/`,
+        item: `${siteUrl}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Aurix Journal",
-        item: `${SITE_URL}/blog`,
+        item: canonicalUrl,
       },
     ],
   };
@@ -69,7 +70,7 @@ export function Blog() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link rel="canonical" href={`${SITE_URL}/blog`} />
+          <link rel="canonical" href={canonicalUrl} />
 
           <meta
             property="og:title"
@@ -83,7 +84,7 @@ export function Blog() {
 
           <meta property="og:type" content="website" />
 
-          <meta property="og:url" content={`${SITE_URL}/blog`} />
+          <meta property="og:url" content={canonicalUrl} />
 
           <meta property="og:site_name" content="Aurix" />
 

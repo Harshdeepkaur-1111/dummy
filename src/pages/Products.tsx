@@ -12,11 +12,12 @@ import OptimizedImage from "../components/OptimizedImage";
 import { products } from "../data";
 import { getOptimizedImage } from "../lib/utils";
 import { useCart } from "../contexts/CartContext";
-
-const SITE_URL = "https://aurix-gold.vercel.app";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 export function Products() {
   const { addToCart, setIsCartOpen } = useCart();
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/products");
 
   const handleBuyNow = (
     product: any,
@@ -54,13 +55,13 @@ export function Products() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: `${SITE_URL}/`,
+        item: `${siteUrl}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Gold Jewellery Collection",
-        item: `${SITE_URL}/products`,
+        item: canonicalUrl,
       },
     ],
   };
@@ -71,11 +72,11 @@ export function Products() {
     name: "Aurix Gold Jewellery Collection",
     description:
       "Premium 22K gold jewellery collection including necklaces, rings, earrings and bangles.",
-    url: `${SITE_URL}/products`,
+    url: canonicalUrl,
     isPartOf: {
       "@type": "WebSite",
       name: "Aurix",
-      url: SITE_URL,
+      url: siteUrl,
     },
   };
 
@@ -108,7 +109,7 @@ export function Products() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link rel="canonical" href={`${SITE_URL}/products`} />
+          <link rel="canonical" href={canonicalUrl} />
 
           <meta
             property="og:title"
@@ -122,7 +123,7 @@ export function Products() {
 
           <meta property="og:type" content="website" />
 
-          <meta property="og:url" content={`${SITE_URL}/products`} />
+          <meta property="og:url" content={canonicalUrl} />
 
           <meta property="og:site_name" content="Aurix" />
 

@@ -1,7 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 export function Terms() {
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/terms");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -10,13 +14,13 @@ export function Terms() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://aurix-gold.vercel.app/",
+        item: `${siteUrl}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Terms of Service",
-        item: "https://aurix-gold.vercel.app/terms",
+        item: canonicalUrl,
       },
     ],
   };
@@ -30,14 +34,14 @@ export function Terms() {
           content="Review Aurix's terms of service for purchasing certified 22K gold jewellery, order processing, warranty, and platform usage."
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://aurix-gold.vercel.app/terms" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Terms of Service | Aurix" />
         <meta
           property="og:description"
           content="Learn the terms and conditions governing purchases and usage of the Aurix gold jewellery platform."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://aurix-gold.vercel.app/terms" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Aurix" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Terms of Service | Aurix" />

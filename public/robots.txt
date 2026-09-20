@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aurix-gold.vercel.app/sitemap.xml
+Sitemap: https://dummy-1c741ii02-harshdeep-1111.vercel.app/sitemap.xml

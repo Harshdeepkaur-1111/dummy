@@ -14,6 +14,7 @@ import {
 import { Helmet } from "react-helmet-async";
 
 import { useCart } from "../contexts/CartContext";
+import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
 
 import {
   classicNecklace,
@@ -240,6 +241,9 @@ export default function Home() {
     setIsCartOpen(true);
   };
 
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = getCanonicalUrl("/");
+
   return (
     <>
       {/* =====================================================
@@ -257,7 +261,7 @@ export default function Home() {
           content="22k gold jewellery, BIS 916 hallmark, certified gold jewellery online, gold necklaces India, 22 karat gold rings, buy gold bangles, bridal gold jewellery, Aurix gold"
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://aurix-gold.vercel.app/" />
+        <link rel="canonical" href={canonicalUrl} />
 
         {/* Open Graph */}
         <meta property="og:title" content="Aurix | BIS 916 Hallmarked 22K Gold Jewellery Online India" />
@@ -266,10 +270,10 @@ export default function Home() {
           content="Discover certified 22K BIS 916 hallmarked gold jewellery in India. Shop timeless necklaces, rings, earrings, and bangles with insured express delivery."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://aurix-gold.vercel.app/" />
+        <meta property="og:url" content={canonicalUrl} />
         <meta
           property="og:image"
-          content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
+          content={`${siteUrl}/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp`}
         />
         <meta property="og:image:alt" content="Aurix certified 22K gold necklace" />
 
@@ -282,7 +286,7 @@ export default function Home() {
         />
         <meta
           name="twitter:image"
-          content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
+          content={`${siteUrl}/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp`}
         />
 
         {/* Store & Organization Schema */}
@@ -290,12 +294,12 @@ export default function Home() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "JewelryStore",
-            "@id": "https://aurix-gold.vercel.app/#store",
+            "@id": `${siteUrl}/#store`,
             name: "Aurix",
             alternateName: "Aurix 22K Gold Jewellery",
-            url: "https://aurix-gold.vercel.app/",
-            logo: "https://aurix-gold.vercel.app/images/336052524_594628079068489_8991184652865232177_n.webp",
-            image: "https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp",
+            url: `${siteUrl}/`,
+            logo: `${siteUrl}/images/336052524_594628079068489_8991184652865232177_n.webp`,
+            image: `${siteUrl}/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp`,
             description: "Certified 22K BIS 916 hallmarked luxury gold jewellery handcrafted in India. Explore timeless necklaces, bridal sets, rings, bangles, and bespoke jewellery.",
             telephone: "+91 9034196429",
             priceRange: "₹₹₹",
@@ -336,15 +340,15 @@ export default function Home() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "@id": "https://aurix-gold.vercel.app/#website",
+            "@id": `${siteUrl}/#website`,
             name: "Aurix",
-            url: "https://aurix-gold.vercel.app/",
+            url: `${siteUrl}/`,
             publisher: {
-              "@id": "https://aurix-gold.vercel.app/#store"
+              "@id": `${siteUrl}/#store`
             },
             potentialAction: {
               "@type": "SearchAction",
-              target: "https://aurix-gold.vercel.app/products?search={search_term_string}",
+              target: `${siteUrl}/products?search={search_term_string}`,
               "query-input": "required name=search_term_string"
             }
           })}
@@ -375,7 +379,7 @@ export default function Home() {
                   price: item.price.replace(/[^0-9]/g, ""),
                   priceCurrency: "INR",
                   availability: "https://schema.org/InStock",
-                  url: "https://aurix-gold.vercel.app/products"
+                  url: `${siteUrl}/products`
                 },
                 aggregateRating: {
                   "@type": "AggregateRating",
