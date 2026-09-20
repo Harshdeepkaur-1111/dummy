@@ -30,9 +30,50 @@ type LazyMotionProps = {
   initial?: TargetAndTransition | boolean;
   animate?: TargetAndTransition;
   whileInView?: TargetAndTransition;
+  whileHover?: TargetAndTransition;
+  whileTap?: TargetAndTransition;
   viewport?: ViewportOptions;
   transition?: Transition;
+  [key: string]: any;
 };
+
+const MOTION_PROP_KEYS = new Set([
+  "initial",
+  "animate",
+  "whileInView",
+  "whileHover",
+  "whileTap",
+  "whileFocus",
+  "whileDrag",
+  "viewport",
+  "transition",
+  "variants",
+  "exit",
+  "layout",
+  "layoutId",
+  "layoutDependency",
+  "layoutScroll",
+  "onAnimationStart",
+  "onAnimationComplete",
+  "onUpdate",
+  "onViewportEnter",
+  "onViewportLeave",
+  "drag",
+  "dragConstraints",
+  "dragElastic",
+  "dragMomentum",
+  "tag",
+]);
+
+function getDomProps(props: Record<string, any>) {
+  const domProps: Record<string, any> = {};
+  for (const key of Object.keys(props)) {
+    if (!MOTION_PROP_KEYS.has(key)) {
+      domProps[key] = props[key];
+    }
+  }
+  return domProps;
+}
 
 /* =========================================================
    STATIC FALLBACK
@@ -45,9 +86,10 @@ function StaticFallback({
   ...rest
 }: LazyMotionProps) {
   const Component = Tag as ElementType;
+  const domProps = getDomProps(rest);
 
   return (
-    <Component className={className} {...rest}>
+    <Component className={className} {...domProps}>
       {children}
     </Component>
   );
@@ -60,6 +102,18 @@ function StaticFallback({
 const AnimatedMotion = lazy(async () => {
   const { motion } = await import("motion/react");
 
+  const componentCache = new Map<any, any>();
+
+  const getMotionComponent = (tag: ElementType) => {
+    if (typeof tag === "string" && (motion as any)[tag]) {
+      return (motion as any)[tag];
+    }
+    if (!componentCache.has(tag)) {
+      componentCache.set(tag, motion.create(tag));
+    }
+    return componentCache.get(tag);
+  };
+
   const Animated = ({
     children,
     className,
@@ -67,11 +121,14 @@ const AnimatedMotion = lazy(async () => {
     initial,
     animate,
     whileInView,
+    whileHover,
+    whileTap,
     viewport,
     transition,
     ...rest
   }: LazyMotionProps) => {
-    const MotionComponent = motion.create(tag as ElementType);
+    const MotionComponent = getMotionComponent(tag as ElementType);
+    const domProps = getDomProps(rest);
 
     return (
       <MotionComponent
@@ -79,9 +136,11 @@ const AnimatedMotion = lazy(async () => {
         initial={initial}
         animate={animate}
         whileInView={whileInView}
+        whileHover={whileHover}
+        whileTap={whileTap}
         viewport={viewport}
         transition={transition}
-        {...rest}
+        {...domProps}
       >
         {children}
       </MotionComponent>

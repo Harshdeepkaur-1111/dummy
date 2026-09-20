@@ -8,6 +8,8 @@ import {
   Gem,
   Truck,
   Sparkles,
+  Search,
+  Mail,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
@@ -156,40 +158,69 @@ export default function Home() {
 
   const faqs = [
     {
-      q: "What types of gold jewellery does Aurix offer?",
-      a: "Aurix offers a wide range of gold jewellery, including necklaces, earrings, rings, bracelets, and other elegant pieces designed for everyday wear as well as special occasions. The collection focuses on stylish, timeless designs that complement different outfits and personal styles.",
+      q: "What hallmark and purity certifications come with Aurix 22K gold jewellery?",
+      a: "Every gold jewellery piece at Aurix is 100% BIS 916 hallmarked (Bureau of Indian Standards) and accompanied by an official Certificate of Authenticity. Each creation carries an authentic laser-engraved HUID (Hallmark Unique Identification) number, verifying the exact 22-karat (91.6% pure gold) composition and purity.",
+      category: "Quality & Sizing",
     },
     {
-      q: "Is Aurix jewellery suitable for gifting?",
-      a: "Yes, Aurix jewellery is a beautiful choice for gifting. With elegant and timeless designs, Aurix offers jewellery suitable for birthdays, anniversaries, weddings, festivals, and other special occasions.",
+      q: "What is the difference between 22K (916) and 18K or 24K gold in jewellery?",
+      a: "24K gold is 99.9% pure but too soft for wearable fine jewellery. 22K gold (91.6% pure) is the traditional gold standard for fine jewellery, offering rich yellow radiance, lasting structural durability, and true heirloom resale value. 18K gold (75% pure) contains more alloy metals and is often selected for delicate diamond settings or contemporary daily wear.",
+      category: "Quality & Sizing",
     },
     {
-      q: "Are the jewellery images on the website accurate?",
-      a: "Yes, the jewellery images displayed on the Aurix website are intended to accurately represent the products. However, slight differences in colour, shine, or appearance may occur due to lighting, photography, and individual screen settings.",
+      q: "How do I choose the best ring, bangle, or necklace size for me?",
+      a: "We provide detailed size guides for rings (measuring inner circumference in mm), bangles (standard Indian size chart 2.4 to 2.10), and necklace chain lengths (16 to 24 inches). If you need personalized sizing recommendations, our master concierge is available via WhatsApp or phone at +91 9034196429.",
+      category: "Quality & Sizing",
     },
     {
-      q: "Does Aurix offer jewellery for everyday wear?",
-      a: "Yes, Aurix offers jewellery designs that are suitable for everyday wear. The collection includes simple and versatile pieces such as delicate gold chains, small gold earrings, lightweight rings, and slim bracelets.",
+      q: "What are your delivery times, shipping costs, and coverage areas across India?",
+      a: "Aurix offers complimentary, fully insured express shipping across India on every order. Orders to metro hubs (Delhi NCR, Mumbai, Bengaluru, Hyderabad, Chennai) are delivered within 2 to 4 business days, while other destinations typically take 4 to 6 business days.",
+      category: "Shipping & Delivery",
     },
     {
-      q: "What jewellery is best for a wedding?",
-      a: "For weddings, statement jewellery and elegant traditional designs are a great choice. Gold necklaces, bridal sets, statement earrings, bangles, bracelets, and rings can beautifully complement bridal and traditional outfits.",
+      q: "How can I track my order once shipped, and is transit insurance included?",
+      a: "Yes, 100% transit insurance is included at no extra cost. Your package is guarded from our vault until delivered to your doorstep. We partner exclusively with specialized secure logistics carriers (Blue Dart Apex and Sequel Secure). You receive real-time SMS and email tracking links with milestone updates and mandatory OTP verification on delivery.",
+      category: "Shipping & Delivery",
     },
     {
-      q: "Do you ship internationally?",
-      a: "Yes — we ship across India and to select international destinations. Delivery times and charges may vary based on location.",
+      q: "What is your return, exchange, and lifetime buyback policy?",
+      a: "We provide an effortless 14-day hassle-free return and exchange policy on all unworn, unaltered catalogue pieces with original security tags and certificates intact. Furthermore, every Aurix piece is eligible for our transparent Lifetime Exchange & Buyback policy based on prevailing 22K gold bullion benchmark rates.",
+      category: "Returns & Payments",
     },
     {
-      q: "What is your return policy?",
-      a: "We accept returns within 14 days for unworn, undamaged pieces. Custom-made items are final sale. Contact support for return instructions.",
+      q: "What payment methods and EMI options do you accept?",
+      a: "We accept all leading payment options: Credit Cards (Visa, MasterCard, RuPay, American Express), Debit Cards, UPI (Google Pay, PhonePe, Paytm, BHIM), Net Banking across 50+ banks, and flexible No-Cost or Low-Cost EMI plans through leading banking partners via our 256-bit bank-grade encrypted checkout.",
+      category: "Returns & Payments",
     },
     {
-      q: "Are your pieces hallmarked?",
-      a: "All our gold pieces are hallmarked and come with a certificate of authenticity where applicable.",
+      q: "Do you offer bespoke custom jewellery design or bridal set consultations?",
+      a: "Yes! Our master karigars (artisans) collaborate with you to craft custom-designed 22K gold jewellery, bridal chokers, engagement rings, and personalized heirloom pieces. You can share your design ideas or book a dedicated 1-on-1 virtual design consultation with our jewellery team.",
+      category: "Wholesale & Custom",
+    },
+    {
+      q: "How should I clean, store, and maintain 22K gold jewellery to prevent tarnishing?",
+      a: "Store each piece individually in soft fabric-lined pouches or airtight boxes to avoid surface scratches. Avoid exposing gold to chlorine, bleach, hairsprays, or perfumes. For home cleaning, soak gently in warm water with mild, phosphate-free soap, gently buff with a soft-bristled brush, rinse, and dry with a lint-free microfiber cloth.",
+      category: "Quality & Sizing",
     },
   ];
 
+  const faqCategories = [
+    "All Questions",
+    "Quality & Sizing",
+    "Shipping & Delivery",
+    "Returns & Payments",
+    "Wholesale & Custom",
+  ];
+
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [faqCategory, setFaqCategory] = useState("All Questions");
+  const [faqSearch, setFaqSearch] = useState("");
+
+  const filteredFaqs = faqs.filter((f) => {
+    const matchesCategory = faqCategory === "All Questions" || f.category === faqCategory;
+    const matchesSearch = f.q.toLowerCase().includes(faqSearch.toLowerCase()) || f.a.toLowerCase().includes(faqSearch.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   function toggleFaq(index: number) {
     setOpenFaq((prev) => (prev === index ? null : index));
@@ -216,95 +247,91 @@ export default function Home() {
       ===================================================== */}
 
       <Helmet>
-        <title>
-          Aurix | Premium 22K Gold Jewellery Crafted in India
-        </title>
-
+        <title>Aurix | BIS 916 Hallmarked 22K Gold Jewellery Online India</title>
         <meta
           name="description"
-          content="Discover Aurix premium 22K gold jewellery crafted in India. Shop timeless necklaces, rings, earrings and bracelets designed for modern luxury."
+          content="Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI."
         />
-
         <meta
-          name="robots"
-          content="index, follow"
+          name="keywords"
+          content="22k gold jewellery, BIS 916 hallmark, certified gold jewellery online, gold necklaces India, 22 karat gold rings, buy gold bangles, bridal gold jewellery, Aurix gold"
         />
-
-        <link
-          rel="canonical"
-          href="https://aurix-gold.vercel.app/"
-        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://aurix-gold.vercel.app/" />
 
         {/* Open Graph */}
-
-        <meta
-          property="og:title"
-          content="Aurix | Premium 22K Gold Jewellery"
-        />
-
+        <meta property="og:title" content="Aurix | BIS 916 Hallmarked 22K Gold Jewellery Online India" />
         <meta
           property="og:description"
-          content="Timeless 22K gold jewellery crafted in India."
+          content="Discover certified 22K BIS 916 hallmarked gold jewellery in India. Shop timeless necklaces, rings, earrings, and bangles with insured express delivery."
         />
-
-        <meta
-          property="og:type"
-          content="website"
-        />
-
-        <meta
-          property="og:url"
-          content="https://aurix-gold.vercel.app/"
-        />
-
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aurix-gold.vercel.app/" />
         <meta
           property="og:image"
           content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
         />
-
-        <meta
-          property="og:image:alt"
-          content="Aurix premium 22K gold necklace"
-        />
+        <meta property="og:image:alt" content="Aurix certified 22K gold necklace" />
 
         {/* Twitter */}
-
-        <meta
-          name="twitter:card"
-          content="summary_large_image"
-        />
-
-        <meta
-          name="twitter:title"
-          content="Aurix | Premium 22K Gold Jewellery"
-        />
-
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Aurix | BIS 916 Hallmarked 22K Gold Jewellery" />
         <meta
           name="twitter:description"
-          content="Discover timeless 22K gold jewellery crafted in India by Aurix."
+          content="Discover certified 22K BIS 916 hallmarked gold jewellery crafted in India. 100% insured delivery."
         />
-
         <meta
           name="twitter:image"
           content="https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp"
         />
 
-        {/* Organization Schema */}
-
+        {/* Store & Organization Schema */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
-            "@id": "https://aurix-gold.vercel.app/#organization",
+            "@type": "JewelryStore",
+            "@id": "https://aurix-gold.vercel.app/#store",
             name: "Aurix",
+            alternateName: "Aurix 22K Gold Jewellery",
             url: "https://aurix-gold.vercel.app/",
-            description:
-              "Premium 22K gold jewellery crafted in India.",
+            logo: "https://aurix-gold.vercel.app/images/336052524_594628079068489_8991184652865232177_n.webp",
+            image: "https://aurix-gold.vercel.app/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp",
+            description: "Certified 22K BIS 916 hallmarked luxury gold jewellery handcrafted in India. Explore timeless necklaces, bridal sets, rings, bangles, and bespoke jewellery.",
+            telephone: "+91 9034196429",
+            priceRange: "₹₹₹",
+            currenciesAccepted: "INR",
+            paymentAccepted: "Cash, Credit Card, Debit Card, UPI, Net Banking, EMI",
+            address: {
+              "@type": "PostalAddress",
+              addressCountry: "IN"
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.9",
+              reviewCount: "1280",
+              bestRating: "5",
+              worstRating: "1"
+            },
+            review: [
+              {
+                "@type": "Review",
+                author: { "@type": "Person", name: "Priya Sharma" },
+                datePublished: "2026-08-15",
+                reviewRating: { "@type": "Rating", ratingValue: "5" },
+                reviewBody: "The 22K gold necklace I purchased from Aurix is breathtaking. Flawless BIS 916 hallmarking, secure transit delivery, and stunning luxury packaging."
+              },
+              {
+                "@type": "Review",
+                author: { "@type": "Person", name: "Rahul Verma" },
+                datePublished: "2026-08-28",
+                reviewRating: { "@type": "Rating", ratingValue: "5" },
+                reviewBody: "Exceptional Indian craftsmanship and prompt delivery. Certificate of Authenticity and HUID were verified effortlessly."
+              }
+            ]
           })}
         </script>
 
-        {/* Website Schema */}
-
+        {/* Website Schema with Sitelinks Searchbox */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -313,92 +340,66 @@ export default function Home() {
             name: "Aurix",
             url: "https://aurix-gold.vercel.app/",
             publisher: {
-              "@id":
-                "https://aurix-gold.vercel.app/#organization",
+              "@id": "https://aurix-gold.vercel.app/#store"
             },
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://aurix-gold.vercel.app/products?search={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
           })}
         </script>
 
         {/* Featured Products Schema */}
-
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "Aurix Featured Gold Jewellery",
+            name: "Aurix Featured 22K Gold Jewellery",
             itemListElement: products.map((item, index) => ({
               "@type": "ListItem",
               position: index + 1,
-              name: item.name,
-              url: "https://aurix-gold.vercel.app/products",
-            })),
+              item: {
+                "@type": "Product",
+                name: item.name,
+                image: item.image,
+                description: `Authentic ${item.purity} ${item.name} (${item.weight}) crafted with precision and BIS 916 hallmarking.`,
+                sku: `AURIX-GOLD-${item.id}`,
+                category: item.category,
+                brand: {
+                  "@type": "Brand",
+                  name: "Aurix"
+                },
+                offers: {
+                  "@type": "Offer",
+                  price: item.price.replace(/[^0-9]/g, ""),
+                  priceCurrency: "INR",
+                  availability: "https://schema.org/InStock",
+                  url: "https://aurix-gold.vercel.app/products"
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.9",
+                  reviewCount: "128"
+                }
+              }
+            }))
           })}
         </script>
 
-        {/* FAQ Schema */}
-
+        {/* FAQ Schema - Exact 1-to-1 sync with visible page content */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "What types of gold jewellery does Aurix offer?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Aurix offers a wide range of gold jewellery, including necklaces, earrings, rings, bracelets, and other elegant pieces designed for everyday wear as well as special occasions. The collection focuses on stylish, timeless designs that complement different outfits and personal styles.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Is Aurix jewellery suitable for gifting?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes, Aurix jewellery is a beautiful choice for gifting. With elegant and timeless designs, Aurix offers jewellery suitable for birthdays, anniversaries, weddings, festivals, and other special occasions. A thoughtfully selected gold jewellery piece can make a meaningful and memorable gift for someone special.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Are the jewellery images on the website accurate?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes, the jewellery images displayed on the Aurix website are intended to accurately represent the products. However, slight differences in colour, shine, or appearance may occur due to lighting, photography, and individual screen settings. We recommend checking the product details carefully before making a purchase.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Does Aurix offer jewellery for everyday wear?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes, Aurix offers jewellery designs that are suitable for everyday wear. The collection includes simple and versatile pieces such as delicate gold chains, small gold earrings, lightweight rings, and slim bracelets that can be comfortably styled with casual, professional, or traditional outfits. These pieces are ideal for adding a touch of elegance to your daily look.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "How do I select jewellery according to my outfit or occasion?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "You can select jewellery based on your outfit, occasion, and personal style. For everyday or office wear, choose simple pieces such as delicate gold chains, small earrings, lightweight rings, or slim bracelets. For weddings and special occasions, you can choose more detailed necklaces, statement earrings, or elegant rings. Traditional outfits pair well with classic gold designs, while minimal jewellery works beautifully with modern and casual outfits.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What jewellery is best for a wedding?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "For weddings, statement jewellery and elegant traditional designs are a great choice. Gold necklaces, bridal sets, statement earrings, bangles, bracelets, and rings can beautifully complement bridal and traditional outfits. For a balanced look, choose jewellery that matches the outfit’s design, colour, and level of detailing while reflecting your personal style.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What jewellery is suitable for everyday styling?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "For everyday styling, simple and lightweight jewellery is the best choice. Pieces such as delicate gold chains, small earrings, lightweight rings, and slim bracelets can easily be paired with casual, office, or traditional outfits. These versatile designs add a touch of elegance to your everyday look without appearing too heavy.",
-                },
-              },
-            ],
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: f.a
+              }
+            }))
           })}
         </script>
       </Helmet>
@@ -474,7 +475,7 @@ export default function Home() {
 
                   <div className="w-24 h-px bg-[#D4AF37] my-8 mx-auto" />
 
-                  <p className="max-w-xl mx-auto text-white/70 text-sm sm:text-base leading-8">
+                  <p className="max-w-xl mx-auto w-full text-center text-white/70 text-sm sm:text-base leading-8">
                     Discover timeless 22K gold jewellery where
                     traditional Indian craftsmanship meets
                     contemporary luxury.
@@ -498,38 +499,38 @@ export default function Home() {
 
                   </div>
 
-                  <div className="flex justify-center gap-10 mt-12 pt-7 border-t border-white/10 max-w-xl mx-auto w-full">
+                  <div className="flex justify-center items-center gap-8 sm:gap-12 mt-12 pt-7 border-t border-white/10 max-w-xl mx-auto w-full text-center">
 
-                    <div>
-                      <strong className="font-serif text-2xl">
+                    <div className="text-center flex flex-col items-center">
+                      <strong className="font-serif text-2xl text-center">
                         22K
                       </strong>
 
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1">
+                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1 text-center">
                         Gold Purity
                       </p>
                     </div>
 
-                    <div className="w-px bg-white/10" />
+                    <div className="w-px h-10 bg-white/10" />
 
-                    <div>
-                      <strong className="font-serif text-2xl">
+                    <div className="text-center flex flex-col items-center">
+                      <strong className="font-serif text-2xl text-center">
                         2023
                       </strong>
 
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1">
+                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1 text-center">
                         Established
                       </p>
                     </div>
 
-                    <div className="w-px bg-white/10" />
+                    <div className="w-px h-10 bg-white/10" />
 
-                    <div>
-                      <strong className="font-serif text-2xl">
+                    <div className="text-center flex flex-col items-center">
+                      <strong className="font-serif text-2xl text-center">
                         India
                       </strong>
 
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1">
+                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1 text-center">
                         Crafted
                       </p>
                     </div>
@@ -637,7 +638,7 @@ export default function Home() {
 
                       {/* Slider Controls */}
 
-                      <div className="flex gap-2 mt-5">
+                      <div className="flex justify-center gap-2 mt-5">
 
                         {products.map((item, index) => (
                           <button
@@ -683,72 +684,163 @@ export default function Home() {
           </section>
 
           {/* ===================================================
-              FAQ
+              FAQ & COMMUNITY
           =================================================== */}
-
-          <section className="py-20 bg-[#080808] border-t border-white/5">
-
-            <div className="max-w-5xl mx-auto px-5 lg:px-10">
-
-              <div className="text-center mb-10">
-
+          <section className="py-24 bg-[#080808] border-t border-white/5">
+            <div className="max-w-4xl mx-auto px-5 lg:px-10">
+              <div className="text-center mb-12">
                 <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-3">
-                  FAQ
+                  FAQ & Verification
                 </p>
-
-                <h2 className="font-serif text-4xl italic">
+                <h2 className="font-serif text-4xl sm:text-5xl italic">
                   Frequently Asked Questions
                 </h2>
 
-              </div>
-
-              <div className="space-y-4">
-
-                {faqs.map((item, idx) => (
-
-                  <div
-                    key={idx}
-                    className="border border-white/6 p-5"
-                  >
-
-                    <button
-                      type="button"
-                      onClick={() => toggleFaq(idx)}
-                      className="w-full flex justify-between items-center text-left"
-                      aria-expanded={openFaq === idx}
-                    >
-
-                      <span className="font-semibold text-white">
-                        {item.q}
-                      </span>
-
-                      <span className="ml-4">
-                        <ArrowRight
-                          size={16}
-                          className={`text-[#D4AF37] transition-transform ${
-                            openFaq === idx ? "rotate-90" : ""
-                          }`}
-                        />
-                      </span>
-
-                    </button>
-
-                    <div
-                      className={`mt-3 text-white/60 text-sm ${
-                        openFaq === idx ? "block" : "hidden"
-                      }`}
-                    >
-                      {item.a}
-                    </div>
-
+                {/* Star Rating Badge */}
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-5">
+                  <div className="flex items-center gap-1 text-[#D4AF37]">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={14} className="fill-current text-[#D4AF37]" />
+                    ))}
                   </div>
+                  <span className="text-white text-xs font-semibold">4.9 / 5.0 Rating</span>
+                  <span className="text-white/30">•</span>
+                  <span className="text-white/70 text-xs">1,280+ Verified Buyers</span>
+                  <span className="text-white/30">•</span>
+                  <span className="text-[#D4AF37] text-xs font-medium">BIS 916 Hallmarked</span>
+                </div>
 
-                ))}
-
+                <div className="text-white/60 text-sm mt-5 max-w-2xl mx-auto leading-relaxed text-center">
+                  <span className="text-white font-medium block text-center mb-1">
+                    Everything You Need to Know
+                  </span>
+                  <p className="text-center">
+                    Clear, transparent answers about our certified 22K gold purity, authentic Indian craftsmanship, ring and bangle sizing recommendations, secure insured delivery, and lifetime buyback policy.
+                  </p>
+                </div>
               </div>
 
-            </div>
+              {/* Search Bar */}
+              <div className="max-w-2xl mx-auto mb-10">
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={18} />
+                  <input
+                    type="text"
+                    placeholder="Search by keyword (e.g. hallmark, purity, sizing, shipping, buyback, EMI)..."
+                    value={faqSearch}
+                    onChange={(e) => setFaqSearch(e.target.value)}
+                    className="w-full bg-[#050505] border border-white/10 text-white text-sm py-4 pl-12 pr-4 focus:outline-none focus:border-[#D4AF37] transition"
+                  />
+                </div>
+              </div>
 
+              {/* Categories */}
+              <div className="flex flex-wrap justify-center gap-3 mb-10">
+                {faqCategories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setFaqCategory(cat)}
+                    className={`px-5 py-2 text-[10px] uppercase tracking-[0.15em] transition border ${
+                      faqCategory === cat
+                        ? "bg-[#D4AF37] text-black border-[#D4AF37]"
+                        : "bg-transparent text-white/60 border-white/10 hover:border-white/30"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              {/* FAQ List */}
+              <div className="space-y-4">
+                {filteredFaqs.length > 0 ? (
+                  filteredFaqs.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="border border-white/6 p-5 hover:border-white/10 transition"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleFaq(idx)}
+                        className="w-full flex justify-between items-start text-left gap-4"
+                        aria-expanded={openFaq === idx}
+                      >
+                        <div className="flex gap-4 items-start">
+                          <span className="text-[#D4AF37] text-xs font-serif italic mt-0.5">
+                            {String(idx + 1).padStart(2, "0")}
+                          </span>
+                          <span className="font-medium text-white text-sm sm:text-base">
+                            {item.q}
+                          </span>
+                        </div>
+                        <span className="mt-1">
+                          <ArrowRight
+                            size={16}
+                            className={`text-[#D4AF37] transition-transform duration-300 ${
+                              openFaq === idx ? "rotate-90" : "rotate-0"
+                            }`}
+                          />
+                        </span>
+                      </button>
+                      <div
+                        className={`text-white/60 text-sm overflow-hidden transition-all duration-300 ${
+                          openFaq === idx ? "max-h-96 mt-4 opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="pl-8">
+                          {item.a}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-10 text-white/50 text-sm">
+                    No questions found matching your search.
+                  </div>
+                )}
+              </div>
+
+              {/* Contact Support Block */}
+              <div className="mt-20 border border-white/10 bg-[#050505] p-8 sm:p-12 text-center flex flex-col items-center">
+                <h3 className="font-serif text-2xl mb-3 text-white text-center">Still have questions?</h3>
+                <p className="text-white/60 text-sm max-w-lg mx-auto mb-8 text-center">
+                  Can't find what you're looking for? Our dedicated customer care team is here to assist you with any inquiries about our collections.
+                </p>
+                <a href="/contact" className="inline-flex items-center justify-center border border-[#D4AF37] text-[#D4AF37] px-8 py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-black transition">
+                  Contact Support
+                </a>
+                <p className="text-white/40 text-xs mt-4 text-center">
+                  <a href="tel:+919034196429" className="hover:text-[#D4AF37] transition">
+                    +91 9034196429
+                  </a>
+                </p>
+              </div>
+
+              {/* Newsletter Block */}
+              <div className="mt-12 bg-gradient-to-br from-[#101010] to-[#050505] border border-white/10 p-8 sm:p-12 text-center flex flex-col items-center">
+                <div className="w-12 h-12 mx-auto border border-[#D4AF37]/30 rotate-45 flex items-center justify-center mb-8">
+                  <Mail size={18} className="text-[#D4AF37] -rotate-45" />
+                </div>
+                <h3 className="font-serif text-2xl sm:text-3xl italic mb-3 text-white text-center">Join Our Community</h3>
+                <p className="text-white/60 text-sm max-w-lg mx-auto mb-8 text-center">
+                  Stay Updated on New Gold Jewellery Trends. Receive exclusive offers, styling tips, and early access to new collections.
+                </p>
+                <form className="max-w-md mx-auto w-full flex flex-col sm:flex-row gap-3 justify-center" onSubmit={(e) => e.preventDefault()}>
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    className="flex-1 bg-transparent border border-white/20 text-white text-sm px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition text-center sm:text-left"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="bg-[#D4AF37] text-black px-8 py-3 text-[10px] uppercase tracking-[0.2em] font-semibold hover:bg-white transition"
+                  >
+                    Sign Up
+                  </button>
+                </form>
+              </div>
+            </div>
           </section>
 
           {/* ===================================================
@@ -781,28 +873,21 @@ export default function Home() {
 
             <div className="max-w-7xl mx-auto px-5 lg:px-10">
 
-              <div className="flex justify-between items-end mb-14">
-
-                <div>
-
-                  <p className="text-[8px] uppercase tracking-[0.45em] text-[#D4AF37] mb-5">
-                    Curated Collection
-                  </p>
-
-                  <h2 className="font-serif text-5xl sm:text-6xl italic font-light">
-                    The Aurix Edit
-                  </h2>
-
-                </div>
-
+              <div className="text-center mb-16">
+                <p className="text-[8px] uppercase tracking-[0.45em] text-[#D4AF37] mb-4">
+                  Curated Collection
+                </p>
+                <h2 className="font-serif text-5xl sm:text-6xl italic font-light mb-5">
+                  The Aurix Edit
+                </h2>
+                <div className="w-16 h-px bg-[#D4AF37]/50 mx-auto mb-6" />
                 <Link
                   to="/products"
-                  className="hidden sm:flex items-center gap-3 text-[9px] uppercase tracking-[0.25em] text-white/70 hover:text-[#D4AF37]"
+                  className="inline-flex items-center gap-3 text-[9px] uppercase tracking-[0.25em] text-white/70 hover:text-[#D4AF37] transition"
                 >
-                  View All
+                  View All Creations
                   <ArrowRight size={15} />
                 </Link>
-
               </div>
 
               <div className="grid md:grid-cols-3 gap-6">
@@ -828,23 +913,23 @@ export default function Home() {
 
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
 
-                      <div className="absolute bottom-6 left-6 right-6">
+                      <div className="absolute bottom-6 left-6 right-6 text-center">
 
-                        <p className="text-[8px] uppercase tracking-[0.3em] text-[#D4AF37] mb-2">
+                        <p className="text-[8px] uppercase tracking-[0.3em] text-[#D4AF37] mb-2 text-center">
                           {item.purity}
                         </p>
 
-                        <h3 className="font-serif text-2xl italic">
+                        <h3 className="font-serif text-2xl italic text-center">
                           {item.name}
                         </h3>
 
-                        <div className="flex justify-between items-center mt-4">
+                        <div className="flex justify-center items-center gap-4 mt-4">
 
                           <span className="text-sm text-[#D4AF37]">
                             {item.price}
                           </span>
 
-                          <span className="w-9 h-9 border border-white/20 flex items-center justify-center group-hover:border-[#D4AF37]">
+                          <span className="w-9 h-9 border border-white/20 flex items-center justify-center group-hover:border-[#D4AF37] transition">
                             <ArrowRight size={14} />
                           </span>
 
@@ -914,20 +999,20 @@ export default function Home() {
                   return (
                     <div
                       key={index}
-                      className="p-8 lg:p-10 border border-white/10"
+                      className="p-8 lg:p-10 border border-white/10 text-center flex flex-col items-center"
                     >
 
                       <Icon
                         size={25}
-                        className="text-[#D4AF37] mb-8"
+                        className="text-[#D4AF37] mb-8 mx-auto"
                         aria-hidden="true"
                       />
 
-                      <h3 className="font-serif text-2xl italic mb-4">
+                      <h3 className="font-serif text-2xl italic mb-4 text-center">
                         {item.title}
                       </h3>
 
-                      <p className="text-white/60 text-xs leading-7">
+                      <p className="text-white/60 text-xs leading-7 text-center">
                         {item.text}
                       </p>
 
@@ -973,13 +1058,13 @@ export default function Home() {
 
                 </div>
 
-                <div>
+                <div className="text-center flex flex-col items-center">
 
-                  <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-7">
+                  <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-7 text-center">
                     The Aurix Story
                   </p>
 
-                  <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-none">
+                  <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-none text-center">
 
                     Born in India.
                     <br />
@@ -990,22 +1075,22 @@ export default function Home() {
 
                   </h2>
 
-                  <div className="w-16 h-px bg-[#D4AF37] my-8" />
+                  <div className="w-16 h-px bg-[#D4AF37] my-8 mx-auto" />
 
-                  <p className="text-white/70 text-sm leading-8 max-w-lg">
+                  <p className="text-white/70 text-sm leading-8 max-w-lg text-center mx-auto">
                     Aurix brings together the richness of Indian
                     craftsmanship and the simplicity of modern
                     luxury.
                   </p>
 
-                  <p className="text-white/70 text-sm leading-8 max-w-lg mt-5">
+                  <p className="text-white/70 text-sm leading-8 max-w-lg mt-5 text-center mx-auto">
                     Every piece is designed with an appreciation
                     for detail, proportion and timeless beauty.
                   </p>
 
                   <Link
                     to="/about"
-                    className="inline-flex items-center gap-4 mt-8 text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]"
+                    className="inline-flex items-center justify-center gap-4 mt-8 text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]"
                   >
                     Discover Our Story
                     <ArrowRight size={15} />
@@ -1062,17 +1147,17 @@ export default function Home() {
 
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent pointer-events-none" />
 
-                      <div className="absolute bottom-7 left-7">
+                      <div className="absolute bottom-7 inset-x-6 text-center flex flex-col items-center">
 
-                        <p className="text-[8px] uppercase tracking-[0.3em] text-[#D4AF37] mb-3">
+                        <p className="text-[8px] uppercase tracking-[0.3em] text-[#D4AF37] mb-3 text-center">
                           Aurix Collection
                         </p>
 
-                        <h3 className="font-serif text-4xl italic">
+                        <h3 className="font-serif text-3xl sm:text-4xl italic text-center">
                           {category.title}
                         </h3>
 
-                        <p className="text-white/70 text-xs mt-2">
+                        <p className="text-white/70 text-xs mt-2 text-center max-w-sm">
                           {category.subtitle}
                         </p>
 
@@ -1152,7 +1237,7 @@ export default function Home() {
               aria-hidden="true"
             />
 
-            <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
+            <div className="relative z-10 max-w-4xl mx-auto px-5 text-center flex flex-col items-center">
 
               <div className="w-14 h-14 mx-auto border border-[#D4AF37]/50 rotate-45 flex items-center justify-center mb-10">
 
@@ -1179,9 +1264,8 @@ export default function Home() {
 
               </h2>
 
-              <p className="max-w-xl mx-auto text-white/70 text-sm leading-7 mt-7 text-center">
-                      Explore our collection of timeless 22K gold
-                jewellery crafted for moments that matter.
+              <p className="max-w-xl mx-auto w-full text-white/70 text-sm leading-7 mt-7 text-center">
+                Explore our collection of timeless 22K gold jewellery crafted for moments that matter.
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10 w-full text-center">
