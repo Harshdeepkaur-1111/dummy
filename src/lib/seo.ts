@@ -8,7 +8,7 @@ export function getSiteUrl(): string {
   if (typeof window !== "undefined" && window.location && window.location.origin) {
     return window.location.origin;
   }
-  return (import.meta.env.VITE_SITE_URL as string) || "https://dummy-1c741ii02-harshdeep-1111.vercel.app";
+  return (import.meta.env.VITE_SITE_URL as string) || "https://aurix-gold.vercel.app";
 }
 
 export function getCanonicalUrl(pathname: string = "/"): string {

@@ -91,11 +91,11 @@ export function About() {
         {/* ================= SEO ================= */}
 
         <Helmet>
-          <title>About Aurix | Premium Gold Jewellery Brand</title>
+          <title>About Aurix | Handcrafted 22K BIS 916 Gold Jewellery Heritage</title>
 
           <meta
             name="description"
-            content="Discover the story, values and vision behind Aurix, a premium gold jewellery brand creating timeless designs with modern elegance."
+            content="Discover Aurix: India's luxury brand for certified 22K BIS 916 hallmarked gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
           />
 
           <meta
@@ -107,12 +107,12 @@ export function About() {
 
           <meta
             property="og:title"
-            content="About Aurix | Premium Gold Jewellery"
+            content="About Aurix | Handcrafted 22K Gold Jewellery"
           />
 
           <meta
             property="og:description"
-            content="Discover the story and values behind Aurix premium gold jewellery."
+            content="Discover Aurix: India's luxury brand for certified 22K BIS 916 hallmarked gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
           />
 
           <meta property="og:type" content="website" />
@@ -125,12 +125,12 @@ export function About() {
 
           <meta
             name="twitter:title"
-            content="About Aurix | Premium Gold Jewellery"
+            content="About Aurix | Handcrafted 22K Gold Jewellery"
           />
 
           <meta
             name="twitter:description"
-            content="Learn more about Aurix and our approach to premium gold jewellery."
+            content="Discover Aurix: India's luxury brand for certified 22K BIS 916 hallmarked gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
           />
 
           <script type="application/ld+json">

@@ -105,12 +105,12 @@ export function Contact() {
 
         <Helmet>
           <title>
-            Contact Aurix | Gold Jewellery Enquiries & Support
+            Contact Aurix | 22K Gold Jewellery Enquiries & Customer Support
           </title>
 
           <meta
             name="description"
-            content="Contact Aurix for gold jewellery enquiries, product information, order support and customer assistance."
+            content="Get in touch with Aurix for custom gold jewellery enquiries, 22K bridal designs, order tracking & support. Call +91 9034196429 or visit our boutique in India."
           />
 
           <meta
@@ -127,12 +127,12 @@ export function Contact() {
 
           <meta
             property="og:title"
-            content="Contact Aurix | Gold Jewellery Support"
+            content="Contact Aurix | 22K Gold Jewellery Enquiries & Support"
           />
 
           <meta
             property="og:description"
-            content="Get in touch with Aurix for jewellery enquiries, product information and customer support."
+            content="Get in touch with Aurix for custom gold jewellery enquiries, 22K bridal designs, order tracking & support. Call +91 9034196429 or visit our boutique in India."
           />
 
           <meta
@@ -159,12 +159,12 @@ export function Contact() {
 
           <meta
             name="twitter:title"
-            content="Contact Aurix | Gold Jewellery Support"
+            content="Contact Aurix | 22K Gold Jewellery Enquiries & Support"
           />
 
           <meta
             name="twitter:description"
-            content="Contact Aurix for gold jewellery enquiries and customer support."
+            content="Get in touch with Aurix for custom gold jewellery enquiries, 22K bridal designs, order tracking & support. Call +91 9034196429 or visit our boutique in India."
           />
 
           {/* Contact Schema */}

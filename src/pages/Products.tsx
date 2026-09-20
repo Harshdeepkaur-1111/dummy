@@ -101,7 +101,7 @@ export function Products() {
 
           <meta
             name="description"
-            content="Explore Aurix's premium 22K gold jewellery collection. Discover elegant necklaces, rings, earrings, bangles and timeless gold jewellery designed for modern luxury."
+            content="Explore Aurix's certified 22K BIS 916 gold jewellery. Shop handcrafted gold necklaces, bridal rings, earrings and bangles with insured delivery across India."
           />
 
           <meta
@@ -118,7 +118,7 @@ export function Products() {
 
           <meta
             property="og:description"
-            content="Discover premium 22K gold necklaces, rings, earrings and bangles from Aurix."
+            content="Explore Aurix's certified 22K BIS 916 gold jewellery. Shop handcrafted gold necklaces, bridal rings, earrings and bangles with insured delivery across India."
           />
 
           <meta property="og:type" content="website" />
@@ -136,7 +136,7 @@ export function Products() {
 
           <meta
             name="twitter:description"
-            content="Explore premium 22K gold jewellery from Aurix."
+            content="Explore Aurix's certified 22K BIS 916 gold jewellery. Shop handcrafted gold necklaces, bridal rings, earrings and bangles with insured delivery across India."
           />
 
           <script type="application/ld+json">

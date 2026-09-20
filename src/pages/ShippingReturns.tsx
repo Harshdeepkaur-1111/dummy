@@ -31,14 +31,14 @@ export function ShippingReturns() {
         <title>Shipping & Returns Policy | Aurix - 22K Gold Jewellery India</title>
         <meta
           name="description"
-          content="Learn about Aurix's 100% insured courier delivery across India, 14-day hassle-free returns, and lifetime 22K gold buyback policy."
+          content="Explore Aurix's shipping and return policies featuring 100% insured delivery across India, 14-day return privilege and lifetime 22K gold buyback guarantee."
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Shipping & Returns Policy | Aurix" />
         <meta
           property="og:description"
-          content="Discover Aurix's insured express shipping, doorstep delivery with OTP verification, and clear return policies."
+          content="Explore Aurix's shipping and return policies featuring 100% insured delivery across India, 14-day return privilege and lifetime 22K gold buyback guarantee."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -47,7 +47,7 @@ export function ShippingReturns() {
         <meta name="twitter:title" content="Shipping & Returns Policy | Aurix" />
         <meta
           name="twitter:description"
-          content="Read our shipping, returns, and transit insurance guidelines."
+          content="Explore Aurix's shipping and return policies featuring 100% insured delivery across India, 14-day return privilege and lifetime 22K gold buyback guarantee."
         />
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbSchema)}

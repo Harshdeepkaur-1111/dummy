@@ -31,14 +31,14 @@ export function Privacy() {
         <title>Privacy Policy | Aurix - 22K Gold Jewellery India</title>
         <meta
           name="description"
-          content="Read Aurix's privacy policy to learn how we protect your personal information, handle secure transactions, and safeguard user data."
+          content="Read the Aurix privacy policy to learn how we protect your personal data, secure online transactions, and maintain confidentiality for luxury jewellery orders."
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Privacy Policy | Aurix" />
         <meta
           property="og:description"
-          content="Aurix is committed to protecting your privacy and personal data. Read our complete privacy policy."
+          content="Read the Aurix privacy policy to learn how we protect your personal data, secure online transactions, and maintain confidentiality for luxury jewellery orders."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -47,7 +47,7 @@ export function Privacy() {
         <meta name="twitter:title" content="Privacy Policy | Aurix" />
         <meta
           name="twitter:description"
-          content="Learn how Aurix protects your privacy and personal information."
+          content="Read the Aurix privacy policy to learn how we protect your personal data, secure online transactions, and maintain confidentiality for luxury jewellery orders."
         />
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbSchema)}

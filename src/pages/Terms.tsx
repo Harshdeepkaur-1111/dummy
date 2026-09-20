@@ -31,14 +31,14 @@ export function Terms() {
         <title>Terms of Service | Aurix - 22K Gold Jewellery India</title>
         <meta
           name="description"
-          content="Review Aurix's terms of service for purchasing certified 22K gold jewellery, order processing, warranty, and platform usage."
+          content="Read Aurix's terms of service covering certified 22K gold jewellery purchases, transparent pricing, insured courier delivery, warranties and return guidelines."
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Terms of Service | Aurix" />
         <meta
           property="og:description"
-          content="Learn the terms and conditions governing purchases and usage of the Aurix gold jewellery platform."
+          content="Read Aurix's terms of service covering certified 22K gold jewellery purchases, transparent pricing, insured courier delivery, warranties and return guidelines."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -47,7 +47,7 @@ export function Terms() {
         <meta name="twitter:title" content="Terms of Service | Aurix" />
         <meta
           name="twitter:description"
-          content="Review the terms and conditions of purchasing 22K gold jewellery from Aurix."
+          content="Read Aurix's terms of service covering certified 22K gold jewellery purchases, transparent pricing, insured courier delivery, warranties and return guidelines."
         />
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbSchema)}

@@ -58,11 +58,11 @@ export function Blog() {
         {/* ================= SEO ================= */}
 
         <Helmet>
-          <title>Aurix Journal | Gold Jewellery Trends, Tips & Guides</title>
+          <title>Aurix Journal | 22K Gold Jewellery Trends, Styling & Purity Guides</title>
 
           <meta
             name="description"
-            content="Read the Aurix Journal for gold jewellery trends, 22K gold care tips, styling ideas, buying guides and expert jewellery advice."
+            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, BIS 916 purity advice, latest market trends and wedding jewellery inspiration."
           />
 
           <meta
@@ -74,12 +74,12 @@ export function Blog() {
 
           <meta
             property="og:title"
-            content="Aurix Journal | Gold Jewellery Trends & Tips"
+            content="Aurix Journal | 22K Gold Jewellery Trends & Guides"
           />
 
           <meta
             property="og:description"
-            content="Discover gold jewellery trends, styling tips and jewellery care guides from Aurix."
+            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, BIS 916 purity advice, latest market trends and wedding jewellery inspiration."
           />
 
           <meta property="og:type" content="website" />
@@ -92,12 +92,12 @@ export function Blog() {
 
           <meta
             name="twitter:title"
-            content="Aurix Journal | Gold Jewellery Trends & Tips"
+            content="Aurix Journal | 22K Gold Jewellery Trends & Guides"
           />
 
           <meta
             name="twitter:description"
-            content="Gold jewellery trends, styling ideas and care guides from Aurix."
+            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, BIS 916 purity advice, latest market trends and wedding jewellery inspiration."
           />
 
           <script type="application/ld+json">

@@ -267,7 +267,7 @@ export default function Home() {
         <meta property="og:title" content="Aurix | BIS 916 Hallmarked 22K Gold Jewellery Online India" />
         <meta
           property="og:description"
-          content="Discover certified 22K BIS 916 hallmarked gold jewellery in India. Shop timeless necklaces, rings, earrings, and bangles with insured express delivery."
+          content="Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -282,7 +282,7 @@ export default function Home() {
         <meta name="twitter:title" content="Aurix | BIS 916 Hallmarked 22K Gold Jewellery" />
         <meta
           name="twitter:description"
-          content="Discover certified 22K BIS 916 hallmarked gold jewellery crafted in India. 100% insured delivery."
+          content="Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI."
         />
         <meta
           name="twitter:image"
