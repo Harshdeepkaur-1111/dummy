@@ -12,7 +12,7 @@ import { team } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
 import LazyMotion from "../components/LazyMotion";
 import { getOptimizedImage } from "../lib/utils";
-import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
+import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
 
 const values = [
   {
@@ -39,7 +39,7 @@ const values = [
 
 export function About() {
   const siteUrl = getSiteUrl();
-  const canonicalUrl = getCanonicalUrl("/about");
+  const canonicalUrl = useCanonical("/about");
 
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -91,11 +91,11 @@ export function About() {
         {/* ================= SEO ================= */}
 
         <Helmet>
-          <title>About Aurix | Handcrafted 22K BIS 916 Gold Jewellery Heritage</title>
+          <title>About Aurix | Pure Handcrafted 22K Gold Jewellery Heritage.</title>
 
           <meta
             name="description"
-            content="Discover Aurix: India's luxury brand for certified 22K BIS 916 hallmarked gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
+            content="Discover Aurix: India's luxury brand for certified 22K gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
           />
 
           <meta
@@ -103,16 +103,14 @@ export function About() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link rel="canonical" href={canonicalUrl} />
-
           <meta
             property="og:title"
-            content="About Aurix | Handcrafted 22K Gold Jewellery"
+            content="About Aurix | Pure Handcrafted 22K Gold Jewellery Heritage."
           />
 
           <meta
             property="og:description"
-            content="Discover Aurix: India's luxury brand for certified 22K BIS 916 hallmarked gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
+            content="Discover Aurix: India's luxury brand for certified 22K gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
           />
 
           <meta property="og:type" content="website" />
@@ -125,12 +123,12 @@ export function About() {
 
           <meta
             name="twitter:title"
-            content="About Aurix | Handcrafted 22K Gold Jewellery"
+            content="About Aurix | Pure Handcrafted 22K Gold Jewellery Heritage."
           />
 
           <meta
             name="twitter:description"
-            content="Discover Aurix: India's luxury brand for certified 22K BIS 916 hallmarked gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
+            content="Discover Aurix: India's luxury brand for certified 22K gold jewellery. Learn about our heritage, master craft and lifelong purity promise."
           />
 
           <script type="application/ld+json">

@@ -1,10 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
+import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
 
 export function ShippingReturns() {
   const siteUrl = getSiteUrl();
-  const canonicalUrl = getCanonicalUrl("/shipping-returns");
+  const canonicalUrl = useCanonical("/shipping-returns");
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -34,7 +34,6 @@ export function ShippingReturns() {
           content="Explore Aurix's shipping and return policies featuring 100% insured delivery across India, 14-day return privilege and lifetime 22K gold buyback guarantee."
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Shipping & Returns Policy | Aurix" />
         <meta
           property="og:description"

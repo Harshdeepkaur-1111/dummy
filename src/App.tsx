@@ -59,6 +59,36 @@ const ShippingReturns = lazy(() =>
   }))
 );
 
+const ProductDetail = lazy(() =>
+  import("./pages/ProductDetail").then((module) => ({
+    default: module.ProductDetail,
+  }))
+);
+
+const Collections = lazy(() =>
+  import("./pages/Collections").then((module) => ({
+    default: module.Collections,
+  }))
+);
+
+const CartPage = lazy(() =>
+  import("./pages/CartPage").then((module) => ({
+    default: module.CartPage,
+  }))
+);
+
+const CheckoutPage = lazy(() =>
+  import("./pages/CheckoutPage").then((module) => ({
+    default: module.CheckoutPage,
+  }))
+);
+
+const LoginPage = lazy(() =>
+  import("./pages/LoginPage").then((module) => ({
+    default: module.LoginPage,
+  }))
+);
+
 /* =========================================================
    LOADING
    ========================================================= */
@@ -146,6 +176,31 @@ export default function App() {
                 <Route
                   path="/contact"
                   element={<Contact />}
+                />
+
+                <Route
+                  path="/collections"
+                  element={<Collections />}
+                />
+
+                <Route
+                  path="/product/:slug"
+                  element={<ProductDetail />}
+                />
+
+                <Route
+                  path="/cart"
+                  element={<CartPage />}
+                />
+
+                <Route
+                  path="/checkout"
+                  element={<CheckoutPage />}
+                />
+
+                <Route
+                  path="/login"
+                  element={<LoginPage />}
                 />
 
                 <Route

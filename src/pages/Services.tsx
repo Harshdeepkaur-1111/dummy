@@ -48,11 +48,6 @@ export function Services() {
             content="Explore Aurix gold jewelry services, handcrafted 22k gold jewelry, custom designs, premium collections and elegant jewelry crafted for every occasion."
           />
 
-          <link
-            rel="canonical"
-            href={canonicalUrl}
-          />
-
           <meta
             name="robots"
             content="index, follow"

@@ -82,8 +82,8 @@ export const products = [
     price: "₹24,999",
     material: "22K Gold",
     weight: "8g",
-    desc: "Elegant gold necklace suitable for weddings and celebrations.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_WNH1ytBlSAx8tnKP4I4iLS4dOyAyUtBPR9VdExQf9gG2dXL-eqSr2o4&s=10",
+    desc: "Elegant 22K BIS 916 hallmarked gold necklace suitable for weddings and celebrations.",
+    image: "/images/336052524_594628079068489_8991184652865232177_n.webp",
   },
   {
     id: 2,
@@ -91,8 +91,8 @@ export const products = [
     price: "₹12,499",
     material: "18K Gold",
     weight: "4g",
-    desc: "Luxury gold ring with a timeless design.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1vnpXbSBQF3FJ6fKmQZFZJJSFrFrzl82IPZFveESr3g&s",
+    desc: "Luxury certified gold ring with a timeless heritage design.",
+    image: "/images/LJ-R00631YG_1_0c039dbf-f4b9-4693-98b8-25f1b5e3f4d5.webp",
   },
   {
     id: 3,
@@ -100,8 +100,8 @@ export const products = [
     price: "₹15,999",
     material: "22K Gold",
     weight: "5g",
-    desc: "Sophisticated gold earrings featuring pearl accents.",
-    image: "https://blingbox.in/cdn/shop/products/beautiful-pearl-drop-earrings-bling-box-jewellery-34608676405484.jpg?v=1661365446",
+    desc: "Sophisticated 22K gold earrings featuring genuine pearl accents.",
+    image: "/images/beautiful-pearl-drop-earrings-bling-box-jewellery-34608676405484.webp",
   },
   {
     id: 4,
@@ -109,8 +109,8 @@ export const products = [
     price: "₹18,999",
     material: "22K Gold",
     weight: "6g",
-    desc: "Modern gold bracelet designed for daily elegance.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpDhbE4Ab4_dO_GX9-ic0e7IeRXPsA8vqS9nRdtTuWMyfAGO4TimRP1Qc&s=10",
+    desc: "Modern 22K gold bracelet designed for daily elegance.",
+    image: "/images/71FN+9fe2yL._SY395_.webp",
   },
   {
     id: 5,
@@ -118,8 +118,8 @@ export const products = [
     price: "₹10,999",
     material: "18K Gold",
     weight: "3g",
-    desc: "Minimalist gold pendant for a refined look.",
-    image: "https://i.etsystatic.com/29820660/c/1104/1104/714/726/il/3cc7aa/6811366752/il_300x300.6811366752_yuu4.jpg",
+    desc: "Minimalist gold pendant crafted for a refined contemporary look.",
+    image: "/images/il_300x300.6811366752_yuu4.webp",
   },
   {
     id: 6,
@@ -127,8 +127,8 @@ export const products = [
     price: "₹29,999",
     material: "22K Gold",
     weight: "10g",
-    desc: "Traditional gold craftsmanship with contemporary styling.",
-    image: "https://m.media-amazon.com/images/I/71FN+9fe2yL._SY395_.jpg",
+    desc: "Traditional 22K gold craftsmanship with contemporary styling.",
+    image: "/images/71FN+9fe2yL._SY395_.webp",
   },
   {
     id: 7,
@@ -136,8 +136,8 @@ export const products = [
     price: "₹1,85,999",
     material: "22K Gold",
     weight: "25g",
-    desc: "An opulent gold piece reserved for royal celebrations and grand events.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBWgJjCaiJu4yRlBHowCWEj_H7EZflSGD0GUeyDvn9qNmrv4RMbLovt1I&s=10",
+    desc: "An opulent 22K gold piece reserved for royal celebrations and grand events.",
+    image: "/images/336052524_594628079068489_8991184652865232177_n.webp",
   },
   {
     id: 8,
@@ -146,6 +146,6 @@ export const products = [
     material: "22K Solid Gold",
     weight: "14g",
     desc: "A bold statement gold ring that speaks volumes of the wearer's legacy.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShWuxBEfQmDI1RfFnFQgf7kSTjYvHRIzSrX-av4KQ3rMsbnaQmm4NxkAZZ&s=10",
+    image: "/images/LJ-R00631YG_1_0c039dbf-f4b9-4693-98b8-25f1b5e3f4d5.webp",
   }
 ];

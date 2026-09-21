@@ -13,6 +13,7 @@ export function Layout() {
 
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "Collections", path: "/collections" },
     { name: "Products", path: "/products" },
     { name: "About", path: "/about" },
     { name: "Blog", path: "/blog" },
@@ -92,6 +93,12 @@ export function Layout() {
             </nav>
 
             <div className="hidden md:flex items-center gap-6">
+              <Link
+                to="/login"
+                className="text-[11px] uppercase tracking-widest text-white/70 hover:text-[#D4AF37] transition-colors"
+              >
+                Client Login
+              </Link>
               <button
                 type="button"
                 className="flex items-center gap-2 cursor-pointer group"
@@ -109,20 +116,20 @@ export function Layout() {
             </div>
 
             {/* Mobile Menu & Cart Buttons */}
-            <div className="md:hidden flex items-center gap-4">
+            <div className="md:hidden flex items-center gap-2">
               <button 
                 type="button"
-                className="flex items-center gap-2 cursor-pointer group"
+                className="flex items-center justify-center min-w-[44px] min-h-[44px] px-2 py-2 cursor-pointer group rounded-lg hover:bg-white/5 transition"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setIsCartOpen(true);
                 }}
-                aria-label="Open cart"
+                aria-label="Open shopping cart"
                 aria-expanded={isCartOpen}
                 aria-controls="cart-drawer"
               >
-                <ShoppingBag className="w-4 h-4 text-[#D4AF37] group-hover:text-white transition-colors" />
-                <span className="text-[11px] text-[#D4AF37] group-hover:text-white transition-colors">({cartCount})</span>
+                <ShoppingBag className="w-5 h-5 text-[#D4AF37] group-hover:text-white transition-colors" />
+                <span className="text-xs font-medium ml-1 text-[#D4AF37] group-hover:text-white transition-colors">({cartCount})</span>
               </button>
               <button
                 type="button"
@@ -130,11 +137,11 @@ export function Layout() {
                   setIsCartOpen(false);
                   setIsMobileMenuOpen(!isMobileMenuOpen);
                 }}
-                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-xs hover:bg-white/5 focus:outline-none"
+                className="min-w-[44px] min-h-[44px] w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-xs hover:bg-white/10 focus:outline-none transition"
                 aria-label="Toggle mobile menu"
                 aria-expanded={isMobileMenuOpen}
               >
-                {isMobileMenuOpen ? <X size={20} className="text-white" /> : <Menu size={20} className="text-white" />}
+                {isMobileMenuOpen ? <X size={22} className="text-white" /> : <Menu size={22} className="text-white" />}
               </button>
             </div>
           </div>
@@ -227,13 +234,23 @@ export function Layout() {
                     ₹{cartTotal.toLocaleString('en-IN')}
                   </span>
                 </div>
-                <button 
-                  className="w-full bg-[#947100] text-black py-5 font-medium uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-colors duration-300"
-                  onClick={handleCheckout}
-                  aria-label="Proceed to Checkout"
-                >
-                  Proceed to Checkout
-                </button>
+                <div className="flex flex-col gap-2.5">
+                  <Link 
+                    to="/checkout"
+                    className="w-full text-center bg-[#D4AF37] text-black py-4 font-medium uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-colors duration-300 rounded"
+                    onClick={() => setIsCartOpen(false)}
+                    aria-label="Proceed to Checkout"
+                  >
+                    Proceed to Checkout
+                  </Link>
+                  <Link
+                    to="/cart"
+                    className="w-full text-center border border-white/20 text-white/80 py-2.5 font-medium uppercase tracking-[0.2em] text-[10px] hover:text-white hover:border-white transition-colors duration-300 rounded"
+                    onClick={() => setIsCartOpen(false)}
+                  >
+                    View Full Cart
+                  </Link>
+                </div>
               </div>
             )}
           </div>
@@ -262,21 +279,22 @@ export function Layout() {
             
             <div className="col-span-1">
               <h2 className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] mb-6">Collections</h2>
-              <ul className="space-y-4">
-                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Bridal Collection</Link></li>
-                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Everyday Essentials</Link></li>
-                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Men's Gold Rings</Link></li>
-                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Limited Editions</Link></li>
+              <ul className="space-y-3">
+                <li><Link to="/collections" className="text-white/70 hover:text-white text-xs transition-colors">All 22K Collections</Link></li>
+                <li><Link to="/products" className="text-white/70 hover:text-white text-xs transition-colors">Bridal & High Jewellery</Link></li>
+                <li><Link to="/product/gold-ring" className="text-white/70 hover:text-white text-xs transition-colors">22K Gold Rings</Link></li>
+                <li><Link to="/product/classic-gold-necklace" className="text-white/70 hover:text-white text-xs transition-colors">Gold Necklaces</Link></li>
               </ul>
             </div>
 
             <div className="col-span-1">
               <h2 className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] mb-6">Customer Care</h2>
-              <ul className="space-y-4">
-                <li><Link to="/contact" className="text-white/70 hover:text-white text-xs transition-colors">Contact Us</Link></li>
-                <li><Link to="/about" className="text-white/70 hover:text-white text-xs transition-colors">Our Story</Link></li>
-                <li><Link to="/blog" className="text-white/70 hover:text-white text-xs transition-colors">Jewelry Care Guide</Link></li>
+              <ul className="space-y-3">
+                <li><Link to="/contact" className="text-white/70 hover:text-white text-xs transition-colors">Contact & Support</Link></li>
+                <li><Link to="/login" className="text-white/70 hover:text-white text-xs transition-colors">Client Login</Link></li>
+                <li><Link to="/cart" className="text-white/70 hover:text-white text-xs transition-colors">View Cart</Link></li>
                 <li><Link to="/shipping-returns" className="text-white/70 hover:text-white text-xs transition-colors">Shipping & Returns</Link></li>
+                <li><Link to="/about" className="text-white/70 hover:text-white text-xs transition-colors">Our Heritage</Link></li>
               </ul>
             </div>
 

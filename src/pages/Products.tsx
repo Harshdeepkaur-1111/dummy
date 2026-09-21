@@ -12,12 +12,12 @@ import OptimizedImage from "../components/OptimizedImage";
 import { products } from "../data";
 import { getOptimizedImage } from "../lib/utils";
 import { useCart } from "../contexts/CartContext";
-import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
+import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
 
 export function Products() {
   const { addToCart, setIsCartOpen } = useCart();
   const siteUrl = getSiteUrl();
-  const canonicalUrl = getCanonicalUrl("/products");
+  const canonicalUrl = useCanonical("/products");
 
   const handleBuyNow = (
     product: any,
@@ -96,12 +96,12 @@ export function Products() {
 
         <Helmet>
           <title>
-            22K Gold Jewellery Collection | Necklaces, Rings & Earrings | Aurix
+            22K Gold  Collection | Necklaces, Rings & Earrings | Aurix
           </title>
 
           <meta
             name="description"
-            content="Explore Aurix's certified 22K BIS 916 gold jewellery. Shop handcrafted gold necklaces, bridal rings, earrings and bangles with insured delivery across India."
+            content="Explore Aurix's certified 22K gold jewellery. Shop handcrafted gold necklaces, earrings and bangles with insured delivery across India."
           />
 
           <meta
@@ -109,16 +109,14 @@ export function Products() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link rel="canonical" href={canonicalUrl} />
-
           <meta
             property="og:title"
-            content="22K Gold Jewellery Collection | Aurix"
+            content="22K Gold  Collection | Necklaces, Rings & Earrings | Aurix"
           />
 
           <meta
             property="og:description"
-            content="Explore Aurix's certified 22K BIS 916 gold jewellery. Shop handcrafted gold necklaces, bridal rings, earrings and bangles with insured delivery across India."
+            content="Explore Aurix's certified 22K gold jewellery. Shop handcrafted gold necklaces, earrings and bangles with insured delivery across India."
           />
 
           <meta property="og:type" content="website" />
@@ -131,12 +129,12 @@ export function Products() {
 
           <meta
             name="twitter:title"
-            content="22K Gold Jewellery Collection | Aurix"
+            content="22K Gold  Collection | Necklaces, Rings & Earrings | Aurix"
           />
 
           <meta
             name="twitter:description"
-            content="Explore Aurix's certified 22K BIS 916 gold jewellery. Shop handcrafted gold necklaces, bridal rings, earrings and bangles with insured delivery across India."
+            content="Explore Aurix's certified 22K gold jewellery. Shop handcrafted gold necklaces, earrings and bangles with insured delivery across India."
           />
 
           <script type="application/ld+json">

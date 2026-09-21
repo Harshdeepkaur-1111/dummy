@@ -1,10 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
+import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
 
 export function Privacy() {
   const siteUrl = getSiteUrl();
-  const canonicalUrl = getCanonicalUrl("/privacy");
+  const canonicalUrl = useCanonical("/privacy");
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -34,7 +34,6 @@ export function Privacy() {
           content="Read the Aurix privacy policy to learn how we protect your personal data, secure online transactions, and maintain confidentiality for luxury jewellery orders."
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Privacy Policy | Aurix" />
         <meta
           property="og:description"

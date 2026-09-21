@@ -6,12 +6,12 @@ import LazyMotion from "../components/LazyMotion";
 import { articles } from "../data";
 import OptimizedImage from "../components/OptimizedImage";
 import { getOptimizedImage } from "../lib/utils";
-import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
+import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
 
 export function Blog() {
   const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
   const siteUrl = getSiteUrl();
-  const canonicalUrl = getCanonicalUrl("/blog");
+  const canonicalUrl = useCanonical("/blog");
 
   const blogSchema = {
     "@context": "https://schema.org",
@@ -58,11 +58,11 @@ export function Blog() {
         {/* ================= SEO ================= */}
 
         <Helmet>
-          <title>Aurix Journal | 22K Gold Jewellery Trends, Styling & Purity Guides</title>
+          <title>Aurix Journal | 22K Gold Jewellery Trends & Purity Guides</title>
 
           <meta
             name="description"
-            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, BIS 916 purity advice, latest market trends and wedding jewellery inspiration."
+            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, latest market trends and wedding jewellery inspiration."
           />
 
           <meta
@@ -70,16 +70,14 @@ export function Blog() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link rel="canonical" href={canonicalUrl} />
-
           <meta
             property="og:title"
-            content="Aurix Journal | 22K Gold Jewellery Trends & Guides"
+            content="Aurix Journal | 22K Gold Jewellery Trends & Purity Guides"
           />
 
           <meta
             property="og:description"
-            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, BIS 916 purity advice, latest market trends and wedding jewellery inspiration."
+            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, latest market trends and wedding jewellery inspiration."
           />
 
           <meta property="og:type" content="website" />
@@ -92,12 +90,12 @@ export function Blog() {
 
           <meta
             name="twitter:title"
-            content="Aurix Journal | 22K Gold Jewellery Trends & Guides"
+            content="Aurix Journal | 22K Gold Jewellery Trends & Purity Guides"
           />
 
           <meta
             name="twitter:description"
-            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, BIS 916 purity advice, latest market trends and wedding jewellery inspiration."
+            content="Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, latest market trends and wedding jewellery inspiration."
           />
 
           <script type="application/ld+json">

@@ -29,6 +29,26 @@ export default defineConfig({
       },
     },
     cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('motion') || id.includes('framer-motion')) {
+              return 'vendor-motion';
+            }
+            if (id.includes('react-router')) {
+              return 'vendor-router';
+            }
+            if (id.includes('react-helmet-async')) {
+              return 'vendor-helmet';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-lucide';
+            }
+          }
+        },
+      },
+    },
   },
   server: {
     hmr: process.env.DISABLE_HMR !== 'true',

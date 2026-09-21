@@ -10,7 +10,7 @@ import {
 import { Helmet } from "react-helmet-async";
 
 import LazyMotion from "../components/LazyMotion";
-import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
+import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
 
 interface FormData {
   name: string;
@@ -63,7 +63,7 @@ export function Contact() {
   };
 
   const siteUrl = getSiteUrl();
-  const canonicalUrl = getCanonicalUrl("/contact");
+  const canonicalUrl = useCanonical("/contact");
 
   const contactSchema = {
     "@context": "https://schema.org",
@@ -105,12 +105,12 @@ export function Contact() {
 
         <Helmet>
           <title>
-            Contact Aurix | 22K Gold Jewellery Enquiries & Customer Support
+            Contact Aurix | 22K Jewellery Enquiries & Customer Support
           </title>
 
           <meta
             name="description"
-            content="Get in touch with Aurix for custom gold jewellery enquiries, 22K bridal designs, order tracking & support. Call +91 9034196429 or visit our boutique in India."
+            content="Get in touch with Aurix for custom gold jewellery enquiries, order tracking & support. Call +91 9034196429 or visit our boutique in India."
           />
 
           <meta
@@ -118,21 +118,16 @@ export function Contact() {
             content="index, follow, max-image-preview:large"
           />
 
-          <link
-            rel="canonical"
-            href={canonicalUrl}
-          />
-
           {/* Open Graph */}
 
           <meta
             property="og:title"
-            content="Contact Aurix | 22K Gold Jewellery Enquiries & Support"
+            content="Contact Aurix | 22K Jewellery Enquiries & Customer Support"
           />
 
           <meta
             property="og:description"
-            content="Get in touch with Aurix for custom gold jewellery enquiries, 22K bridal designs, order tracking & support. Call +91 9034196429 or visit our boutique in India."
+            content="Get in touch with Aurix for custom gold jewellery enquiries, order tracking & support. Call +91 9034196429 or visit our boutique in India."
           />
 
           <meta
@@ -159,12 +154,12 @@ export function Contact() {
 
           <meta
             name="twitter:title"
-            content="Contact Aurix | 22K Gold Jewellery Enquiries & Support"
+            content="Contact Aurix | 22K Jewellery Enquiries & Customer Support"
           />
 
           <meta
             name="twitter:description"
-            content="Get in touch with Aurix for custom gold jewellery enquiries, 22K bridal designs, order tracking & support. Call +91 9034196429 or visit our boutique in India."
+            content="Get in touch with Aurix for custom gold jewellery enquiries, order tracking & support. Call +91 9034196429 or visit our boutique in India."
           />
 
           {/* Contact Schema */}
@@ -264,11 +259,11 @@ export function Contact() {
                 />
 
                 <span>
-                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/60">
+                  <span className="block text-xs uppercase tracking-[0.2em] text-white/90 font-medium">
                     Phone
                   </span>
 
-                  <span className="mt-2 block text-sm text-white/80">
+                  <span className="mt-2 block text-base text-white font-semibold">
                     +91 9034196429
                   </span>
                 </span>
@@ -286,11 +281,11 @@ export function Contact() {
                 />
 
                 <span>
-                  <span className="block text-[9px] uppercase tracking-[0.2em] text-white/60">
+                  <span className="block text-xs uppercase tracking-[0.2em] text-white/90 font-medium">
                     Email
                   </span>
 
-                  <span className="mt-2 block break-all text-sm text-white/80">
+                  <span className="mt-2 block break-all text-sm text-white font-medium">
                     tejinders791@gmail.com
                   </span>
                 </span>

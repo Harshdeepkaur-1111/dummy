@@ -1,10 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
+import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
 
 export function Terms() {
   const siteUrl = getSiteUrl();
-  const canonicalUrl = getCanonicalUrl("/terms");
+  const canonicalUrl = useCanonical("/terms");
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -34,7 +34,6 @@ export function Terms() {
           content="Read Aurix's terms of service covering certified 22K gold jewellery purchases, transparent pricing, insured courier delivery, warranties and return guidelines."
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Terms of Service | Aurix" />
         <meta
           property="og:description"

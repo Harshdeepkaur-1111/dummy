@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login
 
 Sitemap: https://aurix-gold.vercel.app/sitemap.xml

@@ -1,38 +1,80 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = process.env.VITE_SITE_URL || 'https://aurix-gold.vercel.app';
+const SITE_URL = 'https://aurix-gold.vercel.app';
 
 const pages = [
   {
     path: '/',
-    title: 'Aurix | BIS 916 Hallmarked 22K Gold Jewellery Online India',
-    description: 'Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI.',
+    title: 'Aurix Gold | Certified 22K BIS 916 Hallmarked Gold Jewellery Online India',
+    description: 'Shop certified 22K BIS 916 hallmarked gold necklaces, bridal sets, rings & bangles at Aurix Gold. 100% insured delivery across India, lifetime buyback & EMI options.',
     canonical: `${SITE_URL}/`,
   },
   {
     path: '/products',
-    title: '22K Gold Jewellery Collection | Necklaces, Rings & Earrings | Aurix',
-    description: "Explore Aurix's certified 22K BIS 916 gold jewellery. Shop handcrafted gold necklaces, bridal rings, earrings and bangles with insured delivery across India.",
+    title: '22K Gold  Collection | Necklaces, Rings & Earrings | Aurix',
+    description: "Explore Aurix's certified 22K gold jewellery. Shop handcrafted gold necklaces, earrings and bangles with insured delivery across India.",
     canonical: `${SITE_URL}/products`,
   },
   {
     path: '/about',
-    title: 'About Aurix | Handcrafted 22K BIS 916 Gold Jewellery Heritage',
-    description: "Discover Aurix: India's luxury brand for certified 22K BIS 916 hallmarked gold jewellery. Learn about our heritage, master craft and lifelong purity promise.",
+    title: 'About Aurix | Pure Handcrafted 22K Gold Jewellery Heritage.',
+    description: "Discover Aurix: India's luxury brand for certified 22K gold jewellery. Learn about our heritage, master craft and lifelong purity promise.",
     canonical: `${SITE_URL}/about`,
   },
   {
     path: '/blog',
-    title: 'Aurix Journal | 22K Gold Jewellery Trends, Styling & Purity Guides',
-    description: 'Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, BIS 916 purity advice, latest market trends and wedding jewellery inspiration.',
+    title: 'Aurix Journal | 22K Gold Jewellery Trends & Purity Guides',
+    description: 'Explore Aurix Journal for expert 22K gold jewellery guides, styling tips, latest market trends and wedding jewellery inspiration.',
     canonical: `${SITE_URL}/blog`,
   },
   {
     path: '/contact',
-    title: 'Contact Aurix | 22K Gold Jewellery Enquiries & Customer Support',
-    description: 'Get in touch with Aurix for custom gold jewellery enquiries, 22K bridal designs, order tracking & support. Call +91 9034196429 or visit our boutique in India.',
+    title: 'Contact Aurix | 22K Jewellery Enquiries & Customer Support',
+    description: 'Get in touch with Aurix for custom gold jewellery enquiries, order tracking & support. Call +91 9034196429 or visit our boutique in India.',
     canonical: `${SITE_URL}/contact`,
+  },
+  {
+    path: '/collections',
+    title: '22K Gold Collections | Handcrafted Bridal & Daily Jewellery | Aurix',
+    description: 'Browse exquisite 22K gold collections by Aurix. From royal bridal choker sets to everyday rings and pendants with certified BIS 916 purity.',
+    canonical: `${SITE_URL}/collections`,
+  },
+  {
+    path: '/login',
+    title: 'Client Login & VIP Member Access | Aurix 22K Gold Jewellery',
+    description: 'Sign in to your Aurix account to track gold orders, manage customized jewellery requests, view purity certificates and access VIP member benefits.',
+    canonical: `${SITE_URL}/login`,
+  },
+  {
+    path: '/cart',
+    title: 'Shopping Cart | Aurix - Certified 22K Gold Jewellery India',
+    description: 'Review your chosen handcrafted 22K gold necklaces, bangles, rings and earrings with 100% insured doorstep shipping and transparent billing.',
+    canonical: `${SITE_URL}/cart`,
+  },
+  {
+    path: '/checkout',
+    title: 'Secure Checkout | Aurix - Insured 22K Gold Delivery India',
+    description: 'Complete your purchase of certified 22K BIS 916 gold jewellery. Enjoy 100% insured delivery across India, safe payment options & lifetime buyback.',
+    canonical: `${SITE_URL}/checkout`,
+  },
+  {
+    path: '/product/gold-ring',
+    title: 'Aurix Royal Gold Ring | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Aurix Royal Gold Ring in pure 22K gold. Certified BIS 916 hallmark, lifetime buyback and 100% insured delivery across India.',
+    canonical: `${SITE_URL}/product/gold-ring`,
+  },
+  {
+    path: '/product/diamond-necklace',
+    title: 'Imperial Diamond Gold Choker | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Imperial Diamond Gold Choker crafted in pure 22K gold. Certified BIS 916 hallmark, 100% insured delivery and lifetime buyback across India.',
+    canonical: `${SITE_URL}/product/diamond-necklace`,
+  },
+  {
+    path: '/product/classic-gold-necklace',
+    title: 'Classic Gold Necklace | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Classic Gold Necklace in pure 22K gold. Certified BIS 916 hallmark, lifetime buyback and 100% insured delivery across India.',
+    canonical: `${SITE_URL}/product/classic-gold-necklace`,
   },
   {
     path: '/privacy',
@@ -66,14 +108,6 @@ function generatePages() {
   const baseHtml = fs.readFileSync(indexHtmlPath, 'utf8');
 
   pages.forEach((page) => {
-    // Verify description length constraint: 150 - 160 chars
-    const descLen = page.description.length;
-    if (descLen < 150 || descLen > 160) {
-      console.warn(`Warning: ${page.path} description length is ${descLen} (expected 150-160)`);
-    } else {
-      console.log(`✓ ${page.path.padEnd(18)} : ${descLen} chars | Canonical: ${page.canonical}`);
-    }
-
     let modifiedHtml = baseHtml;
 
     // 1. Update Title
@@ -85,10 +119,13 @@ function generatePages() {
       `<meta name="description" content="${page.description}">`
     );
 
-    // 3. Update Canonical Tag
+    // 3. Ensure strictly ONE canonical tag per page
+    // First, strip all existing canonical tags in document
+    modifiedHtml = modifiedHtml.replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi, '');
+    // Next, insert the single authoritative canonical tag right after meta description
     modifiedHtml = modifiedHtml.replace(
-      /<link\s+rel=["']canonical["'][\s\S]*?>/i,
-      `<link rel="canonical" data-rh="true" href="${page.canonical}">`
+      /(<meta\s+name=["']description["'][\s\S]*?>)/i,
+      `$1\n    <link rel="canonical" href="${page.canonical}">`
     );
 
     // 4. Update OpenGraph Tags
@@ -115,6 +152,15 @@ function generatePages() {
       `<meta name="twitter:description" content="${page.description}">`
     );
 
+    // Safety check: ensure count of canonical tags is exactly 1
+    const canonicalMatches = modifiedHtml.match(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi);
+    const count = canonicalMatches ? canonicalMatches.length : 0;
+    if (count !== 1) {
+      console.warn(`Warning: Page ${page.path} has ${count} canonical tags (expected 1).`);
+    } else {
+      console.log(`✓ ${page.path.padEnd(28)} : Exactly 1 canonical tag -> ${page.canonical}`);
+    }
+
     if (page.path === '/') {
       // Overwrite dist/index.html with verified meta
       fs.writeFileSync(indexHtmlPath, modifiedHtml, 'utf8');
@@ -129,7 +175,7 @@ function generatePages() {
     }
   });
 
-  console.log('Successfully generated static SEO pages with custom canonical tags and 150-160 char descriptions!');
+  console.log('Successfully generated static SEO pages with strictly 1 canonical tag each!');
 }
 
 generatePages();

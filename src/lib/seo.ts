@@ -1,21 +1,57 @@
+import { useEffect } from "react";
+
 /**
  * SEO & Canonical URL Helper
- * Ensures self-referential canonical URLs matching the current active domain and pathname.
- * Prevents "Not Indexable - Canonicalised" issues across preview and production environments.
+ * Guarantees exactly 1 authoritative canonical tag per page targeting https://aurix-gold.vercel.app
  */
 
+export const CANONICAL_SITE_URL = "https://aurix-gold.vercel.app";
+
 export function getSiteUrl(): string {
-  if (typeof window !== "undefined" && window.location && window.location.origin) {
-    return window.location.origin;
-  }
-  return (import.meta.env.VITE_SITE_URL as string) || "https://aurix-gold.vercel.app";
+  return CANONICAL_SITE_URL;
 }
 
 export function getCanonicalUrl(pathname: string = "/"): string {
-  const base = getSiteUrl().replace(/\/+$/, "");
-  if (!pathname || pathname === "/") {
-    return `${base}/`;
+  if (!pathname || pathname === "/" || pathname === "") {
+    return `${CANONICAL_SITE_URL}/`;
   }
   const cleanPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
-  return `${base}${cleanPath.replace(/\/+$/, "")}`;
+  return `${CANONICAL_SITE_URL}${cleanPath.replace(/\/+$/, "")}`;
+}
+
+/**
+ * Enforces strictly 1 canonical <link> element in document.head.
+ * Updates the existing canonical tag's href in-place so that
+ * the React reconciler and DOM trees are never disrupted.
+ */
+export function enforceSingleCanonical(targetHref: string) {
+  if (typeof document === "undefined") return;
+
+  const canonicals = document.querySelectorAll('link[rel="canonical"]');
+  if (canonicals.length === 0) {
+    const link = document.createElement("link");
+    link.rel = "canonical";
+    link.href = targetHref;
+    document.head.appendChild(link);
+  } else {
+    // Update the authoritative canonical tag's href in-place
+    (canonicals[0] as HTMLLinkElement).href = targetHref;
+    // For any stray duplicate links (e.g. injected externally),
+    // update their href as well rather than calling .remove(), which avoids
+    // disrupting any reconciler references.
+    for (let i = 1; i < canonicals.length; i++) {
+      (canonicals[i] as HTMLLinkElement).href = targetHref;
+    }
+  }
+}
+
+/**
+ * React hook to synchronize and enforce a single canonical URL on route change
+ */
+export function useCanonical(pathname: string) {
+  const canonicalUrl = getCanonicalUrl(pathname);
+  useEffect(() => {
+    enforceSingleCanonical(canonicalUrl);
+  }, [canonicalUrl]);
+  return canonicalUrl;
 }

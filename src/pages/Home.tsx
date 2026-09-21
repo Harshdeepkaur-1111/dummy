@@ -14,7 +14,7 @@ import {
 import { Helmet } from "react-helmet-async";
 
 import { useCart } from "../contexts/CartContext";
-import { getCanonicalUrl, getSiteUrl } from "../lib/seo";
+import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
 
 import {
   classicNecklace,
@@ -102,7 +102,7 @@ const categories = [
 ========================================================= */
 
 const fallbackImage =
-  "/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp";
+  "/images/336052524_594628079068489_8991184652865232177_n.webp";
 
 /* =========================================================
    SAFE IMAGE
@@ -242,7 +242,7 @@ export default function Home() {
   };
 
   const siteUrl = getSiteUrl();
-  const canonicalUrl = getCanonicalUrl("/");
+  const canonicalUrl = useCanonical("/");
 
   return (
     <>
@@ -251,42 +251,41 @@ export default function Home() {
       ===================================================== */}
 
       <Helmet>
-        <title>Aurix | BIS 916 Hallmarked 22K Gold Jewellery Online India</title>
+        <title>Aurix Gold | Certified 22K BIS 916 Hallmarked Gold Jewellery Online India</title>
         <meta
           name="description"
-          content="Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI."
+          content="Shop certified 22K BIS 916 hallmarked gold necklaces, bridal sets, rings & bangles at Aurix Gold. 100% insured delivery across India, lifetime buyback & EMI options."
         />
         <meta
           name="keywords"
-          content="22k gold jewellery, BIS 916 hallmark, certified gold jewellery online, gold necklaces India, 22 karat gold rings, buy gold bangles, bridal gold jewellery, Aurix gold"
+          content="Aurix Gold, aurix gold jewellery, 22k gold jewellery, BIS 916 hallmark, certified gold jewellery online India, gold necklaces India, 22 karat gold rings, buy gold bangles, bridal gold jewellery"
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={canonicalUrl} />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Aurix | BIS 916 Hallmarked 22K Gold Jewellery Online India" />
+        <meta property="og:title" content="Aurix Gold | Certified 22K BIS 916 Hallmarked Gold Jewellery Online India" />
         <meta
           property="og:description"
-          content="Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI."
+          content="Shop certified 22K BIS 916 hallmarked gold necklaces, bridal sets, rings & bangles at Aurix Gold. 100% insured delivery across India, lifetime buyback & EMI options."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
         <meta
           property="og:image"
-          content={`${siteUrl}/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp`}
+          content={`${siteUrl}/images/336052524_594628079068489_8991184652865232177_n.webp`}
         />
-        <meta property="og:image:alt" content="Aurix certified 22K gold necklace" />
+        <meta property="og:image:alt" content="Aurix Gold certified 22K gold necklace" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Aurix | BIS 916 Hallmarked 22K Gold Jewellery" />
+        <meta name="twitter:title" content="Aurix Gold | Certified 22K BIS 916 Hallmarked Gold Jewellery" />
         <meta
           name="twitter:description"
-          content="Buy certified 22K BIS 916 hallmarked gold necklaces, rings, earrings & bridal jewellery at Aurix. 100% insured delivery across India, lifetime buyback & EMI."
+          content="Shop certified 22K BIS 916 hallmarked gold necklaces, bridal sets, rings & bangles at Aurix Gold. 100% insured delivery across India, lifetime buyback & EMI options."
         />
         <meta
           name="twitter:image"
-          content={`${siteUrl}/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp`}
+          content={`${siteUrl}/images/336052524_594628079068489_8991184652865232177_n.webp`}
         />
 
         {/* Store & Organization Schema */}
@@ -457,30 +456,25 @@ export default function Home() {
 
                   </div>
 
-                  <h1 className="font-serif text-[58px] sm:text-[75px] lg:text-[90px] leading-[0.9] font-light">
-
+                  <h1 className="font-serif text-[48px] sm:text-[70px] lg:text-[86px] leading-[0.95] font-light">
+                    <span className="sr-only">Aurix Gold — Certified 22K BIS 916 Hallmarked Gold Jewellery India: </span>
                     <span className="italic">
                       The Art
                     </span>
-
                     <br />
-
                     <span>
                       of Pure
                     </span>
-
                     <br />
-
                     <span className="text-[#D4AF37] italic">
-                      Gold.
+                      22K Gold.
                     </span>
-
                   </h1>
 
                   <div className="w-24 h-px bg-[#D4AF37] my-8 mx-auto" />
 
-                  <p className="max-w-xl mx-auto w-full text-center text-white/70 text-sm sm:text-base leading-8">
-                    Discover timeless 22K gold jewellery where
+                  <p className="max-w-xl mx-auto w-full text-center text-white/80 text-sm sm:text-base leading-8">
+                    Discover timeless Aurix 22K gold jewellery where
                     traditional Indian craftsmanship meets
                     contemporary luxury.
                   </p>
@@ -489,14 +483,14 @@ export default function Home() {
 
                     <Link
                       to="/products"
-                      className="bg-[#D4AF37] text-black px-9 py-4 text-[9px] uppercase tracking-[0.25em] font-semibold text-center hover:bg-white transition"
+                      className="bg-[#D4AF37] text-neutral-950 font-bold px-9 py-4 text-xs uppercase tracking-[0.25em] text-center hover:bg-white transition min-h-[48px] inline-flex items-center justify-center shadow-sm"
                     >
                       Explore Collection
                     </Link>
 
                     <Link
                       to="/about"
-                      className="border border-white/20 px-9 py-4 text-[9px] uppercase tracking-[0.25em] text-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition"
+                      className="border border-white/40 text-white font-medium px-9 py-4 text-xs uppercase tracking-[0.25em] text-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition min-h-[48px] inline-flex items-center justify-center"
                     >
                       Discover Aurix
                     </Link>
@@ -554,7 +548,7 @@ export default function Home() {
                     aria-hidden="true"
                   />
 
-                  <div className="relative bg-[#0b0b0b] border border-white/10 min-h-[580px] flex items-center justify-center overflow-hidden">
+                  <div className="relative bg-[#0b0b0b] border border-white/10 min-h-[440px] sm:min-h-[520px] lg:min-h-[580px] flex items-center justify-center overflow-hidden">
 
                     {/* Product Counter */}
 
@@ -576,25 +570,35 @@ export default function Home() {
 
                     {/* Product Image */}
 
-                    <div className="relative w-[85%] h-[450px] flex items-center justify-center">
+                    <div className="relative w-[85%] h-[320px] sm:h-[400px] lg:h-[450px] flex items-center justify-center">
 
-                      {products.map((item, index) => (
-                        <SafeImage
-                          key={item.id}
-                          src={item.image}
-                          alt={item.name}
-                          width={900}
-                          height={900}
-                          loading={index === 0 ? "eager" : "lazy"}
-                          fetchPriority={index === 0 ? "high" : "auto"}
-                          decoding={index === 0 ? "sync" : "async"}
-                          className={`absolute w-full h-full object-contain transition-all duration-1000 ${
-                            index === activeProduct
-                              ? "opacity-100 scale-100"
-                              : "opacity-0 scale-90"
-                          }`}
-                        />
-                      ))}
+                      {products.map((item, index) => {
+                        let itemSrcSet: string | undefined = undefined;
+                        if (item.image === classicNecklace) {
+                          itemSrcSet = "/images/hero-mobile.webp 480w, /images/336052524_594628079068489_8991184652865232177_n.webp 700w";
+                        } else if (item.image === pearlDropEarrings) {
+                          itemSrcSet = "/images/beautiful-pearl-drop-earrings-320.webp 320w, /images/beautiful-pearl-drop-earrings-bling-box-jewellery-34608676405484.webp 500w";
+                        }
+                        return (
+                          <SafeImage
+                            key={item.id}
+                            src={item.image}
+                            srcSet={itemSrcSet}
+                            sizes="(max-width: 640px) 320px, (max-width: 1024px) 450px, 550px"
+                            alt={`${item.name} - Aurix Gold Certified 22K Jewellery`}
+                            width={600}
+                            height={600}
+                            loading={index === 0 ? "eager" : "lazy"}
+                            fetchPriority={index === 0 ? "high" : "auto"}
+                            decoding={index === 0 ? "sync" : "async"}
+                            className={`absolute w-full h-full object-contain transition-opacity duration-500 ${
+                              index === activeProduct
+                                ? "opacity-100 pointer-events-auto"
+                                : "opacity-0 pointer-events-none"
+                            }`}
+                          />
+                        );
+                      })}
 
                     </div>
 
@@ -811,14 +815,14 @@ export default function Home() {
               {/* Contact Support Block */}
               <div className="mt-20 border border-white/10 bg-[#050505] p-8 sm:p-12 text-center flex flex-col items-center">
                 <h3 className="font-serif text-2xl mb-3 text-white text-center">Still have questions?</h3>
-                <p className="text-white/60 text-sm max-w-lg mx-auto mb-8 text-center">
-                  Can't find what you're looking for? Our dedicated customer care team is here to assist you with any inquiries about our collections.
+                <p className="text-white/80 text-sm max-w-lg mx-auto mb-8 text-center leading-relaxed">
+                  Can't find what you're looking for? Our dedicated customer care team is here to assist you with any inquiries about our 22K gold collections.
                 </p>
-                <a href="/contact" className="inline-flex items-center justify-center border border-[#D4AF37] text-[#D4AF37] px-8 py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-black transition">
+                <a href="/contact" className="inline-flex items-center justify-center bg-[#D4AF37] text-neutral-950 font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-white transition min-h-[48px] shadow-sm">
                   Contact Support
                 </a>
-                <p className="text-white/40 text-xs mt-4 text-center">
-                  <a href="tel:+919034196429" className="hover:text-[#D4AF37] transition">
+                <p className="text-white/90 text-sm mt-5 text-center">
+                  <a href="tel:+919034196429" className="inline-flex items-center justify-center text-[#E5C158] hover:text-white transition font-medium min-h-[48px] px-4 py-2 text-sm">
                     +91 9034196429
                   </a>
                 </p>
@@ -1199,7 +1203,8 @@ export default function Home() {
 
               <div
                 className="flex justify-center mb-7"
-                aria-label="Aurix client experience"
+                role="img"
+                aria-label="Rated 5 out of 5 stars by verified clients"
               >
 
                 {[1, 2, 3, 4, 5].map((item) => (
@@ -1273,7 +1278,7 @@ export default function Home() {
 
               </h2>
 
-              <p className="max-w-xl mx-auto w-full text-white/70 text-sm leading-7 mt-7 text-center">
+              <p className="max-w-xl mx-auto w-full text-white/80 text-sm leading-7 mt-7 text-center">
                 Explore our collection of timeless 22K gold jewellery crafted for moments that matter.
               </p>
 
@@ -1281,14 +1286,14 @@ export default function Home() {
 
                 <Link
                   to="/products"
-                  className="bg-[#D4AF37] text-black px-10 py-5 text-[9px] uppercase tracking-[0.25em] font-semibold hover:bg-white transition"
+                  className="bg-[#D4AF37] text-neutral-950 font-bold px-10 py-4 text-xs uppercase tracking-[0.25em] hover:bg-white transition min-h-[48px] inline-flex items-center justify-center shadow-sm"
                 >
                   Shop Gold Collection
                 </Link>
 
                 <Link
                   to="/contact"
-                  className="border border-white/20 px-10 py-5 text-[9px] uppercase tracking-[0.25em] hover:border-[#D4AF37] hover:text-[#D4AF37] transition"
+                  className="border border-white/40 text-white font-medium px-10 py-4 text-xs uppercase tracking-[0.25em] hover:border-[#D4AF37] hover:text-[#D4AF37] transition min-h-[48px] inline-flex items-center justify-center"
                 >
                   Custom Design
                 </Link>
