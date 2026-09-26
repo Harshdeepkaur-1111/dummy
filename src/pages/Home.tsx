@@ -9,12 +9,23 @@ import {
   Truck,
   Sparkles,
   Search,
+  Eye,
+  ShoppingBag,
+  Sliders,
+  Scale,
+  Award,
+  RefreshCw,
+  Phone,
   Mail,
+  Calendar,
+  Check,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 import { useCart } from "../contexts/CartContext";
-import { getCanonicalUrl, getSiteUrl, useCanonical } from "../lib/seo";
+import { getSiteUrl, useCanonical } from "../lib/seo";
+import { QuickViewModal, QuickViewProduct } from "../components/QuickViewModal";
+import { VipConsultationModal } from "../components/VipConsultationModal";
 
 import {
   classicNecklace,
@@ -25,75 +36,73 @@ import {
   imperialDiamondChoker,
   sovereignSignetRing,
   pearlDropEarrings,
+  heritageBangle,
 } from "../assets/images";
 
 /* =========================================================
-   FEATURED PRODUCTS
+   FEATURED PRODUCTS (CATALOG DATA)
 ========================================================= */
 
-const products = [
+const allProducts: QuickViewProduct[] = [
   {
     id: 1,
-    image: classicNecklace,
     name: "Classic 22K Gold Necklace",
     category: "Necklaces",
-    purity: "22K Gold",
+    purity: "22K Gold (916)",
     weight: "8.00g",
     price: "₹1,49,999",
+    image: classicNecklace,
+    desc: "A signature statement of 22K pure Indian gold artistry. Hand-assembled links designed for effortless drape and regal shine.",
   },
   {
     id: 2,
-    image: diamondRing,
     name: "Diamond Gold Ring",
     category: "Rings",
-    purity: "22K Gold",
+    purity: "22K Gold (916)",
     weight: "4.20g",
     price: "₹89,999",
+    image: diamondRing,
+    desc: "Solid 22K gold band crowned with hand-selected brilliant diamonds. Designed for both daily prestige and milestone celebrations.",
   },
   {
     id: 3,
-    image: pearlDropEarrings,
     name: "Pearl Drop Gold Earrings",
     category: "Earrings",
-    purity: "22K Gold",
+    purity: "22K Gold (916)",
     weight: "5.20g",
     price: "₹1,29,999",
+    image: pearlDropEarrings,
+    desc: "Lustrous South Sea pearls suspended from delicate 22K handcrafted filigree gold motifs. Featherweight comfort with timeless grace.",
   },
   {
     id: 4,
-    image: modernBracelet,
     name: "Modern Gold Bracelet",
     category: "Bracelets",
-    purity: "22K Gold",
+    purity: "22K Gold (916)",
     weight: "7.50g",
     price: "₹1,19,999",
-  },
-];
-
-/* =========================================================
-   CATEGORIES
-========================================================= */
-
-const categories = [
-  {
-    title: "Necklaces",
-    subtitle: "Statement pieces",
-    image: imperialDiamondChoker,
-  },
-  {
-    title: "Rings",
-    subtitle: "Made to be remembered",
-    image: sovereignSignetRing,
-  },
-  {
-    title: "Earrings",
-    subtitle: "Elegant everyday gold",
-    image: pearlEarrings,
-  },
-  {
-    title: "Bracelets",
-    subtitle: "Modern gold signatures",
     image: modernBracelet,
+    desc: "A contemporary cuff-style bracelet with geometric facets in solid 22K gold, engineered with a secure double-lock clasp.",
+  },
+  {
+    id: 5,
+    name: "Imperial Diamond Choker",
+    category: "Necklaces",
+    purity: "22K Gold (916)",
+    weight: "22.50g",
+    price: "₹2,85,000",
+    image: imperialDiamondChoker,
+    desc: "Grand royal bridal choker handcrafted by multigenerational karigars. Features high-karat yellow gold with certified gemstone inlays.",
+  },
+  {
+    id: 6,
+    name: "Sovereign Gold Signet Ring",
+    category: "Rings",
+    purity: "22K Gold (916)",
+    weight: "12.00g",
+    price: "₹98,500",
+    image: sovereignSignetRing,
+    desc: "An imposing, weighty 22K solid gold signet ring featuring hand-carved heritage heraldry on a mirror-polished bezel.",
   },
 ];
 
@@ -103,10 +112,6 @@ const categories = [
 
 const fallbackImage =
   "/images/336052524_594628079068489_8991184652865232177_n.webp";
-
-/* =========================================================
-   SAFE IMAGE
-========================================================= */
 
 function SafeImage({
   src,
@@ -121,7 +126,6 @@ function SafeImage({
       className={className}
       onError={(event) => {
         const img = event.currentTarget;
-
         if (!img.dataset.fallback) {
           img.dataset.fallback = "true";
           img.src = fallbackImage;
@@ -137,26 +141,36 @@ function SafeImage({
 ========================================================= */
 
 export default function Home() {
-  const [activeProduct, setActiveProduct] = useState(0);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [quickViewItem, setQuickViewItem] = useState<QuickViewProduct | null>(null);
+  const [isVipModalOpen, setIsVipModalOpen] = useState(false);
 
-  const { setIsCartOpen, addToCart } = useCart();
+  // Gold Rate Calculator state
+  const [calcWeight, setCalcWeight] = useState(8); // in grams
+  const goldRate22KPerGram = 6890;
 
-  /* =======================================================
-     AUTO PRODUCT SLIDER
-  ======================================================= */
+  const { addToCart, setIsCartOpen } = useCart();
+  const siteUrl = getSiteUrl();
+  const canonicalUrl = useCanonical("/");
 
+  // Auto carousel for Hero
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveProduct((previous) => {
-        return (previous + 1) % products.length;
-      });
-    }, 5000);
-
+      setActiveHeroSlide((prev) => (prev + 1) % 4);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
-  const product = products[activeProduct];
+  const heroItem = allProducts[activeHeroSlide] || allProducts[0];
 
+  // Category Filtering
+  const filteredProducts =
+    selectedCategory === "All"
+      ? allProducts
+      : allProducts.filter((p) => p.category.toLowerCase().includes(selectedCategory.toLowerCase()));
+
+  // FAQs
   const faqs = [
     {
       q: "What hallmark and purity certifications come with Aurix 22K gold jewellery?",
@@ -219,37 +233,26 @@ export default function Home() {
 
   const filteredFaqs = faqs.filter((f) => {
     const matchesCategory = faqCategory === "All Questions" || f.category === faqCategory;
-    const matchesSearch = f.q.toLowerCase().includes(faqSearch.toLowerCase()) || f.a.toLowerCase().includes(faqSearch.toLowerCase());
+    const matchesSearch =
+      f.q.toLowerCase().includes(faqSearch.toLowerCase()) ||
+      f.a.toLowerCase().includes(faqSearch.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
-  function toggleFaq(index: number) {
-    setOpenFaq((prev) => (prev === index ? null : index));
-  }
-
-  /* =======================================================
-     ADD FEATURED PRODUCT TO CART
-  ======================================================= */
-
-  const handleAddToCart = () => {
+  const handleHeroAddToCart = () => {
     addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
+      id: heroItem.id,
+      name: heroItem.name,
+      price: heroItem.price,
     });
-
     setIsCartOpen(true);
   };
-
-  const siteUrl = getSiteUrl();
-  const canonicalUrl = useCanonical("/");
 
   return (
     <>
       {/* =====================================================
-          SEO
+          SEO HEAD
       ===================================================== */}
-
       <Helmet>
         <title>Aurix Gold | Certified 22K BIS 916 Hallmarked Gold Jewellery Online India</title>
         <meta
@@ -288,78 +291,44 @@ export default function Home() {
           content={`${siteUrl}/images/336052524_594628079068489_8991184652865232177_n.webp`}
         />
 
-        {/* Store & Organization Schema */}
+        {/* Schema: JewelryStore */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "JewelryStore",
             "@id": `${siteUrl}/#store`,
-            name: "Aurix",
+            name: "Aurix Gold",
             alternateName: "Aurix 22K Gold Jewellery",
             url: `${siteUrl}/`,
             logo: `${siteUrl}/images/336052524_594628079068489_8991184652865232177_n.webp`,
             image: `${siteUrl}/images/classic_gold_necklace_1781762659498-D6hMXpiO.webp`,
-            description: "Certified 22K BIS 916 hallmarked luxury gold jewellery handcrafted in India. Explore timeless necklaces, bridal sets, rings, bangles, and bespoke jewellery.",
+            description:
+              "Certified 22K BIS 916 hallmarked luxury gold jewellery handcrafted in India. Explore timeless necklaces, bridal sets, rings, bangles, and bespoke jewellery.",
             telephone: "+91 9034196429",
             priceRange: "₹₹₹",
             currenciesAccepted: "INR",
             paymentAccepted: "Cash, Credit Card, Debit Card, UPI, Net Banking, EMI",
             address: {
               "@type": "PostalAddress",
-              addressCountry: "IN"
+              addressCountry: "IN",
             },
             aggregateRating: {
               "@type": "AggregateRating",
               ratingValue: "4.9",
               reviewCount: "1280",
               bestRating: "5",
-              worstRating: "1"
+              worstRating: "1",
             },
-            review: [
-              {
-                "@type": "Review",
-                author: { "@type": "Person", name: "Priya Sharma" },
-                datePublished: "2026-08-15",
-                reviewRating: { "@type": "Rating", ratingValue: "5" },
-                reviewBody: "The 22K gold necklace I purchased from Aurix is breathtaking. Flawless BIS 916 hallmarking, secure transit delivery, and stunning luxury packaging."
-              },
-              {
-                "@type": "Review",
-                author: { "@type": "Person", name: "Rahul Verma" },
-                datePublished: "2026-08-28",
-                reviewRating: { "@type": "Rating", ratingValue: "5" },
-                reviewBody: "Exceptional Indian craftsmanship and prompt delivery. Certificate of Authenticity and HUID were verified effortlessly."
-              }
-            ]
           })}
         </script>
 
-        {/* Website Schema with Sitelinks Searchbox */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "@id": `${siteUrl}/#website`,
-            name: "Aurix",
-            url: `${siteUrl}/`,
-            publisher: {
-              "@id": `${siteUrl}/#store`
-            },
-            potentialAction: {
-              "@type": "SearchAction",
-              target: `${siteUrl}/products?search={search_term_string}`,
-              "query-input": "required name=search_term_string"
-            }
-          })}
-        </script>
-
-        {/* Featured Products Schema */}
+        {/* Schema: ItemList */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
             name: "Aurix Featured 22K Gold Jewellery",
-            itemListElement: products.map((item, index) => ({
+            itemListElement: allProducts.map((item, index) => ({
               "@type": "ListItem",
               position: index + 1,
               item: {
@@ -371,26 +340,21 @@ export default function Home() {
                 category: item.category,
                 brand: {
                   "@type": "Brand",
-                  name: "Aurix"
+                  name: "Aurix Gold",
                 },
                 offers: {
                   "@type": "Offer",
                   price: item.price.replace(/[^0-9]/g, ""),
                   priceCurrency: "INR",
                   availability: "https://schema.org/InStock",
-                  url: `${siteUrl}/products`
+                  url: `${siteUrl}/products`,
                 },
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  ratingValue: "4.9",
-                  reviewCount: "128"
-                }
-              }
-            }))
+              },
+            })),
           })}
         </script>
 
-        {/* FAQ Schema - Exact 1-to-1 sync with visible page content */}
+        {/* Schema: FAQPage */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -400,911 +364,852 @@ export default function Home() {
               name: f.q,
               acceptedAnswer: {
                 "@type": "Answer",
-                text: f.a
-              }
-            }))
+                text: f.a,
+              },
+            })),
           })}
         </script>
       </Helmet>
 
-      {/* =====================================================
-          PAGE WRAPPER
+      {/* Quick View Modal */}
+      <QuickViewModal
+        product={quickViewItem}
+        onClose={() => setQuickViewItem(null)}
+      />
 
-          Navbar and Footer are handled by Layout.tsx.
-      ===================================================== */}
+      {/* VIP Consultation Modal */}
+      <VipConsultationModal
+        isOpen={isVipModalOpen}
+        onClose={() => setIsVipModalOpen(false)}
+      />
 
-      <div className="min-h-screen bg-[#050505] text-white overflow-hidden">
-
+      {/* Page Body */}
+      <div className="bg-[#050505] text-white">
+        
         {/* ===================================================
-            HERO
+            SECTION 1: TRENDY EDITORIAL HERO
         =================================================== */}
+        <section className="relative min-h-[calc(100vh-120px)] flex items-center border-b border-white/10 overflow-hidden">
+          {/* Subtle Ambient Light */}
+          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#D4AF37]/10 rounded-full blur-[140px]" />
+            <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#D4AF37]/5 rounded-full blur-[120px]" />
+          </div>
 
-        <div className="pt-0">
-
-          <section className="relative min-h-[calc(100vh-96px)] flex items-center">
-
-            {/* Background Glow */}
-
-            <div
-              className="absolute inset-0 pointer-events-none"
-              aria-hidden="true"
-            >
-              <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[#D4AF37]/10 rounded-full blur-[160px]" />
-
-              <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[130px]" />
-            </div>
-
-            <div className="max-w-7xl mx-auto w-full px-5 lg:px-10 py-16 lg:py-20">
-
-              <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-                {/* =================================================
-                    HERO LEFT
-                ================================================= */}
-
-                <div className="relative z-10 flex flex-col items-center text-center">
-
-                  <div className="flex items-center justify-center gap-4 mb-7 w-full">
-
-                    <span className="w-12 h-px bg-[#D4AF37]" />
-
-                    <span className="text-[9px] uppercase tracking-[0.45em] text-[#D4AF37]">
-                      Est. 2023 · Crafted in India
-                    </span>
-
-                    <span className="w-12 h-px bg-[#D4AF37]" />
-
-                  </div>
-
-                  <h1 className="font-serif text-[48px] sm:text-[70px] lg:text-[86px] leading-[0.95] font-light">
-                    <span className="sr-only">Aurix Gold — Certified 22K BIS 916 Hallmarked Gold Jewellery India: </span>
-                    <span className="italic">
-                      The Art
-                    </span>
-                    <br />
-                    <span>
-                      of Pure
-                    </span>
-                    <br />
-                    <span className="text-[#D4AF37] italic">
-                      22K Gold.
-                    </span>
-                  </h1>
-
-                  <div className="w-24 h-px bg-[#D4AF37] my-8 mx-auto" />
-
-                  <p className="max-w-xl mx-auto w-full text-center text-white/80 text-sm sm:text-base leading-8">
-                    Discover timeless Aurix 22K gold jewellery where
-                    traditional Indian craftsmanship meets
-                    contemporary luxury.
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row justify-center gap-4 mt-9 w-full">
-
-                    <Link
-                      to="/products"
-                      className="bg-[#D4AF37] text-neutral-950 font-bold px-9 py-4 text-xs uppercase tracking-[0.25em] text-center hover:bg-white transition min-h-[48px] inline-flex items-center justify-center shadow-sm"
-                    >
-                      Explore Collection
-                    </Link>
-
-                    <Link
-                      to="/about"
-                      className="border border-white/40 text-white font-medium px-9 py-4 text-xs uppercase tracking-[0.25em] text-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition min-h-[48px] inline-flex items-center justify-center"
-                    >
-                      Discover Aurix
-                    </Link>
-
-                  </div>
-
-                  <div className="flex justify-center items-center gap-8 sm:gap-12 mt-12 pt-7 border-t border-white/10 max-w-xl mx-auto w-full text-center">
-
-                    <div className="text-center flex flex-col items-center">
-                      <strong className="font-serif text-2xl text-center">
-                        22K
-                      </strong>
-
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1 text-center">
-                        Gold Purity
-                      </p>
-                    </div>
-
-                    <div className="w-px h-10 bg-white/10" />
-
-                    <div className="text-center flex flex-col items-center">
-                      <strong className="font-serif text-2xl text-center">
-                        2023
-                      </strong>
-
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1 text-center">
-                        Established
-                      </p>
-                    </div>
-
-                    <div className="w-px h-10 bg-white/10" />
-
-                    <div className="text-center flex flex-col items-center">
-                      <strong className="font-serif text-2xl text-center">
-                        India
-                      </strong>
-
-                      <p className="text-[8px] uppercase tracking-[0.25em] text-white/60 mt-1 text-center">
-                        Crafted
-                      </p>
-                    </div>
-
-                  </div>
-
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-12 py-12 lg:py-16">
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+              
+              {/* Left Column: Editorial Headline & Value Propositions */}
+              <div className="lg:col-span-7 flex flex-col items-start text-left">
+                
+                {/* Clean Unboxed Kicker */}
+                <div className="flex items-center gap-2 text-xs text-[#E5C158] font-medium tracking-[0.25em] uppercase mb-4">
+                  <span>Certified BIS 916</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Pure 22K Gold</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Indian Haute Joaillerie</span>
                 </div>
 
-                {/* =================================================
-                    HERO RIGHT / FEATURED PRODUCT
-                ================================================= */}
-
-                <div className="relative">
-
-                  <div
-                    className="absolute inset-5 border border-[#D4AF37]/20"
-                    aria-hidden="true"
-                  />
-
-                  <div className="relative bg-[#0b0b0b] border border-white/10 min-h-[440px] sm:min-h-[520px] lg:min-h-[580px] flex items-center justify-center overflow-hidden">
-
-                    {/* Product Counter */}
-
-                    <div className="absolute top-6 left-6 text-[9px] tracking-[0.3em] text-white/60">
-                      {String(activeProduct + 1).padStart(2, "0")} /{" "}
-                      {String(products.length).padStart(2, "0")}
-                    </div>
-
-                    <div className="absolute top-6 right-6 text-[8px] uppercase tracking-[0.3em] text-[#D4AF37]">
-                      Featured Piece
-                    </div>
-
-                    {/* Gold Glow */}
-
-                    <div
-                      className="absolute w-[400px] h-[400px] rounded-full bg-[#D4AF37]/10 blur-[90px]"
-                      aria-hidden="true"
-                    />
-
-                    {/* Product Image */}
-
-                    <div className="relative w-[85%] h-[320px] sm:h-[400px] lg:h-[450px] flex items-center justify-center">
-
-                      {products.map((item, index) => {
-                        let itemSrcSet: string | undefined = undefined;
-                        if (item.image === classicNecklace) {
-                          itemSrcSet = "/images/hero-mobile.webp 480w, /images/336052524_594628079068489_8991184652865232177_n.webp 700w";
-                        } else if (item.image === pearlDropEarrings) {
-                          itemSrcSet = "/images/beautiful-pearl-drop-earrings-320.webp 320w, /images/beautiful-pearl-drop-earrings-bling-box-jewellery-34608676405484.webp 500w";
-                        }
-                        return (
-                          <SafeImage
-                            key={item.id}
-                            src={item.image}
-                            srcSet={itemSrcSet}
-                            sizes="(max-width: 640px) 320px, (max-width: 1024px) 450px, 550px"
-                            alt={`${item.name} - Aurix Gold Certified 22K Jewellery`}
-                            width={600}
-                            height={600}
-                            loading={index === 0 ? "eager" : "lazy"}
-                            fetchPriority={index === 0 ? "high" : "auto"}
-                            decoding={index === 0 ? "sync" : "async"}
-                            className={`absolute w-full h-full object-contain transition-opacity duration-500 ${
-                              index === activeProduct
-                                ? "opacity-100 pointer-events-auto"
-                                : "opacity-0 pointer-events-none"
-                            }`}
-                          />
-                        );
-                      })}
-
-                    </div>
-
-                    {/* Product Information */}
-
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent p-7 pt-24">
-
-                      <div className="flex justify-between items-end gap-5">
-
-                        <div>
-
-                          <p className="text-[8px] uppercase tracking-[0.35em] text-[#D4AF37] mb-2">
-                            {product.category}
-                          </p>
-
-                          <h2 className="font-serif text-2xl sm:text-3xl italic">
-                            {product.name}
-                          </h2>
-
-                          <div className="flex gap-5 mt-3 text-[8px] uppercase tracking-[0.2em] text-white/60">
-                            <span>
-                              {product.purity}
-                            </span>
-
-                            <span>
-                              {product.weight}
-                            </span>
-                          </div>
-
-                        </div>
-
-                        <div className="text-right">
-
-                          <p className="text-[8px] uppercase tracking-[0.2em] text-white/60">
-                            Price
-                          </p>
-
-                          <p className="font-serif text-xl text-[#D4AF37]">
-                            {product.price}
-                          </p>
-
-                        </div>
-
-                      </div>
-
-                      {/* Slider Controls */}
-
-                      <div className="flex justify-center gap-2 mt-5">
-
-                        {products.map((item, index) => (
-                          <button
-                            key={item.id}
-                            type="button"
-                            onClick={() =>
-                              setActiveProduct(index)
-                            }
-                            aria-label={`Show ${item.name}`}
-                            aria-pressed={
-                              index === activeProduct
-                            }
-                            className="py-3 px-1 inline-flex items-center cursor-pointer"
-                          >
-                            <span
-                              className={`h-1 block transition-all ${
-                                index === activeProduct
-                                  ? "w-12 bg-[#D4AF37]"
-                                  : "w-5 bg-white/20"
-                              }`}
-                            />
-                          </button>
-                        ))}
-
-                      </div>
-
-                      {/* Add To Cart */}
-
-                      <button
-                        type="button"
-                        onClick={handleAddToCart}
-                        className="mt-5 w-full border border-[#D4AF37]/40 text-[#D4AF37] py-3 text-[9px] uppercase tracking-[0.25em] hover:bg-[#D4AF37] hover:text-black transition"
-                      >
-                        Add to Cart
-                      </button>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </section>
-
-          {/* ===================================================
-              FAQ & COMMUNITY
-          =================================================== */}
-          <section className="py-24 bg-[#080808] border-t border-white/5">
-            <div className="max-w-4xl mx-auto px-5 lg:px-10">
-              <div className="text-center mb-12">
-                <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-3">
-                  FAQ & Verification
-                </p>
-                <h2 className="font-serif text-4xl sm:text-5xl italic">
-                  Frequently Asked Questions
-                </h2>
-
-                {/* Star Rating Badge */}
-                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-5">
-                  <div className="flex items-center gap-1 text-[#D4AF37]">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={14} className="fill-current text-[#D4AF37]" />
-                    ))}
-                  </div>
-                  <span className="text-white text-xs font-semibold">4.9 / 5.0 Rating</span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-white/70 text-xs">1,280+ Verified Buyers</span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-[#D4AF37] text-xs font-medium">BIS 916 Hallmarked</span>
-                </div>
-
-                <div className="text-white/60 text-sm mt-5 max-w-2xl mx-auto leading-relaxed text-center">
-                  <span className="text-white font-medium block text-center mb-1">
-                    Everything You Need to Know
+                <h1 className="font-serif text-4xl sm:text-6xl lg:text-[76px] leading-[1.02] font-light text-white mb-6">
+                  The Art of <br />
+                  <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F5E6B3] to-[#D4AF37]">
+                    Aurix 22K Gold.
                   </span>
-                  <p className="text-center">
-                    Clear, transparent answers about our certified 22K gold purity, authentic Indian craftsmanship, ring and bangle sizing recommendations, secure insured delivery, and lifetime buyback policy.
-                  </p>
-                </div>
-              </div>
+                </h1>
 
-              {/* Search Bar */}
-              <div className="max-w-2xl mx-auto mb-10">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={18} />
-                  <input
-                    type="text"
-                    placeholder="Search by keyword (e.g. hallmark, purity, sizing, shipping, buyback, EMI)..."
-                    value={faqSearch}
-                    onChange={(e) => setFaqSearch(e.target.value)}
-                    className="w-full bg-[#050505] border border-white/10 text-white text-sm py-4 pl-12 pr-4 focus:outline-none focus:border-[#D4AF37] transition"
-                  />
-                </div>
-              </div>
-
-              {/* Categories */}
-              <div className="flex flex-wrap justify-center gap-3 mb-10">
-                {faqCategories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setFaqCategory(cat)}
-                    className={`px-5 py-2 text-[10px] uppercase tracking-[0.15em] transition border ${
-                      faqCategory === cat
-                        ? "bg-[#D4AF37] text-black border-[#D4AF37]"
-                        : "bg-transparent text-white/60 border-white/10 hover:border-white/30"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-
-              {/* FAQ List */}
-              <div className="space-y-4">
-                {filteredFaqs.length > 0 ? (
-                  filteredFaqs.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="border border-white/6 p-5 hover:border-white/10 transition"
-                    >
-                      <button
-                        type="button"
-                        onClick={() => toggleFaq(idx)}
-                        className="w-full flex justify-between items-start text-left gap-4"
-                        aria-expanded={openFaq === idx}
-                      >
-                        <div className="flex gap-4 items-start">
-                          <span className="text-[#D4AF37] text-xs font-serif italic mt-0.5">
-                            {String(idx + 1).padStart(2, "0")}
-                          </span>
-                          <span className="font-medium text-white text-sm sm:text-base">
-                            {item.q}
-                          </span>
-                        </div>
-                        <span className="mt-1">
-                          <ArrowRight
-                            size={16}
-                            className={`text-[#D4AF37] transition-transform duration-300 ${
-                              openFaq === idx ? "rotate-90" : "rotate-0"
-                            }`}
-                          />
-                        </span>
-                      </button>
-                      <div
-                        className={`text-white/60 text-sm overflow-hidden transition-all duration-300 ${
-                          openFaq === idx ? "max-h-96 mt-4 opacity-100" : "max-h-0 opacity-0"
-                        }`}
-                      >
-                        <div className="pl-8">
-                          {item.a}
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-10 text-white/50 text-sm">
-                    No questions found matching your search.
-                  </div>
-                )}
-              </div>
-
-              {/* Contact Support Block */}
-              <div className="mt-20 border border-white/10 bg-[#050505] p-8 sm:p-12 text-center flex flex-col items-center">
-                <h3 className="font-serif text-2xl mb-3 text-white text-center">Still have questions?</h3>
-                <p className="text-white/80 text-sm max-w-lg mx-auto mb-8 text-center leading-relaxed">
-                  Can't find what you're looking for? Our dedicated customer care team is here to assist you with any inquiries about our 22K gold collections.
+                <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-xl font-light mb-8">
+                  Where ancient Vedic goldsmithing meets clean modern silhouettes. Every Aurix piece is sculpted in pure 22K (916) hallmarked gold, carrying an authentic laser-engraved HUID certificate.
                 </p>
-                <a href="/contact" className="inline-flex items-center justify-center bg-[#D4AF37] text-neutral-950 font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-white transition min-h-[48px] shadow-sm">
-                  Contact Support
-                </a>
-                <p className="text-white/90 text-sm mt-5 text-center">
-                  <a href="tel:+919034196429" className="inline-flex items-center justify-center text-[#E5C158] hover:text-white transition font-medium min-h-[48px] px-4 py-2 text-sm">
-                    +91 9034196429
-                  </a>
-                </p>
-              </div>
 
-              {/* Newsletter Block */}
-              <div className="mt-12 bg-gradient-to-br from-[#101010] to-[#050505] border border-white/10 p-8 sm:p-12 text-center flex flex-col items-center">
-                <div className="w-12 h-12 mx-auto border border-[#D4AF37]/30 rotate-45 flex items-center justify-center mb-8">
-                  <Mail size={18} className="text-[#D4AF37] -rotate-45" />
-                </div>
-                <h3 className="font-serif text-2xl sm:text-3xl italic mb-3 text-white text-center">Join Our Community</h3>
-                <p className="text-white/60 text-sm max-w-lg mx-auto mb-8 text-center">
-                  Stay Updated on New Gold Jewellery Trends. Receive exclusive offers, styling tips, and early access to new collections.
-                </p>
-                <form className="max-w-md mx-auto w-full flex flex-col sm:flex-row gap-3 justify-center" onSubmit={(e) => e.preventDefault()}>
-                  <input
-                    type="email"
-                    id="newsletter-email-home"
-                    aria-label="Email Address for newsletter"
-                    placeholder="Email Address"
-                    className="flex-1 bg-transparent border border-white/20 text-white text-sm px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition text-center sm:text-left"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="bg-[#D4AF37] text-black px-8 py-3 text-[10px] uppercase tracking-[0.2em] font-semibold hover:bg-white transition"
-                  >
-                    Sign Up
-                  </button>
-                </form>
-              </div>
-            </div>
-          </section>
-
-          {/* ===================================================
-              GOLD STRIP
-          =================================================== */}
-
-          <section className="bg-[#D4AF37] text-black py-4 overflow-hidden">
-
-            <div className="flex justify-center flex-wrap gap-x-10 gap-y-2 px-5 text-[9px] uppercase tracking-[0.3em] font-semibold">
-
-              <span>22K Gold</span>
-              <span>•</span>
-              <span>Premium Craftsmanship</span>
-              <span>•</span>
-              <span>Secure Delivery</span>
-              <span>•</span>
-              <span>Crafted in India</span>
-              <span>•</span>
-              <span>Timeless Design</span>
-
-            </div>
-
-          </section>
-
-          {/* ===================================================
-              COLLECTION
-          =================================================== */}
-
-          <section className="py-28 bg-[#050505]">
-
-            <div className="max-w-7xl mx-auto px-5 lg:px-10">
-
-              <div className="text-center mb-16">
-                <p className="text-[8px] uppercase tracking-[0.45em] text-[#D4AF37] mb-4">
-                  Curated Collection
-                </p>
-                <h2 className="font-serif text-5xl sm:text-6xl italic font-light mb-5">
-                  The Aurix Edit
-                </h2>
-                <div className="w-16 h-px bg-[#D4AF37]/50 mx-auto mb-6" />
-                <Link
-                  to="/products"
-                  className="inline-flex items-center gap-3 text-[9px] uppercase tracking-[0.25em] text-white/70 hover:text-[#D4AF37] transition"
-                >
-                  View All Creations
-                  <ArrowRight size={15} />
-                </Link>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6">
-
-                {products.map((item) => (
-
+                {/* Primary CTAs */}
+                <div className="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto">
                   <Link
-                    key={item.id}
                     to="/products"
-                    className="group"
+                    className="min-h-[48px] bg-[#D4AF37] text-neutral-950 font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] inline-flex items-center justify-center gap-2 hover:bg-white transition duration-200"
                   >
-
-                    <div className="relative aspect-[4/5] bg-[#0b0b0b] border border-white/10 overflow-hidden">
-
-                      <SafeImage
-                        src={item.image}
-                        alt={`${item.name} - Aurix 22K gold jewellery`}
-                        width={900}
-                        height={1100}
-                        loading="lazy"
-                        className="w-full h-full object-contain p-10 group-hover:scale-105 transition-transform duration-700"
-                      />
-
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
-
-                      <div className="absolute bottom-6 left-6 right-6 text-center">
-
-                        <p className="text-[8px] uppercase tracking-[0.3em] text-[#D4AF37] mb-2 text-center">
-                          {item.purity}
-                        </p>
-
-                        <h3 className="font-serif text-2xl italic text-center">
-                          {item.name}
-                        </h3>
-
-                        <div className="flex justify-center items-center gap-4 mt-4">
-
-                          <span className="text-sm text-[#D4AF37]">
-                            {item.price}
-                          </span>
-
-                          <span className="w-9 h-9 border border-white/20 flex items-center justify-center group-hover:border-[#D4AF37] transition">
-                            <ArrowRight size={14} />
-                          </span>
-
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  </Link>
-
-                ))}
-
-              </div>
-
-            </div>
-
-          </section>
-
-          {/* ===================================================
-              WHY AURIX
-          =================================================== */}
-
-          <section className="py-28 bg-[#0a0a0a] border-y border-white/10">
-
-            <div className="max-w-7xl mx-auto px-5 lg:px-10">
-
-              <div className="text-center mb-16">
-
-                <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-5">
-                  The Aurix Standard
-                </p>
-
-                <h2 className="font-serif text-5xl sm:text-6xl italic">
-                  Crafted beyond ordinary.
-                </h2>
-
-              </div>
-
-              <div className="grid md:grid-cols-4">
-
-                {[
-                  {
-                    icon: Gem,
-                    title: "22K Gold",
-                    text: "Premium gold crafted for lasting beauty.",
-                  },
-                  {
-                    icon: ShieldCheck,
-                    title: "Trusted Quality",
-                    text: "Every piece is created with attention to detail.",
-                  },
-                  {
-                    icon: Sparkles,
-                    title: "Timeless Design",
-                    text: "Elegant designs made to stay beautiful for years.",
-                  },
-                  {
-                    icon: Truck,
-                    title: "Secure Delivery",
-                    text: "Carefully packed and securely delivered.",
-                  },
-                ].map((item, index) => {
-
-                  const Icon = item.icon;
-
-                  return (
-                    <div
-                      key={index}
-                      className="p-8 lg:p-10 border border-white/10 text-center flex flex-col items-center"
-                    >
-
-                      <Icon
-                        size={25}
-                        className="text-[#D4AF37] mb-8 mx-auto"
-                        aria-hidden="true"
-                      />
-
-                      <h3 className="font-serif text-2xl italic mb-4 text-center">
-                        {item.title}
-                      </h3>
-
-                      <p className="text-white/60 text-xs leading-7 text-center">
-                        {item.text}
-                      </p>
-
-                    </div>
-                  );
-                })}
-
-              </div>
-
-            </div>
-
-          </section>
-
-          {/* ===================================================
-              STORY
-          =================================================== */}
-
-          <section className="py-28 bg-[#050505]">
-
-            <div className="max-w-7xl mx-auto px-5 lg:px-10">
-
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-                <div className="relative">
-
-                  <div
-                    className="absolute -top-5 -left-5 w-20 h-20 border-l border-t border-[#D4AF37]/40"
-                    aria-hidden="true"
-                  />
-
-                  <div className="aspect-[4/5] bg-[#0b0b0b] overflow-hidden">
-
-                    <SafeImage
-                      src={signaturePendant}
-                      alt="Aurix signature gold pendant"
-                      width={1200}
-                      height={1500}
-                      loading="lazy"
-                      className="w-full h-full object-cover hover:scale-105 transition duration-700"
-                    />
-
-                  </div>
-
-                </div>
-
-                <div className="text-center flex flex-col items-center">
-
-                  <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-7 text-center">
-                    The Aurix Story
-                  </p>
-
-                  <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-none text-center">
-
-                    Born in India.
-                    <br />
-
-                    <span className="italic text-[#D4AF37]">
-                      Made to last.
-                    </span>
-
-                  </h2>
-
-                  <div className="w-16 h-px bg-[#D4AF37] my-8 mx-auto" />
-
-                  <p className="text-white/70 text-sm leading-8 max-w-lg text-center mx-auto">
-                    Aurix brings together the richness of Indian
-                    craftsmanship and the simplicity of modern
-                    luxury.
-                  </p>
-
-                  <p className="text-white/70 text-sm leading-8 max-w-lg mt-5 text-center mx-auto">
-                    Every piece is designed with an appreciation
-                    for detail, proportion and timeless beauty.
-                  </p>
-
-                  <Link
-                    to="/about"
-                    className="inline-flex items-center justify-center gap-4 mt-8 text-[9px] uppercase tracking-[0.3em] text-[#D4AF37]"
-                  >
-                    Discover Our Story
+                    <span>Explore 2026 Collection</span>
                     <ArrowRight size={15} />
                   </Link>
 
+                  <button
+                    type="button"
+                    onClick={() => setIsVipModalOpen(true)}
+                    className="min-h-[48px] border border-white/30 text-white font-medium px-8 py-3.5 text-xs uppercase tracking-[0.2em] inline-flex items-center justify-center gap-2 hover:border-[#D4AF37] hover:text-[#D4AF37] transition duration-200 cursor-pointer"
+                  >
+                    <Calendar size={14} />
+                    <span>Book VIP Stylist</span>
+                  </button>
+                </div>
+
+                {/* Live Bullion Snapshot & Metrics */}
+                <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/10 w-full max-w-lg">
+                  <div>
+                    <div className="font-mono text-xl sm:text-2xl font-bold text-[#E5C158]">
+                      22K·916
+                    </div>
+                    <div className="text-[10px] uppercase tracking-wider text-white/60 mt-1">
+                      Hallmark Standard
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-mono text-xl sm:text-2xl font-bold text-white">
+                      ₹6,890/g
+                    </div>
+                    <div className="text-[10px] uppercase tracking-wider text-white/60 mt-1">
+                      Live Gold Bullion
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-mono text-xl sm:text-2xl font-bold text-white">
+                      100%
+                    </div>
+                    <div className="text-[10px] uppercase tracking-wider text-white/60 mt-1">
+                      Insured Delivery
+                    </div>
+                  </div>
                 </div>
 
               </div>
 
-            </div>
+              {/* Right Column: Interactive Featured Piece Showcase */}
+              <div className="lg:col-span-5">
+                <div className="relative bg-[#0d0d0d] border border-white/10 p-6 sm:p-8 overflow-hidden shadow-2xl">
+                  
+                  {/* Badge & Carousel Indicator */}
+                  <div className="flex items-center justify-between text-xs mb-6">
+                    <span className="text-[#E5C158] uppercase tracking-[0.2em] text-[10px] font-semibold flex items-center gap-1.5">
+                      <Sparkles size={12} /> Featured Haute Piece
+                    </span>
+                    <span className="font-mono text-white/60 text-xs">
+                      {String(activeHeroSlide + 1).padStart(2, "0")} / 04
+                    </span>
+                  </div>
 
-          </section>
+                  {/* LCP Candidate Image Slot */}
+                  <div className="relative aspect-square w-full max-h-[360px] flex items-center justify-center bg-[#070707] border border-white/5 mb-6 group overflow-hidden">
+                    <SafeImage
+                      src={heroItem.image}
+                      srcSet={
+                        heroItem.id === 1
+                          ? "/images/hero-mobile.webp 480w, /images/336052524_594628079068489_8991184652865232177_n.webp 700w"
+                          : undefined
+                      }
+                      sizes="(max-width: 640px) 320px, (max-width: 1024px) 420px, 480px"
+                      alt={`${heroItem.name} - Aurix Gold Certified 22K Jewellery`}
+                      width={600}
+                      height={600}
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="sync"
+                      className="w-full h-full object-contain p-6 transition-transform duration-700 group-hover:scale-105"
+                    />
 
-          {/* ===================================================
-              CATEGORIES
-          =================================================== */}
+                    {/* Quick View Hover Button */}
+                    <button
+                      type="button"
+                      onClick={() => setQuickViewItem(heroItem)}
+                      className="absolute bottom-3 right-3 bg-black/80 hover:bg-[#D4AF37] hover:text-black text-white p-2.5 rounded-full transition shadow-lg flex items-center gap-1.5 text-xs px-3"
+                      aria-label={`Quick view ${heroItem.name}`}
+                    >
+                      <Eye size={14} />
+                      <span className="text-[10px] uppercase tracking-wider font-medium">Quick View</span>
+                    </button>
+                  </div>
 
-          <section className="py-28 bg-[#090909] border-y border-white/10">
-
-            <div className="max-w-7xl mx-auto px-5 lg:px-10">
-
-              <div className="text-center mb-14">
-
-                <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-5">
-                  Explore Aurix
-                </p>
-
-                <h2 className="font-serif text-5xl sm:text-6xl italic">
-                  Find your signature.
-                </h2>
-
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-
-                {categories.map((category) => (
-
-                  <Link
-                    to="/products"
-                    key={category.title}
-                    className="group"
-                  >
-
-                    <div className="relative h-[400px] overflow-hidden bg-[#050505]">
-
-                      <SafeImage
-                        src={category.image}
-                        alt={`${category.title} gold jewellery`}
-                        width={1000}
-                        height={700}
-                        loading="lazy"
-                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
-                      />
-
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent pointer-events-none" />
-
-                      <div className="absolute bottom-7 inset-x-6 text-center flex flex-col items-center">
-
-                        <p className="text-[8px] uppercase tracking-[0.3em] text-[#D4AF37] mb-3 text-center">
-                          Aurix Collection
-                        </p>
-
-                        <h3 className="font-serif text-3xl sm:text-4xl italic text-center">
-                          {category.title}
-                        </h3>
-
-                        <p className="text-white/70 text-xs mt-2 text-center max-w-sm">
-                          {category.subtitle}
-                        </p>
-
-                      </div>
-
+                  {/* Product Metadata */}
+                  <div className="space-y-2 mb-6">
+                    <div className="flex justify-between items-baseline">
+                      <h2 className="font-serif text-2xl text-white italic">
+                        {heroItem.name}
+                      </h2>
+                      <span className="font-mono text-xl text-[#E5C158] font-semibold">
+                        {heroItem.price}
+                      </span>
                     </div>
 
-                  </Link>
+                    <div className="flex items-center gap-3 text-xs text-white/60">
+                      <span>{heroItem.purity}</span>
+                      <span aria-hidden="true">·</span>
+                      <span className="font-mono">{heroItem.weight}</span>
+                      <span aria-hidden="true">·</span>
+                      <span className="text-emerald-400">In Stock</span>
+                    </div>
+                  </div>
 
-                ))}
+                  {/* Action Controls */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    <button
+                      type="button"
+                      onClick={handleHeroAddToCart}
+                      className="min-h-[46px] bg-[#D4AF37] text-neutral-950 font-bold py-2.5 text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-1.5 hover:bg-white transition"
+                    >
+                      <ShoppingBag size={15} /> Add to Bag
+                    </button>
 
+                    <button
+                      type="button"
+                      onClick={() => setQuickViewItem(heroItem)}
+                      className="min-h-[46px] border border-white/20 text-white py-2.5 text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-1.5 hover:border-[#D4AF37] hover:text-[#D4AF37] transition"
+                    >
+                      <Eye size={15} /> Details
+                    </button>
+                  </div>
+
+                  {/* Slide Steppers */}
+                  <div className="flex items-center justify-center gap-2 pt-2">
+                    {[0, 1, 2, 3].map((idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveHeroSlide(idx)}
+                        className={`h-1.5 transition-all ${
+                          idx === activeHeroSlide ? "w-8 bg-[#D4AF37]" : "w-3 bg-white/20 hover:bg-white/40"
+                        }`}
+                        aria-label={`Switch to piece ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                </div>
               </div>
 
             </div>
+          </div>
+        </section>
 
-          </section>
+        {/* ===================================================
+            SECTION 2: TRENDING GOLD INVESTMENT & PURITY CALCULATOR
+        =================================================== */}
+        <section className="py-16 bg-[#090909] border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            
+            <div className="grid lg:grid-cols-12 gap-8 items-center bg-[#0e0e0e] border border-white/10 p-6 sm:p-10">
+              
+              <div className="lg:col-span-5 space-y-4">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#E5C158] font-medium">
+                  <Scale size={14} />
+                  <span>Transparent Purity Estimator</span>
+                </div>
 
-          {/* ===================================================
-              CLIENT STORIES
-          =================================================== */}
+                <h2 className="font-serif text-2xl sm:text-4xl text-white italic">
+                  Live 22K Gold Bullion Value
+                </h2>
 
-          <section className="py-28 bg-[#050505]">
+                <p className="text-white/70 text-xs sm:text-sm font-light leading-relaxed">
+                  Gold in India is not merely an ornament; it is lasting intergenerational security. Check real-time 22-Karat (91.6% purity) gold valuation based on today's official benchmark of <span className="text-[#E5C158] font-mono font-medium">₹6,890 / gram</span>.
+                </p>
 
-            <div className="max-w-5xl mx-auto px-5 text-center">
+                <div className="space-y-2 pt-2 text-xs text-white/60">
+                  <div className="flex items-center gap-2">
+                    <Check size={14} className="text-[#E5C158]" /> 100% Lifetime Exchange at prevailing gold rate
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check size={14} className="text-[#E5C158]" /> Verified 6-digit laser-engraved HUID hallmark
+                  </div>
+                </div>
+              </div>
 
-              <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-7">
-                Client Stories
-              </p>
+              {/* Interactive Calculator Slider */}
+              <div className="lg:col-span-7 bg-[#060606] border border-white/10 p-6 sm:p-8 space-y-6">
+                <div>
+                  <div className="flex justify-between items-center text-xs mb-3">
+                    <span className="text-white/80 uppercase tracking-widest text-[11px]">Select Gold Weight</span>
+                    <span className="font-mono text-base text-[#E5C158] font-bold">{calcWeight} Grams</span>
+                  </div>
 
-              <div
-                className="flex justify-center mb-7"
-                role="img"
-                aria-label="Rated 5 out of 5 stars by verified clients"
-              >
+                  {/* Weight Quick Buttons */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {[4, 8, 12, 16, 25, 50].map((w) => (
+                      <button
+                        key={w}
+                        type="button"
+                        onClick={() => setCalcWeight(w)}
+                        className={`px-3 py-1.5 text-xs font-mono transition border ${
+                          calcWeight === w
+                            ? "bg-[#D4AF37] text-black border-[#D4AF37] font-bold"
+                            : "bg-[#121212] text-white/70 border-white/10 hover:border-white/30"
+                        }`}
+                      >
+                        {w}g
+                      </button>
+                    ))}
+                  </div>
 
-                {[1, 2, 3, 4, 5].map((item) => (
-                  <Star
-                    key={item}
-                    size={14}
-                    className="text-[#D4AF37] fill-current mx-1"
-                    aria-hidden="true"
+                  {/* Range slider */}
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value={calcWeight}
+                    onChange={(e) => setCalcWeight(Number(e.target.value))}
+                    aria-label="Gold weight in grams"
+                    className="w-full accent-[#D4AF37] cursor-pointer"
                   />
-                ))}
+                </div>
 
+                {/* Calculation Matrix */}
+                <div className="grid sm:grid-cols-3 gap-4 pt-4 border-t border-white/10 text-center">
+                  <div className="p-3 bg-[#111] border border-white/5">
+                    <div className="text-[10px] uppercase tracking-wider text-white/60 mb-1">
+                      Pure Gold Content
+                    </div>
+                    <div className="font-mono text-base font-semibold text-white">
+                      {(calcWeight * 0.916).toFixed(2)}g (91.6%)
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-[#111] border border-white/5">
+                    <div className="text-[10px] uppercase tracking-wider text-white/60 mb-1">
+                      Raw Bullion Value
+                    </div>
+                    <div className="font-mono text-base font-semibold text-[#E5C158]">
+                      ₹{(calcWeight * goldRate22KPerGram).toLocaleString("en-IN")}
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-[#111] border border-white/5">
+                    <div className="text-[10px] uppercase tracking-wider text-white/60 mb-1">
+                      Lifetime Resale Value
+                    </div>
+                    <div className="font-mono text-base font-semibold text-emerald-400">
+                      100% Bullion Rate
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs text-white/60 pt-1">
+                  <span>*Making charges & GST (3%) computed transparently at checkout.</span>
+                  <Link to="/products" className="text-[#E5C158] hover:underline font-medium">
+                    Shop {calcWeight}g Pieces →
+                  </Link>
+                </div>
               </div>
-
-              <blockquote className="font-serif italic text-3xl sm:text-4xl lg:text-5xl leading-tight text-white/80">
-                “Jewellery should not simply be worn.
-                It should become part of your story.”
-              </blockquote>
-
-              <p className="text-[9px] uppercase tracking-[0.35em] text-[#D4AF37] mt-8">
-                The Aurix Client Experience
-              </p>
 
             </div>
 
-          </section>
+          </div>
+        </section>
 
-          {/* ===================================================
-              FINAL CTA
-          =================================================== */}
-
-          <section className="relative py-36 overflow-hidden">
-
-            <SafeImage
-              src={imperialDiamondChoker}
-              alt="Aurix handcrafted 22K luxury gold bridal choker jewellery collection"
-              width={1600}
-              height={900}
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-
-            <div
-              className="absolute inset-0 bg-black/85"
-              aria-hidden="true"
-            />
-
-            <div className="relative z-10 max-w-4xl mx-auto px-5 text-center flex flex-col items-center">
-
-              <div className="w-14 h-14 mx-auto border border-[#D4AF37]/50 rotate-45 flex items-center justify-center mb-10">
-
-                <Diamond
-                  size={22}
-                  className="text-[#D4AF37] -rotate-45"
-                  aria-hidden="true"
-                />
-
+        {/* ===================================================
+            SECTION 3: THE 2026 GOLD EDIT (COLLECTION EXPLORER)
+        =================================================== */}
+        <section className="py-24 bg-[#050505] border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            
+            {/* Section Header */}
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <div className="text-[10px] uppercase tracking-[0.35em] text-[#E5C158] font-medium mb-3">
+                Curated Haute Horlogerie & Joaillerie
               </div>
-
-              <p className="text-[8px] uppercase tracking-[0.5em] text-[#D4AF37] mb-6">
-                Your Signature Awaits
-              </p>
-
-              <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl italic">
-
-                Find the piece
-                <br />
-
-                <span className="text-[#D4AF37]">
-                  that becomes yours.
-                </span>
-
+              <h2 className="font-serif text-3xl sm:text-5xl text-white italic mb-4">
+                The 2026 Aurix Gold Edit
               </h2>
-
-              <p className="max-w-xl mx-auto w-full text-white/80 text-sm leading-7 mt-7 text-center">
-                Explore our collection of timeless 22K gold jewellery crafted for moments that matter.
+              <p className="text-white/70 text-xs sm:text-sm font-light leading-relaxed">
+                Explore handcrafted masterpieces sculpted from certified 22K hallmarked gold. Click any piece for full hallmark specs or instant cart reservation.
               </p>
+            </div>
 
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10 w-full text-center">
-
-                <Link
-                  to="/products"
-                  className="bg-[#D4AF37] text-neutral-950 font-bold px-10 py-4 text-xs uppercase tracking-[0.25em] hover:bg-white transition min-h-[48px] inline-flex items-center justify-center shadow-sm"
+            {/* Category Filter Buttons (Interactive Segmented Control) */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+              {["All", "Necklaces", "Rings", "Earrings", "Bracelets"].map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setSelectedCategory(category)}
+                  className={`min-h-[44px] px-6 py-2 text-xs uppercase tracking-[0.15em] transition border ${
+                    selectedCategory === category
+                      ? "bg-[#D4AF37] text-neutral-950 border-[#D4AF37] font-bold shadow-md"
+                      : "bg-[#0f0f0f] text-white/70 border-white/15 hover:border-white/35 hover:text-white"
+                  }`}
                 >
-                  Shop Gold Collection
-                </Link>
+                  {category === "All" ? "All Masterpieces" : category}
+                </button>
+              ))}
+            </div>
 
-                <Link
-                  to="/contact"
-                  className="border border-white/40 text-white font-medium px-10 py-4 text-xs uppercase tracking-[0.25em] hover:border-[#D4AF37] hover:text-[#D4AF37] transition min-h-[48px] inline-flex items-center justify-center"
+            {/* Product Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProducts.map((item) => (
+                <div
+                  key={item.id}
+                  className="group bg-[#0b0b0b] border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between"
                 >
-                  Custom Design
-                </Link>
+                  <div>
+                    {/* Image Box */}
+                    <div className="relative aspect-[4/5] bg-[#060606] overflow-hidden flex items-center justify-center p-8">
+                      <div className="absolute top-4 left-4 z-10 text-[9px] uppercase tracking-widest text-[#E5C158] bg-black/60 px-2.5 py-1 border border-white/10">
+                        {item.weight} · 22K Gold
+                      </div>
 
+                      <SafeImage
+                        src={item.image}
+                        alt={`${item.name} - Aurix 22K Gold`}
+                        width={600}
+                        height={750}
+                        loading="lazy"
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
+                      />
+
+                      {/* Quick View Button on Image */}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setQuickViewItem(item)}
+                          className="min-h-[44px] px-4 py-2 bg-black/90 hover:bg-[#D4AF37] hover:text-black text-white text-xs uppercase tracking-wider font-medium flex items-center gap-1.5 transition border border-white/20"
+                        >
+                          <Eye size={14} /> Quick View
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Metadata */}
+                    <div className="p-6">
+                      <div className="text-[10px] uppercase tracking-[0.25em] text-[#E5C158] mb-1.5 font-medium">
+                        {item.category}
+                      </div>
+                      <h3 className="font-serif text-xl sm:text-2xl text-white italic mb-2">
+                        {item.name}
+                      </h3>
+                      <p className="text-white/60 text-xs line-clamp-2 font-light leading-relaxed mb-4">
+                        {item.desc}
+                      </p>
+                      <div className="font-mono text-xl text-[#E5C158] font-bold">
+                        {item.price}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Bottom CTA */}
+                  <div className="p-6 pt-0 border-t border-white/5 flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        addToCart({
+                          id: item.id,
+                          name: item.name,
+                          price: item.price,
+                        });
+                        setIsCartOpen(true);
+                      }}
+                      className="flex-1 min-h-[44px] bg-[#D4AF37] text-neutral-950 font-bold text-xs uppercase tracking-[0.15em] flex items-center justify-center gap-2 hover:bg-white transition"
+                    >
+                      <ShoppingBag size={14} /> Add to Bag
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuickViewItem(item)}
+                      className="min-w-[44px] min-h-[44px] border border-white/20 text-white/80 hover:text-white hover:border-[#D4AF37] flex items-center justify-center transition"
+                      aria-label={`View details of ${item.name}`}
+                    >
+                      <Eye size={16} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* View Full Catalog Link */}
+            <div className="mt-14 text-center">
+              <Link
+                to="/products"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#E5C158] hover:text-white transition font-medium"
+              >
+                <span>View All 22K Creations in Catalog</span>
+                <ArrowRight size={15} />
+              </Link>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ===================================================
+            SECTION 4: THE 4 MARKS OF AUTHENTIC 22K GOLD
+        =================================================== */}
+        <section className="py-24 bg-[#080808] border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-[#E5C158] font-medium mb-3">
+                Government Certification & Trust
+              </div>
+              <h2 className="font-serif text-3xl sm:text-5xl text-white italic mb-4">
+                The 4 Hallmarks of Certified Aurix Gold
+              </h2>
+              <p className="text-white/70 text-xs sm:text-sm font-light leading-relaxed">
+                In compliance with Bureau of Indian Standards (BIS) regulations, every single piece crafted by Aurix bears the mandatory four-pillar laser engraving guarantee.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+              
+              {/* Pillar 1 */}
+              <div className="p-8 bg-[#0e0e0e] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-none border border-[#D4AF37]/40 flex items-center justify-center text-[#E5C158] mb-6 font-serif text-xl font-bold">
+                    ▲
+                  </div>
+                  <h3 className="font-serif text-xl text-white italic mb-2">
+                    1. BIS Standard Mark
+                  </h3>
+                  <p className="text-white/70 text-xs leading-relaxed font-light">
+                    The official triangular emblem issued by the Bureau of Indian Standards, certifying government testing.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-white/10 text-[10px] uppercase tracking-wider text-[#E5C158] font-mono">
+                  Official BIS Triangle
+                </div>
+              </div>
+
+              {/* Pillar 2 */}
+              <div className="p-8 bg-[#0e0e0e] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-none border border-[#D4AF37]/40 flex items-center justify-center text-[#E5C158] mb-6 font-mono text-base font-bold">
+                    916
+                  </div>
+                  <h3 className="font-serif text-xl text-white italic mb-2">
+                    2. Purity & Fineness (22K)
+                  </h3>
+                  <p className="text-white/70 text-xs leading-relaxed font-light">
+                    Denoting 22K (916 parts per thousand pure gold). The ideal international balance of opulent glow and durable tensile strength.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-white/10 text-[10px] uppercase tracking-wider text-[#E5C158] font-mono">
+                  22K916 Fineness Mark
+                </div>
+              </div>
+
+              {/* Pillar 3 */}
+              <div className="p-8 bg-[#0e0e0e] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-none border border-[#D4AF37]/40 flex items-center justify-center text-[#E5C158] mb-6">
+                    <Award size={24} />
+                  </div>
+                  <h3 className="font-serif text-xl text-white italic mb-2">
+                    3. Assaying Centre Mark
+                  </h3>
+                  <p className="text-white/70 text-xs leading-relaxed font-light">
+                    The authenticated stamp of the certified BIS Assaying & Hallmarking Centre where the metal was laboratory verified.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-white/10 text-[10px] uppercase tracking-wider text-[#E5C158] font-mono">
+                  Government Lab Stamp
+                </div>
+              </div>
+
+              {/* Pillar 4 */}
+              <div className="p-8 bg-[#0e0e0e] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-none border border-[#D4AF37]/40 flex items-center justify-center text-[#E5C158] mb-6 font-mono text-sm font-bold">
+                    HUID
+                  </div>
+                  <h3 className="font-serif text-xl text-white italic mb-2">
+                    4. 6-Digit Alphanumeric HUID
+                  </h3>
+                  <p className="text-white/70 text-xs leading-relaxed font-light">
+                    Hallmark Unique Identification laser-engraved onto each piece. Verifiable anytime on the government BIS Care App.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-white/10 text-[10px] uppercase tracking-wider text-[#E5C158] font-mono">
+                  e.g. AX916K Laser Code
+                </div>
               </div>
 
             </div>
 
-          </section>
+            {/* Interactive HUID Verification Simulator */}
+            <div className="max-w-2xl mx-auto bg-[#040404] border border-[#D4AF37]/30 p-6 sm:p-8 text-center space-y-4">
+              <div className="text-[10px] uppercase tracking-[0.25em] text-[#E5C158] font-semibold">
+                Instant Verification Sandbox
+              </div>
+              <h3 className="font-serif text-2xl text-white italic">
+                Verify Your Aurix Hallmark
+              </h3>
+              <p className="text-white/70 text-xs leading-relaxed font-light max-w-lg mx-auto">
+                Every customer invoice and authenticity certificate includes an authentic HUID code. Enter it below to preview verification credentials.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto pt-2">
+                <input
+                  type="text"
+                  defaultValue="AX916K"
+                  placeholder="Enter 6-digit HUID code"
+                  className="bg-[#111] border border-white/20 text-white font-mono text-sm px-4 py-3 uppercase tracking-wider focus:outline-none focus:border-[#D4AF37] flex-1 text-center"
+                />
+                <button
+                  type="button"
+                  onClick={() => alert("HUID Verified: Aurix Gold 22K (916) Certified Jewellery · Bureau of Indian Standards Compliant.")}
+                  className="min-h-[48px] bg-[#D4AF37] text-neutral-950 font-bold px-6 py-3 text-xs uppercase tracking-widest hover:bg-white transition"
+                >
+                  Verify Now
+                </button>
+              </div>
+            </div>
 
-        </div>
+          </div>
+        </section>
+
+        {/* ===================================================
+            SECTION 5: CLIENT STORIES & PRESS ACCOLADES
+        =================================================== */}
+        <section className="py-24 bg-[#050505] border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-[#E5C158] font-medium mb-3">
+                Acclaimed In Vogue & Trusted by Connoisseurs
+              </div>
+              <h2 className="font-serif text-3xl sm:text-5xl text-white italic mb-4">
+                What Patrons Say About Aurix
+              </h2>
+              
+              {/* Star Rating Badge */}
+              <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs">
+                <div className="flex items-center gap-1 text-[#E5C158]">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={15} className="fill-current text-[#E5C158]" />
+                  ))}
+                </div>
+                <span className="text-white font-bold">4.9 / 5.0 Rating</span>
+                <span className="text-white/30">·</span>
+                <span className="text-white/70">1,280+ Verified Buyers across India</span>
+              </div>
+            </div>
+
+            {/* Testimonials Grid */}
+            <div className="grid sm:grid-cols-3 gap-8 mb-16">
+              
+              <div className="p-8 bg-[#0c0c0c] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="flex gap-1 text-[#E5C158] mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={13} className="fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-white/80 text-sm italic font-serif leading-relaxed mb-6">
+                    “The 22K gold necklace I purchased for my daughter’s wedding from Aurix is breathtaking. Flawless BIS 916 hallmarking, secure transit delivery, and stunning luxury packaging.”
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-white/10 text-xs">
+                  <div className="font-medium text-white">Priya Sharma</div>
+                  <div className="text-white/50 text-[10px] uppercase tracking-wider">New Delhi · Verified Buyer</div>
+                </div>
+              </div>
+
+              <div className="p-8 bg-[#0c0c0c] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="flex gap-1 text-[#E5C158] mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={13} className="fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-white/80 text-sm italic font-serif leading-relaxed mb-6">
+                    “Exceptional Indian craftsmanship and prompt delivery to Mumbai. The Certificate of Authenticity and laser HUID were verified effortlessly on the BIS app.”
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-white/10 text-xs">
+                  <div className="font-medium text-white">Rahul Verma</div>
+                  <div className="text-white/50 text-[10px] uppercase tracking-wider">Mumbai · Verified Buyer</div>
+                </div>
+              </div>
+
+              <div className="p-8 bg-[#0c0c0c] border border-white/10 flex flex-col justify-between">
+                <div>
+                  <div className="flex gap-1 text-[#E5C158] mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={13} className="fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-white/80 text-sm italic font-serif leading-relaxed mb-6">
+                    “I booked a virtual styling session with an Aurix gemologist. They walked me through each diamond setting and 22K weight breakdown. Truly world-class service!”
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-white/10 text-xs">
+                  <div className="font-medium text-white">Ananya Gupta</div>
+                  <div className="text-white/50 text-[10px] uppercase tracking-wider">Bengaluru · Verified Buyer</div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Press Quotes Bar */}
+            <div className="border-t border-white/10 pt-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white/50 text-xs uppercase tracking-[0.2em]">
+              <div>Vogue India · “Next-Gen 22K Luxury”</div>
+              <div>Harper’s Bazaar · “Pure Indian Goldsmithing”</div>
+              <div>Elle Jewellery · “Heirloom Excellence”</div>
+              <div>Forbes India · “Certified Bullion Standard”</div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ===================================================
+            SECTION 6: FREQUENTLY ASKED QUESTIONS (SEARCHABLE)
+        =================================================== */}
+        <section className="py-24 bg-[#080808] border-b border-white/10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div className="text-center mb-12">
+              <div className="text-[10px] uppercase tracking-[0.35em] text-[#E5C158] font-medium mb-3">
+                Knowledge Vault & Assurance
+              </div>
+              <h2 className="font-serif text-3xl sm:text-5xl text-white italic mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-white/70 text-xs sm:text-sm font-light leading-relaxed max-w-xl mx-auto">
+                Clear, transparent answers about certified 22K gold purity, authentic Indian craftsmanship, sizing, insured delivery, and lifetime buyback.
+              </p>
+            </div>
+
+            {/* Search Input */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50" size={18} />
+                <input
+                  type="text"
+                  placeholder="Search questions (e.g. hallmark, purity, sizing, shipping, buyback, EMI)..."
+                  value={faqSearch}
+                  onChange={(e) => setFaqSearch(e.target.value)}
+                  className="w-full bg-[#050505] border border-white/15 text-white text-sm py-3.5 pl-12 pr-4 focus:outline-none focus:border-[#D4AF37] transition"
+                />
+              </div>
+            </div>
+
+            {/* FAQ Category Pills (Interactive Buttons) */}
+            <div className="flex flex-wrap justify-center gap-2 mb-10">
+              {faqCategories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setFaqCategory(cat)}
+                  className={`px-4 py-2 text-[11px] uppercase tracking-wider transition border ${
+                    faqCategory === cat
+                      ? "bg-[#D4AF37] text-neutral-950 border-[#D4AF37] font-bold"
+                      : "bg-transparent text-white/70 border-white/15 hover:border-white/30"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* FAQ Items */}
+            <div className="space-y-4">
+              {filteredFaqs.length > 0 ? (
+                filteredFaqs.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="border border-white/10 bg-[#0c0c0c] p-5 sm:p-6 hover:border-white/20 transition"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                      className="w-full flex justify-between items-start text-left gap-4 cursor-pointer"
+                      aria-expanded={openFaq === idx}
+                    >
+                      <div className="flex gap-4 items-start">
+                        <span className="text-[#E5C158] font-mono text-xs mt-0.5 font-bold">
+                          {String(idx + 1).padStart(2, "0")}
+                        </span>
+                        <span className="font-medium text-white text-sm sm:text-base leading-snug">
+                          {item.q}
+                        </span>
+                      </div>
+                      <span className="text-[#E5C158] font-mono text-lg font-bold">
+                        {openFaq === idx ? "−" : "+"}
+                      </span>
+                    </button>
+                    {openFaq === idx && (
+                      <div className="mt-4 pl-9 text-white/75 text-xs sm:text-sm font-light leading-relaxed border-t border-white/5 pt-3">
+                        {item.a}
+                      </div>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-10 text-white/50 text-sm">
+                  No matching questions found. Contact our master concierge at +91 9034196429.
+                </div>
+              )}
+            </div>
+
+            {/* Support CTA Block */}
+            <div className="mt-16 bg-[#040404] border border-white/10 p-8 text-center space-y-4">
+              <h3 className="font-serif text-2xl text-white italic">
+                Need Personalized Consultation?
+              </h3>
+              <p className="text-white/80 text-xs sm:text-sm max-w-md mx-auto font-light leading-relaxed">
+                Our master concierge and gemologists are ready to assist with custom sizes, bespoke designs, or insured transit updates.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 pt-2">
+                <a
+                  href="tel:+919034196429"
+                  className="min-h-[48px] px-6 py-3 bg-[#D4AF37] text-neutral-950 font-bold text-xs uppercase tracking-widest inline-flex items-center gap-2 hover:bg-white transition"
+                >
+                  <Phone size={14} /> Call +91 9034196429
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setIsVipModalOpen(true)}
+                  className="min-h-[48px] px-6 py-3 border border-white/20 text-white font-medium text-xs uppercase tracking-widest inline-flex items-center gap-2 hover:border-[#D4AF37] hover:text-[#D4AF37] transition"
+                >
+                  <Calendar size={14} /> Book Video Appointment
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ===================================================
+            SECTION 7: FINAL CALL TO ACTION
+        =================================================== */}
+        <section className="relative py-32 overflow-hidden border-t border-white/10">
+          <SafeImage
+            src={imperialDiamondChoker}
+            alt="Aurix handcrafted 22K luxury gold bridal choker jewellery collection"
+            width={1600}
+            height={900}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-black" aria-hidden="true" />
+
+          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center flex flex-col items-center">
+            <div className="w-12 h-12 border border-[#D4AF37]/50 rotate-45 flex items-center justify-center mb-8">
+              <Diamond size={20} className="text-[#D4AF37] -rotate-45" aria-hidden="true" />
+            </div>
+
+            <div className="text-[10px] uppercase tracking-[0.35em] text-[#E5C158] font-medium mb-4">
+              Your Signature Heirloom
+            </div>
+
+            <h2 className="font-serif text-4xl sm:text-6xl text-white italic mb-6">
+              Find the Gold Piece That Becomes Yours.
+            </h2>
+
+            <p className="max-w-xl mx-auto text-white/80 text-sm leading-relaxed font-light mb-10">
+              Explore timeless 22K gold jewellery handcrafted for moments that matter. Guaranteed BIS 916 hallmarked, fully insured doorstep delivery across India.
+            </p>
+
+            <div className="flex flex-wrap justify-center items-center gap-4">
+              <Link
+                to="/products"
+                className="min-h-[48px] bg-[#D4AF37] text-neutral-950 font-bold px-8 py-3.5 text-xs uppercase tracking-[0.2em] inline-flex items-center justify-center hover:bg-white transition"
+              >
+                Shop 22K Gold Collection
+              </Link>
+              <button
+                type="button"
+                onClick={() => setIsVipModalOpen(true)}
+                className="min-h-[48px] border border-white/30 text-white font-medium px-8 py-3.5 text-xs uppercase tracking-[0.2em] inline-flex items-center justify-center hover:border-[#D4AF37] hover:text-[#D4AF37] transition"
+              >
+                Book Stylist Consultation
+              </button>
+            </div>
+          </div>
+        </section>
 
       </div>
     </>

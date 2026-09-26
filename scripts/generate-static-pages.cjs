@@ -12,13 +12,13 @@ const pages = [
   },
   {
     path: '/products',
-    title: '22K Gold  Collection | Necklaces, Rings & Earrings | Aurix',
-    description: "Explore Aurix's certified 22K gold jewellery. Shop handcrafted gold necklaces, earrings and bangles with insured delivery across India.",
+    title: '22K Gold Jewellery Collection | Certified BIS 916 Pure Gold | Aurix',
+    description: "Explore Aurix's certified 22K BIS 916 gold jewellery collection. Shop handcrafted royal necklaces, bridal chokers, rings and bangles with insured delivery across India.",
     canonical: `${SITE_URL}/products`,
   },
   {
     path: '/about',
-    title: 'About Aurix | Pure Handcrafted 22K Gold Jewellery Heritage.',
+    title: 'About Aurix | Master 22K BIS 916 Gold Goldsmith Heritage',
     description: "Discover Aurix: India's luxury brand for certified 22K gold jewellery. Learn about our heritage, master craft and lifelong purity promise.",
     canonical: `${SITE_URL}/about`,
   },
@@ -33,12 +33,6 @@ const pages = [
     title: 'Contact Aurix | 22K Jewellery Enquiries & Customer Support',
     description: 'Get in touch with Aurix for custom gold jewellery enquiries, order tracking & support. Call +91 9034196429 or visit our boutique in India.',
     canonical: `${SITE_URL}/contact`,
-  },
-  {
-    path: '/collections',
-    title: '22K Gold Collections | Handcrafted Bridal & Daily Jewellery | Aurix',
-    description: 'Browse exquisite 22K gold collections by Aurix. From royal bridal choker sets to everyday rings and pendants with certified BIS 916 purity.',
-    canonical: `${SITE_URL}/collections`,
   },
   {
     path: '/login',

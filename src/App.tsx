@@ -65,12 +65,6 @@ const ProductDetail = lazy(() =>
   }))
 );
 
-const Collections = lazy(() =>
-  import("./pages/Collections").then((module) => ({
-    default: module.Collections,
-  }))
-);
-
 const CartPage = lazy(() =>
   import("./pages/CartPage").then((module) => ({
     default: module.CartPage,
@@ -178,9 +172,14 @@ export default function App() {
                   element={<Contact />}
                 />
 
+                {/* Redirect /collections to /products for SEO and unified 22K catalogue */}
                 <Route
                   path="/collections"
-                  element={<Collections />}
+                  element={<Navigate to="/products" replace />}
+                />
+                <Route
+                  path="/collections/*"
+                  element={<Navigate to="/products" replace />}
                 />
 
                 <Route
