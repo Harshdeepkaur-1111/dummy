@@ -39,36 +39,83 @@ const pages = [
     title: 'Client Login & VIP Member Access | Aurix 22K Gold Jewellery',
     description: 'Sign in to your Aurix account to track gold orders, manage customized jewellery requests, view purity certificates and access VIP member benefits.',
     canonical: `${SITE_URL}/login`,
+    robots: 'noindex, follow',
   },
   {
     path: '/cart',
     title: 'Shopping Cart | Aurix - Certified 22K Gold Jewellery India',
     description: 'Review your chosen handcrafted 22K gold necklaces, bangles, rings and earrings with 100% insured doorstep shipping and transparent billing.',
     canonical: `${SITE_URL}/cart`,
+    robots: 'noindex, follow',
   },
   {
     path: '/checkout',
     title: 'Secure Checkout | Aurix - Insured 22K Gold Delivery India',
     description: 'Complete your purchase of certified 22K BIS 916 gold jewellery. Enjoy 100% insured delivery across India, safe payment options & lifetime buyback.',
     canonical: `${SITE_URL}/checkout`,
+    robots: 'noindex, follow',
   },
-  {
-    path: '/product/gold-ring',
-    title: 'Aurix Royal Gold Ring | Certified 22K Gold Jewellery | Aurix',
-    description: 'Buy Aurix Royal Gold Ring in pure 22K gold. Certified BIS 916 hallmark, lifetime buyback and 100% insured delivery across India.',
-    canonical: `${SITE_URL}/product/gold-ring`,
-  },
-  {
-    path: '/product/diamond-necklace',
-    title: 'Imperial Diamond Gold Choker | Certified 22K Gold Jewellery | Aurix',
-    description: 'Buy Imperial Diamond Gold Choker crafted in pure 22K gold. Certified BIS 916 hallmark, 100% insured delivery and lifetime buyback across India.',
-    canonical: `${SITE_URL}/product/diamond-necklace`,
-  },
+  // All 8 Products (Primary Canonical Slugs)
   {
     path: '/product/classic-gold-necklace',
     title: 'Classic Gold Necklace | Certified 22K Gold Jewellery | Aurix',
     description: 'Buy Classic Gold Necklace in pure 22K gold. Certified BIS 916 hallmark, lifetime buyback and 100% insured delivery across India.',
     canonical: `${SITE_URL}/product/classic-gold-necklace`,
+  },
+  {
+    path: '/product/aurix-royal-gold-ring',
+    title: 'Aurix Royal Gold Ring | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Aurix Royal Gold Ring in pure 22K gold. Certified BIS 916 hallmark, lifetime buyback and 100% insured delivery across India.',
+    canonical: `${SITE_URL}/product/aurix-royal-gold-ring`,
+  },
+  {
+    path: '/product/pearl-drop-gold-earrings',
+    title: 'Pearl Drop Gold Earrings | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Pearl Drop Gold Earrings in pure 22K gold with genuine pearls. Certified BIS 916 hallmark, lifetime buyback and insured delivery across India.',
+    canonical: `${SITE_URL}/product/pearl-drop-gold-earrings`,
+  },
+  {
+    path: '/product/modern-gold-charm-bracelet',
+    title: 'Modern Gold Charm Bracelet | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Modern Gold Charm Bracelet handcrafted in 22K gold. Certified BIS 916 hallmark, lifetime buyback and insured delivery across India.',
+    canonical: `${SITE_URL}/product/modern-gold-charm-bracelet`,
+  },
+  {
+    path: '/product/signature-gold-pendant',
+    title: 'Signature Gold Pendant | Certified 18K/22K Gold Jewellery | Aurix',
+    description: 'Buy Signature Gold Pendant crafted in pure hallmarked gold. Certified BIS hallmark, lifetime buyback and insured delivery across India.',
+    canonical: `${SITE_URL}/product/signature-gold-pendant`,
+  },
+  {
+    path: '/product/heritage-gold-bangle',
+    title: 'Heritage Gold Bangle | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Heritage Gold Bangle in pure 22K gold. Handcrafted traditional filigree, certified BIS 916 hallmark and insured delivery across India.',
+    canonical: `${SITE_URL}/product/heritage-gold-bangle`,
+  },
+  {
+    path: '/product/imperial-diamond-gold-choker',
+    title: 'Imperial Diamond Gold Choker | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Imperial Diamond Gold Choker crafted in pure 22K gold. Certified BIS 916 hallmark, 100% insured delivery and lifetime buyback across India.',
+    canonical: `${SITE_URL}/product/imperial-diamond-gold-choker`,
+  },
+  {
+    path: '/product/sovereign-gold-signet-ring',
+    title: 'Sovereign Gold Signet Ring | Certified 22K Solid Gold | Aurix',
+    description: 'Buy Sovereign Gold Signet Ring in pure 22K solid gold. Certified BIS 916 hallmark, lifetime buyback and insured delivery across India.',
+    canonical: `${SITE_URL}/product/sovereign-gold-signet-ring`,
+  },
+  // Legacy aliases (Canonical pointed to primary canonical slug)
+  {
+    path: '/product/gold-ring',
+    title: 'Aurix Royal Gold Ring | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Aurix Royal Gold Ring in pure 22K gold. Certified BIS 916 hallmark, lifetime buyback and 100% insured delivery across India.',
+    canonical: `${SITE_URL}/product/aurix-royal-gold-ring`,
+  },
+  {
+    path: '/product/diamond-necklace',
+    title: 'Imperial Diamond Gold Choker | Certified 22K Gold Jewellery | Aurix',
+    description: 'Buy Imperial Diamond Gold Choker crafted in pure 22K gold. Certified BIS 916 hallmark, 100% insured delivery and lifetime buyback across India.',
+    canonical: `${SITE_URL}/product/imperial-diamond-gold-choker`,
   },
   {
     path: '/privacy',
@@ -114,15 +161,27 @@ function generatePages() {
     );
 
     // 3. Ensure strictly ONE canonical tag per page
-    // First, strip all existing canonical tags in document
     modifiedHtml = modifiedHtml.replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi, '');
-    // Next, insert the single authoritative canonical tag right after meta description
     modifiedHtml = modifiedHtml.replace(
       /(<meta\s+name=["']description["'][\s\S]*?>)/i,
       `$1\n    <link rel="canonical" href="${page.canonical}">`
     );
 
-    // 4. Update OpenGraph Tags
+    // 4. Handle Robots Directive (noindex for private pages, index for others)
+    modifiedHtml = modifiedHtml.replace(/<meta\s+name=["']robots["'][^>]*>/gi, '');
+    if (page.robots) {
+      modifiedHtml = modifiedHtml.replace(
+        /(<meta\s+name=["']description["'][\s\S]*?>)/i,
+        `$1\n    <meta name="robots" content="${page.robots}">`
+      );
+    } else {
+      modifiedHtml = modifiedHtml.replace(
+        /(<meta\s+name=["']description["'][\s\S]*?>)/i,
+        `$1\n    <meta name="robots" content="index, follow, max-image-preview:large">`
+      );
+    }
+
+    // 5. Update OpenGraph Tags
     modifiedHtml = modifiedHtml.replace(
       /<meta\s+property=["']og:title["']\s+content=["'][\s\S]*?["']>/i,
       `<meta property="og:title" content="${page.title}">`
@@ -136,7 +195,7 @@ function generatePages() {
       `<meta property="og:url" content="${page.canonical}">`
     );
 
-    // 5. Update Twitter Cards
+    // 6. Update Twitter Cards
     modifiedHtml = modifiedHtml.replace(
       /<meta\s+name=["']twitter:title["']\s+content=["'][\s\S]*?["']>/i,
       `<meta name="twitter:title" content="${page.title}">`
@@ -146,28 +205,55 @@ function generatePages() {
       `<meta name="twitter:description" content="${page.description}">`
     );
 
-    // Safety check: ensure count of canonical tags is exactly 1
+    // Safety check: verify canonical tag count
     const canonicalMatches = modifiedHtml.match(/<link\s+[^>]*rel=["']canonical["'][^>]*>/gi);
     const count = canonicalMatches ? canonicalMatches.length : 0;
     if (count !== 1) {
       console.warn(`Warning: Page ${page.path} has ${count} canonical tags (expected 1).`);
     } else {
-      console.log(`✓ ${page.path.padEnd(28)} : Exactly 1 canonical tag -> ${page.canonical}`);
+      console.log(`✓ ${page.path.padEnd(38)} : Exactly 1 canonical tag -> ${page.canonical}`);
     }
 
     if (page.path === '/') {
-      // Overwrite dist/index.html with verified meta
       fs.writeFileSync(indexHtmlPath, modifiedHtml, 'utf8');
     } else {
       const pageDir = path.join(distDir, page.path.replace(/^\//, ''));
       fs.mkdirSync(pageDir, { recursive: true });
       fs.writeFileSync(path.join(pageDir, 'index.html'), modifiedHtml, 'utf8');
 
-      // Also create clean html file e.g. dist/products.html
       const cleanHtmlFile = path.join(distDir, `${page.path.replace(/^\//, '')}.html`);
       fs.writeFileSync(cleanHtmlFile, modifiedHtml, 'utf8');
     }
   });
+
+  // Generate static redirect landing page for /collections and /collection
+  const redirectHtml = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to 22K Gold Jewellery Collection | Aurix</title>
+  <meta http-equiv="refresh" content="0; url=/products">
+  <link rel="canonical" href="${SITE_URL}/products">
+  <meta name="robots" content="noindex, follow">
+  <script>window.location.replace("/products");</script>
+</head>
+<body style="background:#050505;color:#fff;font-family:sans-serif;padding:2rem;text-align:center;">
+  <p>Redirecting to <a href="/products" style="color:#D4AF37;">22K Gold Jewellery Collection</a>...</p>
+</body>
+</html>`;
+
+  const collectionsDir = path.join(distDir, 'collections');
+  fs.mkdirSync(collectionsDir, { recursive: true });
+  fs.writeFileSync(path.join(collectionsDir, 'index.html'), redirectHtml, 'utf8');
+  fs.writeFileSync(path.join(distDir, 'collections.html'), redirectHtml, 'utf8');
+
+  const collectionDir = path.join(distDir, 'collection');
+  fs.mkdirSync(collectionDir, { recursive: true });
+  fs.writeFileSync(path.join(collectionDir, 'index.html'), redirectHtml, 'utf8');
+  fs.writeFileSync(path.join(distDir, 'collection.html'), redirectHtml, 'utf8');
+
+  // Also create dist/404.html from baseHtml
+  fs.writeFileSync(path.join(distDir, '404.html'), baseHtml, 'utf8');
 
   console.log('Successfully generated static SEO pages with strictly 1 canonical tag each!');
 }

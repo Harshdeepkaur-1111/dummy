@@ -22,6 +22,7 @@ import { products, categories } from "../data";
 import { getOptimizedImage } from "../lib/utils";
 import { useCart } from "../contexts/CartContext";
 import { getSiteUrl, useCanonical } from "../lib/seo";
+import { PRODUCT_CANONICAL_SLUGS } from "./ProductDetail";
 
 export function Products() {
   const { addToCart, setIsCartOpen } = useCart();
@@ -134,7 +135,7 @@ export function Products() {
     "@type": "ItemList",
     itemListElement: products.map((item, index) => {
       const numericPrice = parseInt(item.price.replace(/[^0-9]/g, ""), 10) || 24999;
-      const slug = getProductSlug(item.name);
+      const slug = PRODUCT_CANONICAL_SLUGS[item.id] || getProductSlug(item.name);
       return {
         "@type": "ListItem",
         position: index + 1,
@@ -323,7 +324,7 @@ export function Products() {
         <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-16">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredProducts.map((product, idx) => {
-              const slug = getProductSlug(product.name);
+              const slug = PRODUCT_CANONICAL_SLUGS[product.id] || getProductSlug(product.name);
               const isAdded = addedProductId === product.id;
 
               return (

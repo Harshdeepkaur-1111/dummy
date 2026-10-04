@@ -6,38 +6,105 @@ import { products } from "../data";
 import { useCart } from "../contexts/CartContext";
 import { CANONICAL_SITE_URL, useCanonical } from "../lib/seo";
 
+export function getProductSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+export const PRODUCT_CANONICAL_SLUGS: Record<number, string> = {
+  1: "classic-gold-necklace",
+  2: "aurix-royal-gold-ring",
+  3: "pearl-drop-gold-earrings",
+  4: "modern-gold-charm-bracelet",
+  5: "signature-gold-pendant",
+  6: "heritage-gold-bangle",
+  7: "imperial-diamond-gold-choker",
+  8: "sovereign-gold-signet-ring",
+};
+
 export function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { addToCart, setIsCartOpen } = useCart();
 
-  const currentSlug = slug || "gold-ring";
-  const canonicalUrl = useCanonical(`/product/${currentSlug}`);
-
-  // Find product matching slug or fallback gracefully
+  // Find product matching slug or fallback gracefully with exact matching first
   const product = useMemo(() => {
     if (!slug) return products[0];
     const normalized = slug.toLowerCase().replace(/[^a-z0-9]/g, "");
-    
-    // Direct matches or slug aliases
+
+    // 1. Exact match on normalized product name
+    const exactMatch = products.find((p) => {
+      const pSlug = getProductSlug(p.name).replace(/[^a-z0-9]/g, "");
+      return pSlug === normalized;
+    });
+    if (exactMatch) return exactMatch;
+
+    // 2. Exact match on canonical slug registry
+    const canonicalEntry = Object.entries(PRODUCT_CANONICAL_SLUGS).find(
+      ([, canonicalSlug]) => canonicalSlug.replace(/[^a-z0-9]/g, "") === normalized
+    );
+    if (canonicalEntry) {
+      const found = products.find((p) => p.id === Number(canonicalEntry[0]));
+      if (found) return found;
+    }
+
+    // 3. Known historical aliases
+    if (normalized === "goldring" || normalized === "royalgoldring") {
+      return products.find((p) => p.id === 2) || products[1];
+    }
+    if (normalized === "diamondnecklace" || normalized === "goldchoker") {
+      return products.find((p) => p.id === 7) || products[6];
+    }
+    if (normalized === "pearlearrings") {
+      return products.find((p) => p.id === 3) || products[2];
+    }
+    if (normalized === "charmbracelet") {
+      return products.find((p) => p.id === 4) || products[3];
+    }
+    if (normalized === "goldpendant") {
+      return products.find((p) => p.id === 5) || products[4];
+    }
+    if (normalized === "goldbangle") {
+      return products.find((p) => p.id === 6) || products[5];
+    }
+    if (normalized === "signetring") {
+      return products.find((p) => p.id === 8) || products[7];
+    }
+
+    // 4. Substring fallback that respects uniqueness
+    if (normalized.includes("signet")) {
+      return products.find((p) => p.id === 8) || products[7];
+    }
+    if (normalized.includes("choker") || normalized.includes("diamond")) {
+      return products.find((p) => p.id === 7) || products[6];
+    }
+    if (normalized.includes("pearl")) {
+      return products.find((p) => p.id === 3) || products[2];
+    }
+    if (normalized.includes("pendant")) {
+      return products.find((p) => p.id === 5) || products[4];
+    }
+    if (normalized.includes("bangle")) {
+      return products.find((p) => p.id === 6) || products[5];
+    }
+    if (normalized.includes("bracelet")) {
+      return products.find((p) => p.id === 4) || products[3];
+    }
     if (normalized.includes("ring")) {
-      return products.find(p => p.name.toLowerCase().includes("ring")) || products[1];
+      return products.find((p) => p.id === 2) || products[1];
     }
-    if (normalized.includes("necklace") || normalized.includes("choker")) {
-      return products.find(p => p.name.toLowerCase().includes("necklace") || p.name.toLowerCase().includes("choker")) || products[0];
+    if (normalized.includes("necklace")) {
+      return products.find((p) => p.id === 1) || products[0];
     }
-    if (normalized.includes("earring")) {
-      return products.find(p => p.name.toLowerCase().includes("earring")) || products[2];
-    }
-    if (normalized.includes("bangle") || normalized.includes("bracelet")) {
-      return products.find(p => p.name.toLowerCase().includes("bangle") || p.name.toLowerCase().includes("bracelet")) || products[3];
-    }
-    
-    return products.find(p => {
-      const pSlug = p.name.toLowerCase().replace(/[^a-z0-9]/g, "");
-      return pSlug === normalized || pSlug.includes(normalized) || normalized.includes(pSlug);
-    }) || products[0];
+
+    return products[0];
   }, [slug]);
+
+  // Canonical URL always points to the definitive canonical slug for this product
+  const canonicalSlug = PRODUCT_CANONICAL_SLUGS[product.id] || getProductSlug(product.name);
+  const canonicalUrl = useCanonical(`/product/${canonicalSlug}`);
 
   const handleAddToCart = () => {
     addToCart({

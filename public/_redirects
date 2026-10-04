@@ -1,1 +1,14 @@
+/index.html / 301
+/index / 301
+/collections /products 301
+/collections/* /products 301
+/collection /products 301
+/collection/* /products 301
+/product /products 301
+/services /products 301
+/services/* /products 301
+/service /products 301
+/service/* /products 301
+/product/gold-ring /product/aurix-royal-gold-ring 301
+/product/diamond-necklace /product/imperial-diamond-gold-choker 301
 /* /index.html 200

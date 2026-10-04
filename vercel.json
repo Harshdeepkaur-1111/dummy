@@ -15,6 +15,31 @@
       "permanent": true
     },
     {
+      "source": "/collections",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/collections/(.*)",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/collection",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/collection/(.*)",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/product",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
       "source": "/services",
       "destination": "/products",
       "permanent": true
@@ -22,6 +47,26 @@
     {
       "source": "/services/(.*)",
       "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/service",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/service/(.*)",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/product/gold-ring",
+      "destination": "/product/aurix-royal-gold-ring",
+      "permanent": true
+    },
+    {
+      "source": "/product/diamond-necklace",
+      "destination": "/product/imperial-diamond-gold-choker",
       "permanent": true
     }
   ],

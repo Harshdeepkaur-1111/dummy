@@ -172,13 +172,33 @@ export default function App() {
                   element={<Contact />}
                 />
 
-                {/* Redirect /collections to /products for SEO and unified 22K catalogue */}
+                {/* Redirect legacy and collection paths to /products for SEO and unified 22K catalogue */}
                 <Route
                   path="/collections"
                   element={<Navigate to="/products" replace />}
                 />
                 <Route
                   path="/collections/*"
+                  element={<Navigate to="/products" replace />}
+                />
+                <Route
+                  path="/collection"
+                  element={<Navigate to="/products" replace />}
+                />
+                <Route
+                  path="/collection/*"
+                  element={<Navigate to="/products" replace />}
+                />
+                <Route
+                  path="/product"
+                  element={<Navigate to="/products" replace />}
+                />
+                <Route
+                  path="/service"
+                  element={<Navigate to="/products" replace />}
+                />
+                <Route
+                  path="/service/*"
                   element={<Navigate to="/products" replace />}
                 />
 

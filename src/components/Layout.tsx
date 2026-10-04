@@ -398,7 +398,7 @@ export function Layout() {
               <ul className="space-y-3">
                 <li><Link to="/products" className="text-white/80 hover:text-[#D4AF37] text-xs transition-colors">All 22K Masterpieces</Link></li>
                 <li><Link to="/products" className="text-white/80 hover:text-[#D4AF37] text-xs transition-colors">Bridal & High Jewellery</Link></li>
-                <li><Link to="/product/gold-ring" className="text-white/80 hover:text-[#D4AF37] text-xs transition-colors">22K Gold Rings</Link></li>
+                <li><Link to="/product/aurix-royal-gold-ring" className="text-white/80 hover:text-[#D4AF37] text-xs transition-colors">22K Gold Rings</Link></li>
                 <li><Link to="/product/classic-gold-necklace" className="text-white/80 hover:text-[#D4AF37] text-xs transition-colors">Gold Necklaces & Chokers</Link></li>
               </ul>
             </div>
