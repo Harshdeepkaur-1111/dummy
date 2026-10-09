@@ -51,13 +51,13 @@ export default defineConfig({
     },
   },
   server: {
-    hmr: process.env.DISABLE_HMR !== 'true',
-    watch: process.env.DISABLE_HMR === 'true' ? null : {},
+    hmr: false,
+    watch: null,
     host: '0.0.0.0',
     port: 3000,
     allowedHosts: true,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
+    include: ['react', 'react-dom', 'react-router-dom', 'lucide-react', 'react-helmet-async'],
   },
 });

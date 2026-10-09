@@ -433,3 +433,5 @@ export function About() {
     </Suspense>
   );
 }
+
+export default About;

@@ -47,31 +47,43 @@ export const team = [
 export const articles = [
   {
     id: 1,
-    title: "How to Choose the Perfect Gold Accessory",
-    excerpt: "Gold accessories can complement any outfit. When choosing jewelry, consider your style, occasion, and comfort. Necklaces and bracelets are excellent everyday options, while statement rings and earrings are ideal for special events.",
+    title: "How to Check BIS 916 Hallmark & HUID on Gold Jewellery in India",
+    excerpt: "Learn how to verify certified 22K BIS 916 hallmarked gold in India. Understand the 3 mandatory hallmark signs: the BIS triangular mark, 22K916 purity stamp, and the 6-digit alphanumeric HUID code verifiable on the BIS Care mobile app.",
     date: "March 15, 2026",
     image: "/images/il_570xN.6784115192_tg5l.webp",
+    readTime: "6 min read",
+    category: "Purity & Certification",
+    content: "When investing in 22-karat gold jewellery in India, hallmark verification is your primary guarantee of purity. Mandated by the Bureau of Indian Standards (BIS), authentic hallmarked jewellery features three laser-engraved hallmarks: 1) The official BIS triangular emblem, 2) The purity benchmark (22K916 signifying 91.6% pure gold alloyed with 8.4% copper/silver for strength), and 3) The unique 6-digit alphanumeric HUID (Hallmarking Unique Identification) number. Every Aurix piece is verified at accredited Assaying and Hallmarking Centres (AHC). By entering your piece's HUID in the official BIS Care app, you can instantly review the hallmarking centre's registration, jeweller's identification, article weight, and assay timestamp."
   },
   {
     id: 2,
-    title: "Gold Jewelry Trends for 2026",
-    excerpt: "This year, minimalist designs, layered necklaces, and personalized pendants are dominating fashion trends. Customers are increasingly choosing elegant and versatile pieces.",
+    title: "22K vs 24K vs 18K Gold: Which Purity Should You Buy?",
+    excerpt: "Compare 24K pure gold bullion, 22K (BIS 916) fine jewellery gold, and 18K gemstone setting gold. Discover which karat delivers the ideal balance between raw bullion value, heirloom durability, and lustrous yellow gold radiance.",
     date: "April 10, 2026",
     image: "/images/Punk-Simple-Style-Square-Customization-Laser-Engraving-304-Stainless-Steel-Polishing-Men-S-Men-Pendant-Necklaces-6.webp",
+    readTime: "7 min read",
+    category: "Buying Guide",
+    content: "Choosing between 24K, 22K, and 18K gold depends on your intended use. 24K gold is 99.9% pure, but its natural softness makes it prone to bending and scratching, making it ideal for investment coins and bullion bars rather than wearable daily jewellery. 22K gold (91.6% purity or BIS 916) is the gold standard for traditional Indian bridal necklaces, bangles, and heirloom chains because it retains the rich, warm, deep-yellow luster of pure gold while providing the tensile strength needed for intricate filigree and everyday wear. 18K gold (75.0% purity) is harder and commonly favored for modern diamond-studded and gemstone settings. At Aurix, our master artisans craft with certified 22K gold to deliver optimal value and timeless heirloom brilliance."
   },
   {
     id: 3,
-    title: "Tips for Maintaining Gold Accessories",
-    excerpt: "Store jewelry separately. Avoid exposure to chemicals. Clean regularly using a soft cloth. Remove jewelry before swimming.",
+    title: "Maintaining Heirloom Gold Jewellery: Cleaning & Storage Guide",
+    excerpt: "Professional goldsmith tips for preserving the deep yellow radiance of your 22K gold necklaces and rings. Protect pure gold from scratches, cosmetic chemicals, and environmental tarnishing with safe cleaning techniques.",
     date: "May 5, 2026",
     image: "https://simhajewellers.com/wp-content/uploads/2026/01/ChatGPT-Image-Jan-1-2026-07_03_44-PM.jpg",
+    readTime: "5 min read",
+    category: "Care & Maintenance",
+    content: "Pure 22K gold does not tarnish or oxidize, but everyday wear can accumulate cosmetic oils, perfumes, dust, and soaps that dull its mirror-like finish. To safely clean your gold jewellery at home, submerge pieces in lukewarm water infused with a few drops of mild ph-neutral soap for 10 minutes. Gently brush filigree crevices with an ultra-soft infant toothbrush, rinse thoroughly under running water, and pat dry with a lint-free microfiber polishing cloth. Always store each necklace, bangle, and pair of earrings in separate plush velvet compartments or anti-tarnish suede pouches to avoid surface scratches from metal-on-metal contact."
   },
   {
     id: 4,
-    title: "Why Gold Accessories Never Go Out of Style",
-    excerpt: "Gold has symbolized luxury and sophistication for centuries. Its timeless appeal makes it a favorite choice for fashion enthusiasts worldwide.",
+    title: "Gold Price Trends in India: Making Charges & Bullion Benchmark Explained",
+    excerpt: "Understand how gold jewellery pricing is calculated in India. Decode the formula: (Net Gold Weight × Daily IBJA 22K Gold Rate) + Transparent Making Charges + 3% GST, ensuring total transparency on every purchase.",
     date: "June 1, 2026",
     image: "/images/354-T26136.webp",
+    readTime: "8 min read",
+    category: "Market & Valuation",
+    content: "Purchasing fine jewellery should always be accompanied by complete pricing transparency. In India, certified gold jewellery follows a standardized calculation: (Net Certified Gold Weight × Prevailing 22K Bullion Rate) + Making Charges + 3% GST. Making charges reflect the artisan skill, laser precision, and hours invested by master goldsmiths in shaping raw gold into intricate heirloom designs. At Aurix, we publish transparent making charges upfront without hidden handling fees or inflated gross weight calculations, and every invoice itemizes the exact gold weight, hallmarked purity, benchmark bullion rate, and statutory taxes."
   }
 ];
 

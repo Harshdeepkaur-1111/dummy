@@ -8,80 +8,60 @@ import {
 } from "react-router-dom";
 
 import { Layout } from "./components/Layout";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { CartProvider } from "./contexts/CartContext";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+
+/* =========================================================
+   ROBUST LAZY LOADER WITH RETRY
+   Handles transient network hiccups or chunk fetch failures
+   ========================================================= */
+
+function lazyWithRetry<T extends Record<string, any>>(
+  importer: () => Promise<T>,
+  exportName?: string
+) {
+  return lazy(async () => {
+    try {
+      const module = await importer();
+      const Component = exportName
+        ? (module[exportName] || module.default)
+        : (module.default || (exportName ? module[exportName] : Object.values(module)[0]));
+      return { default: Component };
+    } catch (error) {
+      console.warn(`Dynamic module load failed, retrying...`, error);
+      // Wait 350ms and retry once
+      try {
+        await new Promise((res) => setTimeout(res, 350));
+        const module = await importer();
+        const Component = exportName
+          ? (module[exportName] || module.default)
+          : (module.default || (exportName ? module[exportName] : Object.values(module)[0]));
+        return { default: Component };
+      } catch (retryError) {
+        console.error(`Dynamic module load failed after retry:`, retryError);
+        throw retryError;
+      }
+    }
+  });
+}
 
 /* =========================================================
    LAZY PAGES
    ========================================================= */
 
-const Home = lazy(() => import("./pages/Home"));
-
-const About = lazy(() =>
-  import("./pages/About").then((module) => ({
-    default: module.About,
-  }))
-);
-
-const Products = lazy(() =>
-  import("./pages/Products").then((module) => ({
-    default: module.Products,
-  }))
-);
-
-const Blog = lazy(() =>
-  import("./pages/Blog").then((module) => ({
-    default: module.Blog,
-  }))
-);
-
-const Contact = lazy(() =>
-  import("./pages/Contact").then((module) => ({
-    default: module.Contact,
-  }))
-);
-
-const Privacy = lazy(() =>
-  import("./pages/Privacy").then((module) => ({
-    default: module.Privacy,
-  }))
-);
-
-const Terms = lazy(() =>
-  import("./pages/Terms").then((module) => ({
-    default: module.Terms,
-  }))
-);
-
-const ShippingReturns = lazy(() =>
-  import("./pages/ShippingReturns").then((module) => ({
-    default: module.ShippingReturns,
-  }))
-);
-
-const ProductDetail = lazy(() =>
-  import("./pages/ProductDetail").then((module) => ({
-    default: module.ProductDetail,
-  }))
-);
-
-const CartPage = lazy(() =>
-  import("./pages/CartPage").then((module) => ({
-    default: module.CartPage,
-  }))
-);
-
-const CheckoutPage = lazy(() =>
-  import("./pages/CheckoutPage").then((module) => ({
-    default: module.CheckoutPage,
-  }))
-);
-
-const LoginPage = lazy(() =>
-  import("./pages/LoginPage").then((module) => ({
-    default: module.LoginPage,
-  }))
-);
+const Home = lazyWithRetry(() => import("./pages/Home"));
+const About = lazyWithRetry(() => import("./pages/About"), "About");
+const Products = lazyWithRetry(() => import("./pages/Products"), "Products");
+const Blog = lazyWithRetry(() => import("./pages/Blog"), "Blog");
+const Contact = lazyWithRetry(() => import("./pages/Contact"), "Contact");
+const Privacy = lazyWithRetry(() => import("./pages/Privacy"), "Privacy");
+const Terms = lazyWithRetry(() => import("./pages/Terms"), "Terms");
+const ShippingReturns = lazyWithRetry(() => import("./pages/ShippingReturns"), "ShippingReturns");
+const ProductDetail = lazyWithRetry(() => import("./pages/ProductDetail"), "ProductDetail");
+const CartPage = lazyWithRetry(() => import("./pages/CartPage"), "CartPage");
+const CheckoutPage = lazyWithRetry(() => import("./pages/CheckoutPage"), "CheckoutPage");
+const LoginPage = lazyWithRetry(() => import("./pages/LoginPage"), "LoginPage");
 
 /* =========================================================
    LOADING
@@ -136,9 +116,10 @@ export default function App() {
   return (
     <HelmetProvider>
       <CartProvider>
-        <Router>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
+        <ErrorBoundary>
+          <Router>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
               <Route element={<Layout />}>
                 <Route index element={<Home />} />
 
@@ -246,7 +227,8 @@ export default function App() {
             </Routes>
           </Suspense>
         </Router>
-      </CartProvider>
-    </HelmetProvider>
-  );
+      </ErrorBoundary>
+    </CartProvider>
+  </HelmetProvider>
+);
 }

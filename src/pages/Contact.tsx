@@ -521,3 +521,5 @@ export function Contact() {
     </Suspense>
   );
 }
+
+export default Contact;

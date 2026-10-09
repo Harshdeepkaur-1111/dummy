@@ -100,56 +100,63 @@ function StaticFallback({
    ========================================================= */
 
 const AnimatedMotion = lazy(async () => {
-  const { motion } = await import("motion/react");
+  try {
+    const { motion } = await import("motion/react");
 
-  const componentCache = new Map<any, any>();
+    const componentCache = new Map<any, any>();
 
-  const getMotionComponent = (tag: ElementType) => {
-    if (typeof tag === "string" && (motion as any)[tag]) {
-      return (motion as any)[tag];
-    }
-    if (!componentCache.has(tag)) {
-      componentCache.set(tag, motion.create(tag));
-    }
-    return componentCache.get(tag);
-  };
+    const getMotionComponent = (tag: ElementType) => {
+      if (typeof tag === "string" && (motion as any)[tag]) {
+        return (motion as any)[tag];
+      }
+      if (!componentCache.has(tag)) {
+        componentCache.set(tag, motion.create(tag));
+      }
+      return componentCache.get(tag);
+    };
 
-  const Animated = ({
-    children,
-    className,
-    tag = "div",
-    initial,
-    animate,
-    whileInView,
-    whileHover,
-    whileTap,
-    viewport,
-    transition,
-    ...rest
-  }: LazyMotionProps) => {
-    const MotionComponent = getMotionComponent(tag as ElementType);
-    const domProps = getDomProps(rest);
+    const Animated = ({
+      children,
+      className,
+      tag = "div",
+      initial,
+      animate,
+      whileInView,
+      whileHover,
+      whileTap,
+      viewport,
+      transition,
+      ...rest
+    }: LazyMotionProps) => {
+      const MotionComponent = getMotionComponent(tag as ElementType);
+      const domProps = getDomProps(rest);
 
-    return (
-      <MotionComponent
-        className={className}
-        initial={initial}
-        animate={animate}
-        whileInView={whileInView}
-        whileHover={whileHover}
-        whileTap={whileTap}
-        viewport={viewport}
-        transition={transition}
-        {...domProps}
-      >
-        {children}
-      </MotionComponent>
-    );
-  };
+      return (
+        <MotionComponent
+          className={className}
+          initial={initial}
+          animate={animate}
+          whileInView={whileInView}
+          whileHover={whileHover}
+          whileTap={whileTap}
+          viewport={viewport}
+          transition={transition}
+          {...domProps}
+        >
+          {children}
+        </MotionComponent>
+      );
+    };
 
-  return {
-    default: Animated,
-  };
+    return {
+      default: Animated,
+    };
+  } catch (error) {
+    console.warn("Failed to load motion/react, falling back to static:", error);
+    return {
+      default: StaticFallback,
+    };
+  }
 });
 
 /* =========================================================
